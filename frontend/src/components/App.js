@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { render } from "react-dom";
+import { CBadge } from "@coreui/react";
+import "./style.scss";
 
 class App extends Component {
     constructor(props) {
@@ -33,15 +35,20 @@ class App extends Component {
 
     render() {
         return (
-            <ul>
-                {this.state.data.map(contact => {
-                    return (
-                        <li key={contact.id}>
-                            {contact.name} - {contact.email}
-                        </li>
-                    );
-                })}
-            </ul>
+            <div>
+                <p>SSH check</p>
+                <ul>
+                    {this.state.data.map(contact => {
+                        return (
+                            <li key={contact.id}>
+                                {contact.name} - {contact.email}
+                                <CBadge color="primary"> Primary color badge</CBadge>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div>
+
         );
     }
 }
