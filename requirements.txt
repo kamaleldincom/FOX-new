@@ -3,3 +3,4 @@ djangorestframework
 flake8
 black
 coverage
+psycopg2-binary
