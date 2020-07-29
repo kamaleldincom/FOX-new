@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server",
-    "dev": "webpack --mode development ./src/index.js --output ./static/front/main.js --watch --devtool inline-source-map",
+    "dev": "webpack --mode development ./src/index.js --output ./static/front/main.js",
     "build": "webpack --mode production ./src/index.js --output ./static/front/main.js"
   },
   "keywords": [],

@@ -5,42 +5,40 @@ import FoxLoginCard from "./cards/FoxLoginCard"
 import "./style.scss";
 
 class App extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         data: [],
-    //         loaded: false,
-    //         placeholder: "Loading"
-    //     };
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [],
+            loaded: false,
+            placeholder: "Loading"
+        };
+    }
 
-    // componentDidMount() {
-    //     fetch("api/back")
-    //         .then(response => {
-    //             if (response.status > 400) {
-    //                 return this.setState(() => {
-    //                     return { placeholder: "Something went wrong!" };
-    //                 });
-    //             }
-    //             return response.json();
-    //         })
-    //         .then(data => {
-    //             this.setState(() => {
-    //                 return {
-    //                     data,
-    //                     loaded: true
-    //                 };
-    //             });
-    //         });
-    // }
+    componentDidMount() {
+        fetch("api/back")
+            .then(response => {
+                if (response.status > 400) {
+                    return this.setState(() => {
+                        return { placeholder: "Something went wrong!" };
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                this.setState(() => {
+                    return {
+                        data,
+                        loaded: true
+                    };
+                });
+            });
+    }
 
     render() {
         return (
             <div>
                 <FoxLoginCard />
-                <h1>Hello Taras!</h1>
             </div>
-
         );
     }
 }

@@ -31,7 +31,8 @@ module.exports = {
     contentBase: path.join(__dirname, 'templates/front'),
     publicPath: '/static/front/',
     proxy: {
-      '/api': 'http://localhost:3000'
+      '/api': 'http://localhost:8000'
     }
-  }
+  },
+  devtool: 'inline-source-map'
 };
