@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { CContainer, CRow, CCol, CCard, CCardHeader, CCardBody, CCardFooter } from "@coreui/react";
-import FoxLoginForm from "../forms/FoxLoginForm"
+import FoxApplicationForm from "../forms/FoxApplicationForm"
 
-class FoxLoginCard extends Component {
+class FoxApplicationCard extends Component {
     render() {
         return (
             <CContainer fluid={true}>
@@ -12,7 +12,7 @@ class FoxLoginCard extends Component {
                             <CCardHeader color='dark' textColor='light'>
                                 Login
                             </CCardHeader>
-                            <FoxLoginForm />
+                            <FoxApplicationForm />
                         </CCard>
                     </CCol>
                 </CRow>
@@ -23,4 +23,4 @@ class FoxLoginCard extends Component {
     }
 }
 
-export default FoxLoginCard;
+export default FoxApplicationCard;

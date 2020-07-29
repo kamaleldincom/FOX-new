@@ -1,8 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import { render } from "react-dom";
-import { CBadge } from "@coreui/react";
-import FoxLoginCard from "./cards/FoxLoginCard"
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import FoxLoginCard from "./cards/FoxLoginCard";
+import FoxHeader from "./layout/FoxHeader";
+import store from './store';
 import "./style.scss";
+import { CContainer } from '@coreui/react';
+import { FoxSidebar } from './layout';
+import { icons } from './assets/icons'
+
+React.icons = icons
+
+const loading = (
+    <div className="pt-3 text-center">
+        <div className="sk-spinner sk-spinner-pulse"></div>
+    </div>
+)
 
 class App extends Component {
     constructor(props) {
@@ -36,9 +50,22 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <FoxLoginCard />
-            </div>
+            <Provider store={store}>
+                <HashRouter>
+                    <Suspense fallback={loading}>
+                        <div className="c-app c-default-layout">
+                            <FoxSidebar />
+                            <div className="c-wrapper">
+                                <FoxHeader />
+                                <div className="c-body">
+                                    <FoxLoginCard />
+                                </div>
+                            </div>
+                        </div>
+                    </Suspense>
+                </HashRouter>
+
+            </Provider>
         );
     }
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { render } from "react-dom";
 import { CForm, CFormGroup, CInput, CLabel, CContainer, CRow, CCol } from "@coreui/react";
-import FoxLoginCard from '../cards/FoxLoginCard';
 
 class FoxLoginForm extends Component {
   render() {
@@ -9,7 +8,7 @@ class FoxLoginForm extends Component {
       <CContainer fluid={true}>
         <CRow className="mt-2 mb-2">
           <CCol sm="8" className="mx-auto">
-            <CForm action="" method="POST">
+            <CForm action="api/login" method="POST">
               <CFormGroup>
                 <CLabel htmlFor="username">Name</CLabel>
                 <CInput id="username" name='username' placeholder="Enter your name" required />

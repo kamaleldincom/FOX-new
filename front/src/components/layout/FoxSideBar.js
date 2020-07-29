@@ -27,16 +27,7 @@ const FoxSidebar = () => {
             onShowChange={(val) => dispatch({ type: 'set', sidebarShow: val })}
         >
             <CSidebarBrand className="d-md-down-none" to="/">
-                <CIcon
-                    className="c-sidebar-brand-full"
-                    name="logo-negative"
-                    height={35}
-                />
-                <CIcon
-                    className="c-sidebar-brand-minimized"
-                    name="sygnet"
-                    height={35}
-                />
+                <h2>FOX</h2>
             </CSidebarBrand>
             <CSidebarNav>
 
@@ -55,4 +46,4 @@ const FoxSidebar = () => {
     )
 }
 
-export default React.memo(TheSidebar)
+export default React.memo(FoxSidebar)
