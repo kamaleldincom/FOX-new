@@ -38,6 +38,7 @@ class App extends Component {
         return (
             <div>
                 <FoxLoginCard />
+                <h1>Hello Taras!</h1>
             </div>
 
         );

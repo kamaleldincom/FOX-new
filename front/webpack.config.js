@@ -1,3 +1,5 @@
+var path = require('path');
+
 module.exports = {
   module: {
     rules: [
@@ -24,5 +26,12 @@ module.exports = {
         ],
       },
     ]
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'templates/front'),
+    publicPath: '/static/front/',
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }
   }
 };
