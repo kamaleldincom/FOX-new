@@ -57,7 +57,7 @@ ROOT_URLCONF = "FOX.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": ["/FOX/templates/fox_admin/"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -77,13 +77,13 @@ WSGI_APPLICATION = "FOX.wsgi.application"
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'HOST': 'db',  # set in docker-compose.yml
-        'PORT': 5432,  # default postgres port
-        'PASSWORD': 'mypassword'
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "postgres",
+        "USER": "postgres",
+        "HOST": "db",  # set in docker-compose.yml
+        "PORT": 5432,  # default postgres port
+        "PASSWORD": "mypassword",
     }
 }
 
@@ -100,6 +100,15 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
 
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "s2b.fox.test@gmail.com"
+EMAIL_HOST_PASSWORD = "simple2bfox"
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
