@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { render } from "react-dom";
 import { CForm, CFormGroup, CInput, CLabel, CContainer, CRow, CCol } from "@coreui/react";
+import DjangoCSRFToken from 'django-react-csrftoken'
+
 
 class FoxLoginForm extends Component {
   render() {
@@ -9,6 +11,7 @@ class FoxLoginForm extends Component {
         <CRow className="mt-2 mb-2">
           <CCol sm="8" className="mx-auto">
             <CForm action="api/login" method="POST">
+              <DjangoCSRFToken />
               <CFormGroup>
                 <CLabel htmlFor="username">Name</CLabel>
                 <CInput id="username" name='username' placeholder="Enter your name" required />

@@ -1,6 +1,19 @@
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
 
 module.exports = {
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, '/static/front'),
+    publicPath: '/static/front/',
+    filename: 'main.js'
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: '../../templates/front/index_test_output3.html',
+    })
+  ],
+
   module: {
     rules: [
       {
