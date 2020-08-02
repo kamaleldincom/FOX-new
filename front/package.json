@@ -39,6 +39,7 @@
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
+    "error-overlay-webpack-plugin": "^0.4.1",
     "html-webpack-plugin": "^4.3.0",
     "react-scripts": "^3.4.1",
     "sass": "^1.26.10",

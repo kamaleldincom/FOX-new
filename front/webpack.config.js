@@ -1,5 +1,6 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
+const path = require('path');
 
 module.exports = {
   entry: './src/index.js',
@@ -11,7 +12,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: '../../templates/front/index_test_output3.html',
-    })
+    }),
+    new ErrorOverlayPlugin()
   ],
 
   module: {
@@ -47,5 +49,5 @@ module.exports = {
       '/api': 'http://localhost:8000'
     }
   },
-  devtool: 'inline-source-map'
+  devtool: 'cheap-module-source-map'
 };
