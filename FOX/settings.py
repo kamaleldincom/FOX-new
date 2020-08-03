@@ -26,7 +26,9 @@ SECRET_KEY = "*myepc&&@())qx_t^^k18t65ehm4_9iaelhr6hx0g8d31$pjjr"
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "46.101.221.249"  # s2b host
+    "46.101.221.249",  # s2b host
+    "127.0.0.1",
+    "localhost"
 ]
 
 
