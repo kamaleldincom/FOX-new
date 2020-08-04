@@ -1,17 +1,18 @@
-from rest_framework import generics
+# from rest_framework import generics
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login
 
 # from django.contrib.auth.models import User
-from .models import TestUser
+# from .models import TestUser
 from .forms import LoginForm
-from .serializers import TestUserSerializer
+
+# from .serializers import TestUserSerializer
 from django.views.decorators.csrf import ensure_csrf_cookie
 
 
-class TestUserListCreate(generics.ListCreateAPIView):
-    queryset = TestUser.objects.all()
-    serializer_class = TestUserSerializer
+# class TestUserListCreate(generics.ListCreateAPIView):
+# queryset = TestUser.objects.all()
+# serializer_class = TestUserSerializer
 
 
 @ensure_csrf_cookie

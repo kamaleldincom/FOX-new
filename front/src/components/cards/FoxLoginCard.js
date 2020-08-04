@@ -5,20 +5,12 @@ import FoxLoginForm from "../forms/FoxLoginForm"
 class FoxLoginCard extends Component {
     render() {
         return (
-            <CContainer fluid={true}>
-                <CRow className="mt-5">
-                    <CCol sm="4" className="mx-auto align-self-center">
-                        <CCard>
-                            <CCardHeader color='dark' textColor='light'>
-                                Login
-                            </CCardHeader>
-                            <FoxLoginForm />
-                        </CCard>
-                    </CCol>
-                </CRow>
-
-            </CContainer>
-
+            <CCard>
+                <CCardHeader color='dark' textColor='light'>
+                    Login
+                </CCardHeader>
+                <FoxLoginForm />
+            </CCard>
         )
     }
 }

@@ -1,15 +1,7 @@
-from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models.signals import pre_save
 from django.core.mail import send_mail
-
-
-class TestUser(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
-    message = models.CharField(max_length=300)
-    created_at = models.DateTimeField(auto_now_add=True)
 
 
 def send_mail_on_creation(**kwargs):
