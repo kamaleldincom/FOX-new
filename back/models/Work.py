@@ -2,4 +2,5 @@ from django.db import models
 
 
 class Work(models.Model):
-    pass
+    name = models.CharField(max_length=64)
+    description = models.TextField()
