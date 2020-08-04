@@ -1,6 +1,6 @@
 from .Client import Client  # noqa F401
 from .ClientAdmin import ClientAdmin  # noqa F401
-from .Company import Company  # noqa F401
+from .company import Company  # noqa F401
 from .Contractor import Contractor  # noqa F401
 from .Document import Document  # noqa F401
 from .DocumentAssign import DocumentAssign  # noqa F401
