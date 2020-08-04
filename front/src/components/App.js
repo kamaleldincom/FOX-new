@@ -1,8 +1,8 @@
 import React, { Component, Suspense } from 'react';
 import { render } from "react-dom";
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from '../services/serviceWorker';
 import { CButton, CButtonGroup } from '@coreui/react'
 import store from './store';
 import "./style.scss";
@@ -54,7 +54,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter>
+        <HashRouter>
           <Suspense fallback={loading}>
             <Switch>
               <Route exact path="/login" name="Login Page" render={props => <Login {...props} />} />
@@ -68,7 +68,7 @@ class App extends Component {
               </>
             </Switch>
           </Suspense>
-        </BrowserRouter>
+        </HashRouter>
       </Provider>
     );
   }

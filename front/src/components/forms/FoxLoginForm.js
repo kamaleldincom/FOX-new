@@ -5,12 +5,28 @@ import DjangoCSRFToken from 'django-react-csrftoken'
 
 
 class FoxLoginForm extends Component {
+
+  constructor(props) {
+    super(props)
+    const onLoginSubmit = (e) => {
+      e.preventDefault()
+      console.log('Worked!')
+    }
+  }
+
   render() {
     return (
       <CContainer fluid={true}>
         <CRow className="mt-2 mb-2">
           <CCol sm="8" className="mx-auto">
-            <CForm action="api/login" method="POST">
+            <CForm
+              onSubmit={(e) => {
+                e.preventDefault()
+                console.log('Worked!')
+                console.log(e.target)
+              }
+              }
+            >
               <DjangoCSRFToken />
               <CFormGroup>
                 <CLabel htmlFor="username">Name</CLabel>
@@ -32,7 +48,7 @@ class FoxLoginForm extends Component {
             </CForm>
           </CCol>
         </CRow>
-      </CContainer>
+      </CContainer >
     )
   }
 }

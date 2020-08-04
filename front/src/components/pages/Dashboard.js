@@ -13,6 +13,7 @@ const Dashboard = () => {
       <div className="c-wrapper">
         <FoxHeader />
         <div className="c-body">
+          <h2> HELLO TO YOU, STRANGEER!!!!!</h2>
         </div>
       </div>
     </div>
