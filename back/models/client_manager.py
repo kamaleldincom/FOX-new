@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from . import FoxUser
+from .fox_user import FoxUser
 
 
 class ClientManager(FoxUser):
