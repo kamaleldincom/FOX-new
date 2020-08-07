@@ -25,9 +25,7 @@ SECRET_KEY = "*myepc&&@())qx_t^^k18t65ehm4_9iaelhr6hx0g8d31$pjjr"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "46.101.221.249"  # s2b host
-]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "46.101.221.249"]  # localhost, s2b host
 
 
 # Application definition
@@ -41,12 +39,14 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "back.apps.BackConfig",
     "rest_framework",
+    "corsheaders",
     "front",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -102,6 +102,20 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+    ),
+}
+
+CORS_ORIGIN_WHITELIST = ("http://localhost:8000",)
+
+CORS_ALLOW_CREDENTIALS = True
+
+JWT_AUTH = {"JWT_RESPONSE_PAYLOAD_HANDLER": "FOX.utils.my_jwt_response_handler"}
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"

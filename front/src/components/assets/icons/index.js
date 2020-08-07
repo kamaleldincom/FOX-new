@@ -37,6 +37,7 @@ import {
   cifPl
 } from '@coreui/icons'
 import {
+  cilAccountLogout,
   cilAlignCenter,
   cilAlignLeft,
   cilAlignRight,
@@ -81,6 +82,7 @@ import {
   cilInbox,
   cilIndentDecrease,
   cilIndentIncrease,
+  cilIndustry,
   cilInputPower,
   cilItalic,
   cilJustifyCenter,
@@ -127,7 +129,7 @@ import {
   cilUserUnfollow,
   cilX,
   cilXCircle,
-  cilWarning
+  cilWarning,
 } from '@coreui/icons'
 
 export const icons = Object.assign({}, {
@@ -135,6 +137,7 @@ export const icons = Object.assign({}, {
   logo,
   logoNegative
 }, {
+  cilAccountLogout,
   cilAlignCenter,
   cilAlignLeft,
   cilAlignRight,
@@ -179,6 +182,7 @@ export const icons = Object.assign({}, {
   cilInbox,
   cilIndentDecrease,
   cilIndentIncrease,
+  cilIndustry,
   cilInputPower,
   cilItalic,
   cilJustifyCenter,
@@ -225,7 +229,7 @@ export const icons = Object.assign({}, {
   cilUserUnfollow,
   cilX,
   cilXCircle,
-  cilWarning
+  cilWarning,
 }, {
   cifUs,
   cifBr,

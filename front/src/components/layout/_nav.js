@@ -36,7 +36,7 @@ export default [
     _tag: 'CSidebarNavDropdown',
     name: 'General',
     route: '/contractor/general',
-    icon: 'cis-factory',
+    icon: 'cil-industry',
     _children: [
       {
         _tag: 'CSidebarNavItem',

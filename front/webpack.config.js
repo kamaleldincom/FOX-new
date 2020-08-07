@@ -45,6 +45,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'templates/front'),
     publicPath: '/static/front/',
+    historyApiFallback: true,
     proxy: {
       '/api': 'http://localhost:8000'
     }
