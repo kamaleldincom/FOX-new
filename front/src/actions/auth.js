@@ -1,7 +1,9 @@
+const SERVER_ADDRESS = `${window.location.origin}`
+
 const userLoginFetch = user => {
     return dispatch => {
         let data = JSON.stringify(user);
-        return fetch("http://localhost:8000/api/token-auth/", {
+        return fetch(`${SERVER_ADDRESS}/api/token-auth/`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -10,11 +12,7 @@ const userLoginFetch = user => {
             body: data
         })
             .then(resp => {
-                // if (!resp.ok) {
-                //     throw Error(response.statusText)
-                // } else {
                 return resp.json()
-                // }
             })
             .then(data => {
                 if (data.token) {
@@ -34,7 +32,7 @@ const getProfileFetch = () => {
     return dispatch => {
         const token = localStorage.token;
         if (token) {
-            return fetch("http://localhost:8000/api/current_user/", {
+            return fetch(`${SERVER_ADDRESS}/api/current_user/`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
