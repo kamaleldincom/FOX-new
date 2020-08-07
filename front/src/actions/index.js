@@ -1,3 +1,5 @@
+import { userLoginFetch, getProfileFetch, logoutUser } from './auth'
+
 const userLoggedIn = () => {
     return {
         type: 'user_logged_in',
@@ -5,5 +7,8 @@ const userLoggedIn = () => {
 };
 
 export {
-    userLoggedIn
+    userLoggedIn,
+    userLoginFetch,
+    getProfileFetch,
+    logoutUser
 };

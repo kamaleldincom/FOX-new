@@ -1,5 +1,7 @@
 Django
 djangorestframework
+django-cors-headers
+djangorestframework-jwt
 flake8
 black
 coverage

@@ -13,6 +13,6 @@ class TemplateItem(models.Model):
     name = models.CharField(max_length=64)
     description = models.TextField()
     template = models.ForeignKey("Template", on_delete=models.CASCADE, name="items")
-    type = models.CharField(max_length=10, choices=Type.choices, default=Type.default,)
+    type = models.CharField(max_length=10, choices=Type.choices, default=Type.text)
     type_values = models.TextField()
     placeholder = models.CharField(max_length=64)

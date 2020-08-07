@@ -1,12 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import {
   CCol,
   CContainer,
   CRow
 } from '@coreui/react'
 import FoxLoginCard from "../cards/FoxLoginCard";
-import CIcon from '@coreui/icons-react'
+
+
 
 const Login = () => {
   return (
