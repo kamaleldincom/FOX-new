@@ -1,4 +1,4 @@
-import { SERVER_ADDRESS } from '../config'
+const SERVER_ADDRESS = `${window.location.origin}/`
 
 class FoxApiService {
 

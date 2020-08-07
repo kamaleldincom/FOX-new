@@ -21,7 +21,7 @@ class Dashboard extends Component {
         <div className="c-wrapper">
           <FoxHeader />
           <div className="c-body">
-            //TODO: make it nice :)
+            {/* //TODO: make it nice :) */}
             <h2> VERY SOON YOU WILL SEE SOME INO HERE!</h2>
           </div>
         </div>
