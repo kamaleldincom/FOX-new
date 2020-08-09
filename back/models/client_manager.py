@@ -15,3 +15,6 @@ class ClientManager(FoxUser):
     role = models.CharField(
         max_length=10, choices=Role.choices, default=Role.site_owner,
     )
+
+    def __str___(self):
+        pass

@@ -1,4 +1,4 @@
-const SERVER_ADDRESS = `${window.location.origin}`
+const SERVER_ADDRESS = `${window.location.origin}`;
 
 const userLoginFetch = user => {
     return dispatch => {

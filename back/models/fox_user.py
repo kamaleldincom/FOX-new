@@ -1,10 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 
-class FoxUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+class FoxUser(AbstractUser):
     company = models.ForeignKey("Company", on_delete=models.CASCADE, null=True)
-
-    class Meta:
-        abstract = True
