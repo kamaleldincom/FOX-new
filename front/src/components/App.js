@@ -16,6 +16,7 @@ const loading = (
 
 const Login = React.lazy(() => import('./pages/Login'));
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
+const Register = React.lazy(() => import('./pages/Register'));
 
 class App extends Component {
 
@@ -28,6 +29,11 @@ class App extends Component {
       <HashRouter>
         <Suspense fallback={loading}>
           <Switch>
+            <Route exact path="/register:token" name="Register Page" render={
+              props => {
+                return <Register {...props} />
+              }
+            } />
             <Route exact path="/login" name="Login Page" render={
               props => {
                 let this_props = this.props;
