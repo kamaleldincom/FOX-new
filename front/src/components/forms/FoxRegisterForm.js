@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CForm, CFormGroup, CInput, CLabel, CContainer, CRow, CCol } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
-import { userLoginFetch } from '../../actions'
+import { userRegisterFetch } from '../../actions'
 
 
 class FoxRegisterForm extends Component {
@@ -21,7 +21,10 @@ class FoxRegisterForm extends Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        this.props.userLoginFetch(this.state)
+        this.props.userRegisterFetch({
+            password: this.state.password,
+            token: this.state.registrationToken
+        })
     }
 
     render() {
@@ -32,7 +35,7 @@ class FoxRegisterForm extends Component {
                         <CForm
                             onSubmit={this.handleSubmit}
                         >
-                            <DjangoCSRFToken />
+                            {/* <DjangoCSRFToken /> */}
                             <CFormGroup>
                                 <CLabel htmlFor="username">Name</CLabel>
                                 <CInput
@@ -70,7 +73,7 @@ class FoxRegisterForm extends Component {
                                 <CInput type="submit" value="Submit" color="info" />
                             </CFormGroup>
                             {this.props.loginError
-                                ? <p>INVALID CREDENTIALS! PLEASE, CHECK YOUR USERNAME AND PASSWORD!</p>
+                                ? <p>INVALID CREDENTIALS! PLEASE, CHECK YOUR PASSWORD AND PASSWORD CONFIRMATION FIELDS!</p>
                                 : null
                             }
                         </CForm>
@@ -84,12 +87,13 @@ class FoxRegisterForm extends Component {
 const mapStateToProps = state => {
     return {
         currentUser: state.currentUser,
-        loginError: state.loginError
+        registerError: state.registerError,
+        registrationToken: state.registrationToken
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-    userLoginFetch: userInfo => dispatch(userLoginFetch(userInfo))
+    userRegisterFetch: credentials => dispatch(userRegisterFetch(credentials))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FoxRegisterForm)

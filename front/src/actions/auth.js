@@ -1,5 +1,57 @@
 const SERVER_ADDRESS = `${window.location.origin}`;
 
+const userRegisterValidationFetch = token => {
+    return dispatch => {
+        const csrftoken = getCookie('csrftoken');
+        let send_data = JSON.stringify({ token: token });
+        return fetch(`${SERVER_ADDRESS}/api/validate_register_token/`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'X-CSRFToken': csrftoken
+            },
+            body: send_data
+        }).then(resp => {
+            if (resp.ok) {
+                dispatch(allowRegistration());
+            } else {
+                dispatch(registerError());
+            }
+            return resp.json();
+        }).then(data => {
+            console.warn(data);
+        }).catch(function (error) {
+            console.error(error);
+        })
+    }
+}
+
+const userRegisterFetch = credentials => {
+    return dispatch => {
+        let data = JSON.stringify(credentials);
+        return fetch(`${SERVER_ADDRESS}/api/password_reset_confirm/`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            },
+            body: data
+        }).then(resp => {
+            if (resp.ok) {
+                dispatch(registerUser());
+            } else {
+                dispatch(registerError());
+            }
+            return resp.json();
+        }).then(data => {
+            console.warn(data);
+        }).catch(function (error) {
+            console.error(error);
+        })
+    }
+}
+
 const userLoginFetch = user => {
     return dispatch => {
         let data = JSON.stringify(user);
@@ -58,15 +110,49 @@ const loginUser = userObj => ({
     type: 'LOGIN_USER',
     currentUser: userObj,
     loginError: false
-})
+});
+
+const registerUser = () => ({
+    type: 'REGISTER_USER',
+    registerError: false,
+    registerAllowed: false
+});
 
 const loginError = () => ({
     type: 'LOGIN_ERROR',
     loginError: true
-})
+});
+
+const registerError = () => ({
+    type: 'REGISTER_ERROR',
+    loginError: true
+});
 
 const logoutUser = () => ({
     type: 'LOGOUT_USER'
-})
+});
 
-export { userLoginFetch, getProfileFetch, logoutUser }
+const allowRegistration = () => ({
+    type: 'ALLOW_REGISTER',
+    registerAllowed: true
+}
+);
+
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+export { userLoginFetch, getProfileFetch, logoutUser, userRegisterValidationFetch, userRegisterFetch }
