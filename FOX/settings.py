@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "back.apps.BackConfig",
     "rest_framework",
     "corsheaders",
+    "django_rest_passwordreset",
     "front",
 ]
 
@@ -59,7 +60,7 @@ ROOT_URLCONF = "FOX.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["/FOX/templates/fox_admin/"],
+        "DIRS": ["/back/templates/back/",],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

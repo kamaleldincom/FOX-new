@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from rest_framework_jwt.views import obtain_jwt_token
 
@@ -9,4 +9,8 @@ urlpatterns = [
     path("current_user/", views.current_user),
     path("protected/", views.protected),
     path("users/", views.UserList.as_view()),
+    path(
+        "password_reset/",
+        include("django_rest_passwordreset.urls", namespace="password_reset"),
+    ),
 ]

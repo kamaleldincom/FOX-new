@@ -6,3 +6,4 @@ flake8
 black
 coverage
 psycopg2-binary
+django-rest-passwordreset
