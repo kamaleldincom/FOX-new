@@ -41,6 +41,7 @@ class FoxRegisterForm extends Component {
                                     placeholder="Enter your name"
                                     value={this.state.username}
                                     onChange={this.handleChange}
+                                    readOnly
                                     required />
                             </CFormGroup>
                             <CFormGroup>

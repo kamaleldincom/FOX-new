@@ -29,7 +29,7 @@ class App extends Component {
       <HashRouter>
         <Suspense fallback={loading}>
           <Switch>
-            <Route exact path="/register:token" name="Register Page" render={
+            <Route exact path="/register" name="Register Page" render={
               props => {
                 return <Register {...props} />
               }

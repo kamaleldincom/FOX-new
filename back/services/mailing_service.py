@@ -21,24 +21,6 @@ from django_rest_passwordreset.models import (
 logger = logging.getLogger(__name__)
 
 
-# def send_mail_on_creation(**kwargs):
-#     user = kwargs["instance"]
-#     logger.warning("WE TRIED TO SEND EMAIL")
-#     link = "http://google.com"
-#     send_mail(
-#         subject="Created Account in Fox",
-#         message="You have account created in Fox company.\nYour credentials:\nUsername: {}.\n"
-#         " To approve your registration, please follow this link: \n {}".format(
-#             user.username, link
-#         ),
-#         from_email=settings.EMAIL_HOST_USER,
-#         recipient_list=[user.email],
-#         fail_silently=False,
-#         auth_user=settings.EMAIL_HOST_USER,
-#         auth_password=settings.EMAIL_HOST_PASSWORD,
-#     )
-
-
 @receiver(reset_password_token_created)
 def password_reset_token_created(
     sender, instance, reset_password_token, *args, **kwargs
@@ -58,8 +40,8 @@ def password_reset_token_created(
         "send an e-mail to the user [%s]", reset_password_token.user.username
     )
 
-    # URL_FORMAT = "http://46.101.221.249:8000/#/register?token={}"
-    URL_FORMAT = "http://127.0.0.1:8000/#/register?token={}"
+    # URL_FORMAT = "http://46.101.221.249:8000/#/register?token={}&username={}"
+    URL_FORMAT = "http://127.0.0.1:8000/#/register?token={}&username={}"
 
     context = {
         "current_user": reset_password_token.user,
@@ -68,6 +50,7 @@ def password_reset_token_created(
         "reset_password_url": URL_FORMAT.format(
             # reverse("password_reset:reset-password-request"),
             reset_password_token.key,
+            reset_password_token.user.username,
         ),
     }
 

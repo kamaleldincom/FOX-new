@@ -168,6 +168,7 @@ var FoxRegisterForm = /*#__PURE__*/function (_Component) {
         placeholder: "Enter your name",
         value: this.state.username,
         onChange: this.handleChange,
+        readOnly: true,
         required: true
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CLabel"], {
         htmlFor: "nf-password"
