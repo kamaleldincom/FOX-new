@@ -1,1 +1,1 @@
-from .login import login_view, current_user, UserList, protected  # noqa F401
+from .login import login_view, current_user, UserList  # noqa F401
