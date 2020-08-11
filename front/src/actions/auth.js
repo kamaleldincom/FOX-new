@@ -30,15 +30,18 @@ const userRegisterValidationFetch = token => {
 const userRegisterFetch = credentials => {
     return dispatch => {
         let data = JSON.stringify(credentials);
+        const csrftoken = getCookie('csrftoken');
         return fetch(`${SERVER_ADDRESS}/api/password_reset_confirm/`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
+                'X-CSRFToken': csrftoken
             },
             body: data
         }).then(resp => {
             if (resp.ok) {
+                dispatch(logoutUser());
                 dispatch(registerUser());
             } else {
                 dispatch(registerError());
@@ -115,7 +118,8 @@ const loginUser = userObj => ({
 const registerUser = () => ({
     type: 'REGISTER_USER',
     registerError: false,
-    registerAllowed: false
+    registerAllowed: false,
+    userRegistered: true
 });
 
 const loginError = () => ({
@@ -125,12 +129,15 @@ const loginError = () => ({
 
 const registerError = () => ({
     type: 'REGISTER_ERROR',
-    loginError: true
+    registerError: true
 });
 
-const logoutUser = () => ({
-    type: 'LOGOUT_USER'
-});
+const logoutUser = () => {
+    localStorage.removeItem("token")
+    return {
+        type: 'LOGOUT_USER'
+    }
+};
 
 const allowRegistration = token => ({
     type: 'ALLOW_REGISTER',

@@ -23,15 +23,15 @@ class FoxRegisterForm extends Component {
             this.props.registerError();
         }
         else {
-            this.props.allowRegistration(this.state.registrationToken);
+            this.props.allowRegistration(this.props.registrationToken);
         };
     }
 
     handleSubmit = event => {
-        event.preventDefault()
+        event.preventDefault();
         this.props.userRegisterFetch({
             password: this.state.password,
-            token: this.state.registrationToken
+            token: this.props.registrationToken
         })
     }
 
@@ -80,7 +80,7 @@ class FoxRegisterForm extends Component {
                             <CFormGroup>
                                 <CInput type="submit" value="Submit" color="info" active={this.state.loginError ? "true" : "false"} />
                             </CFormGroup>
-                            {this.props.registerError
+                            {this.props.registerError.values
                                 ? <p>INVALID CREDENTIALS! PLEASE, CHECK YOUR PASSWORD AND PASSWORD CONFIRMATION FIELDS!</p>
                                 : null
                             }

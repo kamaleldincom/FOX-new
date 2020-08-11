@@ -4,6 +4,7 @@ const initialState = {
     loginError: false,
     registerError: false,
     registerAllowed: false,
+    userRegistered: false,
     registrationToken: ""
 }
 

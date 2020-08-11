@@ -185,8 +185,6 @@ var TheHeaderDropdown = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "handleClick", function (event) {
       event.preventDefault(); //TODO: need improvement???
 
-      localStorage.removeItem("token");
-
       _this.props.logoutUser();
     });
 
