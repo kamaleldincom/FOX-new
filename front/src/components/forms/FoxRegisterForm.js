@@ -13,18 +13,20 @@ class FoxRegisterForm extends Component {
         password2: "",
     }
 
+
     handleChange = event => {
         this.setState({
             [event.target.name]: event.target.value
+        }, () => {
+            if (this.state.password !== this.state.password2) {
+                this.props.registerError();
+                console.log(this.props);
+            }
+            else {
+                this.props.allowRegistration(this.props.registrationToken);
+                console.log(this.props);
+            };
         });
-        if (this.state.password !== this.state.password2) {
-            console.log(this.state.password !== this.state.password2);
-            console.log(this.props)
-            this.props.registerError();
-        }
-        else {
-            this.props.allowRegistration(this.props.registrationToken);
-        };
     }
 
     handleSubmit = event => {
@@ -78,9 +80,9 @@ class FoxRegisterForm extends Component {
                                 />
                             </CFormGroup>
                             <CFormGroup>
-                                <CInput type="submit" value="Submit" color="info" active={this.state.loginError ? "true" : "false"} />
+                                <CInput type="submit" value="Submit" color="info" disabled={this.props.loginError ? true : false} />
                             </CFormGroup>
-                            {this.props.registerError.values
+                            {this.props.registerErrorFlag
                                 ? <p>INVALID CREDENTIALS! PLEASE, CHECK YOUR PASSWORD AND PASSWORD CONFIRMATION FIELDS!</p>
                                 : null
                             }
@@ -94,7 +96,7 @@ class FoxRegisterForm extends Component {
 
 const mapStateToProps = state => {
     return {
-        registerError: state.registerError,
+        registerErrorFlag: state.registerError,
         registrationToken: state.registrationToken
     }
 }
