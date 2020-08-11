@@ -14,7 +14,7 @@ const userRegisterValidationFetch = token => {
             body: send_data
         }).then(resp => {
             if (resp.ok) {
-                dispatch(allowRegistration());
+                dispatch(allowRegistration(token));
             } else {
                 dispatch(registerError());
             }
@@ -132,9 +132,10 @@ const logoutUser = () => ({
     type: 'LOGOUT_USER'
 });
 
-const allowRegistration = () => ({
+const allowRegistration = token => ({
     type: 'ALLOW_REGISTER',
-    registerAllowed: true
+    registerAllowed: true,
+    registrationToken: token
 }
 );
 
@@ -155,4 +156,11 @@ function getCookie(name) {
     return cookieValue;
 }
 
-export { userLoginFetch, getProfileFetch, logoutUser, userRegisterValidationFetch, userRegisterFetch }
+export {
+    userLoginFetch,
+    getProfileFetch,
+    logoutUser,
+    userRegisterValidationFetch,
+    userRegisterFetch,
+    registerError, allowRegistration
+}

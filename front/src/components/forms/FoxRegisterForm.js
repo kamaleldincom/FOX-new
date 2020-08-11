@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CForm, CFormGroup, CInput, CLabel, CContainer, CRow, CCol } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
-import { userRegisterFetch } from '../../actions'
+import { userRegisterFetch, registerError, allowRegistration } from '../../actions'
 
 
 class FoxRegisterForm extends Component {
@@ -17,6 +17,14 @@ class FoxRegisterForm extends Component {
         this.setState({
             [event.target.name]: event.target.value
         });
+        if (this.state.password !== this.state.password2) {
+            console.log(this.state.password !== this.state.password2);
+            console.log(this.props)
+            this.props.registerError();
+        }
+        else {
+            this.props.allowRegistration(this.state.registrationToken);
+        };
     }
 
     handleSubmit = event => {
@@ -35,7 +43,7 @@ class FoxRegisterForm extends Component {
                         <CForm
                             onSubmit={this.handleSubmit}
                         >
-                            {/* <DjangoCSRFToken /> */}
+                            <DjangoCSRFToken />
                             <CFormGroup>
                                 <CLabel htmlFor="username">Name</CLabel>
                                 <CInput
@@ -70,9 +78,9 @@ class FoxRegisterForm extends Component {
                                 />
                             </CFormGroup>
                             <CFormGroup>
-                                <CInput type="submit" value="Submit" color="info" />
+                                <CInput type="submit" value="Submit" color="info" active={this.state.loginError ? "true" : "false"} />
                             </CFormGroup>
-                            {this.props.loginError
+                            {this.props.registerError
                                 ? <p>INVALID CREDENTIALS! PLEASE, CHECK YOUR PASSWORD AND PASSWORD CONFIRMATION FIELDS!</p>
                                 : null
                             }
@@ -86,14 +94,15 @@ class FoxRegisterForm extends Component {
 
 const mapStateToProps = state => {
     return {
-        currentUser: state.currentUser,
         registerError: state.registerError,
         registrationToken: state.registrationToken
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-    userRegisterFetch: credentials => dispatch(userRegisterFetch(credentials))
+    userRegisterFetch: credentials => dispatch(userRegisterFetch(credentials)),
+    registerError: () => dispatch(registerError()),
+    allowRegistration: (token) => dispatch(allowRegistration(token))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FoxRegisterForm)

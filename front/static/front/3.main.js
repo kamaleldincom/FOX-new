@@ -137,6 +137,17 @@ var FoxRegisterForm = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
       _this.setState(_defineProperty({}, event.target.name, event.target.value));
+
+      if (_this.state.password !== _this.state.password2) {
+        console.log(_this.state.password !== _this.state.password2);
+        console.log(_this.props);
+
+        _this.props.registerError();
+      } else {
+        _this.props.allowRegistration(_this.state.registrationToken);
+      }
+
+      ;
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSubmit", function (event) {
@@ -163,7 +174,7 @@ var FoxRegisterForm = /*#__PURE__*/function (_Component) {
         className: "mx-auto"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CForm"], {
         onSubmit: this.handleSubmit
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CLabel"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(django_react_csrftoken__WEBPACK_IMPORTED_MODULE_3___default.a, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CLabel"], {
         htmlFor: "username"
       }, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CInput"], {
         id: "username",
@@ -196,8 +207,9 @@ var FoxRegisterForm = /*#__PURE__*/function (_Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CInput"], {
         type: "submit",
         value: "Submit",
-        color: "info"
-      })), this.props.loginError ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "INVALID CREDENTIALS! PLEASE, CHECK YOUR PASSWORD AND PASSWORD CONFIRMATION FIELDS!") : null))));
+        color: "info",
+        active: this.state.loginError ? "true" : "false"
+      })), this.props.registerError ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "INVALID CREDENTIALS! PLEASE, CHECK YOUR PASSWORD AND PASSWORD CONFIRMATION FIELDS!") : null))));
     }
   }]);
 
@@ -206,7 +218,6 @@ var FoxRegisterForm = /*#__PURE__*/function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    currentUser: state.currentUser,
     registerError: state.registerError,
     registrationToken: state.registrationToken
   };
@@ -216,6 +227,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     userRegisterFetch: function userRegisterFetch(credentials) {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["userRegisterFetch"])(credentials));
+    },
+    registerError: function registerError() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["registerError"])());
+    },
+    allowRegistration: function allowRegistration(token) {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_4__["allowRegistration"])(token));
     }
   };
 };

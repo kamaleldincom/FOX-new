@@ -31,7 +31,7 @@ class FoxLoginForm extends Component {
             <CForm
               onSubmit={this.handleSubmit}
             >
-              {/* <DjangoCSRFToken /> */}
+              <DjangoCSRFToken />
               <CFormGroup>
                 <CLabel htmlFor="username">Name</CLabel>
                 <CInput

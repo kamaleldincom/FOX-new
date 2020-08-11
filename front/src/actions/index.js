@@ -1,4 +1,12 @@
-import { userLoginFetch, getProfileFetch, logoutUser, userRegisterFetch, userRegisterValidationFetch } from './auth'
+import {
+    userLoginFetch,
+    getProfileFetch,
+    logoutUser,
+    userRegisterFetch,
+    userRegisterValidationFetch,
+    registerError,
+    allowRegistration
+} from './auth'
 
 const userLoggedIn = () => {
     return {
@@ -12,5 +20,7 @@ export {
     getProfileFetch,
     logoutUser,
     userRegisterFetch,
-    userRegisterValidationFetch
+    userRegisterValidationFetch,
+    registerError,
+    allowRegistration
 };
