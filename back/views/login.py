@@ -63,11 +63,6 @@ def current_user(request):
     return Response(serializer.data)
 
 
-@api_view(["GET"])
-def protected(request):
-    return Response(data={"response": "You are authenticated with JWT!!"})
-
-
 class UserList(APIView):
     """
     Create a new user. It's called 'UserList' because normally we'd have a get

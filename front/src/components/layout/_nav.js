@@ -77,15 +77,9 @@ export default [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Work status',
+    name: 'Workflow',
     to: '/contactor/work/status',
-    icon: '',
-  },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Workflow Notes',
-    to: '/contactor/work/notes',
-    icon: 'cil-bell',
+    icon: 'cil-av-timer',
   },
 ]
 

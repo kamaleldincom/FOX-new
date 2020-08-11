@@ -17,6 +17,7 @@ const loading = (
 const Login = React.lazy(() => import('./pages/Login'));
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 const Register = React.lazy(() => import('./pages/Register'));
+const Page404 = React.lazy(() => import('./pages/Page404'));
 
 class App extends Component {
 
@@ -45,11 +46,7 @@ class App extends Component {
             <Route exact path="/" name="Fox" render={props => <Dashboard {...props} />}>
             </Route>
             <>
-              <CButtonGroup>
-                <CButton color="success">Button</CButton>
-                <CButton color="info">Button</CButton>
-                <CButton color="primary">Button</CButton>
-              </CButtonGroup>
+              <Page404 />
             </>
           </Switch>
         </Suspense>
