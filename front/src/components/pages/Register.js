@@ -24,7 +24,7 @@ class Register extends Component {
     }
 
     render() {
-        return (this.props.userRegistered ? <Redirect to="/login" /> :
+        return (!this.props.registerAllowed ? <Redirect to="/login" /> :
             <Suspense fallback={loading}>
                 <div className="c-app c-default-layout flex-row align-items-center">
                     <CContainer>
@@ -44,8 +44,8 @@ class Register extends Component {
 
 const mapStateToProps = state => {
     return {
-        currentUser: state.currentUser,
-        userRegistered: state.userRegistered
+        userRegistered: state.userRegistered,
+        registerAllowed: state.registerAllowed
     }
 }
 

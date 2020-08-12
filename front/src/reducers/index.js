@@ -3,9 +3,9 @@ const initialState = {
     currentUser: {},
     loginError: false,
     registerError: false,
-    registerAllowed: false,
-    userRegistered: false,
-    registrationToken: ""
+    registerAllowed: true,
+    registrationToken: "",
+    errorMessage: ""
 }
 
 const changeState = (state = initialState, { type, ...rest }) => {
@@ -13,6 +13,8 @@ const changeState = (state = initialState, { type, ...rest }) => {
         case 'set':
             return { ...state, ...rest }
         case 'ALLOW_REGISTER':
+            return { ...state, ...rest }
+        case 'FORBID_REGISTER':
             return { ...state, ...rest }
         case 'REGISTER_USER':
             return { ...state, ...rest }

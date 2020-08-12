@@ -20,11 +20,9 @@ class FoxRegisterForm extends Component {
         }, () => {
             if (this.state.password !== this.state.password2) {
                 this.props.registerError();
-                console.log(this.props);
             }
             else {
                 this.props.allowRegistration(this.props.registrationToken);
-                console.log(this.props);
             };
         });
     }
@@ -38,6 +36,7 @@ class FoxRegisterForm extends Component {
     }
 
     render() {
+        console.log(this.props.errorMessage)
         return (
             <CContainer fluid={true}>
                 <CRow className="mt-2 mb-2">
@@ -80,10 +79,10 @@ class FoxRegisterForm extends Component {
                                 />
                             </CFormGroup>
                             <CFormGroup>
-                                <CInput type="submit" value="Submit" color="info" disabled={this.props.loginError ? true : false} />
+                                <CInput type="submit" value="Submit" color="info" disabled={this.state.password !== this.state.password2} />
                             </CFormGroup>
                             {this.props.registerErrorFlag
-                                ? <p>INVALID CREDENTIALS! PLEASE, CHECK YOUR PASSWORD AND PASSWORD CONFIRMATION FIELDS!</p>
+                                ? <p>{this.props.errorMessage ? this.props.errorMessage : 'INVALID CREDENTIALS! PLEASE, CHECK YOUR PASSWORD AND PASSWORD CONFIRMATION FIELDS!'}</p>
                                 : null
                             }
                         </CForm>
@@ -97,7 +96,8 @@ class FoxRegisterForm extends Component {
 const mapStateToProps = state => {
     return {
         registerErrorFlag: state.registerError,
-        registrationToken: state.registrationToken
+        registrationToken: state.registrationToken,
+        errorMessage: state.errorMessage
     }
 }
 

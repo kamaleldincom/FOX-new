@@ -16,7 +16,7 @@ const userRegisterValidationFetch = token => {
             if (resp.ok) {
                 dispatch(allowRegistration(token));
             } else {
-                dispatch(registerError());
+                dispatch(forbidRegistration());
             }
             return resp.json();
         }).then(data => {
@@ -44,11 +44,16 @@ const userRegisterFetch = credentials => {
                 dispatch(logoutUser());
                 dispatch(registerUser());
             } else {
-                dispatch(registerError());
+                // pass
             }
             return resp.json();
         }).then(data => {
             console.warn(data);
+            if (data.password) {
+                const message = data.password[0]
+                dispatch(registerError(message))
+            }
+            ;
         }).catch(function (error) {
             console.error(error);
         })
@@ -112,24 +117,26 @@ const getProfileFetch = () => {
 const loginUser = userObj => ({
     type: 'LOGIN_USER',
     currentUser: userObj,
-    loginError: false
+    loginError: false,
+    registerAllowed: true,
 });
 
 const registerUser = () => ({
     type: 'REGISTER_USER',
     registerError: false,
     registerAllowed: false,
-    userRegistered: true
 });
 
 const loginError = () => ({
     type: 'LOGIN_ERROR',
-    loginError: true
+    loginError: true,
+
 });
 
-const registerError = () => ({
+const registerError = (message = "") => ({
     type: 'REGISTER_ERROR',
-    registerError: true
+    registerError: true,
+    errorMessage: message
 });
 
 const logoutUser = () => {
@@ -142,7 +149,13 @@ const logoutUser = () => {
 const allowRegistration = token => ({
     type: 'ALLOW_REGISTER',
     registerAllowed: true,
-    registrationToken: token
+    registrationToken: token,
+    registerError: false
+}
+);
+const forbidRegistration = () => ({
+    type: 'FORBID_REGISTER',
+    registerAllowed: false,
 }
 );
 
