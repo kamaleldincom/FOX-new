@@ -1,4 +1,64 @@
-const SERVER_ADDRESS = `${window.location.origin}`
+const SERVER_ADDRESS = `${window.location.origin}`;
+
+const userRegisterValidationFetch = token => {
+    return dispatch => {
+        const csrftoken = getCookie('csrftoken');
+        let send_data = JSON.stringify({ token: token });
+        return fetch(`${SERVER_ADDRESS}/api/validate_register_token/`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'X-CSRFToken': csrftoken
+            },
+            body: send_data
+        }).then(resp => {
+            if (resp.ok) {
+                dispatch(allowRegistration(token));
+            } else {
+                dispatch(forbidRegistration());
+            }
+            return resp.json();
+        }).then(data => {
+            console.warn(data);
+        }).catch(function (error) {
+            console.error(error);
+        })
+    }
+}
+
+const userRegisterFetch = credentials => {
+    return dispatch => {
+        let data = JSON.stringify(credentials);
+        const csrftoken = getCookie('csrftoken');
+        return fetch(`${SERVER_ADDRESS}/api/password_reset_confirm/`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'X-CSRFToken': csrftoken
+            },
+            body: data
+        }).then(resp => {
+            if (resp.ok) {
+                dispatch(logoutUser());
+                dispatch(registerUser());
+            } else {
+                // pass
+            }
+            return resp.json();
+        }).then(data => {
+            console.warn(data);
+            if (data.password) {
+                const message = data.password[0]
+                dispatch(registerError(message))
+            }
+            ;
+        }).catch(function (error) {
+            console.error(error);
+        })
+    }
+}
 
 const userLoginFetch = user => {
     return dispatch => {
@@ -57,16 +117,70 @@ const getProfileFetch = () => {
 const loginUser = userObj => ({
     type: 'LOGIN_USER',
     currentUser: userObj,
-    loginError: false
-})
+    loginError: false,
+    registerAllowed: true,
+});
+
+const registerUser = () => ({
+    type: 'REGISTER_USER',
+    registerError: false,
+    registerAllowed: false,
+});
 
 const loginError = () => ({
     type: 'LOGIN_ERROR',
-    loginError: true
-})
+    loginError: true,
 
-const logoutUser = () => ({
-    type: 'LOGOUT_USER'
-})
+});
 
-export { userLoginFetch, getProfileFetch, logoutUser }
+const registerError = (message = "") => ({
+    type: 'REGISTER_ERROR',
+    registerError: true,
+    errorMessage: message
+});
+
+const logoutUser = () => {
+    localStorage.removeItem("token")
+    return {
+        type: 'LOGOUT_USER'
+    }
+};
+
+const allowRegistration = token => ({
+    type: 'ALLOW_REGISTER',
+    registerAllowed: true,
+    registrationToken: token,
+    registerError: false
+}
+);
+const forbidRegistration = () => ({
+    type: 'FORBID_REGISTER',
+    registerAllowed: false,
+}
+);
+
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+export {
+    userLoginFetch,
+    getProfileFetch,
+    logoutUser,
+    userRegisterValidationFetch,
+    userRegisterFetch,
+    registerError, allowRegistration
+}

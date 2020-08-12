@@ -2,10 +2,10 @@ import React, { Component, Suspense } from 'react';
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { CButton, CButtonGroup, CSpinner } from '@coreui/react';
 import { connect } from 'react-redux';
-import FoxApiService from '../services/FoxAPIService'
-import store from '../store'
+import queryString from 'query-string'
 import { getProfileFetch } from '../actions';
 import "./style.scss";
+
 
 
 const loading = (
@@ -16,8 +16,12 @@ const loading = (
 
 const Login = React.lazy(() => import('./pages/Login'));
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
+const Register = React.lazy(() => import('./pages/Register'));
+const Page404 = React.lazy(() => import('./pages/Page404'));
 
 class App extends Component {
+
+
 
   componentDidMount() {
     this.props.getProfileFetch();
@@ -28,6 +32,11 @@ class App extends Component {
       <HashRouter>
         <Suspense fallback={loading}>
           <Switch>
+            <Route exact path="/register" name="Register Page" render={
+              props => {
+                return <Register username={queryString.parse(props.location.search).username} token={queryString.parse(props.location.search).token} {...props} />
+              }
+            } />
             <Route exact path="/login" name="Login Page" render={
               props => {
                 let this_props = this.props;
@@ -37,11 +46,7 @@ class App extends Component {
             <Route exact path="/" name="Fox" render={props => <Dashboard {...props} />}>
             </Route>
             <>
-              <CButtonGroup>
-                <CButton color="success">Button</CButton>
-                <CButton color="info">Button</CButton>
-                <CButton color="primary">Button</CButton>
-              </CButtonGroup>
+              <Page404 />
             </>
           </Switch>
         </Suspense>
@@ -51,7 +56,6 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     currentUser: state.currentUser
   }

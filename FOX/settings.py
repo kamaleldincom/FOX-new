@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "back.apps.BackConfig",
     "rest_framework",
     "corsheaders",
+    "django_rest_passwordreset",
     "front",
 ]
 
@@ -59,7 +60,7 @@ ROOT_URLCONF = "FOX.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["/FOX/templates/fox_admin/"],
+        "DIRS": ["/back/templates/back/",],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -101,6 +102,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
+
+AUTH_USER_MODEL = "back.FoxUser"
+# AUTH_USER_MODEL = 'authtools.User'
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),

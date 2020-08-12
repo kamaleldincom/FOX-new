@@ -16,7 +16,6 @@ class TheHeaderDropdown extends Component {
   handleClick = event => {
     event.preventDefault()
     //TODO: need improvement???
-    localStorage.removeItem("token")
     this.props.logoutUser()
   }
 
