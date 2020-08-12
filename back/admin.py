@@ -1,53 +1,18 @@
 from django.contrib import admin
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import PasswordResetForm
 from django.utils.crypto import get_random_string
 from django import forms
-
-
 from django.contrib.auth import get_user_model
-
-from .models import ClientAdmin, Contractor
-
-# class ClientAdminCreateForm(UserCreationForm):
-
-#     class Meta:
-#         model = ClientAdmin
-#         fields = (
-#             "username",
-#             "email",
-#         )
-
-
-# class ClientAdminAdmin(UserAdmin):
-#     add_form = ClientAdminCreateForm
-
-#     add_fieldsets = ((None, {"classes": ("wide",), "fields": ("username", "email",)},),)
+from .forms import (
+    FoxUserCreationForm,
+    ClientAdminCreationForm,
+    ClientManagerCreationForm,
+    ContractorCreationForm,
+)
+from .models import ClientAdmin, ClientManager, Contractor
 
 FoxUser = get_user_model()
-
-
-class FoxUserCreationForm(UserCreationForm):
-    """
-    A UserCreationForm with optional password inputs.
-    """
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields["password1"].required = False
-        self.fields["password2"].required = False
-        # If one field gets autocompleted but not the other, our 'neither
-        # password or both password' validation will be triggered.
-        self.fields["password1"].widget.attrs["autocomplete"] = "off"
-        self.fields["password2"].widget.attrs["autocomplete"] = "off"
-
-    def clean_password2(self):
-        password1 = self.cleaned_data.get("password1")
-        password2 = super().clean_password2()
-        if bool(password1) ^ bool(password2):
-            raise forms.ValidationError("Fill out both fields")
-        return password2
 
 
 class FoxUserAdmin(UserAdmin):
@@ -56,7 +21,7 @@ class FoxUserAdmin(UserAdmin):
     unless a password was entered.
     """
 
-    add_form = FoxUserCreationForm
+    add_form = FoxUserCreationForm()
     add_fieldsets = (
         (
             None,
@@ -73,7 +38,7 @@ class FoxUserAdmin(UserAdmin):
             "Password",
             {
                 "description": "Optionally, you may set the user's password here.",
-                "fields": ("password1", "password2"),
+                "fields": ("password1", "password2", "role"),
                 "classes": ("collapse", "collapse-closed"),
             },
         ),
@@ -99,9 +64,22 @@ class FoxUserAdmin(UserAdmin):
             )
 
 
-# Re-register UserAdmin
+class ClientAdminAdmin(FoxUserAdmin):
 
-# admin.site.unregister(get_user_model())
+    add_form = ClientAdminCreationForm
+
+
+class ClientManagerAdmin(FoxUserAdmin):
+
+    add_form = ClientManagerCreationForm
+
+
+class ContractorAdmin(FoxUserAdmin):
+
+    add_form = ContractorCreationForm
+
+
 admin.site.register(get_user_model(), FoxUserAdmin)
-admin.site.register(ClientAdmin, FoxUserAdmin)
-# admin.site.register(Contractor, FoxUserAdmin)
+admin.site.register(ClientAdmin, ClientAdminAdmin)
+admin.site.register(ClientManager, ClientManagerAdmin)
+admin.site.register(Contractor, ContractorAdmin)
