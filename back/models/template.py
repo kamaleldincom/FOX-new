@@ -7,4 +7,4 @@ class Template(models.Model):
     project = models.ForeignKey("Project", on_delete=models.CASCADE, name="Project")
 
     def __str__(self):
-        return f'{self.name} for {self.Project}'
+        return f'Template {self.name} for {self.Project}'

@@ -20,6 +20,8 @@ from back.models import (
     Permit,
     Template,
     TemplateItem,
+    Document,
+    DocumentAssign
 )
 
 FoxUser = get_user_model()
@@ -177,6 +179,16 @@ class TemplateItemAdmin(admin.ModelAdmin):
     list_display = ('name', 'items', 'type')
 
 
+class DocumentAdmin(admin.ModelAdmin):
+    model = Document
+    list_display = ('template', 'Worker',)
+
+
+class DocumentAssignAdmin(admin.ModelAdmin):
+    model = DocumentAssign
+    list_display = ('document', 'manager', 'issue_date', 'last_approve_date')
+
+
 admin.site.site_header = "Fox Project Admin Panel"
 
 admin.site.register(get_user_model(), FoxUserAdmin)
@@ -189,5 +201,7 @@ admin.site.register(Project, ProjectAdmin)
 admin.site.register(Permit, PermitAdmin)
 admin.site.register(Template, TemplateAdmin)
 admin.site.register(TemplateItem, TemplateItemAdmin)
+admin.site.register(Document, DocumentAdmin)
+admin.site.register(DocumentAssign, DocumentAssignAdmin)
 
 admin.site.unregister(Group)

@@ -8,3 +8,6 @@ class DocumentItem(models.Model):
     document = models.ForeignKey("Document", on_delete=models.CASCADE, name="items")
     text_value = models.TextField(null=True)
     str_value = models.CharField(max_length=64, null=True)
+
+    def __str__(self):
+        return f'Document item from {self.template_item}'
