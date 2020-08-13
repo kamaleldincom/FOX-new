@@ -11,13 +11,14 @@ import {
     CSidebarNavDropdown,
     CSidebarNavItem,
 } from '@coreui/react'
+import { connect } from "react-redux"
 
 import CIcon from '@coreui/icons-react'
 
 // sidebar nav config
-import navigation from './_nav'
+// import navigation from './_nav'
 
-const FoxSidebar = () => {
+const FoxSidebar = (props) => {
     const dispatch = useDispatch()
     const show = useSelector(state => state.sidebarShow)
 
@@ -27,12 +28,12 @@ const FoxSidebar = () => {
             onShowChange={(val) => dispatch({ type: 'set', sidebarShow: val })}
         >
             <CSidebarBrand className="d-md-down-none" to="/">
-                <h2>FOX</h2>
+                <h2>{props.company ? props.company : "FOX"}</h2>
             </CSidebarBrand>
             <CSidebarNav>
 
                 <CCreateElement
-                    items={navigation}
+                    items={props.navigation}
                     components={{
                         CSidebarNavDivider,
                         CSidebarNavDropdown,
@@ -46,4 +47,11 @@ const FoxSidebar = () => {
     )
 }
 
-export default React.memo(FoxSidebar)
+const mapStateToProps = state => {
+    return {
+        navigation: state.sidebar,
+        company: state.company
+    }
+}
+
+export default connect(mapStateToProps)(React.memo(FoxSidebar))

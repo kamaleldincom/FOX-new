@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, connect } from 'react-redux'
 import {
     CContainer,
     CHeader,
@@ -10,7 +10,7 @@ import {
     CHeaderNavLink,
     CSubheader,
     CBreadcrumbRouter,
-    CLink
+    CLink, CCreateElement
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
@@ -24,7 +24,9 @@ import {
     FoxHeaderDropdownTasks
 } from './index'
 
-const FoxHeader = () => {
+import { FoxHeaderNavLink } from '../../utils'
+
+const FoxHeader = (props) => {
     const dispatch = useDispatch()
     const sidebarShow = useSelector(state => state.sidebarShow)
 
@@ -55,7 +57,15 @@ const FoxHeader = () => {
             </CHeaderBrand>
 
             <CHeaderNav className="d-md-down-none mr-auto">
-                <CHeaderNavItem className="px-3" >
+                <CCreateElement
+                    items={props.navigation}
+                    components={{
+                        CHeaderNavItem,
+                        CHeaderNavLink,
+                        FoxHeaderNavLink
+                    }}
+                />
+                {/* <CHeaderNavItem className="px-3" >
                     <CHeaderNavLink to="/">Dashboard</CHeaderNavLink>
                 </CHeaderNavItem>
                 <CHeaderNavItem className="px-3">
@@ -63,7 +73,7 @@ const FoxHeader = () => {
                 </CHeaderNavItem>
                 <CHeaderNavItem className="px-3">
                     <CHeaderNavLink>Settings</CHeaderNavLink>
-                </CHeaderNavItem>
+                </CHeaderNavItem> */}
             </CHeaderNav>
 
             <CHeaderNav className="px-3">
@@ -98,4 +108,11 @@ const FoxHeader = () => {
     )
 }
 
-export default FoxHeader
+const mapStateToProps = state => {
+    return {
+        navigation: state.headerNav,
+        company: state.company
+    }
+}
+
+export default connect(mapStateToProps)(FoxHeader)

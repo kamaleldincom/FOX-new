@@ -8,6 +8,8 @@ import {
     allowRegistration
 } from './auth'
 
+import getDashboardLayout from './dashboard'
+
 const userLoggedIn = () => {
     return {
         type: 'user_logged_in',
@@ -22,5 +24,6 @@ export {
     userRegisterFetch,
     userRegisterValidationFetch,
     registerError,
-    allowRegistration
+    allowRegistration,
+    getDashboardLayout
 };
