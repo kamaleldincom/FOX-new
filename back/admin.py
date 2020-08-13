@@ -11,7 +11,7 @@ from back.forms import (
     ClientManagerCreationForm,
     ContractorCreationForm,
 )
-from back.models import ClientAdmin, ClientManager, Contractor, Company
+from back.models import ClientAdmin, ClientManager, Contractor, Company, Worker
 
 FoxUser = get_user_model()
 
@@ -63,7 +63,7 @@ class FoxUserAdmin(UserAdmin):
                 subject_template_name="registration/account_creation_subject.txt",
                 email_template_name="registration/account_creation_email.html",
             )
-    
+
 
 class ClientAdminAdmin(FoxUserAdmin):
     list_display = ('username', 'email', 'company')
@@ -73,17 +73,23 @@ class ClientAdminAdmin(FoxUserAdmin):
 class ClientManagerAdmin(FoxUserAdmin):
     list_display = ('username', 'email', 'company')
     add_form = ClientManagerCreationForm
+    fieldsets = (
+        (None, {'fields': ('company',)}),
+    ) + FoxUserAdmin.fieldsets
+    add_fieldsets = (
+        (None, {'fields': ('company',)}),
+    ) + FoxUserAdmin.fieldsets
 
 
 class ContractorAdmin(FoxUserAdmin):
     list_display = ('username', 'email', 'company',)
     add_form = ContractorCreationForm
-    fieldsets = FoxUserAdmin.fieldsets + (
+    fieldsets = (
         (None, {'fields': ('company',)}),
-    )
-    add_fieldsets = FoxUserAdmin.add_fieldsets + (
+    ) + FoxUserAdmin.fieldsets
+    add_fieldsets = (
         (None, {'fields': ('company',)}),
-    )
+    ) + FoxUserAdmin.fieldsets
 
 
 class ClientAdminInline(admin.StackedInline):
@@ -138,6 +144,10 @@ class CompanyAdmin(admin.ModelAdmin):
     ]
 
 
+class WorkerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'contractor')
+
+
 admin.site.site_header = "Fox Project Admin Panel"
 
 admin.site.register(get_user_model(), FoxUserAdmin)
@@ -145,4 +155,6 @@ admin.site.register(ClientAdmin, ClientAdminAdmin)
 admin.site.register(ClientManager, ClientManagerAdmin)
 admin.site.register(Contractor, ContractorAdmin)
 admin.site.register(Company, CompanyAdmin)
+admin.site.register(Worker, WorkerAdmin)
+
 admin.site.unregister(Group)
