@@ -10,4 +10,4 @@ class DocumentItem(models.Model):
     str_value = models.CharField(max_length=64, null=True)
 
     def __str__(self):
-        return f'Document item from {self.template_item}'
+        return f'Document item from {self.doc_items}'
