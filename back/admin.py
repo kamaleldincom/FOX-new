@@ -1,16 +1,17 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import Group
 from django.contrib.auth.forms import PasswordResetForm
 from django.utils.crypto import get_random_string
 from django import forms
 from django.contrib.auth import get_user_model
-from .forms import (
+from back.forms import (
     FoxUserCreationForm,
     ClientAdminCreationForm,
     ClientManagerCreationForm,
     ContractorCreationForm,
 )
-from .models import ClientAdmin, ClientManager, Contractor, Company
+from back.models import ClientAdmin, ClientManager, Contractor, Company
 
 FoxUser = get_user_model()
 
@@ -62,21 +63,27 @@ class FoxUserAdmin(UserAdmin):
                 subject_template_name="registration/account_creation_subject.txt",
                 email_template_name="registration/account_creation_email.html",
             )
-
+    
 
 class ClientAdminAdmin(FoxUserAdmin):
-
+    list_display = ('username', 'email', 'company')
     add_form = ClientAdminCreationForm
 
 
 class ClientManagerAdmin(FoxUserAdmin):
-
+    list_display = ('username', 'email', 'company')
     add_form = ClientManagerCreationForm
 
 
 class ContractorAdmin(FoxUserAdmin):
-
+    list_display = ('username', 'email', 'company',)
     add_form = ContractorCreationForm
+    fieldsets = FoxUserAdmin.fieldsets + (
+        (None, {'fields': ('company',)}),
+    )
+    add_fieldsets = FoxUserAdmin.add_fieldsets + (
+        (None, {'fields': ('company',)}),
+    )
 
 
 class ClientAdminInline(admin.StackedInline):
@@ -131,8 +138,11 @@ class CompanyAdmin(admin.ModelAdmin):
     ]
 
 
+admin.site.site_header = "Fox Project Admin Panel"
+
 admin.site.register(get_user_model(), FoxUserAdmin)
 admin.site.register(ClientAdmin, ClientAdminAdmin)
 admin.site.register(ClientManager, ClientManagerAdmin)
 admin.site.register(Contractor, ContractorAdmin)
 admin.site.register(Company, CompanyAdmin)
+admin.site.unregister(Group)

@@ -22,6 +22,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='foxuser',
             name='role',
-            field=models.CharField(choices=[('CliMan', 'Client Manager'), ('CliAdm', 'Client Admin'), ('Contr', 'Contrator'), ('Dum', 'Dummy')], default='Dum', max_length=16),
+            field=models.CharField(choices=[('CliMan', 'Client Manager'), ('CliAdm', 'Client Admin'), ('Contr', 'Contractor'), ('Dum', 'Dummy')], default='Dum', max_length=16),
         ),
     ]
