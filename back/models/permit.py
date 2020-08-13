@@ -7,3 +7,6 @@ class Permit(models.Model):
     issue_date = models.DateField(auto_now_add=True)
     end_date = models.DateField()
     active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'Permit for {self.Worker} ({self.Project})'

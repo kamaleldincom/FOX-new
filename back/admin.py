@@ -17,7 +17,8 @@ from back.models import (
     Company,
     Worker,
     Project,
-    Permit
+    Permit,
+    Template
 )
 
 FoxUser = get_user_model()
@@ -165,6 +166,11 @@ class PermitAdmin(admin.ModelAdmin):
     list_display = ('Project', 'Worker', 'issue_date')
 
 
+class TemplateAdmin(admin.ModelAdmin):
+    model = Template
+    list_display = ('name', 'Project')
+
+
 admin.site.site_header = "Fox Project Admin Panel"
 
 admin.site.register(get_user_model(), FoxUserAdmin)
@@ -175,5 +181,6 @@ admin.site.register(Company, CompanyAdmin)
 admin.site.register(Worker, WorkerAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Permit, PermitAdmin)
+admin.site.register(Template, TemplateAdmin)
 
 admin.site.unregister(Group)
