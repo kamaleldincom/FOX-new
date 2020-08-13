@@ -9,16 +9,10 @@ from django.contrib.auth import get_user_model
 FoxUser = get_user_model()
 
 
-# class TestUserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = TestUser
-#         fields = ("id", "name", "email", "message")
-
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = FoxUser
-        fields = ("username", "password")
+        fields = ("username", "role")
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):
@@ -44,4 +38,4 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 
     class Meta:
         model = FoxUser
-        fields = ("token", "username", "password")
+        fields = ("token", "username", "password", "role")

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import queryString from 'query-string'
 import { getProfileFetch } from '../actions';
 import "./style.scss";
+import store from '../store'
 
 
 
@@ -25,6 +26,7 @@ class App extends Component {
 
   componentDidMount() {
     this.props.getProfileFetch();
+    console.log(store.getState());
   }
 
   render() {
