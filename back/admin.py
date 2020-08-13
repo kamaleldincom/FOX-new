@@ -3,7 +3,6 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
 from django.contrib.auth.forms import PasswordResetForm
 from django.utils.crypto import get_random_string
-from django import forms
 from django.contrib.auth import get_user_model
 from back.forms import (
     FoxUserCreationForm,
@@ -11,7 +10,15 @@ from back.forms import (
     ClientManagerCreationForm,
     ContractorCreationForm,
 )
-from back.models import ClientAdmin, ClientManager, Contractor, Company, Worker
+from back.models import (
+    ClientAdmin,
+    ClientManager,
+    Contractor,
+    Company,
+    Worker,
+    Project,
+    Permit
+)
 
 FoxUser = get_user_model()
 
@@ -145,7 +152,17 @@ class CompanyAdmin(admin.ModelAdmin):
 
 
 class WorkerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'contractor')
+    list_display = ('name', 'contractor',)
+
+
+class ProjectAdmin(admin.ModelAdmin):
+    model = Project
+    list_display = ('name', 'Company',)
+
+
+class PermitAdmin(admin.ModelAdmin):
+    model = Permit
+    list_display = ('Project', 'Worker', 'issue_date')
 
 
 admin.site.site_header = "Fox Project Admin Panel"
@@ -156,5 +173,7 @@ admin.site.register(ClientManager, ClientManagerAdmin)
 admin.site.register(Contractor, ContractorAdmin)
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Worker, WorkerAdmin)
+admin.site.register(Project, ProjectAdmin)
+admin.site.register(Permit, PermitAdmin)
 
 admin.site.unregister(Group)

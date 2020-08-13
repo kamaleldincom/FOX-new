@@ -14,5 +14,8 @@ class Worker(models.Model):
     safety_green_card = models.CharField(max_length=64)
     position_in_company = models.CharField(max_length=64)
 
+    class Meta:
+        verbose_name = 'Worker'
+
     def __str__(self):
         return f'{self.name}'

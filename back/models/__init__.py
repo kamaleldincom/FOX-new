@@ -12,6 +12,5 @@ from .fox_user import FoxUser  # noqa F401
 from .permit import Permit  # noqa F401
 from .project import Project  # noqa F401
 from .template_item import TemplateItem  # noqa F401
-from .work import Work  # noqa F401
 from .worker import Worker  # noqa F401
 from .template import Template  # noqa F401

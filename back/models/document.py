@@ -10,3 +10,6 @@ class Document(models.Model):
         through_fields=("document", "manager"),
     )
     # reg_number
+
+    def __str__(self):
+        return f'{self.template}'
