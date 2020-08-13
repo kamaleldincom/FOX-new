@@ -1,6 +1,6 @@
 digraph model_graph {
   // Dotfile by Django-Extensions graph_models
-  // Created: 2020-08-13 11:33
+  // Created: 2020-08-13 21:11
   // Cli Options: -a
 
   fontname = "Roboto"
@@ -586,7 +586,7 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>template</B></FONT>
+    <FONT FACE="Roboto"><B>Worker</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
@@ -594,7 +594,7 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>worker</B></FONT>
+    <FONT FACE="Roboto"><B>template</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
@@ -754,7 +754,7 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>project</B></FONT>
+    <FONT FACE="Roboto"><B>Project</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
@@ -762,7 +762,7 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>worker</B></FONT>
+    <FONT FACE="Roboto"><B>Worker</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
@@ -812,7 +812,7 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>projects</B></FONT>
+    <FONT FACE="Roboto"><B>Company</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
@@ -903,40 +903,6 @@ digraph model_graph {
     </TABLE>
     >]
 
-  back_models_work_Work [label=<
-    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
-    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
-    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    Work
-    </B></FONT></TD></TR>
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>id</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>AutoField</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">description</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">TextField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">name</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-    </TABLE>
-    >]
-
   back_models_worker_Worker [label=<
     <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
     <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
@@ -954,7 +920,7 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>workers</B></FONT>
+    <FONT FACE="Roboto"><B>contractor</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (foxuser_ptr)</B></FONT>
     </TD></TR>
@@ -1044,7 +1010,7 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>templates</B></FONT>
+    <FONT FACE="Roboto"><B>Project</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
@@ -1197,7 +1163,7 @@ digraph model_graph {
   [label=" template (document)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   back_models_document_Document -> back_models_worker_Worker
-  [label=" worker (document)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" Worker (document)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   back_models_document_assign_DocumentAssign -> back_models_document_Document
   [label=" document (documentassign)"] [arrowhead=none, arrowtail=dot, dir=both];
@@ -1212,22 +1178,22 @@ digraph model_graph {
   [label=" items (documentitem)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   back_models_permit_Permit -> back_models_project_Project
-  [label=" project (permit)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" Project (permit)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   back_models_permit_Permit -> back_models_worker_Worker
-  [label=" worker (permit)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" Worker (permit)"] [arrowhead=none, arrowtail=dot, dir=both];
 
-  back_models_project_Project -> back_models_work_Work
-  [label=" projects (project)"] [arrowhead=none, arrowtail=dot, dir=both];
+  back_models_project_Project -> back_models_company_Company
+  [label=" Company (project)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   back_models_template_item_TemplateItem -> back_models_template_Template
   [label=" items (templateitem)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   back_models_worker_Worker -> back_models_contractor_Contractor
-  [label=" workers (worker)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" contractor (worker)"] [arrowhead=none, arrowtail=dot, dir=both];
 
-  back_models_template_Template -> back_models_work_Work
-  [label=" templates (template)"] [arrowhead=none, arrowtail=dot, dir=both];
+  back_models_template_Template -> back_models_project_Project
+  [label=" Project (template)"] [arrowhead=none, arrowtail=dot, dir=both];
 
 
   django_rest_passwordreset_models_ResetPasswordToken -> back_models_fox_user_FoxUser
