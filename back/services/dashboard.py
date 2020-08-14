@@ -16,24 +16,24 @@ DEFINITIONS = {
             "header_nav": [
                 {
                     "_tag": "CHeaderNavItem",
-                    "id": "head_nav_users",
+                    "id": "head_nav_approvals",
                     "className": "px-3",
                     "_children": [
                         {
-                            "_tag": "CHeaderNavLink",
-                            "id": "head_nav_link_applications",
+                            "_tag": "FoxHeaderNavLink",
+                            "id": "head_nav_link_approvals",
                             "to": "/applications",
-                            "linktext": "Applications",
+                            "linktext": "Approvals",
                         },
                     ],
                 },
                 {
                     "_tag": "CHeaderNavItem",
-                    "id": "head_nav_users",
+                    "id": "head_nav_current",
                     "className": "px-3",
                     "_children": [
                         {
-                            "_tag": "CHeaderNavLink",
+                            "_tag": "FoxHeaderNavLink",
                             "id": "head_nav_link_works",
                             "to": "/works",
                             "linktext": "Current Works",
@@ -139,17 +139,69 @@ DEFINITIONS = {
             "header_nav": [
                 {
                     "_tag": "CHeaderNavItem",
-                    "id": "head_nav_users",
+                    "id": "head_nav_managers",
                     "className": "px-3",
                     "_children": [
                         {
                             "_tag": "FoxHeaderNavLink",
-                            "id": "head_nav_link_users",
-                            "to": "/users",
-                            "linktext": "Users",
+                            "id": "head_nav_link_managers",
+                            "to": "/Managers",
+                            "linktext": "Managers",
                         }
                     ],
-                }
+                },
+                {
+                    "_tag": "CHeaderNavItem",
+                    "id": "head_nav_projects",
+                    "className": "px-3",
+                    "_children": [
+                        {
+                            "_tag": "FoxHeaderNavLink",
+                            "id": "head_nav_link_projects",
+                            "to": "/projects",
+                            "linktext": "Projects",
+                        }
+                    ],
+                },
+                {
+                    "_tag": "CHeaderNavItem",
+                    "id": "head_nav_documents",
+                    "className": "px-3",
+                    "_children": [
+                        {
+                            "_tag": "FoxHeaderNavLink",
+                            "id": "head_nav_link_documents",
+                            "to": "/documents",
+                            "linktext": "Documents",
+                        }
+                    ],
+                },
+                {
+                    "_tag": "CHeaderNavItem",
+                    "id": "head_nav_contractors",
+                    "className": "px-3",
+                    "_children": [
+                        {
+                            "_tag": "FoxHeaderNavLink",
+                            "id": "head_nav_link_contractors",
+                            "to": "/contractors",
+                            "linktext": "Contractors",
+                        }
+                    ],
+                },
+                {
+                    "_tag": "CHeaderNavItem",
+                    "id": "head_nav_approvals",
+                    "className": "px-3",
+                    "_children": [
+                        {
+                            "_tag": "FoxHeaderNavLink",
+                            "id": "head_nav_link_approvals",
+                            "to": "/approvals",
+                            "linktext": "Approvals",
+                        }
+                    ],
+                },
             ],
         }
     },
@@ -163,7 +215,21 @@ DEFINITIONS = {
                     "icon": "cil-speedometer",
                 },
             ],
-            "header_nav": [],
+            "header_nav": [
+                {
+                    "_tag": "CHeaderNavItem",
+                    "id": "head_nav_example",
+                    "className": "px-3",
+                    "_children": [
+                        {
+                            "_tag": "FoxHeaderNavLink",
+                            "id": "head_nav_link_example",
+                            "to": "/",
+                            "linktext": "Example",
+                        }
+                    ],
+                },
+            ],
         }
     },
 }

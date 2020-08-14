@@ -26,7 +26,6 @@ class App extends Component {
 
   componentDidMount() {
     this.props.getProfileFetch();
-    console.log(store.getState());
   }
 
   render() {
@@ -36,7 +35,12 @@ class App extends Component {
           <Switch>
             <Route exact path="/register" name="Register Page" render={
               props => {
-                return <Register username={queryString.parse(props.location.search).username} token={queryString.parse(props.location.search).token} {...props} />
+                return <Register
+                  username={queryString.parse(props.location.search).username}
+                  token={queryString.parse(props.location.search).token}
+                  username={queryString.parse(props.location.search).username}
+                  {...props}
+                />
               }
             } />
             <Route exact path="/login" name="Login Page" render={

@@ -9,7 +9,7 @@ class FoxRegisterCard extends Component {
                 <CCardHeader color='dark' textColor='light'>
                     Register
                 </CCardHeader>
-                <FoxRegisterForm />
+                <FoxRegisterForm username={this.props.username} />
             </CCard>
         )
     }

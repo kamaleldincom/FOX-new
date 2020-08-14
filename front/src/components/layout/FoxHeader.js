@@ -53,10 +53,10 @@ const FoxHeader = (props) => {
                 onClick={toggleSidebar}
             />
             <CHeaderBrand className="mx-auto d-lg-none" to="/">
-                <CIcon name="logo" height="48" alt="Logo" />
+                {/* <CIcon name="logo" height="48" alt="Logo" /> */}
             </CHeaderBrand>
 
-            <CHeaderNav className="d-md-down-none mr-auto">
+            <CHeaderNav className="mr-auto">
                 <CCreateElement
                     items={props.navigation}
                     components={{
@@ -65,20 +65,11 @@ const FoxHeader = (props) => {
                         FoxHeaderNavLink
                     }}
                 />
-                {/* <CHeaderNavItem className="px-3" >
-                    <CHeaderNavLink to="/">Dashboard</CHeaderNavLink>
-                </CHeaderNavItem>
-                <CHeaderNavItem className="px-3">
-                    <CHeaderNavLink to="/users">Users</CHeaderNavLink>
-                </CHeaderNavItem>
-                <CHeaderNavItem className="px-3">
-                    <CHeaderNavLink>Settings</CHeaderNavLink>
-                </CHeaderNavItem> */}
             </CHeaderNav>
 
             <CHeaderNav className="px-3">
                 <FoxHeaderDropdownNotif />
-                <FoxHeaderDropdownTasks />
+                {/* <FoxHeaderDropdownTasks /> */}
                 <FoxHeaderDropdownMssg />
                 <FoxHeaderDropdown />
             </CHeaderNav>
@@ -88,7 +79,7 @@ const FoxHeader = (props) => {
                     className="border-0 c-subheader-nav m-0 px-0 px-md-3"
                     routes={routes}
                 />
-                <div className="d-md-down-none mfe-2 c-subheader-nav">
+                {/* <div className="d-md-down-none mfe-2 c-subheader-nav">
                     <CLink className="c-subheader-nav-link" href="#">
                         <CIcon name="cil-speech" alt="Settings" />
                     </CLink>
@@ -102,7 +93,7 @@ const FoxHeader = (props) => {
                     <CLink className="c-subheader-nav-link" href="#">
                         <CIcon name="cil-settings" alt="Settings" />&nbsp;Settings
             </CLink>
-                </div>
+                </div> */}
             </CSubheader>
         </CHeader>
     )

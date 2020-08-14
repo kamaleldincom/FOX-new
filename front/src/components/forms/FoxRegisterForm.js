@@ -8,7 +8,7 @@ import { userRegisterFetch, registerError, allowRegistration } from '../../actio
 class FoxRegisterForm extends Component {
 
     state = {
-        username: "",
+        username: this.props.username,
         password: "",
         password2: "",
     }
