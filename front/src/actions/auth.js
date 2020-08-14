@@ -1,29 +1,23 @@
+import { FoxApiService } from '../services'
+
+const foxApi = new FoxApiService();
 const SERVER_ADDRESS = `${window.location.origin}`;
 
-const userRegisterValidationFetch = token => {
+const userRegisterValidationFetch = registerToken => {
     return dispatch => {
-        const csrftoken = getCookie('csrftoken');
-        let send_data = JSON.stringify({ token: token });
-        return fetch(`${SERVER_ADDRESS}/api/validate_register_token/`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                'X-CSRFToken': csrftoken
-            },
-            body: send_data
-        }).then(resp => {
-            if (resp.ok) {
-                dispatch(allowRegistration(token));
-            } else {
-                dispatch(forbidRegistration());
-            }
-            return resp.json();
-        }).then(data => {
-            console.warn(data);
-        }).catch(function (error) {
-            console.error(error);
-        })
+        const url = `${SERVER_ADDRESS}/api/validate_register_token/`;
+        const send_data = { token: registerToken };
+        foxApi.post(url, send_data)
+            .then(({ status, data }) => {
+                if (status === 200) {
+                    dispatch(allowRegistration(registerToken));
+                } else {
+                    dispatch(forbidRegistration());
+                }
+                console.warn(data);
+            }).catch(function (error) {
+                console.error(error);
+            })
     }
 }
 

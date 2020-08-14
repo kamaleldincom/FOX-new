@@ -30,7 +30,7 @@ class Register extends Component {
                     <CContainer>
                         <CRow className="justify-content-center">
                             <CCol md="6">
-                                <FoxRegisterCard />
+                                <FoxRegisterCard username={this.props.username} />
                             </CCol>
                         </CRow>
                     </CContainer>

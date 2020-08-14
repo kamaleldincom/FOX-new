@@ -5,7 +5,9 @@ const initialState = {
     registerError: false,
     registerAllowed: true,
     registrationToken: "",
-    errorMessage: ""
+    errorMessage: "",
+    sidebar: [],
+    headerNav: []
 }
 
 const changeState = (state = initialState, { type, ...rest }) => {
@@ -26,6 +28,9 @@ const changeState = (state = initialState, { type, ...rest }) => {
             return { ...state, ...rest }
         case 'REGISTER_ERROR':
             return { ...state, ...rest }
+        case 'INITIATE_DASHBOARD':
+            return { ...state, ...rest }
+
         default:
             return state
     }

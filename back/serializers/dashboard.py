@@ -5,24 +5,12 @@ from rest_framework_jwt.settings import api_settings
 # from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 
-
 FoxUser = get_user_model()
 
 
-class UserSerializer(serializers.ModelSerializer):
+class DashboardSerializer(serializers.ModelSerializer):
 
-    company_name = serializers.ReadOnlyField(source="company.name")
-
-    class Meta:
-        model = FoxUser
-        fields = ("username", "role", "company_name")
-
-
-class UserSerializerWithToken(serializers.ModelSerializer):
-
-    token = serializers.SerializerMethodField()
-    password = serializers.CharField(write_only=True)
-    # company_name = serializers.Field(source="company.name")
+    dashboard = serializers.SerializerMethodField()
 
     def get_token(self, obj):
         jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
@@ -42,4 +30,4 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 
     class Meta:
         model = FoxUser
-        fields = ("token", "username", "password", "role", "company")
+        fields = ("token", "username", "password", "role")

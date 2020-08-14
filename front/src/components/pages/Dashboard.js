@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getProfileFetch } from '../../actions'
+import { getProfileFetch, getDashboardLayout } from '../../actions'
 import {
 } from '@coreui/react'
 import { FoxSidebar } from '../layout';
@@ -12,6 +12,7 @@ class Dashboard extends Component {
 
   componentDidMount = () => {
     this.props.getProfileFetch()
+    this.props.getDashboardLayout()
   }
 
   render() {
@@ -38,7 +39,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getProfileFetch: () => dispatch(getProfileFetch())
+  getProfileFetch: () => dispatch(getProfileFetch()),
+  getDashboardLayout: () => dispatch(getDashboardLayout())
 })
 
 
