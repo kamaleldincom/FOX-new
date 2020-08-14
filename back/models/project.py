@@ -5,7 +5,7 @@ class Project(models.Model):
     name = models.CharField(max_length=64)
     description = models.TextField()
     company = models.ForeignKey(
-        'Company', on_delete=models.CASCADE, name="Company"
+        'Company', on_delete=models.CASCADE, name="Company", null=True
     )
 
     class Meta:
