@@ -50,7 +50,7 @@ const FoxSidebar = (props) => {
 const mapStateToProps = state => {
     return {
         navigation: state.sidebar,
-        company: state.company
+        company: state.currentUser.company_name
     }
 }
 

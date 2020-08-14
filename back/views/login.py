@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
 from back.serializers import UserSerializer, UserSerializerWithToken
+from back.models import Company
+from rest_framework_jwt.views import ObtainJSONWebToken
 
 FoxUser = get_user_model()
 
@@ -15,8 +17,16 @@ def current_user(request):
     Determine the current user by their token, and return their data
     """
 
+    def pre_save(self, obj):
+        obj.company = Company()
+
     serializer = UserSerializer(request.user)
     return Response(serializer.data)
+
+
+class ObtainFoxJWTToken(ObtainJSONWebToken):
+    def pre_save(self, obj):
+        obj.company = Company()
 
 
 class UserList(APIView):

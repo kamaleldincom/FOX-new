@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
-from rest_framework_jwt.views import obtain_jwt_token
+
+# from rest_framework_jwt.views import obtain_jwt_token
 from django_rest_passwordreset.views import (
     reset_password_request_token,
     reset_password_confirm,
@@ -8,7 +9,7 @@ from django_rest_passwordreset.views import (
 )
 
 urlpatterns = [
-    path("token-auth/", obtain_jwt_token),
+    path("token-auth/", views.ObtainFoxJWTToken.as_view()),
     path("current_user/", views.current_user),
     path("users/", views.UserList.as_view()),
     path("dashboard/", views.Dashboard.as_view()),

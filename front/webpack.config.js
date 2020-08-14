@@ -1,4 +1,3 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const path = require('path');
 
@@ -11,9 +10,6 @@ module.exports = {
     filename: 'main.js'
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      filename: '../../templates/front/index_test_output3.html',
-    }),
     new ErrorOverlayPlugin(),
   ],
 
