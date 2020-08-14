@@ -1,16 +1,29 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import Group
 from django.contrib.auth.forms import PasswordResetForm
 from django.utils.crypto import get_random_string
-from django import forms
 from django.contrib.auth import get_user_model
-from .forms import (
+from back.forms import (
     FoxUserCreationForm,
     ClientAdminCreationForm,
     ClientManagerCreationForm,
     ContractorCreationForm,
 )
-from .models import ClientAdmin, ClientManager, Contractor, Company
+from back.models import (
+    ClientAdmin,
+    ClientManager,
+    Contractor,
+    Company,
+    Worker,
+    Project,
+    Permit,
+    Template,
+    TemplateItem,
+    Document,
+    DocumentAssign,
+    DocumentItem,
+)
 
 FoxUser = get_user_model()
 
@@ -43,6 +56,19 @@ class FoxUserAdmin(UserAdmin):
             },
         ),
     )
+    fieldsets = (
+        (
+            None,
+            {
+                "description": (
+                    "Enter the new user's name and email address and click save."
+                    " The user will be emailed a link allowing them to login to"
+                    " the site and set their password."
+                ),
+                "fields": ("email", "username",),
+            },
+        ),
+    )
 
     def save_model(self, request, obj, form, change):
         if not change and not obj.has_usable_password():
@@ -65,18 +91,38 @@ class FoxUserAdmin(UserAdmin):
 
 
 class ClientAdminAdmin(FoxUserAdmin):
-
+    list_display = ('username', 'email', 'company')
     add_form = ClientAdminCreationForm
+    fieldsets = (
+        (None, {'fields': ('company',)}),
+    ) + FoxUserAdmin.fieldsets
+    add_fieldsets = (
+        (None, {'fields': ('company',)}),
+    ) + FoxUserAdmin.add_fieldsets
 
 
 class ClientManagerAdmin(FoxUserAdmin):
-
+    model = ClientManager
+    list_display = ('username', 'email', 'company')
     add_form = ClientManagerCreationForm
+    fieldsets = (
+        (None, {'fields': ('company',)}),
+    ) + FoxUserAdmin.fieldsets
+    add_fieldsets = (
+        (None, {'fields': ('company',)}),
+    ) + FoxUserAdmin.add_fieldsets
 
 
 class ContractorAdmin(FoxUserAdmin):
-
+    model = Contractor
+    list_display = ('username', 'email', 'company',)
     add_form = ContractorCreationForm
+    fieldsets = (
+        (None, {'fields': ('company',)}),
+    ) + FoxUserAdmin.fieldsets
+    add_fieldsets = (
+        (None, {'fields': ('company',)}),
+    ) + FoxUserAdmin.add_fieldsets
 
 
 class ClientAdminInline(admin.StackedInline):
@@ -131,8 +177,59 @@ class CompanyAdmin(admin.ModelAdmin):
     ]
 
 
+class WorkerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'contractor',)
+
+
+class ProjectAdmin(admin.ModelAdmin):
+    model = Project
+    list_display = ('name', 'Company',)
+
+
+class PermitAdmin(admin.ModelAdmin):
+    model = Permit
+    list_display = ('Project', 'Worker', 'issue_date')
+
+
+class TemplateAdmin(admin.ModelAdmin):
+    model = Template
+    list_display = ('name', 'Project')
+
+
+class TemplateItemAdmin(admin.ModelAdmin):
+    model = TemplateItem
+    list_display = ('name', 'items', 'type')
+
+
+class DocumentAdmin(admin.ModelAdmin):
+    model = Document
+    list_display = ('template', 'Worker',)
+
+
+class DocumentAssignAdmin(admin.ModelAdmin):
+    model = DocumentAssign
+    list_display = ('document', 'manager', 'issue_date', 'last_approve_date')
+
+
+class DocumentItemAdmin(admin.ModelAdmin):
+    model = DocumentItem
+    list_display = ('doc_items', 'items')
+
+
+admin.site.site_header = "Fox Project Admin Panel"
+
 admin.site.register(get_user_model(), FoxUserAdmin)
 admin.site.register(ClientAdmin, ClientAdminAdmin)
 admin.site.register(ClientManager, ClientManagerAdmin)
 admin.site.register(Contractor, ContractorAdmin)
 admin.site.register(Company, CompanyAdmin)
+admin.site.register(Worker, WorkerAdmin)
+admin.site.register(Project, ProjectAdmin)
+admin.site.register(Permit, PermitAdmin)
+admin.site.register(Template, TemplateAdmin)
+admin.site.register(TemplateItem, TemplateItemAdmin)
+admin.site.register(Document, DocumentAdmin)
+admin.site.register(DocumentAssign, DocumentAssignAdmin)
+admin.site.register(DocumentItem, DocumentItemAdmin)
+
+admin.site.unregister(Group)

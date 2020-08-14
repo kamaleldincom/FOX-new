@@ -31,13 +31,14 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1", "46.101.221.249"]  # localhost, s2b h
 # Application definition
 
 INSTALLED_APPS = [
+    'django_extensions',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "back.apps.BackConfig",
+    "back",
     "rest_framework",
     "corsheaders",
     "django_rest_passwordreset",

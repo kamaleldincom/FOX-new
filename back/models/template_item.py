@@ -16,3 +16,6 @@ class TemplateItem(models.Model):
     type = models.CharField(max_length=10, choices=Type.choices, default=Type.text)
     type_values = models.TextField()
     placeholder = models.CharField(max_length=64)
+
+    def __str__(self):
+        return f'{self.name} for {self.items}'

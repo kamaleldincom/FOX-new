@@ -14,5 +14,8 @@ class ClientAdmin(FoxUser):
     class Meta:
         verbose_name = "Client Administrator"
 
+    def __str__(self):
+        return f"{self.username}"
+
 
 post_save.connect(send_mail_on_creation, sender=ClientAdmin)
