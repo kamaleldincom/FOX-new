@@ -20,6 +20,7 @@ class FoxUserCreationForm(UserCreationForm):
         # password or both password' validation will be triggered.
         self.fields["password1"].widget.attrs["autocomplete"] = "off"
         self.fields["password2"].widget.attrs["autocomplete"] = "off"
+        self.fields['email'].required = True
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -27,6 +28,9 @@ class FoxUserCreationForm(UserCreationForm):
         if bool(password1) ^ bool(password2):
             raise forms.ValidationError("Fill out both fields")
         return password2
+
+    class Meta(UserCreationForm.Meta):
+        fields = ('username', 'email',)
 
 
 class ClientAdminCreationForm(FoxUserCreationForm):

@@ -56,6 +56,19 @@ class FoxUserAdmin(UserAdmin):
             },
         ),
     )
+    fieldsets = (
+        (
+            None,
+            {
+                "description": (
+                    "Enter the new user's name and email address and click save."
+                    " The user will be emailed a link allowing them to login to"
+                    " the site and set their password."
+                ),
+                "fields": ("email", "username",),
+            },
+        ),
+    )
 
     def save_model(self, request, obj, form, change):
         if not change and not obj.has_usable_password():
@@ -80,9 +93,16 @@ class FoxUserAdmin(UserAdmin):
 class ClientAdminAdmin(FoxUserAdmin):
     list_display = ('username', 'email', 'company')
     add_form = ClientAdminCreationForm
+    fieldsets = (
+        (None, {'fields': ('company',)}),
+    ) + FoxUserAdmin.fieldsets
+    add_fieldsets = (
+        (None, {'fields': ('company',)}),
+    ) + FoxUserAdmin.add_fieldsets
 
 
 class ClientManagerAdmin(FoxUserAdmin):
+    model = ClientManager
     list_display = ('username', 'email', 'company')
     add_form = ClientManagerCreationForm
     fieldsets = (
@@ -90,10 +110,11 @@ class ClientManagerAdmin(FoxUserAdmin):
     ) + FoxUserAdmin.fieldsets
     add_fieldsets = (
         (None, {'fields': ('company',)}),
-    ) + FoxUserAdmin.fieldsets
+    ) + FoxUserAdmin.add_fieldsets
 
 
 class ContractorAdmin(FoxUserAdmin):
+    model = Contractor
     list_display = ('username', 'email', 'company',)
     add_form = ContractorCreationForm
     fieldsets = (
@@ -101,7 +122,7 @@ class ContractorAdmin(FoxUserAdmin):
     ) + FoxUserAdmin.fieldsets
     add_fieldsets = (
         (None, {'fields': ('company',)}),
-    ) + FoxUserAdmin.fieldsets
+    ) + FoxUserAdmin.add_fieldsets
 
 
 class ClientAdminInline(admin.StackedInline):
