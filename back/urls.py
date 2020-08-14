@@ -8,11 +8,10 @@ from django_rest_passwordreset.views import (
 )
 
 urlpatterns = [
-    # path("api/back/", views.TestUserListCreate.as_view()),
-    path("login/", views.login_view, name="login"),
     path("token-auth/", obtain_jwt_token),
     path("current_user/", views.current_user),
     path("users/", views.UserList.as_view()),
+    path("dashboard/", views.Dashboard.as_view()),
     path(
         r"validate_register_token/",
         reset_password_validate_token,

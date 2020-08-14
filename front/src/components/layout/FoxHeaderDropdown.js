@@ -15,7 +15,6 @@ class TheHeaderDropdown extends Component {
 
   handleClick = event => {
     event.preventDefault()
-    //TODO: need improvement???
     this.props.logoutUser()
   }
 
@@ -30,7 +29,7 @@ class TheHeaderDropdown extends Component {
           <CIcon name="cil-user" />
         </CDropdownToggle>
         <CDropdownMenu className="pt-0" placement="bottom-end">
-          <CDropdownItem
+          {/* <CDropdownItem
             header
             tag="div"
             color="light"
@@ -57,7 +56,7 @@ class TheHeaderDropdown extends Component {
             <CIcon name="cil-comment-square" className="mfe-2" />
             Comments
             <CBadge color="warning" className="mfs-auto">42</CBadge>
-          </CDropdownItem>
+          </CDropdownItem> */}
           <CDropdownItem
             header
             tag="div"
@@ -66,14 +65,14 @@ class TheHeaderDropdown extends Component {
           >
             <strong>Settings</strong>
           </CDropdownItem>
-          <CDropdownItem>
+          {/* <CDropdownItem>
             <CIcon name="cil-user" className="mfe-2" />Profile
-          </CDropdownItem>
+          </CDropdownItem> */}
           <CDropdownItem>
             <CIcon name="cil-settings" className="mfe-2" />
             Settings
           </CDropdownItem>
-          <CDropdownItem>
+          {/* <CDropdownItem>
             <CIcon name="cil-credit-card" className="mfe-2" />
             Payments
             <CBadge color="secondary" className="mfs-auto">42</CBadge>
@@ -82,7 +81,7 @@ class TheHeaderDropdown extends Component {
             <CIcon name="cil-file" className="mfe-2" />
             Projects
             <CBadge color="primary" className="mfs-auto">42</CBadge>
-          </CDropdownItem>
+          </CDropdownItem> */}
           <CDropdownItem divider />
           <CDropdownItem onClick={this.handleClick}>
             <CIcon name="cil-account-logout" className="mfe-2" />

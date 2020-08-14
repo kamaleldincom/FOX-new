@@ -2,26 +2,30 @@ const SERVER_ADDRESS = `${window.location.origin}/`
 
 class FoxApiService {
 
-    apiBase = `${SERVER_ADDRESS}api/`
+    apiBase = `${SERVER_ADDRESS}api/`;
 
-    async getResource(url) {
-        jwt = localStorage.getItem('token')
+    async get(url) {
+        const jwt = localStorage.getItem('token');
         const res = await fetch(url, {
-            headers: {
-                'Authorization': jwt ? `JWT ${jwt}` : ''
-            }
+            headers: jwt ? {
+                'Authorization': `JWT ${jwt}`,
+                'Accept': 'application/json',
+            } : {
+                    'Accept': 'application/json',
+                }
         });
         if (!res.ok) {
-            throw new Error(`Could not fetch ${url}. recieved ${res.status}`)
+            if (res.status >= 500) {
+                throw new Error(`Could not fetch ${url}. recieved ${res.status}`);
+            }
         }
-
-        return await res.json()
+        return res.json();
     }
 
-    async postResource(url, data = {}) {
-        jwt = localStorage.getItem('token')
-        const csrftoken = getCookie('csrftoken');
-        const res = await fetch(ulr, {
+    async post(url, data = {}) {
+        const jwt = localStorage.getItem('token');
+        const csrftoken = this.getCookie('csrftoken');
+        const res = await fetch(url, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             headers: jwt ? {
                 'Content-Type': 'application/json',
@@ -36,22 +40,12 @@ class FoxApiService {
             body: JSON.stringify(data) // body data type must match "Content-Type" header
         });
         if (!res.ok) {
-            throw new Error(`Could not fetch ${url}. recieved ${res.status}`)
+            if (res.status >= 500) {
+                throw new Error(`Could not fetch ${url}. recieved ${res.status}`);
+            }
         }
 
-        return await res.json()
-    }
-
-    verifyUser() {
-        if (this.state.logged_in) {
-
-
-            FoxApiService._getResource(url = `${FoxApiService._apiBase}verify-user`)
-                .then(resp => {
-                    this.setState({ username: resp.username })  // EDIT TO WRITWE TO REDUX STATE 
-                })
-                .catch(err => console.log(err));
-        }
+        return { status: res.status, data: await res.json() };
     }
 
     getCookie(name) {
