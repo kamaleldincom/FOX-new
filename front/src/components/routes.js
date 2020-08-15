@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { ProjectList } from './views/projects';
+const ProjectList = React.lazy(() => import('./views/projects/ProjectList'))
 // const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
 // const Tables = React.lazy(() => import('./views/base/tables/Tables'));
 
@@ -40,6 +41,7 @@ import React from 'react';
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
+  { path: '/projects', name: 'Projects', component: ProjectList, exact: true },
   // { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   // { path: '/theme', name: 'Theme', component: Colors, exact: true },
   // { path: '/theme/colors', name: 'Colors', component: Colors },

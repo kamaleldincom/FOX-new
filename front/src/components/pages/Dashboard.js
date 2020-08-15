@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { getProfileFetch, getDashboardLayout } from '../../actions'
 import {
 } from '@coreui/react'
-import { FoxSidebar } from '../layout';
+import { FoxSidebar, FoxHeader, FoxContent } from '../layout';
 
-import FoxHeader from "../layout/FoxHeader";
+// import FoxHeader from "../layout/FoxHeader";
 
 class Dashboard extends Component {
 
@@ -24,6 +24,7 @@ class Dashboard extends Component {
           <div className="c-body">
             {/* //TODO: make it nice :) */}
             <h2> VERY SOON YOU WILL SEE SOME INO HERE!</h2>
+            <FoxContent />
           </div>
         </div>
       </div>
