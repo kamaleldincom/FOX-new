@@ -16,14 +16,14 @@ const loading = (
   </div>
 )
 
-const FoxContent = () => {
+const FoxContent = (props) => {
   return (
     <main className="c-main">
       <CContainer fluid>
         <Suspense fallback={loading}>
           <Switch>
-            <Route exact path="/projects" name="Projects" render={props => <ProjectList {...props} />} />
-            {/* {routes.map((route, idx) => {
+            {/* <Route exact path="/projects" name="ProjectList" component={ProjectList} /> */}
+            {routes.map((route, idx) => {
               return route.component && (
                 <Route
                   key={idx}
@@ -36,8 +36,8 @@ const FoxContent = () => {
                     </CFade>
                   )} />
               )
-            })} */}
-            <Redirect from="/" to="/dashboard" />
+            })}
+            {/* <Redirect from="/" to="/projects" /> */}
           </Switch>
         </Suspense>
       </CContainer>

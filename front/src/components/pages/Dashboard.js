@@ -14,6 +14,7 @@ class Dashboard extends Component {
   }
 
   render() {
+    console.log('PROPS', this.props);
     return (this.props.currentUser.username ?
       <div className="c-app c-default-layout">
         <FoxSidebar />

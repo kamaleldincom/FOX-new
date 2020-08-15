@@ -49,7 +49,7 @@ class App extends Component {
                 return this_props.currentUser.username ? <Redirect to="/" /> : <Login {...props} />
               }
             } />
-            <Route exact path="/" name="Fox" render={props => <Dashboard {...props} />}>
+            <Route path="/" name="Home" render={props => <Dashboard {...props} />}>
             </Route>
             <>
               <Page404 />
