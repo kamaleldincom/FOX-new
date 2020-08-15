@@ -4,14 +4,15 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
-import { CContainer, CFade } from '@coreui/react'
+import { CContainer, CFade, CSpinner } from '@coreui/react'
+import { ProjectList } from '../views/projects/';
 
 // routes config
 import routes from '../routes'
 
 const loading = (
   <div className="pt-3 text-center">
-    <div className="sk-spinner sk-spinner-pulse"></div>
+    <CSpinner size="sm" variant="grow" style={{ width: '4rem', height: '4rem' }} />
   </div>
 )
 
@@ -21,7 +22,8 @@ const FoxContent = () => {
       <CContainer fluid>
         <Suspense fallback={loading}>
           <Switch>
-            {routes.map((route, idx) => {
+            <Route exact path="/projects" name="Projects" render={props => <ProjectList {...props} />} />
+            {/* {routes.map((route, idx) => {
               return route.component && (
                 <Route
                   key={idx}
@@ -34,7 +36,7 @@ const FoxContent = () => {
                     </CFade>
                   )} />
               )
-            })}
+            })} */}
             <Redirect from="/" to="/dashboard" />
           </Switch>
         </Suspense>

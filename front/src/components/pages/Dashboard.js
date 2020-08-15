@@ -6,8 +6,6 @@ import {
 } from '@coreui/react'
 import { FoxSidebar, FoxHeader, FoxContent } from '../layout';
 
-// import FoxHeader from "../layout/FoxHeader";
-
 class Dashboard extends Component {
 
   componentDidMount = () => {
@@ -22,8 +20,6 @@ class Dashboard extends Component {
         <div className="c-wrapper">
           <FoxHeader />
           <div className="c-body">
-            {/* //TODO: make it nice :) */}
-            <h2> VERY SOON YOU WILL SEE SOME INO HERE!</h2>
             <FoxContent />
           </div>
         </div>

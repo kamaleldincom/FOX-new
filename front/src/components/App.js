@@ -1,12 +1,11 @@
 import React, { Component, Suspense } from 'react';
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { CButton, CButtonGroup, CSpinner } from '@coreui/react';
+import { CSpinner } from '@coreui/react';
 import { connect } from 'react-redux';
 import queryString from 'query-string'
 import { getProfileFetch } from '../actions';
 import "./style.scss";
-import store from '../store'
-
+import { ProjectList } from './views/projects/';
 
 
 const loading = (
@@ -33,6 +32,7 @@ class App extends Component {
       <HashRouter>
         <Suspense fallback={loading}>
           <Switch>
+            {/* <Route exact path="/projects" name="Projects" render={props => <ProjectList {...props} />} /> */}
             <Route exact path="/register" name="Register Page" render={
               props => {
                 return <Register
