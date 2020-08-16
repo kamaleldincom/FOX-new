@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import FoxEntityListTable from '../../tables/FoxEntityListTable'
 import { getProfileFetch, getProjectList, } from '../../../actions'
+import { connect } from 'react-redux'
 
 const usersData = [
   { id: 0, name: 'John Doe', registered: '2018/01/01', role: 'Guest', status: 'Pending' },

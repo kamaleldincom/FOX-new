@@ -26,4 +26,6 @@ urlpatterns = [
     path(
         r"password_reset/", reset_password_request_token, name="reset-password-request"
     ),
+    path("projects/", views.ProjectList.as_view()),
+    path("projects/<int:pk>/", views.ProjectDetail.as_view()),
 ]
