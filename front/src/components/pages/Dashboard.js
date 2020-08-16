@@ -8,13 +8,12 @@ import { FoxSidebar, FoxHeader, FoxContent } from '../layout';
 
 class Dashboard extends Component {
 
-  componentDidMount = () => {
-    this.props.getProfileFetch()
-    this.props.getDashboardLayout()
+  componentDidMount = async () => {
+    await this.props.getProfileFetch()
+      .then(() => this.props.getDashboardLayout())
   }
 
   render() {
-    console.log('PROPS', this.props);
     return (this.props.currentUser.username ?
       <div className="c-app c-default-layout">
         <FoxSidebar />

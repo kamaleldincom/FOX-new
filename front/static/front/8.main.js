@@ -71,23 +71,6 @@ var DocumentList = function DocumentList() {
 
 /* harmony default export */ __webpack_exports__["default"] = (DocumentList);
 
-/***/ }),
-
-/***/ "./src/components/views/documents/index.js":
-/*!*************************************************!*\
-  !*** ./src/components/views/documents/index.js ***!
-  \*************************************************/
-/*! exports provided: DocumentList */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _DocumentList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentList */ "./src/components/views/documents/DocumentList.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DocumentList", function() { return _DocumentList__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-
-
-
 /***/ })
 
 }]);

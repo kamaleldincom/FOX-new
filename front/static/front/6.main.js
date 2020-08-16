@@ -71,23 +71,6 @@ var ContractorList = function ContractorList() {
 
 /* harmony default export */ __webpack_exports__["default"] = (ContractorList);
 
-/***/ }),
-
-/***/ "./src/components/views/contractors/index.js":
-/*!***************************************************!*\
-  !*** ./src/components/views/contractors/index.js ***!
-  \***************************************************/
-/*! exports provided: ContractortList */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ContractorList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ContractorList */ "./src/components/views/contractors/ContractorList.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ContractortList", function() { return _ContractorList__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-
-
-
 /***/ })
 
 }]);

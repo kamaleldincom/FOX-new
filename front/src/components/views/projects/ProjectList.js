@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 import FoxEntityListTable from '../../tables/FoxEntityListTable'
+import { getProfileFetch, getProjectList, } from '../../../actions'
 
 const usersData = [
   { id: 0, name: 'John Doe', registered: '2018/01/01', role: 'Guest', status: 'Pending' },
@@ -24,15 +25,35 @@ const alertOnClick = () => {
   alert('Clicked!');
 }
 
-const ProjectList = () => {
-  return (
-    <FoxEntityListTable
-      tableName='Projects'
-      fields={fields}
-      getBadge={getBadge}
-      usersData={usersData}
-      onRowClick={alertOnClick} />
-  )
+class ProjectList extends Component {
+
+  componentDidMount = async () => {
+    await this.props.getProfileFetch()
+      .then(() => this.props.getProjectsList())
+  }
+
+  render = () => {
+    return (
+      <FoxEntityListTable
+        tableName='Projects'
+        fields={this.props.projectTable.fields}
+        getBadge={getBadge}
+        tableData={this.props.projectTable.tableData}
+        onRowClick={alertOnClick} />
+    )
+  }
+
 }
 
-export default ProjectList
+const mapStateToProps = state => {
+  return {
+    projectTable: state.projectTable
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  getProfileFetch: () => dispatch(getProfileFetch()),
+  getProjectList: () => dispatch(getProjectList())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectList)

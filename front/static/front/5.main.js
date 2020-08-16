@@ -71,23 +71,6 @@ var ApprovalList = function ApprovalList() {
 
 /* harmony default export */ __webpack_exports__["default"] = (ApprovalList);
 
-/***/ }),
-
-/***/ "./src/components/views/approvals/index.js":
-/*!*************************************************!*\
-  !*** ./src/components/views/approvals/index.js ***!
-  \*************************************************/
-/*! exports provided: ApprovalList */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ApprovalList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ApprovalList */ "./src/components/views/approvals/ApprovalList.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ApprovalList", function() { return _ApprovalList__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-
-
-
 /***/ })
 
 }]);

@@ -71,23 +71,6 @@ var CurrentWorksList = function CurrentWorksList() {
 
 /* harmony default export */ __webpack_exports__["default"] = (CurrentWorksList);
 
-/***/ }),
-
-/***/ "./src/components/views/current_works/index.js":
-/*!*****************************************************!*\
-  !*** ./src/components/views/current_works/index.js ***!
-  \*****************************************************/
-/*! exports provided: CurrentWorksList */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CurrentWorksList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CurrentWorksList */ "./src/components/views/current_works/CurrentWorksList.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CurrentWorksList", function() { return _CurrentWorksList__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-
-
-
 /***/ })
 
 }]);

@@ -9,6 +9,7 @@ import {
 } from './auth'
 
 import getDashboardLayout from './dashboard'
+import { getProjectList } from './projects'
 
 const userLoggedIn = () => {
     return {
@@ -25,5 +26,6 @@ export {
     userRegisterValidationFetch,
     registerError,
     allowRegistration,
-    getDashboardLayout
+    getDashboardLayout,
+    getProjectList
 };

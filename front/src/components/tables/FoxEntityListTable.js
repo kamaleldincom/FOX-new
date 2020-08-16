@@ -19,7 +19,7 @@ const FoxEntityListTable = (props) => {
           </CCardHeader>
           <CCardBody>
             <CDataTable
-              items={props.usersData}
+              items={props.tableData}
               fields={props.fields}
               hover
               striped

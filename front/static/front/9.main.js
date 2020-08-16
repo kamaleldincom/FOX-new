@@ -71,23 +71,6 @@ var ManagerList = function ManagerList() {
 
 /* harmony default export */ __webpack_exports__["default"] = (ManagerList);
 
-/***/ }),
-
-/***/ "./src/components/views/managers/index.js":
-/*!************************************************!*\
-  !*** ./src/components/views/managers/index.js ***!
-  \************************************************/
-/*! exports provided: ManagerList */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ManagerList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ManagerList */ "./src/components/views/managers/ManagerList.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ManagerList", function() { return _ManagerList__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-
-
-
 /***/ })
 
 }]);
