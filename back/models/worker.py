@@ -4,7 +4,7 @@ from django.db import models
 class Worker(models.Model):
     name = models.CharField(max_length=64)
     contractor = models.ForeignKey(
-        "Contractor", on_delete=models.CASCADE, name="contractor"
+        "Contractor", on_delete=models.CASCADE, related_name="workers"
     )
     birthday = models.DateField()
     company = models.CharField(max_length=64)  # TODO: check if this field is needed
@@ -15,7 +15,7 @@ class Worker(models.Model):
     position_in_company = models.CharField(max_length=64)
 
     class Meta:
-        verbose_name = 'Worker'
+        verbose_name = "Worker"
 
     def __str__(self):
-        return f'{self.name}'
+        return f"{self.name}"

@@ -9,10 +9,13 @@ const getProjectList = () => {
         foxApi.get(url)
             .then(data => {
                 if (data.projects) {
-                    dispatch(populdatProjectsTable(data.projects))
+                    projectTableInfo = {}
+                    projectTableInfo.tableData = data.projects
+                    projectTableInfo.fields = data.projects[0].keys()
+
+                    dispatch(populdatProjectsTable(projectTableInfo))
                 }
             })
-
     }
 }
 
@@ -32,9 +35,9 @@ const deleteProject = () => {
 
 }
 
-const populdatProjectsTable = projects => ({
+const populdatProjectsTable = projectTableInfo => ({
     type: 'POPULATE_PROJECTS_TABLE',
-    projectTable: projects
+    projectTable: projectTableInfo
 })
 
 export {

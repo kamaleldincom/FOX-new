@@ -266,7 +266,6 @@ var TheHeaderDropdown = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
-  console.log('state', state);
   return {
     currentUser: state.currentUser
   };

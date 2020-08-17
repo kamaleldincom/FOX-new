@@ -6,9 +6,10 @@ class Project(models.Model):
     description = models.TextField()
     start_date = models.DateField(null=True)
     company = models.ForeignKey(
-        "Company", on_delete=models.CASCADE, name="Company", null=True
+        to="Company", on_delete=models.CASCADE, related_name="projects", null=True
     )
-    contractors = models.ManyToManyField("Contractor", related_name="projects")
+    contractors = models.ManyToManyField(to="Contractor", related_name="projects")
+    templates = models.ManyToManyField(to="Template", related_name="projects")
 
     class Meta:
         verbose_name = "Project"

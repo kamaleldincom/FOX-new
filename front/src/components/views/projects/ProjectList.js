@@ -30,7 +30,7 @@ class ProjectList extends Component {
 
   componentDidMount = async () => {
     await this.props.getProfileFetch()
-      .then(() => this.props.getProjectsList())
+      .then(() => this.props.getProjectList())
   }
 
   render = () => {
