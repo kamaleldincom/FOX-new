@@ -24,5 +24,9 @@ class Contractor(FoxUser):
     def __repr__(self):
         return self.__str__()
 
+    @property
+    def project_list(self):
+        return [project.name for project in self.projects.all()]
+
 
 post_save.connect(send_mail_on_creation, sender=Contractor)

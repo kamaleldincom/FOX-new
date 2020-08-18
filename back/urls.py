@@ -30,4 +30,8 @@ urlpatterns = [
     path("projects/<int:pk>/", views.ProjectDetail.as_view()),
     path("client_managers/", views.ClientManagerList.as_view()),
     path("client_managers/<int:pk>/", views.ClientManagerDetail.as_view()),
+    path("contractors/", views.ContractorList.as_view()),
+    path("contractors/<int:pk>/", views.ContractorDetail.as_view()),
+    path("templates/", views.TemplateList.as_view()),
+    path("templates/<int:pk>/", views.TemplateDetail.as_view()),
 ]

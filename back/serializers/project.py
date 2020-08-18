@@ -11,5 +11,4 @@ class ProjectSerializer(serializers.ModelSerializer):
             "description",
             "start_date",
             "contractor_list",
-            "company_name",
         ]

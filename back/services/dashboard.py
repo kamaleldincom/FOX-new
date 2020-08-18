@@ -145,7 +145,7 @@ DEFINITIONS = {
                         {
                             "_tag": "FoxHeaderNavLink",
                             "id": "head_nav_link_managers",
-                            "to": "/Managers",
+                            "to": "/managers",
                             "linktext": "Managers",
                         }
                     ],
