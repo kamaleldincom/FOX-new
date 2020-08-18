@@ -178,6 +178,7 @@ class WorkerAdmin(admin.ModelAdmin):
 
 class ProjectAdmin(admin.ModelAdmin):
     model = Project
+    filter_horizontal = ("contractors", "templates")
     list_display = (
         "name",
         "company",
@@ -189,8 +190,16 @@ class PermitAdmin(admin.ModelAdmin):
     list_display = ("Project", "Worker", "issue_date")
 
 
+class TemplateItemInline(admin.StackedInline):
+    extra = 1
+    model = TemplateItem
+
+
 class TemplateAdmin(admin.ModelAdmin):
     model = Template
+    inlines = [
+        TemplateItemInline,
+    ]
     list_display = ("name", "projects")
 
 

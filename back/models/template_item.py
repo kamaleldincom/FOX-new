@@ -22,4 +22,4 @@ class TemplateItem(models.Model):
     placeholder = models.CharField(max_length=64)
 
     def __str__(self):
-        return f"{self.name} for {self.items}"
+        return f"{self.name} for {self.template.name}"

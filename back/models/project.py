@@ -16,3 +16,12 @@ class Project(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+    @property
+    def company_name(self):
+        return self.company.name
+
+    @property
+    def contractor_list(self):
+        # return ",".join([c.username for c in self.contractors])
+        return [c.username for c in self.contractors.all()]

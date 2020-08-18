@@ -8,13 +8,13 @@ const getProjectList = () => {
         const url = `${SERVER_ADDRESS}/api/projects/`
         foxApi.get(url)
             .then(data => {
-                if (data.projects) {
-                    projectTableInfo = {}
-                    projectTableInfo.tableData = data.projects
-                    projectTableInfo.fields = data.projects[0].keys()
+                const projectTableInfo = {}
+                projectTableInfo.tableData = data
+                projectTableInfo.fields = data[0].keys
 
-                    dispatch(populdatProjectsTable(projectTableInfo))
-                }
+                dispatch(populdatProjectsTable(projectTableInfo))
+            }).catch(function (error) {
+                console.error(error);
             })
     }
 }

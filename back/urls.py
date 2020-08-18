@@ -28,4 +28,6 @@ urlpatterns = [
     ),
     path("projects/", views.ProjectList.as_view()),
     path("projects/<int:pk>/", views.ProjectDetail.as_view()),
+    path("client_managers/", views.ClientManagerList.as_view()),
+    path("client_managers/<int:pk>/", views.ClientManagerDetail.as_view()),
 ]
