@@ -1,12 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import FoxEntityListTable from '../../tables/FoxEntityListTable'
-
-const usersData = [
-  { id: 0, name: 'John Doe', registered: '2018/01/01', role: 'Guest', status: 'Pending' },
-  { id: 1, name: 'Samppa Nori', registered: '2018/01/01', role: 'Member', status: 'Active' },
-  { id: 2, name: 'Estavan Lykos', registered: '2018/02/01', role: 'Staff', status: 'Banned' },
-]
-
+import { getProfileFetch, getTemplateList, } from '../../../actions'
+import { connect } from 'react-redux'
 
 const getBadge = status => {
   switch (status) {
@@ -18,21 +13,40 @@ const getBadge = status => {
   }
 }
 
-const fields = ['name', 'registered', 'role', 'status']
-
 const alertOnClick = () => {
   alert('Clicked!');
 }
 
-const DocumentList = () => {
-  return (
-    <FoxEntityListTable
-      tableName='Documents'
-      fields={fields}
-      getBadge={getBadge}
-      usersData={usersData}
-      onRowClick={alertOnClick} />
-  )
+class DocumentList extends Component {
+
+
+  componentDidMount = async () => {
+    await this.props.getProfileFetch()
+      .then(() => this.props.getTemplateList())
+  }
+
+  render = () => {
+    return (
+      <FoxEntityListTable
+        tableName='Documents'
+        fields={this.props.documentListTable.fields}
+        getBadge={getBadge}
+        tableData={this.props.documentListTable.tableData}
+        onRowClick={alertOnClick} />
+    )
+  }
+
 }
 
-export default DocumentList
+const mapStateToProps = state => {
+  return {
+    documentListTable: state.entityListTable
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  getProfileFetch: () => dispatch(getProfileFetch()),
+  getTemplateList: () => dispatch(getTemplateList())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(DocumentList)

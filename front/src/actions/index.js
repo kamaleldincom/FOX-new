@@ -11,7 +11,7 @@ import {
 import getDashboardLayout from './dashboard'
 import { getProjectList } from './projects'
 import { getClientManagerList } from './client_managers'
-
+import { getTemplateList } from './templates'
 
 const userLoggedIn = () => {
     return {
@@ -30,5 +30,6 @@ export {
     allowRegistration,
     getDashboardLayout,
     getProjectList,
-    getClientManagerList
+    getClientManagerList,
+    getTemplateList
 };
