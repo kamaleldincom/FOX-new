@@ -1,3 +1,3 @@
-import ManagerList from './ManagerList'
+import ClientManagerList from './ClientManagerList'
 
-export { ManagerList }
+export { ClientManagerList }

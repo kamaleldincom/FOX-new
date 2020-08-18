@@ -10,6 +10,8 @@ import {
 
 import getDashboardLayout from './dashboard'
 import { getProjectList } from './projects'
+import { getClientManagerList } from './client_managers'
+
 
 const userLoggedIn = () => {
     return {
@@ -27,5 +29,6 @@ export {
     registerError,
     allowRegistration,
     getDashboardLayout,
-    getProjectList
+    getProjectList,
+    getClientManagerList
 };

@@ -8,7 +8,7 @@ const initialState = {
     errorMessage: "",
     sidebar: [],
     headerNav: [],
-    projectTable: {},
+    entityListTable: {},
 }
 
 const changeState = (state = initialState, { type, ...rest }) => {
@@ -31,7 +31,7 @@ const changeState = (state = initialState, { type, ...rest }) => {
             return { ...state, ...rest }
         case 'INITIATE_DASHBOARD':
             return { ...state, ...rest }
-        case 'POPULATE_PROJECTS_TABLE':
+        case 'POPULATE_ENTITY_TABLE':
             return { ...state, ...rest }
 
         default:

@@ -874,8 +874,8 @@ var CurrentWorksList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a
 var DocumentList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/documents/DocumentList */ "./src/components/views/documents/DocumentList.js"));
 });
-var ManagerList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./views/managers/ManagerList */ "./src/components/views/managers/ManagerList.js"));
+var ClientManagerList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
+  return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./views/managers/ClientManagerList */ "./src/components/views/managers/ClientManagerList.js"));
 }); // const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
 // const Tables = React.lazy(() => import('./views/base/tables/Tables'));
 // const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'));
@@ -943,7 +943,7 @@ var routes = [{
 }, {
   path: '/managers',
   name: 'Managers',
-  component: ManagerList,
+  component: ClientManagerList,
   exact: true
 } // { path: '/dashboard', name: 'Dashboard', component: Dashboard },
 // { path: '/theme', name: 'Theme', component: Colors, exact: true },
