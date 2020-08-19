@@ -5,6 +5,7 @@ const ContractorList = React.lazy(() => import('./views/contractors/ContractorLi
 const CurrentWorksList = React.lazy(() => import('./views/current_works/CurrentWorksList'))
 const DocumentList = React.lazy(() => import('./views/documents/DocumentList'))
 const ClientManagerList = React.lazy(() => import('./views/managers/ClientManagerList'))
+const WorkerList = React.lazy(() => import('./views/workers/WorkerList'))
 // const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
 // const Tables = React.lazy(() => import('./views/base/tables/Tables'));
 
@@ -51,6 +52,7 @@ const routes = [
   { path: '/contractors', name: 'Contractors', component: ContractorList, exact: true },
   { path: '/documents', name: 'Documents', component: DocumentList, exact: true },
   { path: '/managers', name: 'Managers', component: ClientManagerList, exact: true },
+  { path: '/workers', name: 'Workers', component: WorkerList, exact: true },
   // { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   // { path: '/theme', name: 'Theme', component: Colors, exact: true },
   // { path: '/theme/colors', name: 'Colors', component: Colors },

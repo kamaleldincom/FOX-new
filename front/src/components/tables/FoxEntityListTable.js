@@ -10,61 +10,62 @@ import {
   CRow,
   CLink
 } from '@coreui/react'
-import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
-const alertOnClick = (e, urlBAse) => {
-  console.log(e.id);
-  console.log(e);
-  alert('Clicked!');
-  return (
-    <Redirect to={`${urlBAse}/${e.id}`} />
-  )
+
+
+class FoxEntityListTable extends Component {
+
+  alertOnClick = (e) => {
+    this.props.history.push(`${this.props.match.path}/${e.id}`)
+  }
+
+  render = () => {
+    return (
+      <CRow>
+        <CCol>
+          <CCard>
+            <CCardHeader
+              className="d-flex justify-content-between">
+              <CCardTitle>
+                {this.props.tableName}
+              </CCardTitle>
+              <CLink
+                className="btn btn-outline-success"
+                to={`${this.props.match.path}/new`}
+              >
+                Add new
+              </CLink>
+            </CCardHeader>
+            <CCardBody>
+              <CDataTable
+                items={this.props.tableData}
+                fields={this.props.fields}
+                hover
+                striped
+                bordered
+                size="sm"
+                itemsPerPage={10}
+                pagination
+                onRowClick={this.alertOnClick}
+                scopedSlots={{
+                  'status':
+                    (item) => (
+                      <td>
+                        <CBadge color={this.props.getBadge(item.status)}>
+                          {item.status}
+                        </CBadge>
+                      </td>
+                    )
+                }}
+              />
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow >
+    )
+  }
+
 }
 
-const FoxEntityListTable = (props) => {
-  return (
-    <CRow>
-      <CCol>
-        <CCard>
-          <CCardHeader
-            className="d-flex justify-content-between">
-            <CCardTitle>
-              {props.tableName}
-            </CCardTitle>
-            <CLink
-              className="btn btn-outline-success"
-              to={`${props.match.path}/new`}
-            >
-              Add new
-            </CLink>
-          </CCardHeader>
-          <CCardBody>
-            <CDataTable
-              items={props.tableData}
-              fields={props.fields}
-              hover
-              striped
-              bordered
-              size="sm"
-              itemsPerPage={10}
-              pagination
-              onRowClick={alertOnClick}
-              scopedSlots={{
-                'status':
-                  (item) => (
-                    <td>
-                      <CBadge color={props.getBadge(item.status)}>
-                        {item.status}
-                      </CBadge>
-                    </td>
-                  )
-              }}
-            />
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow >
-  )
-}
-
-export default FoxEntityListTable
+export default withRouter(FoxEntityListTable)

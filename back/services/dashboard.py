@@ -123,7 +123,21 @@ DEFINITIONS = {
                     "icon": "cil-av-timer",
                 },
             ],
-            "header_nav": [],
+            "header_nav": [
+                {
+                    "_tag": "CHeaderNavItem",
+                    "id": "head_nav_workers",
+                    "className": "px-3",
+                    "_children": [
+                        {
+                            "_tag": "FoxHeaderNavLink",
+                            "id": "head_nav_link_workers",
+                            "to": "/workers",
+                            "linktext": "Workers",
+                        }
+                    ],
+                },
+            ],
         }
     },
     FoxUser.Role.client_admin: {

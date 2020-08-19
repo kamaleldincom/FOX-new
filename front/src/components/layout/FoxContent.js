@@ -5,9 +5,6 @@ import {
   Switch
 } from 'react-router-dom'
 import { CContainer, CFade, CSpinner } from '@coreui/react'
-import { ProjectList } from '../views/projects/';
-
-// routes config
 import routes from '../routes'
 
 const loading = (
@@ -16,13 +13,14 @@ const loading = (
   </div>
 )
 
-const FoxContent = (props) => {
+const Page404 = React.lazy(() => import('../pages/Page404'));
+
+const FoxContent = () => {
   return (
     <main className="c-main">
       <CContainer fluid>
         <Suspense fallback={loading}>
           <Switch>
-            {/* <Route exact path="/projects" name="ProjectList" component={ProjectList} /> */}
             {routes.map((route, idx) => {
               return route.component && (
                 <Route
@@ -37,7 +35,9 @@ const FoxContent = (props) => {
                   )} />
               )
             })}
-            {/* <Redirect from="/" to="/projects" /> */}
+            <>
+              <Page404 />
+            </>
           </Switch>
         </Suspense>
       </CContainer>

@@ -13,12 +13,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
-/* harmony import */ var _views_projects___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../views/projects/ */ "./src/components/views/projects/index.js");
-/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../routes */ "./src/components/routes.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../routes */ "./src/components/routes.js");
 
 
-
- // routes config
 
 
 var loading = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -31,15 +28,18 @@ var loading = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createEl
     height: '4rem'
   }
 }));
+var Page404 = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
+  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../pages/Page404 */ "./src/components/pages/Page404.js"));
+});
 
-var FoxContent = function FoxContent(props) {
+var FoxContent = function FoxContent() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
     className: "c-main"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CContainer"], {
     fluid: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
     fallback: loading
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, _routes__WEBPACK_IMPORTED_MODULE_4__["default"].map(function (route, idx) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, _routes__WEBPACK_IMPORTED_MODULE_3__["default"].map(function (route, idx) {
     return route.component && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
       key: idx,
       path: route.path,
@@ -49,7 +49,7 @@ var FoxContent = function FoxContent(props) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CFade"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(route.component, props));
       }
     });
-  })))));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Page404, null))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(FoxContent));
@@ -860,7 +860,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 var ProjectList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectList */ "./src/components/views/projects/ProjectList.js"));
+  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectList */ "./src/components/views/projects/ProjectList.js"));
 });
 var ApprovalList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./views/approvals/ApprovalList */ "./src/components/views/approvals/ApprovalList.js"));
@@ -876,6 +876,9 @@ var DocumentList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.laz
 });
 var ClientManagerList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./views/managers/ClientManagerList */ "./src/components/views/managers/ClientManagerList.js"));
+});
+var WorkerList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
+  return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerList */ "./src/components/views/workers/WorkerList.js"));
 }); // const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
 // const Tables = React.lazy(() => import('./views/base/tables/Tables'));
 // const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'));
@@ -944,6 +947,11 @@ var routes = [{
   path: '/managers',
   name: 'Managers',
   component: ClientManagerList,
+  exact: true
+}, {
+  path: '/workers',
+  name: 'Workers',
+  component: WorkerList,
   exact: true
 } // { path: '/dashboard', name: 'Dashboard', component: Dashboard },
 // { path: '/theme', name: 'Theme', component: Colors, exact: true },

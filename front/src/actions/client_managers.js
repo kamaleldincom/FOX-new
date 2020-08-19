@@ -1,23 +1,8 @@
-import { FoxApiService } from '../services'
+import { RepresentationService } from '../services'
 
-const foxApi = new FoxApiService();
-const SERVER_ADDRESS = `${window.location.origin}`;
-
+const repr = new RepresentationService
 const getClientManagerList = () => {
-    return dispatch => {
-        const url = `${SERVER_ADDRESS}/api/client_managers/`;
-        foxApi.get(url)
-            .then(data => {
-                const clientManagerTableInfo = {};
-                clientManagerTableInfo.tableData = data;
-                let first_row = data[0];
-                clientManagerTableInfo.fields = Object.keys(first_row);
-
-                dispatch(populateEntityTable(clientManagerTableInfo));
-            }).catch(function (error) {
-                console.error(error);
-            })
-    }
+    return repr.displaySimpleList('client_managers')
 }
 
 const getProject = () => {
@@ -35,11 +20,6 @@ const updateProject = () => {
 const deleteProject = () => {
 
 }
-
-const populateEntityTable = clientManagerTableInfo => ({
-    type: 'POPULATE_ENTITY_TABLE',
-    entityListTable: clientManagerTableInfo
-})
 
 export {
     getClientManagerList

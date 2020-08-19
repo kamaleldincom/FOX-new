@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import queryString from 'query-string'
 import { getProfileFetch } from '../actions';
 import "./style.scss";
-import { ProjectList } from './views/projects/';
 
 
 const loading = (
