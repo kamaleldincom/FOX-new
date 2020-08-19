@@ -29,6 +29,7 @@ class ClientManagerList extends Component {
   render = () => {
     return (
       <FoxEntityListTable
+        {...this.props}
         tableName='Managers'
         fields={this.props.clientManagerTable.fields}
         getBadge={getBadge}

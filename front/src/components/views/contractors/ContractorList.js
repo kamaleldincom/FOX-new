@@ -28,6 +28,7 @@ class ContractorList extends Component {
   render = () => {
     return (
       <FoxEntityListTable
+        {...this.props}
         tableName='Contractors'
         fields={this.props.contractorTable.fields}
         getBadge={getBadge}

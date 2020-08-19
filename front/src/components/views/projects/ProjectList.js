@@ -28,6 +28,7 @@ class ProjectList extends Component {
   render = () => {
     return (
       <FoxEntityListTable
+        {...this.props}
         tableName='Projects'
         fields={this.props.projectTable.fields}
         getBadge={getBadge}

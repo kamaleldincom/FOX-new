@@ -12,7 +12,7 @@ const getProjectList = () => {
                 projectTableInfo.tableData = data;
                 let first_row = data[0];
                 projectTableInfo.fields = Object.keys(first_row);
-
+                projectTableInfo.fields.shift()
                 dispatch(populateEntityTable(projectTableInfo));
             }).catch(function (error) {
                 console.error(error);

@@ -27,6 +27,7 @@ const alertOnClick = () => {
 const CurrentWorksList = () => {
     return (
         <FoxEntityListTable
+            {...this.props}
             tableName='Current Works'
             fields={fields}
             getBadge={getBadge}

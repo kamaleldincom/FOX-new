@@ -1,21 +1,42 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
   CBadge,
   CCard,
   CCardBody,
   CCardHeader,
+  CCardTitle,
   CCol,
   CDataTable,
-  CRow
+  CRow,
+  CLink
 } from '@coreui/react'
+import { Redirect } from 'react-router-dom'
+
+const alertOnClick = (e, urlBAse) => {
+  console.log(e.id);
+  console.log(e);
+  alert('Clicked!');
+  return (
+    <Redirect to={`${urlBAse}/${e.id}`} />
+  )
+}
 
 const FoxEntityListTable = (props) => {
   return (
     <CRow>
       <CCol>
         <CCard>
-          <CCardHeader>
-            {props.tableName}
+          <CCardHeader
+            className="d-flex justify-content-between">
+            <CCardTitle>
+              {props.tableName}
+            </CCardTitle>
+            <CLink
+              className="btn btn-outline-success"
+              to={`${props.match.path}/new`}
+            >
+              Add new
+            </CLink>
           </CCardHeader>
           <CCardBody>
             <CDataTable
@@ -27,7 +48,7 @@ const FoxEntityListTable = (props) => {
               size="sm"
               itemsPerPage={10}
               pagination
-              onRowClick={props.onRowClick}
+              onRowClick={alertOnClick}
               scopedSlots={{
                 'status':
                   (item) => (
@@ -42,7 +63,7 @@ const FoxEntityListTable = (props) => {
           </CCardBody>
         </CCard>
       </CCol>
-    </CRow>
+    </CRow >
   )
 }
 

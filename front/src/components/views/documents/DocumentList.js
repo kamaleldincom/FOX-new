@@ -28,6 +28,7 @@ class DocumentList extends Component {
   render = () => {
     return (
       <FoxEntityListTable
+        {...this.props}
         tableName='Documents'
         fields={this.props.documentListTable.fields}
         getBadge={getBadge}

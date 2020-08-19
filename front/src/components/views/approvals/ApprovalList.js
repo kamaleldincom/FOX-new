@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import FoxEntityListTable from '../../tables/FoxEntityListTable'
 
 const usersData = [
@@ -24,15 +24,19 @@ const alertOnClick = () => {
     alert('Clicked!');
 }
 
-const ApprovalList = () => {
-    return (
-        <FoxEntityListTable
-            tableName='Approvals'
-            fields={fields}
-            getBadge={getBadge}
-            usersData={usersData}
-            onRowClick={alertOnClick} />
-    )
+class ApprovalList extends Component {
+    render = () => {
+        return (
+            <FoxEntityListTable
+                {...this.props}
+                tableName='Approvals'
+                fields={fields}
+                getBadge={getBadge}
+                usersData={usersData}
+                onRowClick={alertOnClick} />
+        )
+    }
+
 }
 
 export default ApprovalList
