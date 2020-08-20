@@ -7,6 +7,7 @@ class TemplateSerializer(serializers.ModelSerializer):
         model = Template
 
         fields = [
+            "id",
             "name",
             "description",
         ]

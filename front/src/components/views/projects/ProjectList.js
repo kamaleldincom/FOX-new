@@ -14,9 +14,6 @@ const getBadge = status => {
   }
 }
 
-const alertOnClick = () => {
-  alert('Clicked!');
-}
 
 class ProjectList extends Component {
 
@@ -33,7 +30,7 @@ class ProjectList extends Component {
         fields={this.props.projectTable.fields}
         getBadge={getBadge}
         tableData={this.props.projectTable.tableData}
-        onRowClick={alertOnClick} />
+      />
     )
   }
 

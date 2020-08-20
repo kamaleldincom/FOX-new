@@ -93,10 +93,10 @@ var FoxEntityListTable = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./src/components/views/workers/WorkerList.js":
-/*!****************************************************!*\
-  !*** ./src/components/views/workers/WorkerList.js ***!
-  \****************************************************/
+/***/ "./src/components/views/projects/ProjectList.js":
+/*!******************************************************!*\
+  !*** ./src/components/views/projects/ProjectList.js ***!
+  \******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -157,15 +157,15 @@ var getBadge = function getBadge(status) {
   }
 };
 
-var WorkerList = /*#__PURE__*/function (_Component) {
-  _inherits(WorkerList, _Component);
+var ProjectList = /*#__PURE__*/function (_Component) {
+  _inherits(ProjectList, _Component);
 
-  var _super = _createSuper(WorkerList);
+  var _super = _createSuper(ProjectList);
 
-  function WorkerList() {
+  function ProjectList() {
     var _this;
 
-    _classCallCheck(this, WorkerList);
+    _classCallCheck(this, ProjectList);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -180,7 +180,7 @@ var WorkerList = /*#__PURE__*/function (_Component) {
             case 0:
               _context.next = 2;
               return _this.props.getProfileFetch().then(function () {
-                return _this.props.getWorkerList();
+                return _this.props.getProjectList();
               });
 
             case 2:
@@ -194,21 +194,21 @@ var WorkerList = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "render", function () {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tables_FoxEntityListTable__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({}, _this.props, {
         tableName: "Projects",
-        fields: _this.props.workerTable.fields,
+        fields: _this.props.projectTable.fields,
         getBadge: getBadge,
-        tableData: _this.props.workerTable.tableData
+        tableData: _this.props.projectTable.tableData
       }));
     });
 
     return _this;
   }
 
-  return WorkerList;
+  return ProjectList;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    workerTable: state.entityListTable
+    projectTable: state.entityListTable
   };
 };
 
@@ -218,12 +218,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getProfileFetch"])());
     },
     getProjectList: function getProjectList() {
-      return dispatch(getWorkerList());
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getProjectList"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(WorkerList));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(ProjectList));
 
 /***/ })
 

@@ -45,7 +45,7 @@ class FoxApiService {
             }
         }
 
-        return { status: res.status, data: await res.json() };
+        return res.json();
     }
 
     getCookie(name) {
@@ -62,6 +62,12 @@ class FoxApiService {
             }
         }
         return cookieValue;
+    }
+
+    createEntityOf = (entity, data) => {
+        let url = `${this.apiBase}${entity}/new/`;
+        const res = this.post(url = url, data = data);
+        return res
     }
 }
 

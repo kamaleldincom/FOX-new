@@ -8,8 +8,10 @@ class Project(models.Model):
     company = models.ForeignKey(
         to="Company", on_delete=models.CASCADE, related_name="projects", null=True
     )
-    contractors = models.ManyToManyField(to="Contractor", related_name="projects")
-    templates = models.ManyToManyField(to="Template", related_name="projects")
+    contractor = models.ForeignKey(
+        to="Contractor", on_delete=models.SET_NULL, related_name="projects", null=True
+    )
+    # templates = models.ManyToManyField(to="Template", related_name="projects")
 
     class Meta:
         verbose_name = "Project"
@@ -22,6 +24,6 @@ class Project(models.Model):
         return self.company.name
 
     @property
-    def contractor_list(self):
+    def contractor_name(self):
         # return ",".join([c.username for c in self.contractors])
-        return [c.username for c in self.contractors.all()]
+        return self.contractor.username

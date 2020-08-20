@@ -1,9 +1,14 @@
 from back.models import Project
-from back.serializers import ProjectSerializer
+from back.serializers import ProjectSerializer, ProjectListSerializer
 from rest_framework import generics
 
 
-class ProjectList(generics.ListCreateAPIView):
+class ProjectList(generics.ListAPIView):
+    queryset = Project.objects.all()
+    serializer_class = ProjectListSerializer
+
+
+class ProjectCreate(generics.CreateAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
 

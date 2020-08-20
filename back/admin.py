@@ -178,7 +178,6 @@ class WorkerAdmin(admin.ModelAdmin):
 
 class ProjectAdmin(admin.ModelAdmin):
     model = Project
-    filter_horizontal = ("contractors", "templates")
     list_display = (
         "name",
         "company",
@@ -190,22 +189,22 @@ class PermitAdmin(admin.ModelAdmin):
     list_display = ("Project", "Worker", "issue_date")
 
 
-class TemplateItemInline(admin.StackedInline):
-    extra = 1
-    model = TemplateItem
+# class TemplateItemInline(admin.StackedInline):
+#     extra = 1
+#     model = TemplateItem
 
 
-class TemplateAdmin(admin.ModelAdmin):
-    model = Template
-    inlines = [
-        TemplateItemInline,
-    ]
-    list_display = ("name", "projects")
+# class TemplateAdmin(admin.ModelAdmin):
+#     model = Template
+#     inlines = [
+#         TemplateItemInline,
+#     ]
+#     list_display = ("name", "projects")
 
 
-class TemplateItemAdmin(admin.ModelAdmin):
-    model = TemplateItem
-    list_display = ("name", "template", "type_choice")
+# class TemplateItemAdmin(admin.ModelAdmin):
+#     model = TemplateItem
+#     list_display = ("name", "template", "type_choice")
 
 
 class DocumentAdmin(admin.ModelAdmin):
@@ -236,8 +235,8 @@ admin.site.register(Company, CompanyAdmin)
 admin.site.register(Worker, WorkerAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Permit, PermitAdmin)
-admin.site.register(Template, TemplateAdmin)
-admin.site.register(TemplateItem, TemplateItemAdmin)
+# admin.site.register(Template, TemplateAdmin)
+# admin.site.register(TemplateItem, TemplateItemAdmin)
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(DocumentAssign, DocumentAssignAdmin)
 admin.site.register(DocumentItem, DocumentItemAdmin)

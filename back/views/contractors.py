@@ -1,9 +1,14 @@
 from back.models import Contractor
-from back.serializers import ContractorSerializer
+from back.serializers import ContractorSerializer, ContractorListSerializer
 from rest_framework import generics
 
 
-class ContractorList(generics.ListCreateAPIView):
+class ContractorList(generics.ListAPIView):
+    queryset = Contractor.objects.all()
+    serializer_class = ContractorListSerializer
+
+
+class ContractorCreate(generics.CreateAPIView):
     queryset = Contractor.objects.all()
     serializer_class = ContractorSerializer
 

@@ -9,7 +9,7 @@ class WorkerListSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "name",
-            "position_in_cmopany",
+            "position_in_company",
         ]
 
 
