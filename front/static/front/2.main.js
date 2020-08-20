@@ -880,8 +880,11 @@ var ClientManagerList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.
 var WorkerList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerList */ "./src/components/views/workers/WorkerList.js"));
 });
+var ProjectCreate = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectCreate */ "./src/components/views/projects/ProjectCreate.js"));
+});
 var ProjectDetail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectDetail */ "./src/components/views/projects/ProjectDetail.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectDetail */ "./src/components/views/projects/ProjectDetail.js"));
 });
 var ContractorDetail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ./views/contractors/ContractorDetail */ "./src/components/views/contractors/ContractorDetail.js"));
@@ -932,8 +935,12 @@ var routes = [{
 }, {
   path: '/projects/new',
   name: 'New',
-  component: ProjectDetail,
+  component: ProjectCreate,
   exact: true
+}, {
+  path: '/projects/:id',
+  name: 'Project Details',
+  component: ProjectDetail
 }, {
   path: '/approvals',
   name: 'Approvals',

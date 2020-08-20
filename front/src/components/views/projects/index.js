@@ -1,3 +1,5 @@
 import ProjectList from './ProjectList'
+import ProjectCreate from './ProjectCreate'
+import ProjectDetail from './ProjectDetail'
 
-export { ProjectList }
+export { ProjectList, ProjectCreate, ProjectDetail }

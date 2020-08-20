@@ -7,8 +7,6 @@ import {
   CInput,
   CLabel, CRow,
   CCol,
-  CTextarea,
-  CSelect,
 } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
 import { FoxApiService } from '../../../services'

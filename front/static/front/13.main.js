@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[13],{
 
-/***/ "./src/components/views/projects/ProjectDetail.js":
+/***/ "./src/components/views/projects/ProjectCreate.js":
 /*!********************************************************!*\
-  !*** ./src/components/views/projects/ProjectDetail.js ***!
+  !*** ./src/components/views/projects/ProjectCreate.js ***!
   \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -49,15 +49,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var foxApi = new _services__WEBPACK_IMPORTED_MODULE_5__["FoxApiService"]();
 
-var ProjectDetail = /*#__PURE__*/function (_Component) {
-  _inherits(ProjectDetail, _Component);
+var ProjectCreate = /*#__PURE__*/function (_Component) {
+  _inherits(ProjectCreate, _Component);
 
-  var _super = _createSuper(ProjectDetail);
+  var _super = _createSuper(ProjectCreate);
 
-  function ProjectDetail() {
+  function ProjectCreate() {
     var _this;
 
-    _classCallCheck(this, ProjectDetail);
+    _classCallCheck(this, ProjectCreate);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -75,6 +75,8 @@ var ProjectDetail = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
+      console.log(_this.props);
+
       _this.setState(_defineProperty({}, event.target.name, event.target.value));
     });
 
@@ -197,13 +199,13 @@ var ProjectDetail = /*#__PURE__*/function (_Component) {
         value: "Create project",
         color: "info",
         disabled: _this.state.password !== _this.state.password2
-      })), _this.props.registerErrorFlag ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.props.errorMessage ? _this.props.errorMessage : 'INVALID CREDENTIALS! PLEASE, CHECK YOUR PASSWORD AND PASSWORD CONFIRMATION FIELDS!') : null, _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Contractor was not selected! Please, choose contractor form the list") : null)));
+      })), _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
     });
 
     return _this;
   }
 
-  return ProjectDetail;
+  return ProjectCreate;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -224,7 +226,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ProjectDetail));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ProjectCreate));
 
 /***/ })
 

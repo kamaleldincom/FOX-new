@@ -5,3 +5,4 @@ from .client_managers import ClientManagerList, ClientManagerDetail  # noqa F401
 from .contractors import ContractorList, ContractorDetail, ContractorCreate  # noqa F401
 from .templates import TemplateList, TemplateDetail  # noqa F401
 from .workers import WorkerList, WorkerDetail  # noqa F401
+from .ptw import ptw  # noqa F401

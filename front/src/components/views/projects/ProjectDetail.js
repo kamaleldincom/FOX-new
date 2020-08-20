@@ -27,6 +27,8 @@ class ProjectDetail extends Component {
   }
 
   handleChange = event => {
+    console.log(this.props);
+    console.log(this.state);
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -42,7 +44,7 @@ class ProjectDetail extends Component {
     } else {
       this.formData = this.state;
       delete this.formData.error;
-      await foxApi.createEntityOf('projects', this.formData).then(() => {
+      await foxApi.updateEntityOf('projects', this.props.match.params.id, this.formData).then(() => {
         this.props.history.goBack()
       },
         (error) => {
@@ -54,15 +56,12 @@ class ProjectDetail extends Component {
           })
         })
     }
-
-    // this.props.userRegisterFetch({
-    //   password: this.state.password,
-    //   token: this.props.registrationToken
-    // })
   }
 
   componentDidMount = async () => {
     await this.props.getProfileFetch()
+      .then(() => foxApi.getDetailsOf('projects', this.props.match.params.id))
+      .then((data) => this.setState({ ...data }))
       .then(() => this.props.getContractorList())
   }
 
@@ -126,14 +125,10 @@ class ProjectDetail extends Component {
               </CSelect>
             </CFormGroup>
             <CFormGroup>
-              <CInput type="submit" value="Create project" color="info" disabled={this.state.password !== this.state.password2} />
+              <CInput type="submit" value="Save changes" color="info" />
             </CFormGroup>
-            {this.props.registerErrorFlag
-              ? <p>{this.props.errorMessage ? this.props.errorMessage : 'INVALID CREDENTIALS! PLEASE, CHECK YOUR PASSWORD AND PASSWORD CONFIRMATION FIELDS!'}</p>
-              : null
-            }
             {this.state.error
-              ? <p>Contractor was not selected! Please, choose contractor form the list</p>
+              ? <p>{this.state.error}</p>
               : null
             }
           </CForm>
@@ -156,4 +151,3 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetail)
-

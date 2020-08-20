@@ -48,6 +48,32 @@ class FoxApiService {
         return res.json();
     }
 
+    async put(url, data = {}) {
+        const jwt = localStorage.getItem('token');
+        const csrftoken = this.getCookie('csrftoken');
+        const res = await fetch(url, {
+            method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+            headers: jwt ? {
+                'Content-Type': 'application/json',
+                'Authorization': `JWT ${jwt}`,
+                'X-CSRFToken': csrftoken ? csrftoken : '',
+                'Accept': 'application/json',
+            } : {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken ? csrftoken : '',
+                    'Accept': 'application/json',
+                },
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
+        });
+        if (!res.ok) {
+            if (res.status >= 500) {
+                throw new Error(`Could not fetch ${url}. recieved ${res.status}`);
+            }
+        }
+
+        return res.json();
+    }
+
     getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -69,6 +95,19 @@ class FoxApiService {
         const res = this.post(url = url, data = data);
         return res
     }
+
+    getDetailsOf = (entity, id) => {
+        let url = `${this.apiBase}${entity}/${id}/`;
+        const res = this.get(url = url);
+        return res
+    }
+
+    updateEntityOf = (entity, id, data) => {
+        let url = `${this.apiBase}${entity}/${id}/`;
+        const res = this.put(url = url, data = data);
+        return res
+    }
+
 }
 
 export default FoxApiService
