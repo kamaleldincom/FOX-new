@@ -9,12 +9,14 @@ class RepresentationService {
             const url = `${SERVER_ADDRESS}/api/${entity}/`
             foxApi.get(url)
                 .then(data => {
-                    const entityTableInfo = {};
-                    entityTableInfo.tableData = data;
-                    let first_row = data[0];
-                    entityTableInfo.fields = Object.keys(first_row);
-                    entityTableInfo.fields.shift();
-                    dispatch(this.populateEntityTable(entityTableInfo));
+                    if (data.length > 0) {
+                        const entityTableInfo = {};
+                        entityTableInfo.tableData = data;
+                        let first_row = data[0];
+                        entityTableInfo.fields = Object.keys(first_row);
+                        entityTableInfo.fields.shift();
+                        dispatch(this.populateEntityTable(entityTableInfo));
+                    }
                 }).catch(function (error) {
                     console.error(error);
                 })
