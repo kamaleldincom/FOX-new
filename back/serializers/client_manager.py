@@ -2,7 +2,7 @@ from rest_framework import serializers
 from back.models import ClientManager
 
 
-class ClientManagerSerializer(serializers.ModelSerializer):
+class ClientManagerListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClientManager
         fields = [
@@ -10,3 +10,9 @@ class ClientManagerSerializer(serializers.ModelSerializer):
             "username",
             "position",
         ]
+
+
+class ClientManagerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClientManager
+        fields = "__all__"
