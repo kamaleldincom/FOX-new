@@ -8,15 +8,11 @@ const userRegisterValidationFetch = registerToken => {
         const url = `${SERVER_ADDRESS}/api/validate_register_token/`;
         const send_data = { token: registerToken };
         foxApi.post(url, send_data)
-            .then(({ status, data }) => {
-                if (status === 200) {
-                    dispatch(allowRegistration(registerToken));
-                } else {
-                    dispatch(forbidRegistration());
-                }
-                console.warn(data);
+            .then(() => {
+                dispatch(allowRegistration(registerToken));
             }).catch(function (error) {
                 console.error(error);
+                dispatch(forbidRegistration());
             })
     }
 }
@@ -98,7 +94,7 @@ const getProfileFetch = () => {
                 .then(data => {
                     if (data.detail) {
                         console.log(data.detail)
-                        localStorage.removeItem("token")
+                        dispatch(logoutUser())
                         return data
                     } else {
                         dispatch(loginUser(data))

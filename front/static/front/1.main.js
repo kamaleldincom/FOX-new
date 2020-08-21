@@ -1,2 +1,53 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{724:function(e,a,t){"use strict";t.r(a);var l=t(1),n=t.n(l),c=t(165),r=t(60);a.default=function(){return n.a.createElement("div",{className:"c-app c-default-layout flex-row align-items-center"},n.a.createElement(c.k,null,n.a.createElement(c.J,{className:"justify-content-center"},n.a.createElement(c.j,{md:"6"},n.a.createElement("div",{className:"clearfix"},n.a.createElement("h1",{className:"float-left display-3 mr-4"},"404"),n.a.createElement("h4",{className:"pt-3"},"Oops! You","'","re lost."),n.a.createElement("p",{className:"text-muted float-left"},"The page you are looking for was not found.")),n.a.createElement(c.C,{className:"input-prepend"},n.a.createElement(c.E,null,n.a.createElement(c.F,null,n.a.createElement(r.a,{name:"cil-magnifying-glass"}))),n.a.createElement(c.B,{size:"16",type:"text",placeholder:"What are you looking for?"}),n.a.createElement(c.D,null,n.a.createElement(c.e,{color:"info"},"Search")))))))}}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
+
+/***/ "./src/components/pages/Page404.js":
+/*!*****************************************!*\
+  !*** ./src/components/pages/Page404.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
+/* harmony import */ var _coreui_icons_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @coreui/icons-react */ "./node_modules/@coreui/icons-react/es/index.js");
+
+
+
+
+var Page404 = function Page404() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "c-app c-default-layout flex-row align-items-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CRow"], {
+    className: "justify-content-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CCol"], {
+    md: "6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "clearfix"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "float-left display-3 mr-4"
+  }, "404"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+    className: "pt-3"
+  }, "Oops! You", '\'', "re lost."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "text-muted float-left"
+  }, "The page you are looking for was not found.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CInputGroup"], {
+    className: "input-prepend"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CInputGroupPrepend"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CInputGroupText"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    name: "cil-magnifying-glass"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CInput"], {
+    size: "16",
+    type: "text",
+    placeholder: "What are you looking for?"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CInputGroupAppend"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CButton"], {
+    color: "info"
+  }, "Search")))))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Page404);
+
+/***/ })
+
+}]);
 //# sourceMappingURL=1.main.js.map
