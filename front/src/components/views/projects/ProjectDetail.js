@@ -9,6 +9,7 @@ import {
   CCol,
   CTextarea,
   CSelect,
+  CLink
 } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
 import { FoxApiService } from '../../../services'
@@ -28,7 +29,6 @@ class ProjectDetail extends Component {
 
   handleChange = event => {
     console.log(this.props);
-    console.log(this.state);
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -124,6 +124,15 @@ class ProjectDetail extends Component {
                 })}
               </CSelect>
             </CFormGroup>
+            <CFormGroup>
+              <CLink
+                className="btn btn-outline-success"
+                to={`${this.props.match.url}/ptw`}
+              >
+                See Permission To Work
+              </CLink>
+            </CFormGroup>
+
             <CFormGroup>
               <CInput type="submit" value="Save changes" color="info" />
             </CFormGroup>

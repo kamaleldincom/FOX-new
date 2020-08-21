@@ -49,7 +49,7 @@ class ContractorDetail extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getProfileFetch()
+    this.props.getProfileFetch().then(() => this.props.getContractorList())
   }
 
   render = () => {

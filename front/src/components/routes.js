@@ -8,6 +8,7 @@ const ClientManagerList = React.lazy(() => import('./views/managers/ClientManage
 const WorkerList = React.lazy(() => import('./views/workers/WorkerList'))
 const ProjectCreate = React.lazy(() => import('./views/projects/ProjectCreate'))
 const ProjectDetail = React.lazy(() => import('./views/projects/ProjectDetail'))
+const ProjectPTW = React.lazy(() => import('./views/projects/ProjectPTW'))
 const ContractorDetail = React.lazy(() => import('./views/contractors/ContractorDetail'))
 // const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
 // const Tables = React.lazy(() => import('./views/base/tables/Tables'));
@@ -51,6 +52,7 @@ const routes = [
   { path: '/', exact: true, name: 'Fox' },
   { path: '/projects', name: 'Projects', component: ProjectList, exact: true },
   { path: '/projects/new', name: 'New', component: ProjectCreate, exact: true },
+  { path: '/projects/:id/ptw', name: 'PTW', component: ProjectPTW, exact: true },
   { path: '/projects/:id', name: 'Project Details', component: ProjectDetail },
   { path: '/approvals', name: 'Approvals', component: ApprovalList, exact: true },
   { path: '/current-works', name: 'Current Works', component: CurrentWorksList, exact: true },
