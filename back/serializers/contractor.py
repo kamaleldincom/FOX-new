@@ -11,4 +11,4 @@ class ContractorListSerializer(serializers.ModelSerializer):
 class ContractorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contractor
-        fields = ["id", "username", "email"]
+        fields = ["id", "username", "email", "company", "role"]
