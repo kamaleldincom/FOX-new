@@ -9,6 +9,11 @@ import {
 } from './auth'
 
 import getDashboardLayout from './dashboard'
+import { getProjectList } from './projects'
+import { getClientManagerList } from './client_managers'
+import { getTemplateList } from './templates'
+import { getContractorList } from './contractors'
+import { getWorkerList } from './workers'
 
 const userLoggedIn = () => {
     return {
@@ -25,5 +30,10 @@ export {
     userRegisterValidationFetch,
     registerError,
     allowRegistration,
-    getDashboardLayout
+    getDashboardLayout,
+    getProjectList,
+    getClientManagerList,
+    getTemplateList,
+    getContractorList,
+    getWorkerList
 };

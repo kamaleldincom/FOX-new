@@ -19,7 +19,14 @@ class Contractor(FoxUser):
         verbose_name = "Contractor"
 
     def __str__(self):
-        return f'{self.username}'
+        return f"{self.username}"
+
+    def __repr__(self):
+        return self.__str__()
+
+    @property
+    def project_list(self):
+        return [project.name for project in self.projects.all()]
 
 
 post_save.connect(send_mail_on_creation, sender=Contractor)

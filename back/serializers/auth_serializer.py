@@ -15,14 +15,13 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FoxUser
-        fields = ("username", "role", "company_name")
+        fields = ("username", "role", "company_name", "company")
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):
 
     token = serializers.SerializerMethodField()
     password = serializers.CharField(write_only=True)
-    # company_name = serializers.Field(source="company.name")
 
     def get_token(self, obj):
         jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
@@ -42,4 +41,4 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 
     class Meta:
         model = FoxUser
-        fields = ("token", "username", "password", "role", "company")
+        fields = ("token", "username", "password", "role")

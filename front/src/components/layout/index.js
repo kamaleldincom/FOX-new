@@ -7,9 +7,10 @@ import FoxHeaderDropdownNotif from './FoxHeaderDropdownNotif'
 import FoxHeaderDropdownTasks from './FoxHeaderDropdownTasks'
 // import FoxLayout from './TheLayout'
 import FoxSidebar from './FoxSidebar'
+import FoxContent from './FoxContent'
 
 export {
-  // FoxContent,
+  FoxContent,
   FoxFooter,
   FoxHeader,
   FoxHeaderDropdown,

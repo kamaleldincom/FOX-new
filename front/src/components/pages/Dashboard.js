@@ -4,15 +4,13 @@ import { connect } from 'react-redux';
 import { getProfileFetch, getDashboardLayout } from '../../actions'
 import {
 } from '@coreui/react'
-import { FoxSidebar } from '../layout';
-
-import FoxHeader from "../layout/FoxHeader";
+import { FoxSidebar, FoxHeader, FoxContent } from '../layout';
 
 class Dashboard extends Component {
 
-  componentDidMount = () => {
-    this.props.getProfileFetch()
-    this.props.getDashboardLayout()
+  componentDidMount = async () => {
+    await this.props.getProfileFetch()
+      .then(() => this.props.getDashboardLayout())
   }
 
   render() {
@@ -22,8 +20,7 @@ class Dashboard extends Component {
         <div className="c-wrapper">
           <FoxHeader />
           <div className="c-body">
-            {/* //TODO: make it nice :) */}
-            <h2> VERY SOON YOU WILL SEE SOME INO HERE!</h2>
+            <FoxContent />
           </div>
         </div>
       </div>

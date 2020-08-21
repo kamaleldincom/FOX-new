@@ -7,7 +7,8 @@ const initialState = {
     registrationToken: "",
     errorMessage: "",
     sidebar: [],
-    headerNav: []
+    headerNav: [],
+    entityListTable: {},
 }
 
 const changeState = (state = initialState, { type, ...rest }) => {
@@ -29,6 +30,8 @@ const changeState = (state = initialState, { type, ...rest }) => {
         case 'REGISTER_ERROR':
             return { ...state, ...rest }
         case 'INITIATE_DASHBOARD':
+            return { ...state, ...rest }
+        case 'POPULATE_ENTITY_TABLE':
             return { ...state, ...rest }
 
         default:

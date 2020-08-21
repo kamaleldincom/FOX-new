@@ -91,38 +91,30 @@ class FoxUserAdmin(UserAdmin):
 
 
 class ClientAdminAdmin(FoxUserAdmin):
-    list_display = ('username', 'email', 'company')
+    list_display = ("username", "email", "company")
     add_form = ClientAdminCreationForm
-    fieldsets = (
-        (None, {'fields': ('company',)}),
-    ) + FoxUserAdmin.fieldsets
-    add_fieldsets = (
-        (None, {'fields': ('company',)}),
-    ) + FoxUserAdmin.add_fieldsets
+    fieldsets = ((None, {"fields": ("company",)}),) + FoxUserAdmin.fieldsets
+    add_fieldsets = ((None, {"fields": ("company",)}),) + FoxUserAdmin.add_fieldsets
 
 
 class ClientManagerAdmin(FoxUserAdmin):
     model = ClientManager
-    list_display = ('username', 'email', 'company')
+    list_display = ("username", "email", "company")
     add_form = ClientManagerCreationForm
-    fieldsets = (
-        (None, {'fields': ('company',)}),
-    ) + FoxUserAdmin.fieldsets
-    add_fieldsets = (
-        (None, {'fields': ('company',)}),
-    ) + FoxUserAdmin.add_fieldsets
+    fieldsets = ((None, {"fields": ("company",)}),) + FoxUserAdmin.fieldsets
+    add_fieldsets = ((None, {"fields": ("company",)}),) + FoxUserAdmin.add_fieldsets
 
 
 class ContractorAdmin(FoxUserAdmin):
     model = Contractor
-    list_display = ('username', 'email', 'company',)
+    list_display = (
+        "username",
+        "email",
+        "company",
+    )
     add_form = ContractorCreationForm
-    fieldsets = (
-        (None, {'fields': ('company',)}),
-    ) + FoxUserAdmin.fieldsets
-    add_fieldsets = (
-        (None, {'fields': ('company',)}),
-    ) + FoxUserAdmin.add_fieldsets
+    fieldsets = ((None, {"fields": ("company",)}),) + FoxUserAdmin.fieldsets
+    add_fieldsets = ((None, {"fields": ("company",)}),) + FoxUserAdmin.add_fieldsets
 
 
 class ClientAdminInline(admin.StackedInline):
@@ -178,42 +170,59 @@ class CompanyAdmin(admin.ModelAdmin):
 
 
 class WorkerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'contractor',)
+    list_display = (
+        "name",
+        "contractor",
+    )
 
 
 class ProjectAdmin(admin.ModelAdmin):
     model = Project
-    list_display = ('name', 'Company',)
+    list_display = (
+        "name",
+        "company",
+    )
 
 
 class PermitAdmin(admin.ModelAdmin):
     model = Permit
-    list_display = ('Project', 'Worker', 'issue_date')
+    list_display = ("Project", "Worker", "issue_date")
 
 
-class TemplateAdmin(admin.ModelAdmin):
-    model = Template
-    list_display = ('name', 'Project')
+# class TemplateItemInline(admin.StackedInline):
+#     extra = 1
+#     model = TemplateItem
 
 
-class TemplateItemAdmin(admin.ModelAdmin):
-    model = TemplateItem
-    list_display = ('name', 'items', 'type')
+# class TemplateAdmin(admin.ModelAdmin):
+#     model = Template
+#     inlines = [
+#         TemplateItemInline,
+#     ]
+#     list_display = ("name", "projects")
+
+
+# class TemplateItemAdmin(admin.ModelAdmin):
+#     model = TemplateItem
+#     list_display = ("name", "template", "type_choice")
 
 
 class DocumentAdmin(admin.ModelAdmin):
     model = Document
-    list_display = ('template', 'Worker',)
+    list_display = (
+        "template",
+        "Worker",
+    )
 
 
 class DocumentAssignAdmin(admin.ModelAdmin):
     model = DocumentAssign
-    list_display = ('document', 'manager', 'issue_date', 'last_approve_date')
+    list_display = ("document", "manager", "issue_date", "last_approve_date")
 
 
 class DocumentItemAdmin(admin.ModelAdmin):
     model = DocumentItem
-    list_display = ('doc_items', 'items')
+    list_display = ("doc_items", "items")
 
 
 admin.site.site_header = "Fox Project Admin Panel"
@@ -226,8 +235,8 @@ admin.site.register(Company, CompanyAdmin)
 admin.site.register(Worker, WorkerAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Permit, PermitAdmin)
-admin.site.register(Template, TemplateAdmin)
-admin.site.register(TemplateItem, TemplateItemAdmin)
+# admin.site.register(Template, TemplateAdmin)
+# admin.site.register(TemplateItem, TemplateItemAdmin)
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(DocumentAssign, DocumentAssignAdmin)
 admin.site.register(DocumentItem, DocumentItemAdmin)

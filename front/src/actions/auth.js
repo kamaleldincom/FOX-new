@@ -99,8 +99,10 @@ const getProfileFetch = () => {
                     if (data.detail) {
                         console.log(data.detail)
                         localStorage.removeItem("token")
+                        return data
                     } else {
                         dispatch(loginUser(data))
+                        return data
                     }
                 })
         }

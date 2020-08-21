@@ -12,10 +12,14 @@ class TemplateItem(models.Model):
 
     name = models.CharField(max_length=64)
     description = models.TextField()
-    template = models.ForeignKey("Template", on_delete=models.CASCADE, name="items")
-    type = models.CharField(max_length=10, choices=Type.choices, default=Type.text)
+    template = models.ForeignKey(
+        "Template", on_delete=models.CASCADE, related_name="items", null=True
+    )
+    type_choice = models.CharField(
+        max_length=10, choices=Type.choices, default=Type.text
+    )
     type_values = models.TextField()
     placeholder = models.CharField(max_length=64)
 
     def __str__(self):
-        return f'{self.name} for {self.items}'
+        return f"{self.name} for {self.template.name}"
