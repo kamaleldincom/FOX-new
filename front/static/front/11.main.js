@@ -217,8 +217,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     getProfileFetch: function getProfileFetch() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getProfileFetch"])());
     },
-    getProjectList: function getProjectList() {
-      return dispatch(getWorkerList());
+    getWorkerList: function getWorkerList() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getWorkerList"])());
     }
   };
 };

@@ -5,6 +5,9 @@ class Project(models.Model):
     name = models.CharField(max_length=64)
     description = models.TextField()
     start_date = models.DateField(null=True)
+    start_time = models.TimeField(null=True)
+    end_date = models.DateField(null=True)
+    end_time = models.TimeField(null=True)
     company = models.ForeignKey(
         to="Company", on_delete=models.CASCADE, related_name="projects", null=True
     )

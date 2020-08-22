@@ -83,7 +83,7 @@ class ContractorDetail extends Component {
               />
             </CFormGroup>
             <CFormGroup>
-              <CInput type="submit" value="Create contractor" color="info" disabled={this.state.password !== this.state.password2} />
+              <CInput type="submit" value="Create contractor" color="info" />
             </CFormGroup>
             {this.props.registerErrorFlag
               ? <p>{this.props.errorMessage ? this.props.errorMessage : 'INVALID CREDENTIALS! PLEASE, CHECK YOUR PASSWORD AND PASSWORD CONFIRMATION FIELDS!'}</p>

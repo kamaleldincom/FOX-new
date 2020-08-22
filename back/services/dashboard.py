@@ -67,7 +67,7 @@ DEFINITIONS = {
                         {
                             "_tag": "CSidebarNavItem",
                             "name": "2. Safety",
-                            "to": "/contractor/personal/video",
+                            "to": "/safety_video",
                         },
                         {
                             "_tag": "CSidebarNavItem",
@@ -134,6 +134,19 @@ DEFINITIONS = {
                             "id": "head_nav_link_workers",
                             "to": "/workers",
                             "linktext": "Workers",
+                        }
+                    ],
+                },
+                {
+                    "_tag": "CHeaderNavItem",
+                    "id": "head_nav_projects",
+                    "className": "px-3",
+                    "_children": [
+                        {
+                            "_tag": "FoxHeaderNavLink",
+                            "id": "head_nav_link_projects",
+                            "to": "/projects",
+                            "linktext": "Projects",
                         }
                     ],
                 },

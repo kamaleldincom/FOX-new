@@ -38,6 +38,7 @@ urlpatterns = [
     path("templates/", views.TemplateList.as_view()),
     path("templates/<int:pk>/", views.TemplateDetail.as_view()),
     path("workers/", views.WorkerList.as_view()),
+    path("workers/new/", views.WorkerCreate.as_view()),
     path("workers/<int:pk>/", views.WorkerDetail.as_view()),
     path("ptw/<int:pk>", views.ptw),
 ]

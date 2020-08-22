@@ -181,6 +181,11 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display = (
         "name",
         "company",
+        "contractor",
+        "start_date",
+        "start_time",
+        "end_date",
+        "end_time",
     )
 
 

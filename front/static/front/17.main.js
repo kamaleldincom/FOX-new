@@ -1,9 +1,9 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[14],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[17],{
 
-/***/ "./src/components/views/projects/ProjectDetail.js":
-/*!********************************************************!*\
-  !*** ./src/components/views/projects/ProjectDetail.js ***!
-  \********************************************************/
+/***/ "./src/components/views/workers/WorkerCreate.js":
+/*!******************************************************!*\
+  !*** ./src/components/views/workers/WorkerCreate.js ***!
+  \******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18,10 +18,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../services */ "./src/services/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -53,15 +49,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var foxApi = new _services__WEBPACK_IMPORTED_MODULE_5__["FoxApiService"]();
 
-var ProjectDetail = /*#__PURE__*/function (_Component) {
-  _inherits(ProjectDetail, _Component);
+var ProjectCreate = /*#__PURE__*/function (_Component) {
+  _inherits(ProjectCreate, _Component);
 
-  var _super = _createSuper(ProjectDetail);
+  var _super = _createSuper(ProjectCreate);
 
-  function ProjectDetail() {
+  function ProjectCreate() {
     var _this;
 
-    _classCallCheck(this, ProjectDetail);
+    _classCallCheck(this, ProjectCreate);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -71,18 +67,18 @@ var ProjectDetail = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "state", {
       name: "",
-      description: "",
-      start_date: "",
-      start_time: "",
-      end_date: "",
-      end_time: "",
-      company: _this.props.company,
-      contractor: "-1",
+      contractor: _this.props.contractor,
+      birthday: "",
+      card_number_id: "",
+      license_number: "",
+      passport: "",
+      safety_green_card: "",
+      position_in_company: "",
       error: false
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
-      console.log(_this.props);
+      console.log(_this.state);
 
       _this.setState(_defineProperty({}, event.target.name, event.target.value));
     });
@@ -94,34 +90,20 @@ var ProjectDetail = /*#__PURE__*/function (_Component) {
             switch (_context.prev = _context.next) {
               case 0:
                 event.preventDefault();
-
-                if (!(parseInt(_this.state.contractor) < 0)) {
-                  _context.next = 5;
-                  break;
-                }
-
-                _this.setState({
-                  error: 'Contractor was not selected! Please, choose contractor form the list'
-                });
-
-                _context.next = 9;
-                break;
-
-              case 5:
                 _this.formData = _this.state;
                 delete _this.formData.error;
-                _context.next = 9;
-                return foxApi.updateEntityOf('projects', _this.props.match.params.id, _this.formData).then(function () {
+                _context.next = 5;
+                return foxApi.createEntityOf('workers', _this.formData).then(function () {
                   _this.props.history.goBack();
                 }, function (error) {
                   console.error(error);
 
                   _this.setState({
-                    error: 'Project creation failed!' + ' Please check your input and try again!' + ' In case this problem repeats, please contact your administrator!'
+                    error: 'Worker creation failed!' + ' Please check your input and try again!' + ' In case this problem repeats, please contact your administrator!'
                   });
                 });
 
-              case 9:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -140,13 +122,7 @@ var ProjectDetail = /*#__PURE__*/function (_Component) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return _this.props.getProfileFetch().then(function () {
-                return foxApi.getDetailsOf('projects', _this.props.match.params.id);
-              }).then(function (data) {
-                return _this.setState(_objectSpread({}, data));
-              }).then(function () {
-                return _this.props.getContractorList();
-              });
+              return _this.props.getProfileFetch();
 
             case 2:
             case "end":
@@ -164,102 +140,81 @@ var ProjectDetail = /*#__PURE__*/function (_Component) {
       }, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
         id: "name",
         name: "name",
-        placeholder: "Enter project name",
+        placeholder: "Enter worker name",
         value: _this.state.name,
         onChange: _this.handleChange,
         required: true
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "description"
-      }, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CTextarea"], {
-        id: "descrption",
-        name: "description",
-        placeholder: "Please, enter short description of the projet",
-        value: _this.state.description,
+        htmlFor: "birthday"
+      }, "Birthday"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        type: "date",
+        id: "birthday",
+        name: "birthday",
+        value: _this.state.birthday,
         onChange: _this.handleChange,
         required: true
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "start_date"
-      }, "Start Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
-        type: "date",
-        id: "start_date",
-        name: "start_date",
-        placeholder: "date",
-        value: _this.state.start_date,
-        onChange: _this.handleChange,
-        required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], {
-        className: "col-lg-6"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "start_time"
-      }, "Start Time"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
-        type: "time",
-        id: "start_time",
-        name: "start_time" // placeholder="date"
-        ,
-        value: _this.state.start_time,
-        onChange: _this.handleChange,
-        required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], {
-        className: "col-lg-6"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "end_date"
-      }, "End Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
-        type: "date",
-        id: "end_date",
-        name: "end_date",
-        placeholder: "date",
-        value: _this.state.end_date,
-        onChange: _this.handleChange,
-        required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], {
-        className: "col-lg-6"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "end_time"
-      }, "End Time"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
-        type: "time",
-        id: "end_time",
-        name: "end_time" // placeholder="date"
-        ,
-        value: _this.state.end_time,
+        htmlFor: "card_number_id"
+      }, "Card number ID"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        id: "card_number_id",
+        name: "card_number_id",
+        placeholder: "Enter ID",
+        value: _this.state.card_number_id,
         onChange: _this.handleChange,
         required: true
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "contractor"
-      }, "Contractor"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CSelect"], {
-        id: "contractor",
-        name: "contractor",
-        placeholder: "Choose contractor",
-        value: _this.state.contractor,
+        htmlFor: "license_number"
+      }, "License Number"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        id: "license_number",
+        name: "license_number",
+        placeholder: "Enter worker name",
+        value: _this.state.license_number,
         onChange: _this.handleChange,
         required: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        key: "-1",
-        value: "-1",
-        disabled: true
-      }, "Choose contractor"), _this.props.options.map(function (option) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-          key: option.id,
-          value: option.id
-        }, option.username);
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLink"], {
-        className: "btn btn-outline-success",
-        to: "".concat(_this.props.match.url, "/ptw")
-      }, "See Permission To Work")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "passport"
+      }, "Passport"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        id: "passport",
+        name: "passport",
+        placeholder: "Enter passport info",
+        value: _this.state.passport,
+        onChange: _this.handleChange,
+        required: true
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "safety_green_card"
+      }, "Safety Green Card"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        id: "safety_green_card",
+        name: "safety_green_card",
+        placeholder: "Enter card info",
+        value: _this.state.safety_green_card,
+        onChange: _this.handleChange,
+        required: true
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "position_in_company"
+      }, "Position in Company"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        id: "position_in_company",
+        name: "position_in_company",
+        placeholder: "Enter worker position",
+        value: _this.state.position_in_company,
+        onChange: _this.handleChange,
+        required: true
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
         type: "submit",
-        value: "Save changes",
-        color: "info"
+        value: "Create worker",
+        color: "info",
+        disabled: _this.state.password !== _this.state.password2
       })), _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
     });
 
     return _this;
   }
 
-  return ProjectDetail;
+  return ProjectCreate;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    company: state.currentUser.company,
+    contractor: state.currentUser.id,
     options: state.entityListTable.tableData
   };
 };
@@ -269,15 +224,25 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     getProfileFetch: function getProfileFetch() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getProfileFetch"])());
     },
-    getContractorList: function getContractorList() {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getContractorList"])());
-    }
+    getContractorList: function (_getContractorList) {
+      function getContractorList() {
+        return _getContractorList.apply(this, arguments);
+      }
+
+      getContractorList.toString = function () {
+        return _getContractorList.toString();
+      };
+
+      return getContractorList;
+    }(function () {
+      return dispatch(getContractorList());
+    })
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ProjectDetail));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ProjectCreate));
 
 /***/ })
 
 }]);
-//# sourceMappingURL=14.main.js.map
+//# sourceMappingURL=17.main.js.map

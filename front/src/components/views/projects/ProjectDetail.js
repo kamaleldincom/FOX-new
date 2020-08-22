@@ -22,6 +22,9 @@ class ProjectDetail extends Component {
     name: "",
     description: "",
     start_date: "",
+    start_time: "",
+    end_date: "",
+    end_time: "",
     company: this.props.company,
     contractor: "-1",
     error: false
@@ -102,6 +105,42 @@ class ProjectDetail extends Component {
                 name="start_date"
                 placeholder="date"
                 value={this.state.start_date}
+                onChange={this.handleChange}
+                required
+              />
+            </CFormGroup>
+            <CFormGroup className="col-lg-6">
+              <CLabel htmlFor="start_time">Start Time</CLabel>
+              <CInput
+                type="time"
+                id="start_time"
+                name="start_time"
+                // placeholder="date"
+                value={this.state.start_time}
+                onChange={this.handleChange}
+                required
+              />
+            </CFormGroup>
+            <CFormGroup className="col-lg-6">
+              <CLabel htmlFor="end_date">End Date</CLabel>
+              <CInput
+                type="date"
+                id="end_date"
+                name="end_date"
+                placeholder="date"
+                value={this.state.end_date}
+                onChange={this.handleChange}
+                required
+              />
+            </CFormGroup>
+            <CFormGroup className="col-lg-6">
+              <CLabel htmlFor="end_time">End Time</CLabel>
+              <CInput
+                type="time"
+                id="end_time"
+                name="end_time"
+                // placeholder="date"
+                value={this.state.end_time}
                 onChange={this.handleChange}
                 required
               />

@@ -11,6 +11,7 @@ class ProjectListSerializer(serializers.ModelSerializer):
             "name",
             "description",
             "start_date",
+            "end_date",
             "contractor_name",
         ]
 

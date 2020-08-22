@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FoxEntityListTable from '../../tables/FoxEntityListTable'
-import { getProfileFetch, getProjectList, } from '../../../actions'
+import { getProfileFetch, getWorkerList, } from '../../../actions'
 import { connect } from 'react-redux'
 
 
@@ -43,7 +43,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
-  getProjectList: () => dispatch(getWorkerList())
+  getWorkerList: () => dispatch(getWorkerList())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkerList)
