@@ -9,7 +9,8 @@ import {
   CCol,
   CTextarea,
   CSelect,
-  CLink
+  CLink,
+  CButton
 } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
 import { FoxApiService } from '../../../services'
@@ -31,7 +32,6 @@ class ProjectDetail extends Component {
   }
 
   handleChange = event => {
-    console.log(this.props);
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -53,7 +53,7 @@ class ProjectDetail extends Component {
         (error) => {
           console.error(error);
           this.setState({
-            error: 'Project creation failed!' +
+            error: 'Project update failed!' +
               ' Please check your input and try again!' +
               ' In case this problem repeats, please contact your administrator!'
           })
@@ -173,7 +173,7 @@ class ProjectDetail extends Component {
             </CFormGroup>
 
             <CFormGroup>
-              <CInput type="submit" value="Save changes" color="info" />
+              <CButton type="submit" color="dark" variant="outline" block>Save changes</CButton>
             </CFormGroup>
             {this.state.error
               ? <p>{this.state.error}</p>

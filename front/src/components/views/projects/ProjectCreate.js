@@ -10,6 +10,7 @@ import {
   CCol,
   CTextarea,
   CSelect,
+  CButton
 } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
 import { FoxApiService } from '../../../services'
@@ -170,7 +171,7 @@ class ProjectCreate extends Component {
               </CSelect>
             </CFormGroup>
             <CFormGroup>
-              <CInput type="submit" value="Create project" color="info" disabled={this.state.password !== this.state.password2} />
+              <CButton type="submit" color="dark" variant="outline" block>Create Project</CButton>
             </CFormGroup>
             {this.state.error
               ? <p>{this.state.error}</p>

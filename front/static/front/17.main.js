@@ -49,15 +49,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var foxApi = new _services__WEBPACK_IMPORTED_MODULE_5__["FoxApiService"]();
 
-var ProjectCreate = /*#__PURE__*/function (_Component) {
-  _inherits(ProjectCreate, _Component);
+var WorkerCreate = /*#__PURE__*/function (_Component) {
+  _inherits(WorkerCreate, _Component);
 
-  var _super = _createSuper(ProjectCreate);
+  var _super = _createSuper(WorkerCreate);
 
-  function ProjectCreate() {
+  function WorkerCreate() {
     var _this;
 
-    _classCallCheck(this, ProjectCreate);
+    _classCallCheck(this, WorkerCreate);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -198,24 +198,23 @@ var ProjectCreate = /*#__PURE__*/function (_Component) {
         value: _this.state.position_in_company,
         onChange: _this.handleChange,
         required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
         type: "submit",
-        value: "Create worker",
-        color: "info",
-        disabled: _this.state.password !== _this.state.password2
-      })), _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
+        color: "dark",
+        variant: "outline",
+        block: true
+      }, "Create Worker")), _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
     });
 
     return _this;
   }
 
-  return ProjectCreate;
+  return WorkerCreate;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    contractor: state.currentUser.id,
-    options: state.entityListTable.tableData
+    contractor: state.currentUser.id
   };
 };
 
@@ -223,24 +222,11 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     getProfileFetch: function getProfileFetch() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getProfileFetch"])());
-    },
-    getContractorList: function (_getContractorList) {
-      function getContractorList() {
-        return _getContractorList.apply(this, arguments);
-      }
-
-      getContractorList.toString = function () {
-        return _getContractorList.toString();
-      };
-
-      return getContractorList;
-    }(function () {
-      return dispatch(getContractorList());
-    })
+    }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ProjectCreate));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(WorkerCreate));
 
 /***/ })
 

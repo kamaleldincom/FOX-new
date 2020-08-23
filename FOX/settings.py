@@ -27,11 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "46.101.221.249"]  # localhost, s2b host
 
+LOCAL_FILE_DIR = os.path.join(BASE_DIR, "local_files")
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django_extensions',
+    "django_extensions",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

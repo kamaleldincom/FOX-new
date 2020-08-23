@@ -18,11 +18,8 @@ from back.models import (
     Worker,
     Project,
     Permit,
-    Template,
-    TemplateItem,
     Document,
     DocumentAssign,
-    DocumentItem,
 )
 
 FoxUser = get_user_model()
@@ -194,40 +191,13 @@ class PermitAdmin(admin.ModelAdmin):
     list_display = ("Project", "Worker", "issue_date")
 
 
-# class TemplateItemInline(admin.StackedInline):
-#     extra = 1
-#     model = TemplateItem
-
-
-# class TemplateAdmin(admin.ModelAdmin):
-#     model = Template
-#     inlines = [
-#         TemplateItemInline,
-#     ]
-#     list_display = ("name", "projects")
-
-
-# class TemplateItemAdmin(admin.ModelAdmin):
-#     model = TemplateItem
-#     list_display = ("name", "template", "type_choice")
-
-
 class DocumentAdmin(admin.ModelAdmin):
     model = Document
-    list_display = (
-        "template",
-        "Worker",
-    )
 
 
 class DocumentAssignAdmin(admin.ModelAdmin):
     model = DocumentAssign
     list_display = ("document", "manager", "issue_date", "last_approve_date")
-
-
-class DocumentItemAdmin(admin.ModelAdmin):
-    model = DocumentItem
-    list_display = ("doc_items", "items")
 
 
 admin.site.site_header = "Fox Project Admin Panel"
@@ -240,10 +210,6 @@ admin.site.register(Company, CompanyAdmin)
 admin.site.register(Worker, WorkerAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Permit, PermitAdmin)
-# admin.site.register(Template, TemplateAdmin)
-# admin.site.register(TemplateItem, TemplateItemAdmin)
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(DocumentAssign, DocumentAssignAdmin)
-admin.site.register(DocumentItem, DocumentItemAdmin)
-
 admin.site.unregister(Group)

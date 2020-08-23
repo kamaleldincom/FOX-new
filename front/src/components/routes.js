@@ -7,11 +7,13 @@ const DocumentList = React.lazy(() => import('./views/documents/DocumentList'))
 const ClientManagerList = React.lazy(() => import('./views/managers/ClientManagerList'))
 const WorkerList = React.lazy(() => import('./views/workers/WorkerList'))
 const WorkerCreate = React.lazy(() => import('./views/workers/WorkerCreate'))
+const WorkerDetail = React.lazy(() => import('./views/workers/WorkerDetail'))
 const ProjectCreate = React.lazy(() => import('./views/projects/ProjectCreate'))
 const ProjectDetail = React.lazy(() => import('./views/projects/ProjectDetail'))
 const ProjectPTW = React.lazy(() => import('./views/projects/ProjectPTW'))
-const ContractorDetail = React.lazy(() => import('./views/contractors/ContractorDetail'))
+const ContractorCreate = React.lazy(() => import('./views/contractors/ContractorCreate'))
 const SafetyVideo = React.lazy(() => import('./views/safety/Video'))
+
 
 const routes = [
   { path: '/', exact: true, name: 'Fox' },
@@ -22,11 +24,12 @@ const routes = [
   { path: '/approvals', name: 'Approvals', component: ApprovalList, exact: true },
   { path: '/current-works', name: 'Current Works', component: CurrentWorksList, exact: true },
   { path: '/contractors', name: 'Contractors', component: ContractorList, exact: true },
-  { path: '/contractors/new', name: 'New', component: ContractorDetail, exact: true },
+  { path: '/contractors/new', name: 'New', component: ContractorCreate, exact: true },
   { path: '/documents', name: 'Documents', component: DocumentList, exact: true },
   { path: '/managers', name: 'Managers', component: ClientManagerList, exact: true },
   { path: '/workers', name: 'Workers', component: WorkerList, exact: true },
   { path: '/workers/new', name: 'New', component: WorkerCreate, exact: true },
+  { path: '/workers/:id', name: 'Project Details', component: WorkerDetail, exact: true },
   { path: '/safety_video', name: 'Safety Video', component: SafetyVideo, exact: true },
 ];
 
