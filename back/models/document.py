@@ -17,7 +17,7 @@ class Document(models.Model):
     file = models.FilePathField(path=project_docs_path, null=True)
     origin_filename = models.CharField(max_length=256, null=True)
     project = models.ForeignKey(
-        "back.Project", on_delete=models.CASCADE, name="documents", null=True
+        "back.Project", on_delete=models.CASCADE, related_name="documents", null=True
     )
     target_type = models.CharField(
         max_length=12, choices=TargetType.choices, default=TargetType.contractor

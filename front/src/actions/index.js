@@ -11,7 +11,7 @@ import {
 import getDashboardLayout from './dashboard'
 import { getProjectList } from './projects'
 import { getClientManagerList } from './client_managers'
-import { getTemplateList } from './templates'
+import { getDocumentList } from './documents'
 import { getContractorList } from './contractors'
 import { getWorkerList } from './workers'
 
@@ -33,7 +33,7 @@ export {
     getDashboardLayout,
     getProjectList,
     getClientManagerList,
-    getTemplateList,
+    getDocumentList,
     getContractorList,
     getWorkerList
 };

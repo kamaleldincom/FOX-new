@@ -157,10 +157,6 @@ var getBadge = function getBadge(status) {
   }
 };
 
-var alertOnClick = function alertOnClick() {
-  alert('Clicked!');
-};
-
 var DocumentList = /*#__PURE__*/function (_Component) {
   _inherits(DocumentList, _Component);
 
@@ -184,7 +180,9 @@ var DocumentList = /*#__PURE__*/function (_Component) {
             case 0:
               _context.next = 2;
               return _this.props.getProfileFetch().then(function () {
-                return _this.props.getTemplateList();
+                return _this.props.getDocumentList({
+                  project_id: _this.props.match.params.id
+                });
               });
 
             case 2:
@@ -200,8 +198,7 @@ var DocumentList = /*#__PURE__*/function (_Component) {
         tableName: "Documents",
         fields: _this.props.documentListTable.fields,
         getBadge: getBadge,
-        tableData: _this.props.documentListTable.tableData,
-        onRowClick: alertOnClick
+        tableData: _this.props.documentListTable.tableData
       }));
     });
 
@@ -222,8 +219,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     getProfileFetch: function getProfileFetch() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getProfileFetch"])());
     },
-    getTemplateList: function getTemplateList() {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getTemplateList"])());
+    getDocumentList: function getDocumentList(params) {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getDocumentList"])(params));
     }
   };
 };

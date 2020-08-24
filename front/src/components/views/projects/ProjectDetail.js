@@ -170,6 +170,12 @@ class ProjectDetail extends Component {
               >
                 See Permission To Work
               </CLink>
+              <CLink
+                className="btn btn-outline-secondary"
+                to={`${this.props.match.url}/documents`}
+              >
+                Attached Documents
+              </CLink>
             </CFormGroup>
 
             <CFormGroup>

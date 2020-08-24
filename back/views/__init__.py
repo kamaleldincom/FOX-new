@@ -9,3 +9,4 @@ from .client_managers import (  # noqa F401
 from .contractors import ContractorList, ContractorDetail, ContractorCreate  # noqa F401
 from .workers import WorkerList, WorkerDetail, WorkerCreate  # noqa F401
 from .ptw import ptw  # noqa F401
+from .documents import DocumentList, DocumentDetail, DocumentCreate  # noqa F401

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FoxEntityListTable from '../../tables/FoxEntityListTable'
-import { getProfileFetch, getTemplateList, } from '../../../actions'
+import { getProfileFetch, getDocumentList, } from '../../../actions'
 import { connect } from 'react-redux'
 
 const getBadge = status => {
@@ -13,16 +13,16 @@ const getBadge = status => {
   }
 }
 
-const alertOnClick = () => {
-  alert('Clicked!');
-}
 
 class DocumentList extends Component {
 
 
   componentDidMount = async () => {
     await this.props.getProfileFetch()
-      .then(() => this.props.getTemplateList())
+      .then(() =>
+        this.props.getDocumentList({
+          project_id: this.props.match.params.id
+        }))
   }
 
   render = () => {
@@ -33,7 +33,7 @@ class DocumentList extends Component {
         fields={this.props.documentListTable.fields}
         getBadge={getBadge}
         tableData={this.props.documentListTable.tableData}
-        onRowClick={alertOnClick} />
+      />
     )
   }
 
@@ -47,7 +47,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
-  getTemplateList: () => dispatch(getTemplateList())
+  getDocumentList: (params) => dispatch(getDocumentList(params))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DocumentList)
