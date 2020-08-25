@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "46.101.221.249"]  # localhost, s2b host
 
-LOCAL_FILE_DIR = os.path.join(BASE_DIR, "local_files")
+MEDIA_ROOT = os.path.join(BASE_DIR, "local_files")
 
 # Application definition
 

@@ -26,7 +26,7 @@ class FoxApiService {
         const jwt = localStorage.getItem('token');
         const csrftoken = this.getCookie('csrftoken');
         const res = await fetch(url, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            method: 'POST',
             headers: jwt ? {
                 'Content-Type': 'application/json',
                 'Authorization': `JWT ${jwt}`,
@@ -45,11 +45,36 @@ class FoxApiService {
         return res.json();
     }
 
+    async postWithFiles(url, data = {}) {
+        const jwt = localStorage.getItem('token');
+        const csrftoken = this.getCookie('csrftoken');
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: jwt ? {
+                // 'Content-Type': 'multipart/form-data',
+                'Authorization': `JWT ${jwt}`,
+                'X-CSRFToken': csrftoken ? csrftoken : '',
+                'Accept': 'application/json',
+            } : {
+                    // 'Content-Type': 'multipart/form-data',
+                    'X-CSRFToken': csrftoken ? csrftoken : '',
+                    'Accept': 'application/json',
+                },
+            body: data // body data type must match "Content-Type" header
+        });
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${url}. recieved ${res.status}`);
+        }
+        return res.json();
+    }
+
+
+
     async put(url, data = {}) {
         const jwt = localStorage.getItem('token');
         const csrftoken = this.getCookie('csrftoken');
         const res = await fetch(url, {
-            method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+            method: 'PUT',
             headers: jwt ? {
                 'Content-Type': 'application/json',
                 'Authorization': `JWT ${jwt}`,
@@ -90,6 +115,12 @@ class FoxApiService {
     createEntityOf = (entity, data) => {
         let url = `${this.apiBase}${entity}/new/`;
         const res = this.post(url = url, data = data);
+        return res
+    }
+
+    createEntityWithFile = (entity, data) => {
+        let url = `${this.apiBase}${entity}/new/`;
+        const res = this.postWithFiles(url = url, data = data);
         return res
     }
 

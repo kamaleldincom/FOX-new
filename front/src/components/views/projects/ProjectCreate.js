@@ -143,7 +143,6 @@ class ProjectCreate extends Component {
                     type="time"
                     id="end_time"
                     name="end_time"
-                    // placeholder="date"
                     value={this.state.end_time}
                     onChange={this.handleChange}
                     required

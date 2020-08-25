@@ -7,7 +7,7 @@ class DocumentListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Document
-        fields = ["name", "project_name", "target_type"]
+        fields = ["id", "name", "project_name", "target_type"]
 
 
 class DocumentSerializer(serializers.ModelSerializer):
@@ -18,7 +18,6 @@ class DocumentSerializer(serializers.ModelSerializer):
         fields = [
             "name",
             "file",
-            "origin_filename",
             "project",
             "target_type",
             "url_to_doc",

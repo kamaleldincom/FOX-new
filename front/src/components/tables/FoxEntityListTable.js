@@ -10,17 +10,17 @@ import {
   CRow,
   CLink
 } from '@coreui/react'
-import { withRouter } from 'react-router-dom'
 
 
 
 class FoxEntityListTable extends Component {
 
   alertOnClick = (e) => {
-    this.props.history.push(`${this.props.match.path}/${e.id}`)
+    this.props.history.push(`${this.props.match.url}/${e.id}`)
   }
 
   render = () => {
+    console.log(this.props);
     return (
       <CRow>
         <CCol>
@@ -32,7 +32,7 @@ class FoxEntityListTable extends Component {
               </CCardTitle>
               <CLink
                 className="btn btn-outline-success"
-                to={`${this.props.match.path}/new`}
+                to={`${this.props.match.url}/new`}
               >
                 Add new
               </CLink>
@@ -68,4 +68,4 @@ class FoxEntityListTable extends Component {
 
 }
 
-export default withRouter(FoxEntityListTable)
+export default FoxEntityListTable
