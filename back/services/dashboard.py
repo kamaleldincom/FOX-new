@@ -192,19 +192,6 @@ DEFINITIONS = {
                 },
                 {
                     "_tag": "CHeaderNavItem",
-                    "id": "head_nav_documents",
-                    "className": "px-3",
-                    "_children": [
-                        {
-                            "_tag": "FoxHeaderNavLink",
-                            "id": "head_nav_link_documents",
-                            "to": "/documents",
-                            "linktext": "Documents",
-                        }
-                    ],
-                },
-                {
-                    "_tag": "CHeaderNavItem",
                     "id": "head_nav_contractors",
                     "className": "px-3",
                     "_children": [

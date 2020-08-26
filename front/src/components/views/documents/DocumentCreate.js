@@ -35,7 +35,6 @@ class DocumentCreate extends Component {
   state = {
     name: "",
     file: "",
-    origin_filename: "",
     project: this.props.match.params.id,
     target_type: -1,
     url_to_doc: "",
@@ -67,12 +66,8 @@ class DocumentCreate extends Component {
       delete this.requestData.upload_option;
       this.formData = new FormData
       Object.entries(this.requestData).forEach(([key, value]) => {
-        console.log(key);
-        console.log(value);
         this.formData.append(key, value);
-        console.log(this.formData);
       })
-      console.log(this.formData);
       await foxApi.createEntityWithFile('documents', this.formData).then(() => {
         this.props.history.goBack()
       },

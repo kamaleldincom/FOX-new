@@ -98,52 +98,60 @@ class ProjectDetail extends Component {
               />
             </CFormGroup>
             <CFormGroup>
-              <CLabel htmlFor="start_date">Start Date</CLabel>
-              <CInput
-                type="date"
-                id="start_date"
-                name="start_date"
-                placeholder="date"
-                value={this.state.start_date}
-                onChange={this.handleChange}
-                required
-              />
+              <CRow>
+                <CCol lg="6">
+                  <CLabel htmlFor="start_date">Start Date</CLabel>
+                  <CInput
+                    type="date"
+                    id="start_date"
+                    name="start_date"
+                    placeholder="date"
+                    value={this.state.start_date}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </CCol>
+                <CCol lg="6">
+                  <CLabel htmlFor="start_time">Start Time</CLabel>
+                  <CInput
+                    type="time"
+                    id="start_time"
+                    name="start_time"
+                    // placeholder="date"
+                    value={this.state.start_time}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </CCol>
+              </CRow>
             </CFormGroup>
-            <CFormGroup className="col-lg-6">
-              <CLabel htmlFor="start_time">Start Time</CLabel>
-              <CInput
-                type="time"
-                id="start_time"
-                name="start_time"
-                // placeholder="date"
-                value={this.state.start_time}
-                onChange={this.handleChange}
-                required
-              />
-            </CFormGroup>
-            <CFormGroup className="col-lg-6">
-              <CLabel htmlFor="end_date">End Date</CLabel>
-              <CInput
-                type="date"
-                id="end_date"
-                name="end_date"
-                placeholder="date"
-                value={this.state.end_date}
-                onChange={this.handleChange}
-                required
-              />
-            </CFormGroup>
-            <CFormGroup className="col-lg-6">
-              <CLabel htmlFor="end_time">End Time</CLabel>
-              <CInput
-                type="time"
-                id="end_time"
-                name="end_time"
-                // placeholder="date"
-                value={this.state.end_time}
-                onChange={this.handleChange}
-                required
-              />
+            <CFormGroup>
+              <CRow>
+                <CCol lg="6">
+                  <CLabel htmlFor="end_date">End Date</CLabel>
+                  <CInput
+                    type="date"
+                    id="end_date"
+                    name="end_date"
+                    placeholder="date"
+                    value={this.state.end_date}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </CCol>
+                <CCol lg="6">
+                  <CLabel htmlFor="end_time">End Time</CLabel>
+                  <CInput
+                    type="time"
+                    id="end_time"
+                    name="end_time"
+                    // placeholder="date"
+                    value={this.state.end_time}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </CCol>
+              </CRow>
             </CFormGroup>
             <CFormGroup>
               <CLabel htmlFor="contractor">Contractor</CLabel>
@@ -165,13 +173,13 @@ class ProjectDetail extends Component {
             </CFormGroup>
             <CFormGroup>
               <CLink
-                className="btn btn-outline-success"
+                className="btn btn-outline-dark mr-3"
                 to={`${this.props.match.url}/ptw`}
               >
                 See Permission To Work
               </CLink>
               <CLink
-                className="btn btn-outline-secondary"
+                className="btn btn-outline-dark"
                 to={`${this.props.match.url}/documents`}
               >
                 Attached Documents
@@ -179,7 +187,7 @@ class ProjectDetail extends Component {
             </CFormGroup>
 
             <CFormGroup>
-              <CButton type="submit" color="dark" variant="outline" block>Save changes</CButton>
+              <CButton type="submit" color="success" variant="outline" block>Save changes</CButton>
             </CFormGroup>
             {this.state.error
               ? <p>{this.state.error}</p>

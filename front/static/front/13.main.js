@@ -99,7 +99,6 @@ var DocumentCreate = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "state", {
       name: "",
       file: "",
-      origin_filename: "",
       project: _this.props.match.params.id,
       target_type: -1,
       url_to_doc: "",
@@ -132,7 +131,7 @@ var DocumentCreate = /*#__PURE__*/function (_Component) {
                   error: 'Target type was not selected! Please, choose target type form the list'
                 });
 
-                _context.next = 13;
+                _context.next = 12;
                 break;
 
               case 5:
@@ -145,15 +144,9 @@ var DocumentCreate = /*#__PURE__*/function (_Component) {
                       key = _ref3[0],
                       value = _ref3[1];
 
-                  console.log(key);
-                  console.log(value);
-
                   _this.formData.append(key, value);
-
-                  console.log(_this.formData);
                 });
-                console.log(_this.formData);
-                _context.next = 13;
+                _context.next = 12;
                 return foxApi.createEntityWithFile('documents', _this.formData).then(function () {
                   _this.props.history.goBack();
                 }, function (error) {
@@ -164,7 +157,7 @@ var DocumentCreate = /*#__PURE__*/function (_Component) {
                   });
                 });
 
-              case 13:
+              case 12:
               case "end":
                 return _context.stop();
             }

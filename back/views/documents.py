@@ -1,6 +1,8 @@
+from django.http import HttpResponse
+from rest_framework import generics
+from rest_framework.views import APIView
 from back.models import Document, Project
 from back.serializers import DocumentSerializer, DocumentListSerializer
-from rest_framework import generics
 from back.logger import log
 
 
@@ -26,3 +28,14 @@ class DocumentCreate(generics.CreateAPIView):
 class DocumentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Document.objects.all()
     serializer_class = DocumentSerializer
+
+
+class DocumentDownload(APIView):
+    def get(self, request, pk, format=None):
+        document = Document.objects.get(pk=pk)
+        document.file.open("rb")
+        response = HttpResponse(
+            document.file.read(), content_type="application/octet-stream"
+        )
+        response["Content-Disposition"] = f"attachment; filename={document.file.name}"
+        return response

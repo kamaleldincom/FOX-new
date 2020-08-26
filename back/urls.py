@@ -42,4 +42,5 @@ urlpatterns = [
     path("documents/", views.DocumentList.as_view()),
     path("documents/new/", views.DocumentCreate.as_view()),
     path("documents/<int:pk>/", views.DocumentDetail.as_view()),
+    path("documents/downloads/<int:pk>/", views.DocumentDownload.as_view()),
 ]

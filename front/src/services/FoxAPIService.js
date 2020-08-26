@@ -1,3 +1,5 @@
+import { $CombinedState } from "redux";
+
 const SERVER_ADDRESS = `${window.location.origin}/`
 
 class FoxApiService {
@@ -20,6 +22,19 @@ class FoxApiService {
             }
         }
         return res.json();
+    }
+
+    async getDoc(url) {
+        const jwt = localStorage.getItem('token');
+        const res = await fetch(url, {
+            headers: jwt ? {
+                'Authorization': `JWT ${jwt}`,
+            } : {}
+        });
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${url}. recieved ${res.status}`);
+        }
+        return res;
     }
 
     async post(url, data = {}) {
@@ -134,6 +149,12 @@ class FoxApiService {
         let url = `${this.apiBase}${entity}/${id}/`;
         const res = this.put(url = url, data = data);
         return res
+    }
+
+    downloadDocument = async (id) => {
+        let url = `${this.apiBase}documents/downloads/${id}/`;
+        const res = await this.getDoc(url = url);
+        return res.blob();
     }
 
 }

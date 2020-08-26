@@ -28,6 +28,7 @@ class Project(models.Model):
     contractor = models.ForeignKey(
         to="Contractor", on_delete=models.SET_NULL, related_name="projects", null=True
     )
+    workers = models.ManyToManyField("Worker", related_name="projects", blank=True)
 
     class Meta:
         verbose_name = "Project"
