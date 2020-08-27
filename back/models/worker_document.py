@@ -3,8 +3,8 @@ from django.conf import settings
 from django.db import models
 
 
-def worker_docs_path():
-    return os.path.join(settings.LOCAL_FILE_DIR, "worker_docs")
+def project_docs_path(instance, filename):
+    return "project_{0}/{1}".format(instance.project.id, filename)
 
 
 class WorkerDocument(models.Model):
@@ -14,5 +14,4 @@ class WorkerDocument(models.Model):
     worker = models.ForeignKey(
         "Document", on_delete=models.CASCADE, related_name="related_documents"
     )
-    file = models.FilePathField(path=worker_docs_path)
-    origin_filename = models.CharField(max_length=256)
+    file = models.FileField(upload_to=project_docs_path, null=True, blank=True)

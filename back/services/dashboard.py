@@ -55,14 +55,14 @@ DEFINITIONS = {
                 {"_tag": "CSidebarNavTitle", "_children": ["APPLICATION"]},
                 {
                     "_tag": "CSidebarNavDropdown",
-                    "name": "Responsible Person",
+                    "name": "Workers Management",
                     "route": "/contractor/personal",
                     "icon": "cil-user",
                     "_children": [
                         {
                             "_tag": "CSidebarNavItem",
-                            "name": "1. Information",
-                            "to": "/contractor/personal/info",
+                            "name": "1. Responsible Person",
+                            "to": "{props.params.id}/responsible_person",
                         },
                         {
                             "_tag": "CSidebarNavItem",
