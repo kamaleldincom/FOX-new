@@ -56,7 +56,6 @@ var FoxEntityListTable = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
-      console.log(_this.props);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CCol"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CCard"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CCardHeader"], {
         className: "d-flex justify-content-between"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CCardTitle"], null, _this.props.tableName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CLink"], {
@@ -177,12 +176,14 @@ var WorkerList = /*#__PURE__*/function (_Component) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              _this.props.setProjectId(_this.props.match.params.id);
+
+              _context.next = 3;
               return _this.props.getProfileFetch().then(function () {
                 return _this.props.getWorkerList();
               });
 
-            case 2:
+            case 3:
             case "end":
               return _context.stop();
           }
@@ -192,7 +193,7 @@ var WorkerList = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tables_FoxEntityListTable__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({}, _this.props, {
-        tableName: "Projects",
+        tableName: "Workers",
         fields: _this.props.workerTable.fields,
         getBadge: getBadge,
         tableData: _this.props.workerTable.tableData
@@ -218,6 +219,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     getWorkerList: function getWorkerList() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getWorkerList"])());
+    },
+    setProjectId: function setProjectId() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["setProjectId"])());
     }
   };
 };

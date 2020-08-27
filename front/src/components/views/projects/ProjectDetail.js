@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getProfileFetch, getContractorList } from '../../../actions'
+import { getProfileFetch, getContractorList, setProjectId } from '../../../actions'
 import { connect } from 'react-redux'
 import {
   CForm,
@@ -62,10 +62,12 @@ class ProjectDetail extends Component {
   }
 
   componentDidMount = async () => {
+    console.log(this.props);
     await this.props.getProfileFetch()
       .then(() => foxApi.getDetailsOf('projects', this.props.match.params.id))
       .then((data) => this.setState({ ...data }))
       .then(() => this.props.getContractorList())
+      .then(() => this.props.setProjectId(this.props.match.params.id))
   }
 
   render = () => {
@@ -209,7 +211,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
-  getContractorList: () => dispatch(getContractorList())
+  getContractorList: () => dispatch(getContractorList()),
+  setProjectId: (id) => dispatch(setProjectId(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetail)

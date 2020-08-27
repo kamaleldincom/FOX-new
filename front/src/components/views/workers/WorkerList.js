@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FoxEntityListTable from '../../tables/FoxEntityListTable'
-import { getProfileFetch, getWorkerList, } from '../../../actions'
+import { getProfileFetch, getWorkerList, setProjectId } from '../../../actions'
 import { connect } from 'react-redux'
 
 
@@ -17,6 +17,7 @@ const getBadge = status => {
 class WorkerList extends Component {
 
   componentDidMount = async () => {
+    this.props.setProjectId(this.props.match.params.id)
     await this.props.getProfileFetch()
       .then(() => this.props.getWorkerList())
   }
@@ -25,7 +26,7 @@ class WorkerList extends Component {
     return (
       <FoxEntityListTable
         {...this.props}
-        tableName='Projects'
+        tableName='Workers'
         fields={this.props.workerTable.fields}
         getBadge={getBadge}
         tableData={this.props.workerTable.tableData}
@@ -43,7 +44,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
-  getWorkerList: () => dispatch(getWorkerList())
+  getWorkerList: () => dispatch(getWorkerList()),
+  setProjectId: () => dispatch(setProjectId())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkerList)

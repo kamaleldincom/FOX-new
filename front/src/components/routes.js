@@ -25,7 +25,7 @@ const routes = [
   { path: '/projects/:id/documents', name: 'Documents', component: DocumentList, exact: true },
   { path: '/projects/:id/documents/new', name: 'New', component: DocumentCreate, exact: false },
   { path: '/projects/:id/documents/:doc_id', name: 'Document Details', component: DocumentDetail, exact: false },
-  { path: '/projects/:id', name: 'Project Details', component: ProjectDetail },
+  { path: '/projects/:id/', name: 'Project Details', component: ProjectDetail },
   { path: '/approvals', name: 'Approvals', component: ApprovalList, exact: true },
   { path: '/current-works', name: 'Current Works', component: CurrentWorksList, exact: true },
   { path: '/contractors', name: 'Contractors', component: ContractorList, exact: true },

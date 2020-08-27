@@ -9,6 +9,7 @@ const initialState = {
     sidebar: [],
     headerNav: [],
     entityListTable: {},
+    projectId: ""
 }
 
 const changeState = (state = initialState, { type, ...rest }) => {
@@ -32,6 +33,8 @@ const changeState = (state = initialState, { type, ...rest }) => {
         case 'INITIATE_DASHBOARD':
             return { ...state, ...rest }
         case 'POPULATE_ENTITY_TABLE':
+            return { ...state, ...rest }
+        case 'SET_PROJECT_ID':
             return { ...state, ...rest }
 
         default:

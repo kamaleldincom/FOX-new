@@ -137,16 +137,19 @@ var ProjectDetail = /*#__PURE__*/function (_Component) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              _context2.next = 2;
+              console.log(_this.props);
+              _context2.next = 3;
               return _this.props.getProfileFetch().then(function () {
                 return foxApi.getDetailsOf('projects', _this.props.match.params.id);
               }).then(function (data) {
                 return _this.setState(_objectSpread({}, data));
               }).then(function () {
                 return _this.props.getContractorList();
+              }).then(function () {
+                return _this.props.setProjectId(_this.props.match.params.id);
               });
 
-            case 2:
+            case 3:
             case "end":
               return _context2.stop();
           }
@@ -275,6 +278,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     getContractorList: function getContractorList() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getContractorList"])());
+    },
+    setProjectId: function setProjectId(id) {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["setProjectId"])(id));
     }
   };
 };

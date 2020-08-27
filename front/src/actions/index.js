@@ -9,7 +9,7 @@ import {
 } from './auth'
 
 import getDashboardLayout from './dashboard'
-import { getProjectList } from './projects'
+import { getProjectList, setProjectId } from './projects'
 import { getClientManagerList } from './client_managers'
 import { getDocumentList } from './documents'
 import { getContractorList } from './contractors'
@@ -35,5 +35,6 @@ export {
     getClientManagerList,
     getDocumentList,
     getContractorList,
-    getWorkerList
+    getWorkerList,
+    setProjectId
 };
