@@ -7,7 +7,8 @@ import {
   CLabel,
   CRow,
   CCol,
-  CButton
+  CButton,
+  CSelect
 } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
 import { FoxApiService } from '../../../services'
@@ -17,21 +18,21 @@ const foxApi = new FoxApiService();
 class ResponsiblePerson extends Component {
 
   state = {
-    responsible_person: "",
+    responsible_person: -1,
     error: false
   }
 
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
-    });
+    }, () => console.log(this.state));
   }
 
   handleSubmit = async event => {
     event.preventDefault();
     this.formData = this.state;
     delete this.formData.error;
-    await foxApi.updateEntityOf('projects', this.props.match.params.id, this.formData).then(() => {
+    await foxApi.patchEntityOf('projects', this.props.match.params.id, this.formData).then(() => {
       this.props.history.goBack()
     },
       (error) => {
@@ -61,8 +62,7 @@ class ResponsiblePerson extends Component {
               <CLabel htmlFor="responsible_person">Please, choose the responsible person among your workers.</CLabel>
               <CSelect
                 id="responsible_person"
-                id="responsible_person"
-                name="contractor"
+                name="responsible_person"
                 placeholder="Choose responsible person"
                 value={this.state.responsible_person}
                 onChange={this.handleChange}

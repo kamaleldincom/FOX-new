@@ -43,4 +43,10 @@ urlpatterns = [
     path("documents/new/", views.DocumentCreate.as_view()),
     path("documents/<int:pk>/", views.DocumentDetail.as_view()),
     path("documents/downloads/<int:pk>/", views.DocumentDownload.as_view()),
+    path("worker_documents/", views.WorkerDocumentList.as_view()),
+    path("worker_documents/new/", views.WorkerDocumentCreate.as_view()),
+    path("worker_documents/<int:pk>/", views.WorkerDocumentDetail.as_view()),
+    path(
+        "worker_documents/downloads/<int:pk>/", views.WorkerDocumentDownload.as_view()
+    ),
 ]

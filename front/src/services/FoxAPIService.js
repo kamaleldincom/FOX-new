@@ -111,6 +111,32 @@ class FoxApiService {
         return res.json();
     }
 
+    async patch(url, data = {}) {
+        const jwt = localStorage.getItem('token');
+        const csrftoken = this.getCookie('csrftoken');
+        const res = await fetch(url, {
+            method: 'PATCH',
+            headers: jwt ? {
+                'Content-Type': 'application/json',
+                'Authorization': `JWT ${jwt}`,
+                'X-CSRFToken': csrftoken ? csrftoken : '',
+                'Accept': 'application/json',
+            } : {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken ? csrftoken : '',
+                    'Accept': 'application/json',
+                },
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
+        });
+        if (!res.ok) {
+            if (res.status >= 500) {
+                throw new Error(`Could not fetch ${url}. recieved ${res.status}`);
+            }
+        }
+
+        return res.json();
+    }
+
     getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -148,6 +174,12 @@ class FoxApiService {
     updateEntityOf = (entity, id, data) => {
         let url = `${this.apiBase}${entity}/${id}/`;
         const res = this.put(url = url, data = data);
+        return res
+    }
+
+    patchEntityOf = (entity, id, data) => {
+        let url = `${this.apiBase}${entity}/${id}/`;
+        const res = this.patch(url = url, data = data);
         return res
     }
 

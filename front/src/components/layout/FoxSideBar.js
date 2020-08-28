@@ -16,14 +16,11 @@ import { withRouter } from "react-router-dom"
 
 import CIcon from '@coreui/icons-react'
 
-// sidebar nav config
-// import navigation from './_nav'
 
 const FoxSidebar = (props) => {
     const dispatch = useDispatch()
     const show = useSelector(state => state.sidebarShow)
     props.projectId ? props.match.params.id = props.projectId : null
-    console.log(props);
     return (
 
         <CSidebar

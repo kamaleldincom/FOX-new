@@ -10,7 +10,8 @@ import {
   CTextarea,
   CSelect,
   CLink,
-  CButton
+  CButton,
+  CEmbed
 } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
 import { FoxApiService } from '../../../services'
@@ -62,7 +63,6 @@ class ProjectDetail extends Component {
   }
 
   componentDidMount = async () => {
-    console.log(this.props);
     await this.props.getProfileFetch()
       .then(() => foxApi.getDetailsOf('projects', this.props.match.params.id))
       .then((data) => this.setState({ ...data }))
@@ -71,131 +71,138 @@ class ProjectDetail extends Component {
   }
 
   render = () => {
+
     return (
       <CRow>
-        <CCol>
-          <CForm
-            onSubmit={this.handleSubmit}
-          >
-            <DjangoCSRFToken />
-            <CFormGroup>
-              <CLabel htmlFor="name">Name</CLabel>
-              <CInput
-                id="name"
-                name='name'
-                placeholder="Enter project name"
-                value={this.state.name}
-                onChange={this.handleChange}
-                required />
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="description">Description</CLabel>
-              <CTextarea
-                id="descrption"
-                name="description"
-                placeholder="Please, enter short description of the projet"
-                value={this.state.description}
-                onChange={this.handleChange}
-                required
-              />
-            </CFormGroup>
-            <CFormGroup>
-              <CRow>
-                <CCol lg="6">
-                  <CLabel htmlFor="start_date">Start Date</CLabel>
-                  <CInput
-                    type="date"
-                    id="start_date"
-                    name="start_date"
-                    placeholder="date"
-                    value={this.state.start_date}
-                    onChange={this.handleChange}
-                    required
-                  />
-                </CCol>
-                <CCol lg="6">
-                  <CLabel htmlFor="start_time">Start Time</CLabel>
-                  <CInput
-                    type="time"
-                    id="start_time"
-                    name="start_time"
-                    // placeholder="date"
-                    value={this.state.start_time}
-                    onChange={this.handleChange}
-                    required
-                  />
-                </CCol>
-              </CRow>
-            </CFormGroup>
-            <CFormGroup>
-              <CRow>
-                <CCol lg="6">
-                  <CLabel htmlFor="end_date">End Date</CLabel>
-                  <CInput
-                    type="date"
-                    id="end_date"
-                    name="end_date"
-                    placeholder="date"
-                    value={this.state.end_date}
-                    onChange={this.handleChange}
-                    required
-                  />
-                </CCol>
-                <CCol lg="6">
-                  <CLabel htmlFor="end_time">End Time</CLabel>
-                  <CInput
-                    type="time"
-                    id="end_time"
-                    name="end_time"
-                    // placeholder="date"
-                    value={this.state.end_time}
-                    onChange={this.handleChange}
-                    required
-                  />
-                </CCol>
-              </CRow>
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="contractor">Contractor</CLabel>
-              <CSelect
-                id="contractor"
-                name="contractor"
-                placeholder="Choose contractor"
-                value={this.state.contractor}
-                onChange={this.handleChange}
-                required
-              >
-                <option key="-1" value="-1" disabled>Choose contractor</option>
-                {this.props.options.map((option) => {
-                  return (
-                    <option key={option.id} value={option.id}>{option.username}</option>
-                  )
-                })}
-              </CSelect>
-            </CFormGroup>
-            <CFormGroup>
-              <CLink
-                className="btn btn-outline-dark mr-3"
-                to={`${this.props.match.url}/ptw`}
-              >
-                See Permission To Work
+        <CCol>{this.props.role === 'CliAdm' ? <CForm
+          onSubmit={this.handleSubmit}
+        >
+          <DjangoCSRFToken />
+          <CFormGroup>
+            <CLabel htmlFor="name">Name</CLabel>
+            <CInput
+              id="name"
+              name='name'
+              placeholder="Enter project name"
+              value={this.state.name}
+              onChange={this.handleChange}
+              required />
+          </CFormGroup>
+          <CFormGroup>
+            <CLabel htmlFor="description">Description</CLabel>
+            <CTextarea
+              id="descrption"
+              name="description"
+              placeholder="Please, enter short description of the projet"
+              value={this.state.description}
+              onChange={this.handleChange}
+              required
+            />
+          </CFormGroup>
+          <CFormGroup>
+            <CRow>
+              <CCol lg="6">
+                <CLabel htmlFor="start_date">Start Date</CLabel>
+                <CInput
+                  type="date"
+                  id="start_date"
+                  name="start_date"
+                  placeholder="date"
+                  value={this.state.start_date}
+                  onChange={this.handleChange}
+                  required
+                />
+              </CCol>
+              <CCol lg="6">
+                <CLabel htmlFor="start_time">Start Time</CLabel>
+                <CInput
+                  type="time"
+                  id="start_time"
+                  name="start_time"
+                  // placeholder="date"
+                  value={this.state.start_time}
+                  onChange={this.handleChange}
+                  required
+                />
+              </CCol>
+            </CRow>
+          </CFormGroup>
+          <CFormGroup>
+            <CRow>
+              <CCol lg="6">
+                <CLabel htmlFor="end_date">End Date</CLabel>
+                <CInput
+                  type="date"
+                  id="end_date"
+                  name="end_date"
+                  placeholder="date"
+                  value={this.state.end_date}
+                  onChange={this.handleChange}
+                  required
+                />
+              </CCol>
+              <CCol lg="6">
+                <CLabel htmlFor="end_time">End Time</CLabel>
+                <CInput
+                  type="time"
+                  id="end_time"
+                  name="end_time"
+                  // placeholder="date"
+                  value={this.state.end_time}
+                  onChange={this.handleChange}
+                  required
+                />
+              </CCol>
+            </CRow>
+          </CFormGroup>
+          <CFormGroup>
+            <CLabel htmlFor="contractor">Contractor</CLabel>
+            <CSelect
+              id="contractor"
+              name="contractor"
+              placeholder="Choose contractor"
+              value={this.state.contractor}
+              onChange={this.handleChange}
+              required
+            >
+              <option key="-1" value="-1" disabled>Choose contractor</option>
+              {this.props.options.map((option) => {
+                return (
+                  <option key={option.id} value={option.id}>{option.username}</option>
+                )
+              })}
+            </CSelect>
+          </CFormGroup>
+          <CFormGroup>
+            <CLink
+              className="btn btn-outline-dark mr-3"
+              to={`${this.props.match.url}ptw`}
+            >
+              See Permission To Work
               </CLink>
-              <CLink
-                className="btn btn-outline-dark"
-                to={`${this.props.match.url}/documents`}
-              >
-                Attached Documents
+            <CLink
+              className="btn btn-outline-dark"
+              to={`${this.props.match.url}documents`}
+            >
+              Attached Documents
               </CLink>
-            </CFormGroup>
+          </CFormGroup>
 
-            <CFormGroup>
-              <CButton type="submit" color="success" variant="outline" block>Save changes</CButton>
-            </CFormGroup>
-            {this.state.error
-              ? <p>{this.state.error}</p>
-              : null
-            }
-          </CForm>
+          <CFormGroup>
+            <CButton type="submit" color="success" variant="outline" block>Save changes</CButton>
+          </CFormGroup>
+          {this.state.error
+            ? <p>{this.state.error}</p>
+            : null
+          }
+        </CForm>
+          :
+          <CEmbed
+            ratio="16by9"
+          >
+            <iframe src={`${window.location.origin}/api/ptw/${this.props.match.params.id}`} />
+          </CEmbed>}
+
         </CCol>
       </CRow >
     )
@@ -205,7 +212,8 @@ class ProjectDetail extends Component {
 const mapStateToProps = state => {
   return {
     company: state.currentUser.company,
-    options: state.entityListTable.tableData
+    options: state.entityListTable.tableData,
+    role: state.currentUser.role
   }
 }
 

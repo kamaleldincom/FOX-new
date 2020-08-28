@@ -137,8 +137,7 @@ var ProjectDetail = /*#__PURE__*/function (_Component) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              console.log(_this.props);
-              _context2.next = 3;
+              _context2.next = 2;
               return _this.props.getProfileFetch().then(function () {
                 return foxApi.getDetailsOf('projects', _this.props.match.params.id);
               }).then(function (data) {
@@ -149,7 +148,7 @@ var ProjectDetail = /*#__PURE__*/function (_Component) {
                 return _this.props.setProjectId(_this.props.match.params.id);
               });
 
-            case 3:
+            case 2:
             case "end":
               return _context2.stop();
           }
@@ -158,7 +157,7 @@ var ProjectDetail = /*#__PURE__*/function (_Component) {
     })));
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCol"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CForm"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCol"], null, _this.props.role === 'CliAdm' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CForm"], {
         onSubmit: _this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4___default.a, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
         htmlFor: "name"
@@ -246,16 +245,20 @@ var ProjectDetail = /*#__PURE__*/function (_Component) {
         }, option.username);
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLink"], {
         className: "btn btn-outline-dark mr-3",
-        to: "".concat(_this.props.match.url, "/ptw")
+        to: "".concat(_this.props.match.url, "ptw")
       }, "See Permission To Work"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLink"], {
         className: "btn btn-outline-dark",
-        to: "".concat(_this.props.match.url, "/documents")
+        to: "".concat(_this.props.match.url, "documents")
       }, "Attached Documents")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
         type: "submit",
         color: "success",
         variant: "outline",
         block: true
-      }, "Save changes")), _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
+      }, "Save changes")), _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CEmbed"], {
+        ratio: "16by9"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
+        src: "".concat(window.location.origin, "/api/ptw/").concat(_this.props.match.params.id)
+      }))));
     });
 
     return _this;
@@ -267,7 +270,8 @@ var ProjectDetail = /*#__PURE__*/function (_Component) {
 var mapStateToProps = function mapStateToProps(state) {
   return {
     company: state.currentUser.company,
-    options: state.entityListTable.tableData
+    options: state.entityListTable.tableData,
+    role: state.currentUser.role
   };
 };
 

@@ -15,7 +15,8 @@ const DocumentList = React.lazy(() => import('./views/documents/DocumentList'))
 const DocumentCreate = React.lazy(() => import('./views/documents/DocumentCreate'))
 const DocumentDetail = React.lazy(() => import('./views/documents/DocumentDetail'))
 const SafetyVideo = React.lazy(() => import('./views/safety/Video'))
-
+const ResponsiblePerson = React.lazy(() => import('./views/workers/ResponsiblePerson'))
+const WorkersAssign = React.lazy(() => import('./views/workers/Assign'))
 
 const routes = [
   { path: '/', exact: true, name: 'Fox' },
@@ -25,7 +26,10 @@ const routes = [
   { path: '/projects/:id/documents', name: 'Documents', component: DocumentList, exact: true },
   { path: '/projects/:id/documents/new', name: 'New', component: DocumentCreate, exact: false },
   { path: '/projects/:id/documents/:doc_id', name: 'Document Details', component: DocumentDetail, exact: false },
-  { path: '/projects/:id/', name: 'Project Details', component: ProjectDetail },
+  { path: '/projects/:id/responsible_person', name: 'Responsible Person', component: ResponsiblePerson, exact: false },
+  { path: '/projects/:id/safety_video', name: 'Safety Video', component: SafetyVideo, exact: true },
+  { path: '/projects/:id/assign_workers', name: 'Assign Workers', component: WorkersAssign, exact: true },
+  { path: '/projects/:id/', name: 'Project Details', component: ProjectDetail, exact: true },
   { path: '/approvals', name: 'Approvals', component: ApprovalList, exact: true },
   { path: '/current-works', name: 'Current Works', component: CurrentWorksList, exact: true },
   { path: '/contractors', name: 'Contractors', component: ContractorList, exact: true },
@@ -34,7 +38,7 @@ const routes = [
   { path: '/workers', name: 'Workers', component: WorkerList, exact: true },
   { path: '/workers/new', name: 'New', component: WorkerCreate, exact: true },
   { path: '/workers/:id', name: 'Project Details', component: WorkerDetail, exact: true },
-  { path: '/safety_video', name: 'Safety Video', component: SafetyVideo, exact: true },
+
 ];
 
 export default routes;

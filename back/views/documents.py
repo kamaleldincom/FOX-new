@@ -4,20 +4,24 @@ from rest_framework.views import APIView
 from back.models import Document, Project
 from back.serializers import DocumentSerializer, DocumentListSerializer
 from back.logger import log
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class DocumentList(generics.ListAPIView):
     queryset = Document.objects.all()
     serializer_class = DocumentListSerializer
 
-    def get_queryset(self):
-        project_id = self.request.query_params.get("project_id", None)
-        if not project_id:
-            log(log.ERROR, "Project id is absent")
-            return []
-        project = Project.objects.get(pk=project_id)
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["project_id", "target_type"]
 
-        return Document.objects.filter(project=project)
+    # def get_queryset(self):
+    #     project_id = self.request.query_params.get("project_id", None)
+    #     if not project_id:
+    #         log(log.ERROR, "Project id is absent")
+    #         return []
+    #     project = Project.objects.get(pk=project_id)
+
+    #     return Document.objects.filter(project=project)
 
 
 class DocumentCreate(generics.CreateAPIView):

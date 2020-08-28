@@ -59,8 +59,6 @@ var ProjectPTW = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
       _this.props.getProfileFetch();
-
-      console.log(_this.props);
     });
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {

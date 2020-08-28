@@ -632,8 +632,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // sidebar nav config
-// import navigation from './_nav'
+
 
 var FoxSidebar = function FoxSidebar(props) {
   var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
@@ -641,7 +640,6 @@ var FoxSidebar = function FoxSidebar(props) {
     return state.sidebarShow;
   });
   props.projectId ? props.match.params.id = props.projectId : null;
-  console.log(props);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CSidebar"], {
     show: show,
     onShowChange: function onShowChange(val) {
@@ -883,10 +881,10 @@ var WorkerList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(
   return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerList */ "./src/components/views/workers/WorkerList.js"));
 });
 var WorkerCreate = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(19)]).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerCreate */ "./src/components/views/workers/WorkerCreate.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(21)]).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerCreate */ "./src/components/views/workers/WorkerCreate.js"));
 });
 var WorkerDetail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(20)]).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerDetail */ "./src/components/views/workers/WorkerDetail.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(22)]).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerDetail */ "./src/components/views/workers/WorkerDetail.js"));
 });
 var ProjectCreate = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectCreate */ "./src/components/views/projects/ProjectCreate.js"));
@@ -911,6 +909,12 @@ var DocumentDetail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.l
 });
 var SafetyVideo = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ./views/safety/Video */ "./src/components/views/safety/Video.js"));
+});
+var ResponsiblePerson = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(20)]).then(__webpack_require__.bind(null, /*! ./views/workers/ResponsiblePerson */ "./src/components/views/workers/ResponsiblePerson.js"));
+});
+var WorkersAssign = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(19)]).then(__webpack_require__.bind(null, /*! ./views/workers/Assign */ "./src/components/views/workers/Assign.js"));
 });
 var routes = [{
   path: '/',
@@ -947,9 +951,25 @@ var routes = [{
   component: DocumentDetail,
   exact: false
 }, {
+  path: '/projects/:id/responsible_person',
+  name: 'Responsible Person',
+  component: ResponsiblePerson,
+  exact: false
+}, {
+  path: '/projects/:id/safety_video',
+  name: 'Safety Video',
+  component: SafetyVideo,
+  exact: true
+}, {
+  path: '/projects/:id/assign_workers',
+  name: 'Assign Workers',
+  component: WorkersAssign,
+  exact: true
+}, {
   path: '/projects/:id/',
   name: 'Project Details',
-  component: ProjectDetail
+  component: ProjectDetail,
+  exact: true
 }, {
   path: '/approvals',
   name: 'Approvals',
@@ -989,11 +1009,6 @@ var routes = [{
   path: '/workers/:id',
   name: 'Project Details',
   component: WorkerDetail,
-  exact: true
-}, {
-  path: '/safety_video',
-  name: 'Safety Video',
-  component: SafetyVideo,
   exact: true
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);

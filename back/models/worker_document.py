@@ -4,7 +4,9 @@ from django.db import models
 
 
 def project_docs_path(instance, filename):
-    return "project_{0}/{1}".format(instance.project.id, filename)
+    return "project_{0}/{1}/{2}".format(
+        instance.template.project.id, instance.worker.id, filename
+    )
 
 
 class WorkerDocument(models.Model):

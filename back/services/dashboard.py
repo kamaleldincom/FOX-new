@@ -55,24 +55,24 @@ DEFINITIONS = {
                 {"_tag": "CSidebarNavTitle", "_children": ["APPLICATION"]},
                 {
                     "_tag": "CSidebarNavDropdown",
-                    "name": "Workers Management",
+                    "name": "Personnel Management",
                     "route": "/contractor/personal",
                     "icon": "cil-user",
                     "_children": [
                         {
                             "_tag": "CSidebarNavItem",
                             "name": "1. Responsible Person",
-                            "to": "{props.params.id}/responsible_person",
+                            "to": "responsible_person",
                         },
                         {
                             "_tag": "CSidebarNavItem",
                             "name": "2. Safety",
-                            "to": "/safety_video",
+                            "to": "safety_video",
                         },
                         {
                             "_tag": "CSidebarNavItem",
-                            "name": "3. Quiz",
-                            "to": "/contractor/personal/quiz",
+                            "name": "3. Assign Workers",
+                            "to": "assign_workers",
                         },
                     ],
                 },

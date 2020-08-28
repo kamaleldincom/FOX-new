@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[20],{
 
-/***/ "./src/components/views/workers/WorkerDetail.js":
-/*!******************************************************!*\
-  !*** ./src/components/views/workers/WorkerDetail.js ***!
-  \******************************************************/
+/***/ "./src/components/views/workers/ResponsiblePerson.js":
+/*!***********************************************************!*\
+  !*** ./src/components/views/workers/ResponsiblePerson.js ***!
+  \***********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18,10 +18,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../services */ "./src/services/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -53,15 +49,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var foxApi = new _services__WEBPACK_IMPORTED_MODULE_5__["FoxApiService"]();
 
-var WorkerDetail = /*#__PURE__*/function (_Component) {
-  _inherits(WorkerDetail, _Component);
+var ResponsiblePerson = /*#__PURE__*/function (_Component) {
+  _inherits(ResponsiblePerson, _Component);
 
-  var _super = _createSuper(WorkerDetail);
+  var _super = _createSuper(ResponsiblePerson);
 
-  function WorkerDetail() {
+  function ResponsiblePerson() {
     var _this;
 
-    _classCallCheck(this, WorkerDetail);
+    _classCallCheck(this, ResponsiblePerson);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -70,19 +66,14 @@ var WorkerDetail = /*#__PURE__*/function (_Component) {
     _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      name: "",
-      contractor: _this.props.contractor,
-      birthday: "",
-      card_number_id: "",
-      license_number: "",
-      passport: "",
-      safety_green_card: "",
-      position_in_company: "",
+      responsible_person: -1,
       error: false
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
-      _this.setState(_defineProperty({}, event.target.name, event.target.value));
+      _this.setState(_defineProperty({}, event.target.name, event.target.value), function () {
+        return console.log(_this.state);
+      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSubmit", /*#__PURE__*/function () {
@@ -95,13 +86,13 @@ var WorkerDetail = /*#__PURE__*/function (_Component) {
                 _this.formData = _this.state;
                 delete _this.formData.error;
                 _context.next = 5;
-                return foxApi.updateEntityOf('workers', _this.props.match.params.id, _this.formData).then(function () {
+                return foxApi.patchEntityOf('projects', _this.props.match.params.id, _this.formData).then(function () {
                   _this.props.history.goBack();
                 }, function (error) {
                   console.error(error);
 
                   _this.setState({
-                    error: 'Worker update failed!' + ' Please check your input and try again!' + ' In case this problem repeats, please contact your administrator!'
+                    error: 'Responsible person creation failed!' + ' Please check your input and try again!' + ' In case this problem repeats, please contact your administrator!'
                   });
                 });
 
@@ -125,9 +116,7 @@ var WorkerDetail = /*#__PURE__*/function (_Component) {
             case 0:
               _context2.next = 2;
               return _this.props.getProfileFetch().then(function () {
-                return foxApi.getDetailsOf('workers', _this.props.match.params.id);
-              }).then(function (data) {
-                return _this.setState(_objectSpread({}, data));
+                return _this.props.getWorkerList();
               });
 
             case 2:
@@ -142,85 +131,41 @@ var WorkerDetail = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCol"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CForm"], {
         onSubmit: _this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4___default.a, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "name"
-      }, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
-        id: "name",
-        name: "name",
-        placeholder: "Enter worker name",
-        value: _this.state.name,
+        htmlFor: "responsible_person"
+      }, "Please, choose the responsible person among your workers."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CSelect"], {
+        id: "responsible_person",
+        name: "responsible_person",
+        placeholder: "Choose responsible person",
+        value: _this.state.responsible_person,
         onChange: _this.handleChange,
         required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "birthday"
-      }, "Birthday"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
-        type: "date",
-        id: "birthday",
-        name: "birthday",
-        value: _this.state.birthday,
-        onChange: _this.handleChange,
-        required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "card_number_id"
-      }, "Card number ID"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
-        id: "card_number_id",
-        name: "card_number_id",
-        placeholder: "Enter ID",
-        value: _this.state.card_number_id,
-        onChange: _this.handleChange,
-        required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "license_number"
-      }, "License Number"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
-        id: "license_number",
-        name: "license_number",
-        placeholder: "Enter worker name",
-        value: _this.state.license_number,
-        onChange: _this.handleChange,
-        required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "passport"
-      }, "Passport"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
-        id: "passport",
-        name: "passport",
-        placeholder: "Enter passport info",
-        value: _this.state.passport,
-        onChange: _this.handleChange,
-        required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "safety_green_card"
-      }, "Safety Green Card"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
-        id: "safety_green_card",
-        name: "safety_green_card",
-        placeholder: "Enter card info",
-        value: _this.state.safety_green_card,
-        onChange: _this.handleChange,
-        required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "position_in_company"
-      }, "Position in Company"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
-        id: "position_in_company",
-        name: "position_in_company",
-        placeholder: "Enter worker position",
-        value: _this.state.position_in_company,
-        onChange: _this.handleChange,
-        required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        key: "-1",
+        value: "-1",
+        disabled: true
+      }, "Choose responsible person"), _this.props.options ? _this.props.options.map(function (option) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: option.id,
+          value: option.id
+        }, option.name);
+      }) : null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
         type: "submit",
         color: "dark",
         variant: "outline",
         block: true
-      }, "Save changes")), _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
+      }, "Set responsible person")), _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
     });
 
     return _this;
   }
 
-  return WorkerDetail;
+  return ResponsiblePerson;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    contractor: state.currentUser.id
+    contractor: state.currentUser.id,
+    options: state.entityListTable.tableData
   };
 };
 
@@ -228,11 +173,14 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     getProfileFetch: function getProfileFetch() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getProfileFetch"])());
+    },
+    getWorkerList: function getWorkerList() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getWorkerList"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(WorkerDetail));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ResponsiblePerson));
 
 /***/ })
 
