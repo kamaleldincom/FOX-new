@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[23],{
 
-/***/ "./src/components/views/workers/Assign.js":
-/*!************************************************!*\
-  !*** ./src/components/views/workers/Assign.js ***!
-  \************************************************/
+/***/ "./src/components/views/workers/WorkerDetail.js":
+/*!******************************************************!*\
+  !*** ./src/components/views/workers/WorkerDetail.js ***!
+  \******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18,6 +18,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../services */ "./src/services/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -49,15 +53,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var foxApi = new _services__WEBPACK_IMPORTED_MODULE_5__["FoxApiService"]();
 
-var WorkerAssign = /*#__PURE__*/function (_Component) {
-  _inherits(WorkerAssign, _Component);
+var WorkerDetail = /*#__PURE__*/function (_Component) {
+  _inherits(WorkerDetail, _Component);
 
-  var _super = _createSuper(WorkerAssign);
+  var _super = _createSuper(WorkerDetail);
 
-  function WorkerAssign() {
+  function WorkerDetail() {
     var _this;
 
-    _classCallCheck(this, WorkerAssign);
+    _classCallCheck(this, WorkerDetail);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -66,46 +70,42 @@ var WorkerAssign = /*#__PURE__*/function (_Component) {
     _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      workers: [],
-      error: false,
-      filename: "",
-      file_id: "",
-      upload_files: {}
+      name: "",
+      contractor: _this.props.contractor,
+      birthday: "",
+      card_number_id: "",
+      license_number: "",
+      passport: "",
+      safety_green_card: "",
+      position_in_company: "",
+      error: false
     });
 
-    _defineProperty(_assertThisInitialized(_this), "downloadFile", /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
+    _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
+      _this.setState(_defineProperty({}, event.target.name, event.target.value));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleSubmit", /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log(_this.state);
+                event.preventDefault();
+                _this.formData = _this.state;
+                delete _this.formData.error;
+                _context.next = 5;
+                return foxApi.updateEntityOf('workers', _this.props.match.params.id, _this.formData).then(function () {
+                  _this.props.history.goBack();
+                }, function (error) {
+                  console.error(error);
 
-                _this.setState({
-                  filename: e.target.value,
-                  file_id: e.target.name
-                }, function () {
-                  console.log(_this.state);
-                  foxApi.downloadDocument(_this.state.file_id).then(function (blob) {
-                    var url = window.URL.createObjectURL(new Blob([blob]));
-                    var link = document.createElement('a');
-                    link.href = url;
-
-                    var filename = _this.state.filename.split('/').pop();
-
-                    link.setAttribute('download', filename);
-                    document.body.appendChild(link);
-                    link.click();
-                    link.parentNode.removeChild(link);
-                  }).then(function () {
-                    console.log('file downloaded');
-                  }).catch(function (error) {
-                    console.error('File download failed!');
-                    console.error(error);
+                  _this.setState({
+                    error: 'Worker update failed!' + ' Please check your input and try again!' + ' In case this problem repeats, please contact your administrator!'
                   });
                 });
 
-              case 2:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -118,150 +118,95 @@ var WorkerAssign = /*#__PURE__*/function (_Component) {
       };
     }());
 
-    _defineProperty(_assertThisInitialized(_this), "handleCheck", function (event) {
-      var workers = _this.state.workers;
-      event.target.checked ? workers.push(event.target.value) : workers.splice(workers.indexOf(event.target.value), 1);
-
-      _this.setState({
-        workers: workers
-      }, function () {
-        return console.log(_this.state);
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "handleFileUpload", function (event) {
-      var upload_files = _this.state.upload_files;
-      upload_files[event.target.name] = event.target.files[0];
-
-      _this.setState({
-        upload_files: upload_files
-      }, console.log(_this.state));
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "handleSubmit", /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                event.preventDefault(); // if (parseInt(this.state.contractor) < 0) {
-                //   this.setState({
-                //     error: 'Contractor was not selected! Please, choose contractor form the list'
-                //   })
-                // } else {
-                //   this.formData = this.state;
-                //   delete this.formData.error;
-                //   await foxApi.updateEntityOf('projects', this.props.match.params.id, this.formData).then(() => {
-                //     this.props.history.goBack()
-                //   },
-                //     (error) => {
-                //       console.error(error);
-                //       this.setState({
-                //         error: 'Project update failed!' +
-                //           ' Please check your input and try again!' +
-                //           ' In case this problem repeats, please contact your administrator!'
-                //       })
-                //     })
-                // }
-
-              case 1:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }));
-
-      return function (_x2) {
-        return _ref2.apply(this, arguments);
-      };
-    }());
-
-    _defineProperty(_assertThisInitialized(_this), "componentDidMount", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+    _defineProperty(_assertThisInitialized(_this), "componentDidMount", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
-              _context3.next = 2;
+              _context2.next = 2;
               return _this.props.getProfileFetch().then(function () {
-                return _this.props.getWorkerList();
-              }).then(function () {
-                return _this.props.getDocumentList({
-                  target_type: "Worker",
-                  project_id: _this.props.match.params.id
-                }, true);
-              }).then(function () {
-                return _this.props.setProjectId(_this.props.match.params.id);
+                return foxApi.getDetailsOf('workers', _this.props.match.params.id);
+              }).then(function (data) {
+                return _this.setState(_objectSpread({}, data));
               });
 
             case 2:
             case "end":
-              return _context3.stop();
+              return _context2.stop();
           }
         }
-      }, _callee3);
+      }, _callee2);
     })));
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
-      console.log(_this.props);
-      var downloadButtonArray = {};
-      var workerList = {};
-
-      if (_this.props.documents) {
-        downloadButtonArray = _this.props.documents.map(function (document) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], {
-            key: "fg-".concat(document.id),
-            className: "d-flex"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
-            variant: "outline",
-            color: "success",
-            key: "cb-".concat(document.id),
-            id: document.id,
-            name: document.id,
-            value: document.filename,
-            onClick: _this.downloadFile
-          }, "Download"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-            key: "lb-".concat(document.id),
-            htmlFor: document.id
-          }, document.name));
-        });
-        workerList = _this.props.workers.map(function (worker) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], {
-            key: "fg-".concat(worker.id),
-            variant: "checkbox",
-            className: "checkbox d-flex"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputCheckbox"], {
-            key: "cb-".concat(worker.id),
-            id: worker.id,
-            name: worker.id,
-            value: worker.id,
-            onChange: _this.handleCheck
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-            key: "lb-".concat(worker.id),
-            variant: "checkbox",
-            className: "form-check-label mr-4",
-            htmlFor: worker.id
-          }, worker.name), _this.props.documents.map(function (document) {
-            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-              key: "lb-".concat(document.id),
-              htmlFor: "file-".concat(document.id)
-            }, document.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputFile"], {
-              key: "lb-".concat(document.id),
-              id: "file-".concat(document.id),
-              name: document.id,
-              onChange: _this.handleFileUpload,
-              required: true
-            }));
-          }));
-        });
-      } else {
-        downloadButtonArray = null;
-        workerList = null;
-      }
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCol"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CForm"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4___default.a, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, downloadButtonArray), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, workerList), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCol"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CForm"], {
+        onSubmit: _this.handleSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4___default.a, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "name"
+      }, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        id: "name",
+        name: "name",
+        placeholder: "Enter worker name",
+        value: _this.state.name,
+        onChange: _this.handleChange,
+        required: true
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "birthday"
+      }, "Birthday"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        type: "date",
+        id: "birthday",
+        name: "birthday",
+        value: _this.state.birthday,
+        onChange: _this.handleChange,
+        required: true
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "card_number_id"
+      }, "Card number ID"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        id: "card_number_id",
+        name: "card_number_id",
+        placeholder: "Enter ID",
+        value: _this.state.card_number_id,
+        onChange: _this.handleChange,
+        required: true
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "license_number"
+      }, "License Number"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        id: "license_number",
+        name: "license_number",
+        placeholder: "Enter worker name",
+        value: _this.state.license_number,
+        onChange: _this.handleChange,
+        required: true
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "passport"
+      }, "Passport"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        id: "passport",
+        name: "passport",
+        placeholder: "Enter passport info",
+        value: _this.state.passport,
+        onChange: _this.handleChange,
+        required: true
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "safety_green_card"
+      }, "Safety Green Card"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        id: "safety_green_card",
+        name: "safety_green_card",
+        placeholder: "Enter card info",
+        value: _this.state.safety_green_card,
+        onChange: _this.handleChange,
+        required: true
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "position_in_company"
+      }, "Position in Company"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        id: "position_in_company",
+        name: "position_in_company",
+        placeholder: "Enter worker position",
+        value: _this.state.position_in_company,
+        onChange: _this.handleChange,
+        required: true
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
         type: "submit",
-        color: "success",
+        color: "dark",
         variant: "outline",
         block: true
       }, "Save changes")), _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
@@ -270,16 +215,12 @@ var WorkerAssign = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  return WorkerAssign;
+  return WorkerDetail;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    workers: state.entityListTable.tableData,
-    company: state.currentUser.company,
-    role: state.currentUser.role,
-    contractor: state.currentUser.id,
-    documents: state.additionalEntityListTable.tableData
+    contractor: state.currentUser.id
   };
 };
 
@@ -287,20 +228,11 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     getProfileFetch: function getProfileFetch() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getProfileFetch"])());
-    },
-    getWorkerList: function getWorkerList() {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getWorkerList"])());
-    },
-    getDocumentList: function getDocumentList(params, additional) {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getDocumentList"])(params, additional));
-    },
-    setProjectId: function setProjectId(id) {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["setProjectId"])(id));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(WorkerAssign));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(WorkerDetail));
 
 /***/ })
 

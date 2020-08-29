@@ -9,6 +9,8 @@ class ProjectList(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
+        if user.role == "Contr":
+            return Project.objects.filter(company=user.company, contractor=user)
         return Project.objects.filter(company=user.company)
 
 

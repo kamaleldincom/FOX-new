@@ -15,4 +15,4 @@ class ClientManagerListSerializer(serializers.ModelSerializer):
 class ClientManagerSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClientManager
-        fields = "__all__"
+        fields = ["id", "username", "email", "company", "role", "position"]

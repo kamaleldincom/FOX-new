@@ -1,20 +1,21 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from .fox_user import FoxUser
+
+# from .fox_user import FoxUser
 from django.db.models.signals import post_save
 from back.services import send_mail_on_creation
 
-# from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model
 
-# FoxUser = get_user_model() - it does't work, though it works fine with other user types
+FoxUser = get_user_model()
 
 
 class ClientManager(FoxUser):
     class Position(models.TextChoices):
         safety_manager = "SafeMan", _("Safety Manager")
         security_manager = "SecMan", _("Security Manager")
-        safety_officer = "SecOff", _("Safety Officer")
-        site_owner = "SiteOwn", _("Site Oswner")
+        safety_officer = "SecOff", _("Security Officer")
+        site_owner = "SiteOwn", _("Site Owner")
         work_owner = "WorkOwn", _("Owner of Work")
         security_guards = "SecGrd", _("Security Guards")
 
