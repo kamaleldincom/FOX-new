@@ -25,7 +25,7 @@ SECRET_KEY = "*myepc&&@())qx_t^^k18t65ehm4_9iaelhr6hx0g8d31$pjjr"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "46.101.221.249"]  # localhost, s2b host
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "46.101.221.249", "ec2-3-23-115-178.us-east-2.compute.amazonaws.com"]  # localhost, s2b host
 
 
 # Application definition
