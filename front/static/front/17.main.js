@@ -74,13 +74,23 @@ var ProjectCreate = /*#__PURE__*/function (_Component) {
       end_time: "",
       company: _this.props.company,
       contractor: "-1",
+      work_at_height: false,
+      lifting_work: false,
+      confined_space: false,
+      hot_work: false,
+      chemical_handling: false,
+      work_alone: false,
+      work_at_sensitive_area: false,
+      cold_work: false,
       error: false
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
-      console.log(_this.props);
-
       _this.setState(_defineProperty({}, event.target.name, event.target.value));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleCheck", function (event) {
+      _this.setState(_defineProperty({}, event.target.name, event.target.checked));
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSubmit", /*#__PURE__*/function () {
@@ -90,9 +100,10 @@ var ProjectCreate = /*#__PURE__*/function (_Component) {
             switch (_context.prev = _context.next) {
               case 0:
                 event.preventDefault();
+                console.log(_this.state);
 
                 if (!(parseInt(_this.state.contractor) < 0)) {
-                  _context.next = 5;
+                  _context.next = 6;
                   break;
                 }
 
@@ -100,13 +111,13 @@ var ProjectCreate = /*#__PURE__*/function (_Component) {
                   error: 'Contractor was not selected! Please, choose contractor form the list'
                 });
 
-                _context.next = 9;
+                _context.next = 10;
                 break;
 
-              case 5:
+              case 6:
                 _this.formData = _this.state;
                 delete _this.formData.error;
-                _context.next = 9;
+                _context.next = 10;
                 return foxApi.createEntityOf('projects', _this.formData).then(function () {
                   _this.props.history.goBack();
                 }, function (error) {
@@ -117,7 +128,7 @@ var ProjectCreate = /*#__PURE__*/function (_Component) {
                   });
                 });
 
-              case 9:
+              case 10:
               case "end":
                 return _context.stop();
             }
@@ -233,7 +244,82 @@ var ProjectCreate = /*#__PURE__*/function (_Component) {
           key: option.id,
           value: option.id
         }, option.username);
-      }) : null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
+      }) : null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], {
+        variant: "checkbox",
+        className: "checkbox"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputCheckbox"], {
+        id: "work_at_height",
+        name: "work_at_height",
+        value: "work_at_height",
+        onChange: _this.handleCheck
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        variant: "checkbox",
+        className: "form-check-label",
+        htmlFor: "work_at_height"
+      }, "Work at height")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputCheckbox"], {
+        id: "lifting_work",
+        name: "lifting_work",
+        value: "lifting_work",
+        onChange: _this.handleCheck
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        variant: "checkbox",
+        className: "form-check-label",
+        htmlFor: "lifting_work"
+      }, "Lifting work")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputCheckbox"], {
+        id: "confined_space",
+        name: "confined_space",
+        value: "confined_space",
+        onChange: _this.handleCheck
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        variant: "checkbox",
+        className: "form-check-label",
+        htmlFor: "confined_space"
+      }, "Confined space")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputCheckbox"], {
+        id: "hot_work",
+        name: "hot_work",
+        value: "hot_work",
+        onChange: _this.handleCheck
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        variant: "checkbox",
+        className: "form-check-label",
+        htmlFor: "hot_work"
+      }, "Hot work")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputCheckbox"], {
+        id: "chemical_handling",
+        name: "chemical_handling",
+        value: "chemical_handling",
+        onChange: _this.handleCheck
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        variant: "checkbox",
+        className: "form-check-label",
+        htmlFor: "chemical_handling"
+      }, "Chemical handling")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputCheckbox"], {
+        id: "work_alone",
+        name: "work_alone",
+        value: "work_alone",
+        onChange: _this.handleCheck
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        variant: "checkbox",
+        className: "form-check-label",
+        htmlFor: "work_alone"
+      }, "Work alone")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputCheckbox"], {
+        id: "work_at_sensitive_area",
+        name: "work_at_sensitive_area",
+        value: "work_at_sensitive_area",
+        onChange: _this.handleCheck
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        variant: "checkbox",
+        className: "form-check-label",
+        htmlFor: "work_at_sensitive_area"
+      }, "Work at sensitive area")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputCheckbox"], {
+        id: "cold_work",
+        name: "cold_work",
+        value: "cold_work",
+        onChange: _this.handleCheck
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        variant: "checkbox",
+        className: "form-check-label",
+        htmlFor: "cold_work"
+      }, "Cold work"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
         type: "submit",
         color: "dark",
         variant: "outline",

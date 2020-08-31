@@ -11,7 +11,8 @@ import {
   CSelect,
   CLink,
   CButton,
-  CEmbed
+  CEmbed,
+  CInputCheckbox
 } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
 import { FoxApiService } from '../../../services'
@@ -29,6 +30,14 @@ class ProjectDetail extends Component {
     end_time: "",
     company: this.props.company,
     contractor: "-1",
+    work_at_height: false,
+    lifting_work: false,
+    confined_space: false,
+    hot_work: false,
+    chemical_handling: false,
+    work_alone: false,
+    work_at_sensitive_area: false,
+    cold_work: false,
     error: false
   }
 
@@ -36,6 +45,12 @@ class ProjectDetail extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
+  }
+
+  handleCheck = event => {
+    this.setState({
+      [event.target.name]: event.target.checked
+    })
   }
 
   handleSubmit = async event => {
@@ -187,7 +202,89 @@ class ProjectDetail extends Component {
               Attached Documents
               </CLink>
           </CFormGroup>
-
+          <CFormGroup variant="checkbox" className="checkbox">
+            <CFormGroup>
+              <CInputCheckbox
+                id="work_at_height"
+                name="work_at_height"
+                value="work_at_height"
+                checked={this.state.work_at_height}
+                onChange={this.handleCheck}
+              />
+              <CLabel variant="checkbox" className="form-check-label" htmlFor="work_at_height">Work at height</CLabel>
+            </CFormGroup>
+            <CFormGroup>
+              <CInputCheckbox
+                id="lifting_work"
+                name="lifting_work"
+                value="lifting_work"
+                checked={this.state.lifting_work}
+                onChange={this.handleCheck}
+              />
+              <CLabel variant="checkbox" className="form-check-label" htmlFor="lifting_work">Lifting work</CLabel>
+            </CFormGroup>
+            <CFormGroup>
+              <CInputCheckbox
+                id="confined_space"
+                name="confined_space"
+                value="confined_space"
+                value="confined_space"
+                checked={this.state.confined_space}
+                onChange={this.handleCheck}
+              />
+              <CLabel variant="checkbox" className="form-check-label" htmlFor="confined_space">Confined space</CLabel>
+            </CFormGroup>
+            <CFormGroup>
+              <CInputCheckbox
+                id="hot_work"
+                name="hot_work"
+                value="hot_work"
+                checked={this.state.hot_work}
+                onChange={this.handleCheck}
+              />
+              <CLabel variant="checkbox" className="form-check-label" htmlFor="hot_work">Hot work</CLabel>
+            </CFormGroup>
+            <CFormGroup>
+              <CInputCheckbox
+                id="chemical_handling"
+                name="chemical_handling"
+                value="chemical_handling"
+                checked={this.state.chemical_handling}
+                onChange={this.handleCheck}
+              />
+              <CLabel variant="checkbox" className="form-check-label" htmlFor="chemical_handling">Chemical handling</CLabel>
+            </CFormGroup>
+            <CFormGroup>
+              <CInputCheckbox
+                id="work_alone"
+                name="work_alone"
+                value="work_alone"
+                checked={this.state.work_alone}
+                onChange={this.handleCheck}
+              />
+              <CLabel variant="checkbox" className="form-check-label" htmlFor="work_alone">Work alone</CLabel>
+            </CFormGroup>
+            <CFormGroup>
+              <CInputCheckbox
+                id="work_at_sensitive_area"
+                name="work_at_sensitive_area"
+                value="work_at_sensitive_area"
+                checked={this.state.work_at_sensitive_area}
+                onChange={this.handleCheck}
+              />
+              <CLabel variant="checkbox" className="form-check-label" htmlFor="work_at_sensitive_area">Work at sensitive area</CLabel>
+            </CFormGroup>
+            <CFormGroup>
+              <CInputCheckbox
+                id="cold_work"
+                name="cold_work"
+                value="cold_work"
+                checked={this.state.cold_work}
+                onChange={this.handleCheck}
+              />
+              <CLabel variant="checkbox" className="form-check-label" htmlFor="cold_work">Cold work</CLabel>
+            </CFormGroup>
+          </CFormGroup>
           <CFormGroup>
             <CButton type="submit" color="success" variant="outline" block>Save changes</CButton>
           </CFormGroup>

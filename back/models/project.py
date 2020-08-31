@@ -29,6 +29,14 @@ class Project(models.Model):
         to="Contractor", on_delete=models.SET_NULL, related_name="projects", null=True
     )
     workers = models.ManyToManyField("Worker", related_name="projects", blank=True)
+    work_at_height = models.BooleanField(default=False)
+    lifting_work = models.BooleanField(default=False)
+    confined_space = models.BooleanField(default=False)
+    hot_work = models.BooleanField(default=False)
+    chemical_handling = models.BooleanField(default=False)
+    work_alone = models.BooleanField(default=False)
+    work_at_sensitive_area = models.BooleanField(default=False)
+    cold_work = models.BooleanField(default=False)
     responsible_person = models.ForeignKey(
         "Worker",
         related_name="projects_to_manage",
@@ -49,5 +57,4 @@ class Project(models.Model):
 
     @property
     def contractor_name(self):
-        # return ",".join([c.username for c in self.contractors])
         return self.contractor.username
