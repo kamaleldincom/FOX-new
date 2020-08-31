@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = "*myepc&&@())qx_t^^k18t65ehm4_9iaelhr6hx0g8d31$pjjr"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "46.101.221.249", "ec2-3-23-115-178.us-east-2.compute.amazonaws.com"]  # localhost, s2b host
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "46.101.221.249", "ec2-3-23-115-178.us-east-2.compute.amazonaws.com"]  # localhost, s2b host, aws
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "local_files")
 
@@ -150,3 +151,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
+
+JWT_AUTH = {
+    'JWT_VERIFY': True,
+    'JWT_VERIFY_EXPIRATION': False,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=2),
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+}
