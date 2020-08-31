@@ -638,8 +638,8 @@ var FoxSidebar = function FoxSidebar(props) {
   var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
   var show = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(function (state) {
     return state.sidebarShow;
-  });
-  props.projectId ? props.match.params.id = props.projectId : null;
+  }); // props.projectId ? props.match.params.id = props.projectId : null
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CSidebar"], {
     show: show,
     onShowChange: function onShowChange(val) {
@@ -774,6 +774,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var Dashboard = /*#__PURE__*/function (_Component) {
   _inherits(Dashboard, _Component);
 
@@ -797,7 +798,7 @@ var Dashboard = /*#__PURE__*/function (_Component) {
             case 0:
               _context.next = 2;
               return _this.props.getProfileFetch().then(function () {
-                return _this.props.getDashboardLayout();
+                return _this.props.getDashboardLayout(_this.props.currentUser.role, _this.props.match.params.id);
               });
 
             case 2:
@@ -807,6 +808,17 @@ var Dashboard = /*#__PURE__*/function (_Component) {
         }
       }, _callee);
     })));
+
+    _defineProperty(_assertThisInitialized(_this), "componentDidUpdate", function (prevProps) {
+      var updatedMatch = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["matchPath"])(_this.props.location.pathname, {
+        path: "/projects/:id",
+        exact: true
+      });
+
+      if (updatedMatch && prevProps.location.pathname != _this.props.location.pathname) {
+        _this.props.getDashboardLayout(_this.props.currentUser.role, updatedMatch.params.id);
+      }
+    });
 
     return _this;
   }
@@ -831,7 +843,8 @@ var Dashboard = /*#__PURE__*/function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    navigation: state.sidebar
   };
 };
 
@@ -840,8 +853,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     getProfileFetch: function getProfileFetch() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["getProfileFetch"])());
     },
-    getDashboardLayout: function getDashboardLayout() {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["getDashboardLayout"])());
+    getDashboardLayout: function getDashboardLayout(userRole, projectId) {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["getDashboardLayout"])(userRole, projectId));
     }
   };
 };
@@ -881,25 +894,28 @@ var ClientManagerCreate = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___defaul
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ./views/managers/ClientManagerCreate */ "./src/components/views/managers/ClientManagerCreate.js"));
 });
 var ClientManagerDetail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(24)]).then(__webpack_require__.bind(null, /*! ./views/managers/ClientManagerDetail */ "./src/components/views/managers/ClientManagerDetail.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ./views/managers/ClientManagerDetail */ "./src/components/views/managers/ClientManagerDetail.js"));
 });
 var WorkerList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerList */ "./src/components/views/workers/WorkerList.js"));
 });
 var WorkerCreate = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(22)]).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerCreate */ "./src/components/views/workers/WorkerCreate.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(24)]).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerCreate */ "./src/components/views/workers/WorkerCreate.js"));
 });
 var WorkerDetail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(23)]).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerDetail */ "./src/components/views/workers/WorkerDetail.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(25)]).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerDetail */ "./src/components/views/workers/WorkerDetail.js"));
 });
 var ProjectCreate = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectCreate */ "./src/components/views/projects/ProjectCreate.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(17)]).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectCreate */ "./src/components/views/projects/ProjectCreate.js"));
 });
 var ProjectDetail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(17)]).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectDetail */ "./src/components/views/projects/ProjectDetail.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(18)]).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectDetail */ "./src/components/views/projects/ProjectDetail.js"));
 });
 var ProjectPTW = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectPTW */ "./src/components/views/projects/ProjectPTW.js"));
+  return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectPTW */ "./src/components/views/projects/ProjectPTW.js"));
+});
+var ProjectUploadDocs = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(20)]).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectUploadDocs */ "./src/components/views/projects/ProjectUploadDocs.js"));
 });
 var ContractorCreate = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ./views/contractors/ContractorCreate */ "./src/components/views/contractors/ContractorCreate.js"));
@@ -914,13 +930,13 @@ var DocumentDetail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.l
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, /*! ./views/documents/DocumentDetail */ "./src/components/views/documents/DocumentDetail.js"));
 });
 var SafetyVideo = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ./views/safety/Video */ "./src/components/views/safety/Video.js"));
+  return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! ./views/safety/Video */ "./src/components/views/safety/Video.js"));
 });
 var ResponsiblePerson = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(21)]).then(__webpack_require__.bind(null, /*! ./views/workers/ResponsiblePerson */ "./src/components/views/workers/ResponsiblePerson.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(23)]).then(__webpack_require__.bind(null, /*! ./views/workers/ResponsiblePerson */ "./src/components/views/workers/ResponsiblePerson.js"));
 });
 var WorkersAssign = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(20)]).then(__webpack_require__.bind(null, /*! ./views/workers/Assign */ "./src/components/views/workers/Assign.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(22)]).then(__webpack_require__.bind(null, /*! ./views/workers/Assign */ "./src/components/views/workers/Assign.js"));
 });
 var routes = [{
   path: '/',
@@ -970,6 +986,11 @@ var routes = [{
   path: '/projects/:id/assign_workers',
   name: 'Assign Workers',
   component: WorkersAssign,
+  exact: true
+}, {
+  path: '/projects/:id/related_documents',
+  name: 'Related Documents',
+  component: ProjectUploadDocs,
   exact: true
 }, {
   path: '/projects/:id',

@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[20],{
 
-/***/ "./src/components/views/workers/Assign.js":
-/*!************************************************!*\
-  !*** ./src/components/views/workers/Assign.js ***!
-  \************************************************/
+/***/ "./src/components/views/projects/ProjectUploadDocs.js":
+/*!************************************************************!*\
+  !*** ./src/components/views/projects/ProjectUploadDocs.js ***!
+  \************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -61,15 +61,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var foxApi = new _services__WEBPACK_IMPORTED_MODULE_5__["FoxApiService"]();
 
-var WorkerAssign = /*#__PURE__*/function (_Component) {
-  _inherits(WorkerAssign, _Component);
+var ProjectUploadDocs = /*#__PURE__*/function (_Component) {
+  _inherits(ProjectUploadDocs, _Component);
 
-  var _super = _createSuper(WorkerAssign);
+  var _super = _createSuper(ProjectUploadDocs);
 
-  function WorkerAssign() {
+  function ProjectUploadDocs() {
     var _this;
 
-    _classCallCheck(this, WorkerAssign);
+    _classCallCheck(this, ProjectUploadDocs);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -78,11 +78,12 @@ var WorkerAssign = /*#__PURE__*/function (_Component) {
     _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      workers: [],
-      error: false,
       filename: "",
       file_id: "",
-      upload_files: {}
+      project: _this.props.match.params.id,
+      url_to_doc: "",
+      upload_files: {},
+      error: false
     });
 
     _defineProperty(_assertThisInitialized(_this), "downloadFile", /*#__PURE__*/function () {
@@ -91,13 +92,10 @@ var WorkerAssign = /*#__PURE__*/function (_Component) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log(_this.state);
-
                 _this.setState({
                   filename: e.target.value,
                   file_id: e.target.name
                 }, function () {
-                  console.log(_this.state);
                   foxApi.downloadDocument(_this.state.file_id).then(function (blob) {
                     var url = window.URL.createObjectURL(new Blob([blob]));
                     var link = document.createElement('a');
@@ -117,7 +115,7 @@ var WorkerAssign = /*#__PURE__*/function (_Component) {
                   });
                 });
 
-              case 2:
+              case 1:
               case "end":
                 return _context.stop();
             }
@@ -130,21 +128,12 @@ var WorkerAssign = /*#__PURE__*/function (_Component) {
       };
     }());
 
-    _defineProperty(_assertThisInitialized(_this), "handleCheck", function (event) {
-      var workers = _this.state.workers;
-      event.target.checked ? workers.push(event.target.value) : workers.splice(workers.indexOf(event.target.value), 1);
-
-      _this.setState({
-        workers: workers
-      }, function () {
-        return console.log(_this.state);
-      });
-    });
-
     _defineProperty(_assertThisInitialized(_this), "handleFileUpload", function (event) {
-      // const [worker, template] = event.target.name.split('-')
+      console.log("initila state", _this.state);
       var upload_files = _this.state.upload_files;
+      console.log("before", upload_files);
       upload_files[event.target.name] = event.target.files[0];
+      console.log("before", upload_files);
 
       _this.setState({
         upload_files: upload_files
@@ -153,49 +142,41 @@ var WorkerAssign = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleSubmit", /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
-        var _this$state, workers, upload_files, workersData, uploadFileList;
-
+        var upload_files;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 event.preventDefault();
-                _this$state = _this.state, workers = _this$state.workers, upload_files = _this$state.upload_files;
-                workersData = {
-                  workers: workers
-                };
-                uploadFileList = [];
+                upload_files = _this.state.upload_files;
+                console.log(upload_files);
                 Object.entries(upload_files).forEach(function (_ref3) {
                   var _ref4 = _slicedToArray(_ref3, 2),
                       key = _ref4[0],
                       value = _ref4[1];
 
                   var uploadFilesData = new FormData();
-
-                  var _key$split = key.split('-'),
-                      _key$split2 = _slicedToArray(_key$split, 2),
-                      worker = _key$split2[0],
-                      template = _key$split2[1];
-
-                  uploadFilesData.append('worker', worker);
-                  uploadFilesData.append('template', template);
                   uploadFilesData.append('file', value);
-                  uploadFileList.push(uploadFilesData);
+                  upload_files[key] = uploadFilesData;
                 });
-                _context2.next = 7;
-                return Promise.all([foxApi.patchEntityOf("projects", _this.props.match.params.id, workersData), uploadFileList.forEach(function (file) {
-                  return foxApi.createEntityWithFile("worker_documents", file);
+                _context2.next = 6;
+                return Promise.all([Object.entries(upload_files).forEach(function (_ref5) {
+                  var _ref6 = _slicedToArray(_ref5, 2),
+                      key = _ref6[0],
+                      value = _ref6[1];
+
+                  foxApi.patchEntityWithFiles("documents", key, value);
                 })]).then(function () {
                   _this.props.history.goBack();
-                }, function (error) {
+                }).catch(function (error) {
                   console.error(error);
 
                   _this.setState({
-                    error: 'Workers assignment failed!' + ' Please check your input and try again!' + ' In case this problem repeats, please contact your administrator!'
+                    error: 'Document update failed!' + ' Please check your input and try again!' + ' In case this problem repeats, please contact your administrator!'
                   });
                 });
 
-              case 7:
+              case 6:
               case "end":
                 return _context2.stop();
             }
@@ -215,12 +196,10 @@ var WorkerAssign = /*#__PURE__*/function (_Component) {
             case 0:
               _context3.next = 2;
               return _this.props.getProfileFetch().then(function () {
-                return _this.props.getWorkerList();
-              }).then(function () {
                 return _this.props.getDocumentList({
-                  target_type: "Worker",
+                  target_type: "Contractor",
                   project_id: _this.props.match.params.id
-                }, true);
+                });
               }).then(function () {
                 return _this.props.setProjectId(_this.props.match.params.id);
               });
@@ -234,85 +213,59 @@ var WorkerAssign = /*#__PURE__*/function (_Component) {
     })));
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
-      var downloadButtonArray = {};
-      var workerList = {};
+      var documentWidgetArray = {};
 
       if (_this.props.documents) {
-        downloadButtonArray = _this.props.documents.map(function (document) {
+        documentWidgetArray = _this.props.documents.map(function (document) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], {
-            key: "fg-".concat(document.id),
-            className: "d-flex"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
+            key: "fg-".concat(document.id)
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+            key: "lb-".concat(document.id),
+            htmlFor: document.id
+          }, document.name), document.url_to_doc ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLink"], {
+            key: "dl-".concat(document.id),
+            href: document.url_to_doc,
+            target: "_blank",
+            className: "btn btn-ghost-primary"
+          }, "Open this document in Google Docs") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
             variant: "outline",
-            color: "success",
+            color: "primary",
             key: "cb-".concat(document.id),
             id: document.id,
             name: document.id,
             value: document.filename,
             onClick: _this.downloadFile
-          }, "Download"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+          }, "Download template for this document"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
             key: "lb-".concat(document.id),
             htmlFor: document.id
-          }, document.name));
+          }, "Upload filled up document"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputFile"], {
+            key: "of-".concat(document.id),
+            id: "file-".concat(document.id),
+            name: "".concat(document.id),
+            onChange: _this.handleFileUpload
+          })));
         });
-        workerList = _this.props.workers.map(function (worker) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], {
-            key: "fg-".concat(worker.id),
-            variant: "checkbox",
-            className: "checkbox d-flex"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputCheckbox"], {
-            key: "cb-".concat(worker.id),
-            id: worker.id,
-            name: worker.id,
-            value: worker.id,
-            onChange: _this.handleCheck
-          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-            key: "lb-".concat(worker.id),
-            variant: "checkbox",
-            className: "form-check-label mr-4",
-            htmlFor: worker.id
-          }, worker.name), _this.props.documents.map(function (document) {
-            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, {
-              key: "fr-".concat(worker.id)
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-              key: "lb-".concat(worker.id, "-").concat(document.id),
-              htmlFor: "file-".concat(document.id)
-            }, document.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputFile"], {
-              key: "of-".concat(worker.id, "-").concat(document.id),
-              id: "file-".concat(document.id),
-              name: "".concat(worker.id, "-").concat(document.id),
-              onChange: _this.handleFileUpload
-            }));
-          }));
-        });
-      } else {
-        downloadButtonArray = null;
-        workerList = null;
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCol"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CForm"], {
         onSubmit: _this.handleSubmit
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4___default.a, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, downloadButtonArray), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, workerList), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4___default.a, null), documentWidgetArray, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
         type: "submit",
-        color: "success",
+        color: "dark",
         variant: "outline",
         block: true
-      }, "Save changes")), _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
+      }, "Submit documents")), _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
     });
 
     return _this;
   }
 
-  return WorkerAssign;
+  return ProjectUploadDocs;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    workers: state.entityListTable.tableData,
-    company: state.currentUser.company,
-    role: state.currentUser.role,
-    contractor: state.currentUser.id,
-    documents: state.additionalEntityListTable.tableData
+    documents: state.entityListTable.tableData
   };
 };
 
@@ -321,11 +274,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     getProfileFetch: function getProfileFetch() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getProfileFetch"])());
     },
-    getWorkerList: function getWorkerList() {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getWorkerList"])());
-    },
-    getDocumentList: function getDocumentList(params, additional) {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getDocumentList"])(params, additional));
+    getDocumentList: function getDocumentList(params) {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getDocumentList"])(params));
     },
     setProjectId: function setProjectId(id) {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["setProjectId"])(id));
@@ -333,7 +283,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(WorkerAssign));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ProjectUploadDocs));
 
 /***/ })
 

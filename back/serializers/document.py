@@ -8,7 +8,7 @@ class DocumentListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Document
-        fields = ["id", "name", "project_name", "target_type", "filename"]
+        fields = ["id", "name", "project_name", "target_type", "url_to_doc", "filename"]
 
     def get_filename(self, obj):
         return obj.file.name

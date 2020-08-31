@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[19],{
 
-/***/ "./src/components/views/safety/Video.js":
-/*!**********************************************!*\
-  !*** ./src/components/views/safety/Video.js ***!
-  \**********************************************/
+/***/ "./src/components/views/projects/ProjectPTW.js":
+/*!*****************************************************!*\
+  !*** ./src/components/views/projects/ProjectPTW.js ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -41,15 +41,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var SefetyVideo = /*#__PURE__*/function (_Component) {
-  _inherits(SefetyVideo, _Component);
+var ProjectPTW = /*#__PURE__*/function (_Component) {
+  _inherits(ProjectPTW, _Component);
 
-  var _super = _createSuper(SefetyVideo);
+  var _super = _createSuper(ProjectPTW);
 
-  function SefetyVideo() {
+  function ProjectPTW() {
     var _this;
 
-    _classCallCheck(this, SefetyVideo);
+    _classCallCheck(this, ProjectPTW);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -59,18 +59,13 @@ var SefetyVideo = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
       _this.props.getProfileFetch();
-
-      console.log(_this.props);
     });
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CCol"], null, _this.props.username ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CEmbed"], {
         ratio: "16by9"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
-        src: "https://www.youtube.com/embed/ORUJ6gWBhrY",
-        frameBorder: "0",
-        allow: "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
-        allowFullScreen: true
+        src: "".concat(window.location.origin, "/api/ptw/").concat(_this.props.match.params.id)
       })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
         to: ""
       })));
@@ -79,7 +74,7 @@ var SefetyVideo = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  return SefetyVideo;
+  return ProjectPTW;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -96,7 +91,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(SefetyVideo));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(ProjectPTW));
 
 /***/ })
 

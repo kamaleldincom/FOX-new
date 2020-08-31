@@ -176,13 +176,13 @@ class ProjectDetail extends Component {
           <CFormGroup>
             <CLink
               className="btn btn-outline-dark mr-3"
-              to={`${this.props.match.url}ptw`}
+              to={`${this.props.match.url}/ptw`}
             >
               See Permission To Work
               </CLink>
             <CLink
               className="btn btn-outline-dark"
-              to={`${this.props.match.url}documents`}
+              to={`${this.props.match.url}/documents`}
             >
               Attached Documents
               </CLink>

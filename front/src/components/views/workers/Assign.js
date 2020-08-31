@@ -27,12 +27,10 @@ class WorkerAssign extends Component {
   }
 
   downloadFile = async (e) => {
-    console.log(this.state);
     this.setState({
       filename: e.target.value,
       file_id: e.target.name
     }, () => {
-      console.log(this.state);
       foxApi.downloadDocument(this.state.file_id)
         .then((blob) => {
           const url = window.URL.createObjectURL(new Blob([blob]));

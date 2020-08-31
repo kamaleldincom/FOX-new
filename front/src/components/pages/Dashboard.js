@@ -5,12 +5,23 @@ import { getProfileFetch, getDashboardLayout } from '../../actions'
 import {
 } from '@coreui/react'
 import { FoxSidebar, FoxHeader, FoxContent } from '../layout';
+import { matchPath } from 'react-router-dom'
 
 class Dashboard extends Component {
 
   componentDidMount = async () => {
     await this.props.getProfileFetch()
-      .then(() => this.props.getDashboardLayout())
+      .then(() => this.props.getDashboardLayout(this.props.currentUser.role, this.props.match.params.id))
+  }
+
+  componentDidUpdate = (prevProps) => {
+    const updatedMatch = matchPath(this.props.location.pathname, {
+      path: "/projects/:id",
+      exact: true
+    });
+    if (updatedMatch && (prevProps.location.pathname != this.props.location.pathname)) {
+      this.props.getDashboardLayout(this.props.currentUser.role, updatedMatch.params.id);
+    }
   }
 
   render() {
@@ -31,13 +42,14 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    navigation: state.sidebar
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
-  getDashboardLayout: () => dispatch(getDashboardLayout())
+  getDashboardLayout: (userRole, projectId) => dispatch(getDashboardLayout(userRole, projectId))
 })
 
 

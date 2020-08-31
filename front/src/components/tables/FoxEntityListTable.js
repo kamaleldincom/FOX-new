@@ -16,7 +16,7 @@ import {
 class FoxEntityListTable extends Component {
 
   alertOnClick = (e) => {
-    this.props.history.push(`${this.props.match.url}/${e.id}/`)
+    this.props.history.push(`${this.props.match.url}/${e.id}`)
   }
 
   render = () => {

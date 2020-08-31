@@ -62,7 +62,7 @@ DEFINITIONS = {
                         {
                             "_tag": "CSidebarNavItem",
                             "name": "1. Responsible Person",
-                            "to": "responsible_person",
+                            "to": "/project/${CURRENT_PROJECT_ID}/responsible_person",
                         },
                         {
                             "_tag": "CSidebarNavItem",
@@ -78,34 +78,19 @@ DEFINITIONS = {
                 },
                 {
                     "_tag": "CSidebarNavDropdown",
-                    "name": "General",
+                    "name": "Documentation",
                     "route": "/contractor/general",
-                    "icon": "cil-industry",
+                    "icon": "cil-file",
                     "_children": [
                         {
                             "_tag": "CSidebarNavItem",
-                            "name": "1. Risk Assessment",
-                            "to": "/contractor/general/risk-assesment",
+                            "name": "1. Related docs",
+                            "to": "related_documents",
                         },
                         {
                             "_tag": "CSidebarNavItem",
-                            "name": "2. Method of Statement",
-                            "to": "/contractor/general/method-of-statement",
-                        },
-                        {
-                            "_tag": "CSidebarNavItem",
-                            "name": "3. Permit to Work",
-                            "to": "/contractor/general/permit-to-work",
-                        },
-                        {
-                            "_tag": "CSidebarNavItem",
-                            "name": "4. Hazardous work permits",
-                            "to": "/contractor/general/hazardous-work-permits",
-                        },
-                        {
-                            "_tag": "CSidebarNavItem",
-                            "name": "5. Workers",
-                            "to": "/contractor/general/workers",
+                            "name": "2. Submit Proposal",
+                            "to": "submit_proposal",
                         },
                     ],
                 },

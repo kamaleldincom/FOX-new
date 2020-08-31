@@ -52,7 +52,7 @@ var FoxEntityListTable = /*#__PURE__*/function (_Component) {
     _this = _super.call.apply(_super, [this].concat(args));
 
     _defineProperty(_assertThisInitialized(_this), "alertOnClick", function (e) {
-      _this.props.history.push("".concat(_this.props.match.url, "/").concat(e.id, "/"));
+      _this.props.history.push("".concat(_this.props.match.url, "/").concat(e.id));
     });
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
