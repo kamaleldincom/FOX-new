@@ -12,17 +12,17 @@ import {
     CSidebarNavItem,
 } from '@coreui/react'
 import { connect } from "react-redux"
+import { withRouter } from "react-router-dom"
 
 import CIcon from '@coreui/icons-react'
 
-// sidebar nav config
-// import navigation from './_nav'
 
 const FoxSidebar = (props) => {
     const dispatch = useDispatch()
     const show = useSelector(state => state.sidebarShow)
-
+    // props.projectId ? props.match.params.id = props.projectId : null
     return (
+
         <CSidebar
             show={show}
             onShowChange={(val) => dispatch({ type: 'set', sidebarShow: val })}
@@ -31,8 +31,7 @@ const FoxSidebar = (props) => {
                 <h2>{props.company ? props.company : "FOX"}</h2>
             </CSidebarBrand>
             <CSidebarNav>
-
-                <CCreateElement
+                {props.projectId ? <CCreateElement
                     items={props.navigation}
                     components={{
                         CSidebarNavDivider,
@@ -40,7 +39,8 @@ const FoxSidebar = (props) => {
                         CSidebarNavItem,
                         CSidebarNavTitle
                     }}
-                />
+                /> : null}
+
             </CSidebarNav>
             <CSidebarMinimizer className="c-d-md-down-none" />
         </CSidebar>
@@ -50,8 +50,9 @@ const FoxSidebar = (props) => {
 const mapStateToProps = state => {
     return {
         navigation: state.sidebar,
-        company: state.currentUser.company_name
+        company: state.currentUser.company_name,
+        projectId: state.projectId
     }
 }
 
-export default connect(mapStateToProps)(React.memo(FoxSidebar))
+export default connect(mapStateToProps)(React.memo(withRouter(FoxSidebar)))

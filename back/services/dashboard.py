@@ -55,57 +55,42 @@ DEFINITIONS = {
                 {"_tag": "CSidebarNavTitle", "_children": ["APPLICATION"]},
                 {
                     "_tag": "CSidebarNavDropdown",
-                    "name": "Responsible Person",
+                    "name": "Personnel Management",
                     "route": "/contractor/personal",
                     "icon": "cil-user",
                     "_children": [
                         {
                             "_tag": "CSidebarNavItem",
-                            "name": "1. Information",
-                            "to": "/contractor/personal/info",
+                            "name": "1. Responsible Person",
+                            "to": "/project/${CURRENT_PROJECT_ID}/responsible_person",
                         },
                         {
                             "_tag": "CSidebarNavItem",
                             "name": "2. Safety",
-                            "to": "/contractor/personal/video",
+                            "to": "safety_video",
                         },
                         {
                             "_tag": "CSidebarNavItem",
-                            "name": "3. Quiz",
-                            "to": "/contractor/personal/quiz",
+                            "name": "3. Assign Workers",
+                            "to": "assign_workers",
                         },
                     ],
                 },
                 {
                     "_tag": "CSidebarNavDropdown",
-                    "name": "General",
+                    "name": "Documentation",
                     "route": "/contractor/general",
-                    "icon": "cil-industry",
+                    "icon": "cil-file",
                     "_children": [
                         {
                             "_tag": "CSidebarNavItem",
-                            "name": "1. Risk Assessment",
-                            "to": "/contractor/general/risk-assesment",
+                            "name": "1. Related docs",
+                            "to": "related_documents",
                         },
                         {
                             "_tag": "CSidebarNavItem",
-                            "name": "2. Method of Statement",
-                            "to": "/contractor/general/method-of-statement",
-                        },
-                        {
-                            "_tag": "CSidebarNavItem",
-                            "name": "3. Permit to Work",
-                            "to": "/contractor/general/permit-to-work",
-                        },
-                        {
-                            "_tag": "CSidebarNavItem",
-                            "name": "4. Hazardous work permits",
-                            "to": "/contractor/general/hazardous-work-permits",
-                        },
-                        {
-                            "_tag": "CSidebarNavItem",
-                            "name": "5. Workers",
-                            "to": "/contractor/general/workers",
+                            "name": "2. Submit Proposal",
+                            "to": "submit_proposal",
                         },
                     ],
                 },
@@ -134,6 +119,19 @@ DEFINITIONS = {
                             "id": "head_nav_link_workers",
                             "to": "/workers",
                             "linktext": "Workers",
+                        }
+                    ],
+                },
+                {
+                    "_tag": "CHeaderNavItem",
+                    "id": "head_nav_projects",
+                    "className": "px-3",
+                    "_children": [
+                        {
+                            "_tag": "FoxHeaderNavLink",
+                            "id": "head_nav_link_projects",
+                            "to": "/projects",
+                            "linktext": "Projects",
                         }
                     ],
                 },
@@ -174,19 +172,6 @@ DEFINITIONS = {
                             "id": "head_nav_link_projects",
                             "to": "/projects",
                             "linktext": "Projects",
-                        }
-                    ],
-                },
-                {
-                    "_tag": "CHeaderNavItem",
-                    "id": "head_nav_documents",
-                    "className": "px-3",
-                    "_children": [
-                        {
-                            "_tag": "FoxHeaderNavLink",
-                            "id": "head_nav_link_documents",
-                            "to": "/documents",
-                            "linktext": "Documents",
                         }
                     ],
                 },

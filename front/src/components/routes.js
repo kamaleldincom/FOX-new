@@ -3,105 +3,49 @@ const ProjectList = React.lazy(() => import('./views/projects/ProjectList'))
 const ApprovalList = React.lazy(() => import('./views/approvals/ApprovalList'))
 const ContractorList = React.lazy(() => import('./views/contractors/ContractorList'))
 const CurrentWorksList = React.lazy(() => import('./views/current_works/CurrentWorksList'))
-const DocumentList = React.lazy(() => import('./views/documents/DocumentList'))
 const ClientManagerList = React.lazy(() => import('./views/managers/ClientManagerList'))
+const ClientManagerCreate = React.lazy(() => import('./views/managers/ClientManagerCreate'))
+const ClientManagerDetail = React.lazy(() => import('./views/managers/ClientManagerDetail'))
 const WorkerList = React.lazy(() => import('./views/workers/WorkerList'))
+const WorkerCreate = React.lazy(() => import('./views/workers/WorkerCreate'))
+const WorkerDetail = React.lazy(() => import('./views/workers/WorkerDetail'))
 const ProjectCreate = React.lazy(() => import('./views/projects/ProjectCreate'))
 const ProjectDetail = React.lazy(() => import('./views/projects/ProjectDetail'))
 const ProjectPTW = React.lazy(() => import('./views/projects/ProjectPTW'))
-const ContractorDetail = React.lazy(() => import('./views/contractors/ContractorDetail'))
-// const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
-// const Tables = React.lazy(() => import('./views/base/tables/Tables'));
+const ProjectUploadDocs = React.lazy(() => import('./views/projects/ProjectUploadDocs'))
+const ContractorCreate = React.lazy(() => import('./views/contractors/ContractorCreate'))
+const DocumentList = React.lazy(() => import('./views/documents/DocumentList'))
+const DocumentCreate = React.lazy(() => import('./views/documents/DocumentCreate'))
+const DocumentDetail = React.lazy(() => import('./views/documents/DocumentDetail'))
+const SafetyVideo = React.lazy(() => import('./views/safety/Video'))
+const ResponsiblePerson = React.lazy(() => import('./views/workers/ResponsiblePerson'))
+const WorkersAssign = React.lazy(() => import('./views/workers/Assign'))
 
-// const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'));
-// const Cards = React.lazy(() => import('./views/base/cards/Cards'));
-// const Carousels = React.lazy(() => import('./views/base/carousels/Carousels'));
-// const Collapses = React.lazy(() => import('./views/base/collapses/Collapses'));
-// const BasicForms = React.lazy(() => import('./views/base/forms/BasicForms'));
-
-// const Jumbotrons = React.lazy(() => import('./views/base/jumbotrons/Jumbotrons'));
-// const ListGroups = React.lazy(() => import('./views/base/list-groups/ListGroups'));
-// const Navbars = React.lazy(() => import('./views/base/navbars/Navbars'));
-// const Navs = React.lazy(() => import('./views/base/navs/Navs'));
-// const Paginations = React.lazy(() => import('./views/base/paginations/Pagnations'));
-// const Popovers = React.lazy(() => import('./views/base/popovers/Popovers'));
-// const ProgressBar = React.lazy(() => import('./views/base/progress-bar/ProgressBar'));
-// const Switches = React.lazy(() => import('./views/base/switches/Switches'));
-
-// const Tabs = React.lazy(() => import('./views/base/tabs/Tabs'));
-// const Tooltips = React.lazy(() => import('./views/base/tooltips/Tooltips'));
-// const BrandButtons = React.lazy(() => import('./views/buttons/brand-buttons/BrandButtons'));
-// const ButtonDropdowns = React.lazy(() => import('./views/buttons/button-dropdowns/ButtonDropdowns'));
-// const ButtonGroups = React.lazy(() => import('./views/buttons/button-groups/ButtonGroups'));
-// const Buttons = React.lazy(() => import('./views/buttons/buttons/Buttons'));
-// const Charts = React.lazy(() => import('./views/charts/Charts'));
-// const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
-// const CoreUIIcons = React.lazy(() => import('./views/icons/coreui-icons/CoreUIIcons'));
-// const Flags = React.lazy(() => import('./views/icons/flags/Flags'));
-// const Brands = React.lazy(() => import('./views/icons/brands/Brands'));
-// const Alerts = React.lazy(() => import('./views/notifications/alerts/Alerts'));
-// const Badges = React.lazy(() => import('./views/notifications/badges/Badges'));
-// const Modals = React.lazy(() => import('./views/notifications/modals/Modals'));
-// const Colors = React.lazy(() => import('./views/theme/colors/Colors'));
-// const Typography = React.lazy(() => import('./views/theme/typography/Typography'));
-// const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
-// const Users = React.lazy(() => import('./views/users/Users'));
-// const User = React.lazy(() => import('./views/users/User'));
 
 const routes = [
   { path: '/', exact: true, name: 'Fox' },
   { path: '/projects', name: 'Projects', component: ProjectList, exact: true },
   { path: '/projects/new', name: 'New', component: ProjectCreate, exact: true },
   { path: '/projects/:id/ptw', name: 'PTW', component: ProjectPTW, exact: true },
-  { path: '/projects/:id', name: 'Project Details', component: ProjectDetail },
+  { path: '/projects/:id/documents', name: 'Documents', component: DocumentList, exact: true },
+  { path: '/projects/:id/documents/new', name: 'New', component: DocumentCreate, exact: false },
+  { path: '/projects/:id/documents/:doc_id', name: 'Document Details', component: DocumentDetail, exact: false },
+  { path: '/projects/:id/responsible_person', name: 'Responsible Person', component: ResponsiblePerson, exact: false },
+  { path: '/projects/:id/safety_video', name: 'Safety Video', component: SafetyVideo, exact: true },
+  { path: '/projects/:id/assign_workers', name: 'Assign Workers', component: WorkersAssign, exact: true },
+  { path: '/projects/:id/related_documents', name: 'Related Documents', component: ProjectUploadDocs, exact: true },
+  { path: '/projects/:id', name: 'Project Details', component: ProjectDetail, exact: false },
   { path: '/approvals', name: 'Approvals', component: ApprovalList, exact: true },
   { path: '/current-works', name: 'Current Works', component: CurrentWorksList, exact: true },
   { path: '/contractors', name: 'Contractors', component: ContractorList, exact: true },
-  { path: '/contractors/new', name: 'New', component: ContractorDetail, exact: true },
-  { path: '/documents', name: 'Documents', component: DocumentList, exact: true },
+  { path: '/contractors/new', name: 'New', component: ContractorCreate, exact: true },
   { path: '/managers', name: 'Managers', component: ClientManagerList, exact: true },
+  { path: '/managers/new', name: 'New', component: ClientManagerCreate, exact: true },
+  { path: '/managers/:id', name: 'Details', component: ClientManagerDetail, exact: true },
   { path: '/workers', name: 'Workers', component: WorkerList, exact: true },
+  { path: '/workers/new', name: 'New', component: WorkerCreate, exact: true },
+  { path: '/workers/:id', name: 'Project Details', component: WorkerDetail, exact: true },
 
-  // { path: '/dashboard', name: 'Dashboard', component: Dashboard },
-  // { path: '/theme', name: 'Theme', component: Colors, exact: true },
-  // { path: '/theme/colors', name: 'Colors', component: Colors },
-  // { path: '/theme/typography', name: 'Typography', component: Typography },
-  // { path: '/base', name: 'Base', component: Cards, exact: true },
-  // { path: '/base/breadcrumbs', name: 'Breadcrumbs', component: Breadcrumbs },
-  // { path: '/base/cards', name: 'Cards', component: Cards },
-  // { path: '/base/carousels', name: 'Carousel', component: Carousels },
-  // { path: '/base/collapses', name: 'Collapse', component: Collapses },
-  // { path: '/base/forms', name: 'Forms', component: BasicForms },
-  // { path: '/base/jumbotrons', name: 'Jumbotrons', component: Jumbotrons },
-  // { path: '/base/list-groups', name: 'List Groups', component: ListGroups },
-  // { path: '/base/navbars', name: 'Navbars', component: Navbars },
-  // { path: '/base/navs', name: 'Navs', component: Navs },
-  // { path: '/base/paginations', name: 'Paginations', component: Paginations },
-  // { path: '/base/popovers', name: 'Popovers', component: Popovers },
-  // { path: '/base/progress-bar', name: 'Progress Bar', component: ProgressBar },
-  // { path: '/base/switches', name: 'Switches', component: Switches },
-  // { path: '/base/tables', name: 'Tables', component: Tables },
-  // { path: '/base/tabs', name: 'Tabs', component: Tabs },
-  // { path: '/base/tooltips', name: 'Tooltips', component: Tooltips },
-  // { path: '/buttons', name: 'Buttons', component: Buttons, exact: true },
-  // { path: '/buttons/buttons', name: 'Buttons', component: Buttons },
-  // { path: '/buttons/button-dropdowns', name: 'Dropdowns', component: ButtonDropdowns },
-  // { path: '/buttons/button-groups', name: 'Button Groups', component: ButtonGroups },
-  // { path: '/buttons/brand-buttons', name: 'Brand Buttons', component: BrandButtons },
-  // { path: '/charts', name: 'Charts', component: Charts },
-  // { path: '/icons', exact: true, name: 'Icons', component: CoreUIIcons },
-  // { path: '/icons/coreui-icons', name: 'CoreUI Icons', component: CoreUIIcons },
-  // { path: '/icons/flags', name: 'Flags', component: Flags },
-  // { path: '/icons/brands', name: 'Brands', component: Brands },
-  // { path: '/notifications', name: 'Notifications', component: Alerts, exact: true },
-  // { path: '/notifications/alerts', name: 'Alerts', component: Alerts },
-  // { path: '/notifications/badges', name: 'Badges', component: Badges },
-  // { path: '/notifications/modals', name: 'Modals', component: Modals },
-  // { path: '/notifications/toaster', name: 'Toaster', component: Toaster },
-  // { path: '/widgets', name: 'Widgets', component: Widgets },
-  // { path: '/users', exact: true,  name: 'Users', component: Users },
-  // { path: '/users/:id', exact: true, name: 'User Details', component: User }
 ];
 
 export default routes;
-

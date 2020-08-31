@@ -9,6 +9,9 @@ def ptw(request, pk):
     context = {
         "company": project.company.name,
         "start_date": project.start_date,
+        "start_time": project.start_time,
+        "end_date": project.end_date,
+        "end_time": project.end_time,
         "contractor": project.contractor.username,
     }
     return render(request, "back/ptw.html", context=context)

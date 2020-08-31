@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[12],{
 
-/***/ "./src/components/views/contractors/ContractorDetail.js":
+/***/ "./src/components/views/contractors/ContractorCreate.js":
 /*!**************************************************************!*\
-  !*** ./src/components/views/contractors/ContractorDetail.js ***!
+  !*** ./src/components/views/contractors/ContractorCreate.js ***!
   \**************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -49,15 +49,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var foxApi = new _services__WEBPACK_IMPORTED_MODULE_5__["FoxApiService"]();
 
-var ContractorDetail = /*#__PURE__*/function (_Component) {
-  _inherits(ContractorDetail, _Component);
+var ContractorCreate = /*#__PURE__*/function (_Component) {
+  _inherits(ContractorCreate, _Component);
 
-  var _super = _createSuper(ContractorDetail);
+  var _super = _createSuper(ContractorCreate);
 
-  function ContractorDetail() {
+  function ContractorCreate() {
     var _this;
 
-    _classCallCheck(this, ContractorDetail);
+    _classCallCheck(this, ContractorCreate);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -88,8 +88,7 @@ var ContractorDetail = /*#__PURE__*/function (_Component) {
                 event.preventDefault();
                 _this.formData = _this.state;
                 delete _this.formData.error;
-                console.log(_this.formData);
-                _context.next = 6;
+                _context.next = 5;
                 return foxApi.createEntityOf('contractors', _this.formData).then(function () {
                   _this.props.history.goBack();
                 }, function (error) {
@@ -100,7 +99,7 @@ var ContractorDetail = /*#__PURE__*/function (_Component) {
                   });
                 });
 
-              case 6:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -141,24 +140,23 @@ var ContractorDetail = /*#__PURE__*/function (_Component) {
         value: _this.state.email,
         onChange: _this.handleChange,
         required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
         type: "submit",
-        value: "Create contractor",
-        color: "info",
-        disabled: _this.state.password !== _this.state.password2
-      })), _this.props.registerErrorFlag ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.props.errorMessage ? _this.props.errorMessage : 'INVALID CREDENTIALS! PLEASE, CHECK YOUR PASSWORD AND PASSWORD CONFIRMATION FIELDS!') : null, _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
+        color: "dark",
+        variant: "outline",
+        block: true
+      }, "Create contractor")), _this.props.registerErrorFlag ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.props.errorMessage ? _this.props.errorMessage : 'INVALID CREDENTIALS! PLEASE, CHECK YOUR PASSWORD AND PASSWORD CONFIRMATION FIELDS!') : null, _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
     });
 
     return _this;
   }
 
-  return ContractorDetail;
+  return ContractorCreate;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    company: state.currentUser.company,
-    options: state.entityListTable.tableData
+    company: state.currentUser.company
   };
 };
 
@@ -170,7 +168,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ContractorDetail));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ContractorCreate));
 
 /***/ })
 

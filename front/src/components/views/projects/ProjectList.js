@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FoxEntityListTable from '../../tables/FoxEntityListTable'
-import { getProfileFetch, getProjectList, } from '../../../actions'
+import { getProfileFetch, getProjectList, setProjectId } from '../../../actions'
 import { connect } from 'react-redux'
 
 
@@ -18,6 +18,7 @@ const getBadge = status => {
 class ProjectList extends Component {
 
   componentDidMount = async () => {
+    this.props.setProjectId(this.props.match.params.id)
     await this.props.getProfileFetch()
       .then(() => this.props.getProjectList())
   }
@@ -44,7 +45,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
-  getProjectList: () => dispatch(getProjectList())
+  getProjectList: () => dispatch(getProjectList()),
+  setProjectId: () => dispatch(setProjectId())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectList)

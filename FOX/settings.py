@@ -27,11 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "46.101.221.249", "ec2-3-23-115-178.us-east-2.compute.amazonaws.com"]  # localhost, s2b host
 
+MEDIA_ROOT = os.path.join(BASE_DIR, "local_files")
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django_extensions',
+    "django_extensions",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

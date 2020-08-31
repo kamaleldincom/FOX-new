@@ -12,7 +12,6 @@ class ProjectPTW extends Component {
 
     componentDidMount = () => {
         this.props.getProfileFetch()
-        console.log(this.props);
     }
 
     render = () => {

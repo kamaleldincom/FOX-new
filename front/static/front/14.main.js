@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[14],{
 
-/***/ "./src/components/views/projects/ProjectDetail.js":
-/*!********************************************************!*\
-  !*** ./src/components/views/projects/ProjectDetail.js ***!
-  \********************************************************/
+/***/ "./src/components/views/documents/DocumentDetail.js":
+/*!**********************************************************!*\
+  !*** ./src/components/views/documents/DocumentDetail.js ***!
+  \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22,6 +22,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -52,16 +64,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var foxApi = new _services__WEBPACK_IMPORTED_MODULE_5__["FoxApiService"]();
+var targetTypes = [{
+  id: "Contractor",
+  target_type: "Contractor"
+}, {
+  id: "Worker",
+  target_type: "Worker"
+}];
 
-var ProjectDetail = /*#__PURE__*/function (_Component) {
-  _inherits(ProjectDetail, _Component);
+var DocumentDetail = /*#__PURE__*/function (_Component) {
+  _inherits(DocumentDetail, _Component);
 
-  var _super = _createSuper(ProjectDetail);
+  var _super = _createSuper(DocumentDetail);
 
-  function ProjectDetail() {
+  function DocumentDetail() {
     var _this;
 
-    _classCallCheck(this, ProjectDetail);
+    _classCallCheck(this, DocumentDetail);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -71,86 +90,109 @@ var ProjectDetail = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "state", {
       name: "",
-      description: "",
-      start_date: "",
-      company: _this.props.company,
-      contractor: "-1",
+      file: "",
+      project: _this.props.match.params.id,
+      target_type: -1,
+      url_to_doc: "",
       error: false
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
-      console.log(_this.props);
-
       _this.setState(_defineProperty({}, event.target.name, event.target.value));
     });
 
+    _defineProperty(_assertThisInitialized(_this), "downloadFile", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return foxApi.downloadDocument(_this.props.match.params.doc_id).then(function (blob) {
+                var url = window.URL.createObjectURL(new Blob([blob]));
+                var link = document.createElement('a');
+                link.href = url;
+
+                var filename = _this.state.file.split('/').pop();
+
+                link.setAttribute('download', filename);
+                document.body.appendChild(link);
+                link.click();
+                link.parentNode.removeChild(link);
+              }).then(function () {
+                console.log('file downloaded');
+              }).catch(function (error) {
+                console.error('File download failed!');
+                console.error(error);
+              });
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    })));
+
     _defineProperty(_assertThisInitialized(_this), "handleSubmit", /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 event.preventDefault();
+                _this.requestData = _this.state;
+                delete _this.requestData.error;
+                delete _this.requestData.upload_option;
+                _this.formData = new FormData();
+                Object.entries(_this.requestData).forEach(function (_ref3) {
+                  var _ref4 = _slicedToArray(_ref3, 2),
+                      key = _ref4[0],
+                      value = _ref4[1];
 
-                if (!(parseInt(_this.state.contractor) < 0)) {
-                  _context.next = 5;
-                  break;
-                }
-
-                _this.setState({
-                  error: 'Contractor was not selected! Please, choose contractor form the list'
+                  _this.formData.append(key, value);
                 });
-
-                _context.next = 9;
-                break;
-
-              case 5:
-                _this.formData = _this.state;
-                delete _this.formData.error;
-                _context.next = 9;
-                return foxApi.updateEntityOf('projects', _this.props.match.params.id, _this.formData).then(function () {
+                _context2.next = 8;
+                return foxApi.updateEntityOf('documents', _this.props.match.params.doc_id, _this.formData).then(function () {
                   _this.props.history.goBack();
                 }, function (error) {
                   console.error(error);
 
                   _this.setState({
-                    error: 'Project creation failed!' + ' Please check your input and try again!' + ' In case this problem repeats, please contact your administrator!'
+                    error: 'Document update failed!' + ' Please check your input and try again!' + ' In case this problem repeats, please contact your administrator!'
                   });
                 });
 
-              case 9:
+              case 8:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }));
 
       return function (_x) {
-        return _ref.apply(this, arguments);
+        return _ref2.apply(this, arguments);
       };
     }());
 
-    _defineProperty(_assertThisInitialized(_this), "componentDidMount", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+    _defineProperty(_assertThisInitialized(_this), "componentDidMount", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
-              _context2.next = 2;
+              _context3.next = 2;
               return _this.props.getProfileFetch().then(function () {
-                return foxApi.getDetailsOf('projects', _this.props.match.params.id);
+                return foxApi.getDetailsOf('documents', _this.props.match.params.doc_id);
               }).then(function (data) {
                 return _this.setState(_objectSpread({}, data));
-              }).then(function () {
-                return _this.props.getContractorList();
               });
 
             case 2:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2);
+      }, _callee3);
     })));
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
@@ -161,82 +203,73 @@ var ProjectDetail = /*#__PURE__*/function (_Component) {
       }, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
         id: "name",
         name: "name",
-        placeholder: "Enter project name",
+        placeholder: "Enter document name",
         value: _this.state.name,
         onChange: _this.handleChange,
         required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "description"
-      }, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CTextarea"], {
-        id: "descrption",
-        name: "description",
-        placeholder: "Please, enter short description of the projet",
-        value: _this.state.description,
+      })), _this.state.url_to_doc ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "url_to_doc"
+      }, "Url to document"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        type: "url",
+        id: "url_to_doc",
+        name: "url_to_doc",
+        placeholder: "https://example.com",
+        pattern: "https://.*",
+        value: _this.state.url_to_doc,
         onChange: _this.handleChange,
         required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "start_date"
-      }, "Start Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
-        type: "date",
-        id: "start_date",
-        name: "start_date",
-        placeholder: "date",
-        value: _this.state.start_date,
+      })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
+        variant: "outline",
+        color: "success",
+        onClick: _this.downloadFile
+      }, "Link to download current file")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "file"
+      }, "Upload new File"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputFile"], {
+        id: "file",
+        name: "file",
+        onChange: _this.handleFileUpload,
+        required: true
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "target_type"
+      }, "Target Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CSelect"], {
+        id: "target_type",
+        name: "target_type",
+        placeholder: "Choose target type",
+        value: _this.state.target_type,
         onChange: _this.handleChange,
         required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "contractor"
-      }, "Contractor"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CSelect"], {
-        id: "contractor",
-        name: "contractor",
-        placeholder: "Choose contractor",
-        value: _this.state.contractor,
-        onChange: _this.handleChange,
-        required: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        key: "-1",
-        value: "-1",
-        disabled: true
-      }, "Choose contractor"), _this.props.options.map(function (option) {
+      }, targetTypes.map(function (option) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: option.id,
           value: option.id
-        }, option.username);
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLink"], {
-        className: "btn btn-outline-success",
-        to: "".concat(_this.props.match.url, "/ptw")
-      }, "See Permission To Work")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        }, option.target_type);
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
         type: "submit",
-        value: "Save changes",
-        color: "info"
-      })), _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
+        color: "dark",
+        variant: "outline",
+        block: true
+      }, "Update Document")), _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
     });
 
     return _this;
   }
 
-  return ProjectDetail;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+  return DocumentDetail;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); // const mapStateToProps = state => {
+//   return {
+//   }
+// }
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    company: state.currentUser.company,
-    options: state.entityListTable.tableData
-  };
-};
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     getProfileFetch: function getProfileFetch() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getProfileFetch"])());
-    },
-    getContractorList: function getContractorList() {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getContractorList"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ProjectDetail));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mapDispatchToProps)(DocumentDetail));
 
 /***/ })
 

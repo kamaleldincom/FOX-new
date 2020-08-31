@@ -4,11 +4,12 @@ from rest_framework import generics
 
 
 class ProjectList(generics.ListAPIView):
-    # queryset = Project.objects.all()
     serializer_class = ProjectListSerializer
 
     def get_queryset(self):
         user = self.request.user
+        if user.role == "Contr":
+            return Project.objects.filter(company=user.company, contractor=user)
         return Project.objects.filter(company=user.company)
 
 
@@ -18,7 +19,6 @@ class ProjectCreate(generics.CreateAPIView):
 
 
 class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
-    # queryset = Project.objects.all()
     serializer_class = ProjectSerializer
 
     def get_queryset(self):

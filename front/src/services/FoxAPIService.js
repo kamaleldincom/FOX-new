@@ -1,3 +1,5 @@
+import { $CombinedState } from "redux";
+
 const SERVER_ADDRESS = `${window.location.origin}/`
 
 class FoxApiService {
@@ -22,11 +24,24 @@ class FoxApiService {
         return res.json();
     }
 
+    async getDoc(url) {
+        const jwt = localStorage.getItem('token');
+        const res = await fetch(url, {
+            headers: jwt ? {
+                'Authorization': `JWT ${jwt}`,
+            } : {}
+        });
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${url}. recieved ${res.status}`);
+        }
+        return res;
+    }
+
     async post(url, data = {}) {
         const jwt = localStorage.getItem('token');
         const csrftoken = this.getCookie('csrftoken');
         const res = await fetch(url, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            method: 'POST',
             headers: jwt ? {
                 'Content-Type': 'application/json',
                 'Authorization': `JWT ${jwt}`,
@@ -45,11 +60,36 @@ class FoxApiService {
         return res.json();
     }
 
+    async postWithFiles(url, data = {}) {
+        const jwt = localStorage.getItem('token');
+        const csrftoken = this.getCookie('csrftoken');
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: jwt ? {
+                // 'Content-Type': 'multipart/form-data',
+                'Authorization': `JWT ${jwt}`,
+                'X-CSRFToken': csrftoken ? csrftoken : '',
+                'Accept': 'application/json',
+            } : {
+                    // 'Content-Type': 'multipart/form-data',
+                    'X-CSRFToken': csrftoken ? csrftoken : '',
+                    'Accept': 'application/json',
+                },
+            body: data // body data type must match "Content-Type" header
+        });
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${url}. recieved ${res.status}`);
+        }
+        return res.json();
+    }
+
+
+
     async put(url, data = {}) {
         const jwt = localStorage.getItem('token');
         const csrftoken = this.getCookie('csrftoken');
         const res = await fetch(url, {
-            method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+            method: 'PUT',
             headers: jwt ? {
                 'Content-Type': 'application/json',
                 'Authorization': `JWT ${jwt}`,
@@ -61,6 +101,58 @@ class FoxApiService {
                     'Accept': 'application/json',
                 },
             body: JSON.stringify(data) // body data type must match "Content-Type" header
+        });
+        if (!res.ok) {
+            if (res.status >= 500) {
+                throw new Error(`Could not fetch ${url}. recieved ${res.status}`);
+            }
+        }
+
+        return res.json();
+    }
+
+    async patch(url, data = {}) {
+        const jwt = localStorage.getItem('token');
+        const csrftoken = this.getCookie('csrftoken');
+        const res = await fetch(url, {
+            method: 'PATCH',
+            headers: jwt ? {
+                'Content-Type': 'application/json',
+                'Authorization': `JWT ${jwt}`,
+                'X-CSRFToken': csrftoken ? csrftoken : '',
+                'Accept': 'application/json',
+            } : {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken ? csrftoken : '',
+                    'Accept': 'application/json',
+                },
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
+        });
+        if (!res.ok) {
+            if (res.status >= 500) {
+                throw new Error(`Could not fetch ${url}. recieved ${res.status}`);
+            }
+        }
+
+        return res.json();
+    }
+
+    async patchWithFiles(url, data = {}) {
+        const jwt = localStorage.getItem('token');
+        const csrftoken = this.getCookie('csrftoken');
+        const res = await fetch(url, {
+            method: 'PATCH',
+            headers: jwt ? {
+                // 'Content-Type': 'application/json',
+                'Authorization': `JWT ${jwt}`,
+                'X-CSRFToken': csrftoken ? csrftoken : '',
+                'Accept': 'application/json',
+            } : {
+                    // 'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken ? csrftoken : '',
+                    'Accept': 'application/json',
+                },
+            body: data // body data type must match "Content-Type" header
         });
         if (!res.ok) {
             if (res.status >= 500) {
@@ -93,6 +185,12 @@ class FoxApiService {
         return res
     }
 
+    createEntityWithFile = (entity, data) => {
+        let url = `${this.apiBase}${entity}/new/`;
+        const res = this.postWithFiles(url = url, data = data);
+        return res
+    }
+
     getDetailsOf = (entity, id) => {
         let url = `${this.apiBase}${entity}/${id}/`;
         const res = this.get(url = url);
@@ -103,6 +201,24 @@ class FoxApiService {
         let url = `${this.apiBase}${entity}/${id}/`;
         const res = this.put(url = url, data = data);
         return res
+    }
+
+    patchEntityOf = (entity, id, data) => {
+        let url = `${this.apiBase}${entity}/${id}/`;
+        const res = this.patch(url = url, data = data);
+        return res
+    }
+
+    patchEntityWithFiles = (entity, id, data) => {
+        let url = `${this.apiBase}${entity}/${id}/`;
+        const res = this.patchWithFiles(url = url, data = data);
+        return res
+    }
+
+    downloadDocument = async (id) => {
+        let url = `${this.apiBase}documents/downloads/${id}/`;
+        const res = await this.getDoc(url = url);
+        return res.blob();
     }
 
 }

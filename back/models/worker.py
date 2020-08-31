@@ -7,7 +7,7 @@ class Worker(models.Model):
         "Contractor", on_delete=models.CASCADE, related_name="workers"
     )
     birthday = models.DateField()
-    company = models.CharField(max_length=64)  # TODO: check if this field is needed
+    # company = models.CharField(max_length=64)  # TODO: check if this field is needed
     card_number_id = models.CharField(max_length=64)
     license_number = models.CharField(max_length=64)
     passport = models.CharField(max_length=64, null=True)

@@ -1,17 +1,49 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Project(models.Model):
+    class Status(models.TextChoices):
+        created = "Created", _("Created")
+        submitted = "Submitted", _("Submitted")
+        approved = "Approved", _("Approved")
+        rejected = "Rejected", _("Rejected")
+        works_started = "Works_started", _("Works started")
+        works_finished = "Works_finished", _("Works finished")
+        extended = "Extended", _("Extended")
+        closed = "Closed", _("Closed")
+
     name = models.CharField(max_length=64)
     description = models.TextField()
     start_date = models.DateField(null=True)
+    start_time = models.TimeField(null=True)
+    end_date = models.DateField(null=True)
+    end_time = models.TimeField(null=True)
+    status = models.CharField(
+        max_length=16, choices=Status.choices, default=Status.created
+    )
     company = models.ForeignKey(
         to="Company", on_delete=models.CASCADE, related_name="projects", null=True
     )
     contractor = models.ForeignKey(
         to="Contractor", on_delete=models.SET_NULL, related_name="projects", null=True
     )
-    # templates = models.ManyToManyField(to="Template", related_name="projects")
+    workers = models.ManyToManyField("Worker", related_name="projects", blank=True)
+    work_at_height = models.BooleanField(default=False)
+    lifting_work = models.BooleanField(default=False)
+    confined_space = models.BooleanField(default=False)
+    hot_work = models.BooleanField(default=False)
+    chemical_handling = models.BooleanField(default=False)
+    work_alone = models.BooleanField(default=False)
+    work_at_sensitive_area = models.BooleanField(default=False)
+    cold_work = models.BooleanField(default=False)
+    responsible_person = models.ForeignKey(
+        "Worker",
+        related_name="projects_to_manage",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
 
     class Meta:
         verbose_name = "Project"
@@ -25,5 +57,4 @@ class Project(models.Model):
 
     @property
     def contractor_name(self):
-        # return ",".join([c.username for c in self.contractors])
         return self.contractor.username
