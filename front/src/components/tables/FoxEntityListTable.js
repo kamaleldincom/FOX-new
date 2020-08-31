@@ -20,6 +20,7 @@ class FoxEntityListTable extends Component {
   }
 
   render = () => {
+    console.log("table props", this.props);
     return (
       <CRow>
         <CCol>
@@ -38,8 +39,8 @@ class FoxEntityListTable extends Component {
             </CCardHeader>
             <CCardBody>
               <CDataTable
-                items={this.props.tableData}
-                fields={this.props.fields}
+                items={this.props.tableData ? this.props.tableData : []}
+                fields={this.props.fields ? this.props.fields : []}
                 hover
                 striped
                 bordered

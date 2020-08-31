@@ -22,15 +22,26 @@ class WorkerDetail extends Component {
         birthday: "",
         card_number_id: "",
         license_number: "",
+        license_scan: "",
         passport: "",
+        passport_scan: "",
         safety_green_card: "",
+        safety_green_card_scan: "",
         position_in_company: "",
+        safety_quiz_answer: "",
+        personal_declaration: "",
         error: false
     }
 
     handleChange = event => {
         this.setState({
             [event.target.name]: event.target.value
+        });
+    }
+
+    handleFileUpload = event => {
+        this.setState({
+            [event.target.name]: event.target.files[0]
         });
     }
 

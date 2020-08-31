@@ -35,6 +35,8 @@ const changeState = (state = initialState, { type, ...rest }) => {
             return { ...state, ...rest }
         case 'POPULATE_ENTITY_TABLE':
             return { ...state, ...rest }
+        case 'CLEAR_ENTITY_TABLE':
+            return { ...state, entityListTable: {} }
         case 'POPULATE_ADDITIONAL_ENTITY_TABLE':
             return { ...state, ...rest }
         case 'SET_PROJECT_ID':

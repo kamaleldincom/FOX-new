@@ -24,6 +24,7 @@ class ProjectList extends Component {
   }
 
   render = () => {
+    console.log('view props', this.props);
     return (
       <FoxEntityListTable
         {...this.props}

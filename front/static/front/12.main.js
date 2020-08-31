@@ -113,9 +113,7 @@ var ContractorCreate = /*#__PURE__*/function (_Component) {
     }());
 
     _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
-      _this.props.getProfileFetch().then(function () {
-        return _this.props.getContractorList();
-      });
+      _this.props.getProfileFetch();
     });
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {

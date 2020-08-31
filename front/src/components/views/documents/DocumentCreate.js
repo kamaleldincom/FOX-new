@@ -68,17 +68,18 @@ class DocumentCreate extends Component {
       Object.entries(this.requestData).forEach(([key, value]) => {
         this.formData.append(key, value);
       })
-      await foxApi.createEntityWithFile('documents', this.formData).then(() => {
-        this.props.history.goBack()
-      },
-        (error) => {
-          console.error(error);
-          this.setState({
-            error: 'Document creation failed!' +
-              ' Please check your input and try again!' +
-              ' In case this problem repeats, please contact your administrator!'
+      await foxApi.createEntityWithFile('documents', this.formData)
+        .then(() => {
+          this.props.history.goBack()
+        },
+          (error) => {
+            console.error(error);
+            this.setState({
+              error: 'Document creation failed!' +
+                ' Please check your input and try again!' +
+                ' In case this problem repeats, please contact your administrator!'
+            })
           })
-        })
     }
   }
 

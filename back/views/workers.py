@@ -1,6 +1,8 @@
+from django.http import HttpResponse
+from rest_framework import generics
+from rest_framework.views import APIView
 from back.models import Worker
 from back.serializers import WorkerListSerializer, WorkerSerializer
-from rest_framework import generics
 
 
 class WorkerList(generics.ListAPIView):
@@ -24,3 +26,15 @@ class WorkerDetail(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         user = self.request.user
         return Worker.objects.filter(contractor=user)
+
+
+class WorkerDocDownload(APIView):
+    def get(self, request, pk, doctype, format=None):
+        worker = Worker.objects.get(pk=pk)
+        document = getattr(worker, doctype)
+        document.open("rb")
+        response = HttpResponse(
+            document.read(), content_type="application/octet-stream"
+        )
+        response["Content-Disposition"] = f"attachment; filename={document.name}"
+        return response

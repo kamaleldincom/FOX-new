@@ -252,12 +252,12 @@ var ProjectDetail = /*#__PURE__*/function (_Component) {
         key: "-1",
         value: "-1",
         disabled: true
-      }, "Choose contractor"), _this.props.options.map(function (option) {
+      }, "Choose contractor"), _this.props.options ? _this.props.options.map(function (option) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: option.id,
           value: option.id
         }, option.username);
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLink"], {
+      }) : null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLink"], {
         className: "btn btn-outline-dark mr-3",
         to: "".concat(_this.props.match.url, "/ptw")
       }, "See Permission To Work"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLink"], {

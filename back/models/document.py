@@ -13,7 +13,6 @@ class Document(models.Model):
 
     name = models.CharField(max_length=128, null=True)
     file = models.FileField(upload_to=project_docs_path, null=True, blank=True)
-    # origin_filename = models.CharField(max_length=256, null=True)
     project = models.ForeignKey(
         "back.Project", on_delete=models.CASCADE, related_name="documents", null=True
     )

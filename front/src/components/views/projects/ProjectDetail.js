@@ -181,11 +181,11 @@ class ProjectDetail extends Component {
               required
             >
               <option key="-1" value="-1" disabled>Choose contractor</option>
-              {this.props.options.map((option) => {
+              {this.props.options ? this.props.options.map((option) => {
                 return (
                   <option key={option.id} value={option.id}>{option.username}</option>
                 )
-              })}
+              }) : null}
             </CSelect>
           </CFormGroup>
           <CFormGroup>

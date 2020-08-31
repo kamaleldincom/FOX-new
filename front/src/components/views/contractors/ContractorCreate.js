@@ -49,7 +49,7 @@ class ContractorCreate extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getProfileFetch().then(() => this.props.getContractorList())
+    this.props.getProfileFetch()
   }
 
   render = () => {

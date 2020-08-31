@@ -75,14 +75,23 @@ var WorkerDetail = /*#__PURE__*/function (_Component) {
       birthday: "",
       card_number_id: "",
       license_number: "",
+      license_scan: "",
       passport: "",
+      passport_scan: "",
       safety_green_card: "",
+      safety_green_card_scan: "",
       position_in_company: "",
+      safety_quiz_answer: "",
+      personal_declaration: "",
       error: false
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
       _this.setState(_defineProperty({}, event.target.name, event.target.value));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleFileUpload", function (event) {
+      _this.setState(_defineProperty({}, event.target.name, event.target.files[0]));
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSubmit", /*#__PURE__*/function () {

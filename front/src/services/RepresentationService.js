@@ -6,6 +6,7 @@ const SERVER_ADDRESS = `${window.location.origin}`;
 class RepresentationService {
     displaySimpleList = (entity, params = null, additional = false) => {
         return dispatch => {
+            dispatch(this.clearEntityTable({}))
             let url = `${SERVER_ADDRESS}/api/${entity}/`
             if (params) {
                 url = new URL(url)
@@ -38,6 +39,10 @@ class RepresentationService {
     populateEntityTable = projectTableInfo => ({
         type: 'POPULATE_ENTITY_TABLE',
         entityListTable: projectTableInfo
+    })
+
+    clearEntityTable = () => ({
+        type: 'CLEAR_ENTITY_TABLE',
     })
 
 }
