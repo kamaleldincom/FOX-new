@@ -138,17 +138,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var getBadge = function getBadge(status) {
   switch (status) {
-    case 'Active':
-      return 'success';
-
-    case 'Inactive':
+    case 'Created':
       return 'secondary';
 
-    case 'Pending':
+    case 'Submitted':
       return 'warning';
 
-    case 'Banned':
+    case 'Approved':
+      return 'success';
+
+    case 'Rejected':
       return 'danger';
+
+    case 'Works_started':
+      return 'info';
+
+    case 'Works_finished':
+      return 'warning';
+
+    case 'Extended':
+      return 'primary';
+
+    case 'Closed':
+      return 'dark';
 
     default:
       return 'primary';

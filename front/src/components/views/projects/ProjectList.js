@@ -6,10 +6,14 @@ import { connect } from 'react-redux'
 
 const getBadge = status => {
   switch (status) {
-    case 'Active': return 'success'
-    case 'Inactive': return 'secondary'
-    case 'Pending': return 'warning'
-    case 'Banned': return 'danger'
+    case 'Created': return 'secondary'
+    case 'Submitted': return 'warning'
+    case 'Approved': return 'success'
+    case 'Rejected': return 'danger'
+    case 'Works_started': return 'info'
+    case 'Works_finished': return 'warning'
+    case 'Extended': return 'primary'
+    case 'Closed': return 'dark'
     default: return 'primary'
   }
 }
