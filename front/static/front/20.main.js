@@ -199,9 +199,7 @@ var ProjectUploadDocs = /*#__PURE__*/function (_Component) {
                 return _this.props.getDocumentList({
                   target_type: "Contractor",
                   project_id: _this.props.match.params.id
-                });
-              }).then(function () {
-                return _this.props.setProjectId(_this.props.match.params.id);
+                }, false);
               });
 
             case 2:
@@ -213,7 +211,7 @@ var ProjectUploadDocs = /*#__PURE__*/function (_Component) {
     })));
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
-      var documentWidgetArray = {};
+      var documentWidgetArray = [];
 
       if (_this.props.documents) {
         documentWidgetArray = _this.props.documents.map(function (document) {
@@ -274,8 +272,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     getProfileFetch: function getProfileFetch() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getProfileFetch"])());
     },
-    getDocumentList: function getDocumentList(params) {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getDocumentList"])(params));
+    getDocumentList: function getDocumentList(params, additional) {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getDocumentList"])(params, additional));
     },
     setProjectId: function setProjectId(id) {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["setProjectId"])(id));

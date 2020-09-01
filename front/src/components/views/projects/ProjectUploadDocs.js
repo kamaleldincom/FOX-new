@@ -97,12 +97,11 @@ class ProjectUploadDocs extends Component {
       .then(() => this.props.getDocumentList({
         target_type: "Contractor",
         project_id: this.props.match.params.id
-      }))
-      .then(() => this.props.setProjectId(this.props.match.params.id))
+      }, false))
   }
 
   render = () => {
-    let documentWidgetArray = {}
+    let documentWidgetArray = []
 
     if (this.props.documents) {
       documentWidgetArray = this.props.documents.map((document) => {
@@ -174,7 +173,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
-  getDocumentList: (params) => dispatch(getDocumentList(params)),
+  getDocumentList: (params, additional) => dispatch(getDocumentList(params, additional)),
   setProjectId: (id) => dispatch(setProjectId(id))
 })
 

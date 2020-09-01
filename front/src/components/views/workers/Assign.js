@@ -85,7 +85,7 @@ class WorkerAssign extends Component {
                 }) : null}
             </CFormGroup>
             <CFormGroup>
-              <CButton type="submit" color="success" variant="outline" block>Save changes</CButton>
+              <CButton type="submit" color="dark" variant="outline" block>Save changes</CButton>
             </CFormGroup>
             {this.state.error
               ? <p>{this.state.error}</p>
