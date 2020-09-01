@@ -18,23 +18,24 @@ const foxApi = new FoxApiService();
 class ProposalSubmit extends Component {
 
   state = {
-    status: "Created"
+    status: "Created",
+    error: ""
   }
 
   handleSubmit = async () => {
     console.log(this.props);
-    // await workflow.submitProposal(this.props.match.params.id)
-    //   .then(
-    //     this.props.history.goBack()
-    //   )
-    //   .catch((error) => {
-    //     console.error(error);
-    //     this.setState({
-    //       error: 'Application submit failed!' +
-    //         ' Please check your input and try again!' +
-    //         ' In case this problem repeats, please contact your administrator!'
-    //     })
-    //   })
+    await workflow.submitProposal(this.props.match.params.id)
+      .then(
+        this.props.history.goBack()
+      )
+      .catch((error) => {
+        console.error(error);
+        this.setState({
+          error: 'Proposal submit failed!' +
+            ' Please check your input and try again!' +
+            ' In case this problem repeats, please contact your administrator!'
+        })
+      })
   }
 
   componentDidMount = async () => {

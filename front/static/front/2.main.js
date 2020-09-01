@@ -902,10 +902,10 @@ var WorkerList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(
   return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerList */ "./src/components/views/workers/WorkerList.js"));
 });
 var WorkerCreate = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(24)]).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerCreate */ "./src/components/views/workers/WorkerCreate.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(25)]).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerCreate */ "./src/components/views/workers/WorkerCreate.js"));
 });
 var WorkerDetail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(25)]).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerDetail */ "./src/components/views/workers/WorkerDetail.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(26)]).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerDetail */ "./src/components/views/workers/WorkerDetail.js"));
 });
 var ProjectCreate = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(17)]).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectCreate */ "./src/components/views/projects/ProjectCreate.js"));
@@ -932,16 +932,16 @@ var DocumentDetail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.l
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, /*! ./views/documents/DocumentDetail */ "./src/components/views/documents/DocumentDetail.js"));
 });
 var SafetyVideo = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! ./views/safety/Video */ "./src/components/views/safety/Video.js"));
+  return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! ./views/safety/Video */ "./src/components/views/safety/Video.js"));
 });
 var ResponsiblePerson = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(23)]).then(__webpack_require__.bind(null, /*! ./views/workers/ResponsiblePerson */ "./src/components/views/workers/ResponsiblePerson.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(24)]).then(__webpack_require__.bind(null, /*! ./views/workers/ResponsiblePerson */ "./src/components/views/workers/ResponsiblePerson.js"));
 });
 var WorkersAssign = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(22)]).then(__webpack_require__.bind(null, /*! ./views/workers/Assign */ "./src/components/views/workers/Assign.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(23)]).then(__webpack_require__.bind(null, /*! ./views/workers/Assign */ "./src/components/views/workers/Assign.js"));
 });
 var ProposalSubmit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ./views/projects/ProposalSubmit */ "./src/components/views/projects/ProposalSubmit.js"));
+  return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! ./views/projects/ProposalSubmit */ "./src/components/views/projects/ProposalSubmit.js"));
 });
 var routes = [{
   path: '/',

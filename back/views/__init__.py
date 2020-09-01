@@ -26,3 +26,4 @@ from .worker_documents import (  # noqa F401
     WorkerDocumentCreate,
     WorkerDocumentDownload,
 )  # noqa F401
+from .workflow import ProposalSubmit  # noqa F401

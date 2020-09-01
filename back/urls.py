@@ -29,6 +29,7 @@ urlpatterns = [
     path("projects/", views.ProjectList.as_view()),
     path("projects/new/", views.ProjectCreate.as_view()),
     path("projects/<int:pk>/", views.ProjectDetail.as_view()),
+    path("projects/<int:pk>/workflow/submit_proposal/", views.ProposalSubmit.as_view()),
     path("client_managers/", views.ClientManagerList.as_view()),
     path("client_managers/new/", views.ClientManagerCreate.as_view()),
     path("client_managers/<int:pk>/", views.ClientManagerDetail.as_view()),
@@ -53,7 +54,7 @@ urlpatterns = [
     path(
         "worker_documents/downloads/<int:pk>/", views.WorkerDocumentDownload.as_view()
     ),
-    # projects/:id/workflow/submit_proposal get  change_project_status
+    # get  change_project_status
     # projects/id/workflow/confirm_proposal get change_project_status
     # projects/id/workflow/works_finished get change_project_status
     # projects/id/workflow/project_closed get change_project_status
