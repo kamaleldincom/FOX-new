@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 const ProjectList = React.lazy(() => import('./views/projects/ProjectList'))
 const ApprovalList = React.lazy(() => import('./views/approvals/ApprovalList'))
 const ContractorList = React.lazy(() => import('./views/contractors/ContractorList'))
@@ -20,6 +21,7 @@ const DocumentDetail = React.lazy(() => import('./views/documents/DocumentDetail
 const SafetyVideo = React.lazy(() => import('./views/safety/Video'))
 const ResponsiblePerson = React.lazy(() => import('./views/workers/ResponsiblePerson'))
 const WorkersAssign = React.lazy(() => import('./views/workers/Assign'))
+const ProposalSubmit = React.lazy(() => import('./views/projects/ProposalSubmit'))
 
 
 const routes = [
@@ -33,6 +35,7 @@ const routes = [
   { path: '/projects/:id/responsible_person', name: 'Responsible Person', component: ResponsiblePerson, exact: false },
   { path: '/projects/:id/safety_video', name: 'Safety Video', component: SafetyVideo, exact: true },
   { path: '/projects/:id/assign_workers', name: 'Assign Workers', component: WorkersAssign, exact: true },
+  { path: '/projects/:id/submit_proposal', name: 'Submit Proposal', component: ProposalSubmit, exact: true },
   { path: '/projects/:id/related_documents', name: 'Related Documents', component: ProjectUploadDocs, exact: true },
   { path: '/projects/:id', name: 'Project Details', component: ProjectDetail, exact: false },
   { path: '/approvals', name: 'Approvals', component: ApprovalList, exact: true },

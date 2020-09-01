@@ -53,4 +53,9 @@ urlpatterns = [
     path(
         "worker_documents/downloads/<int:pk>/", views.WorkerDocumentDownload.as_view()
     ),
+    # projects/:id/workflow/submit_proposal get  change_project_status
+    # projects/id/workflow/confirm_proposal get change_project_status
+    # projects/id/workflow/works_finished get change_project_status
+    # projects/id/workflow/project_closed get change_project_status
+    # ...
 ]
