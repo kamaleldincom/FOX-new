@@ -221,6 +221,12 @@ class FoxApiService {
         return res.blob();
     }
 
+    downloadWorkerDocument = async (worker_id, doc_type) => {
+        let url = `${this.apiBase}workers/download_doc/${worker_id}/${doc_type}/`;
+        const res = await this.getDoc(url = url);
+        return res.blob();
+    }
+
 }
 
 export default FoxApiService

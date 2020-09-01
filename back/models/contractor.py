@@ -15,6 +15,8 @@ class Contractor(FoxUser):
         max_length=10, choices=Type.choices, default=Type.default,
     )
 
+    related_company = models.CharField(max_length=128, null=True)
+
     class Meta:
         verbose_name = "Contractor"
 
