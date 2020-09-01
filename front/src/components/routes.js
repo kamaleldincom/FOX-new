@@ -20,6 +20,7 @@ const DocumentDetail = React.lazy(() => import('./views/documents/DocumentDetail
 const SafetyVideo = React.lazy(() => import('./views/safety/Video'))
 const ResponsiblePerson = React.lazy(() => import('./views/workers/ResponsiblePerson'))
 const WorkersAssign = React.lazy(() => import('./views/workers/Assign'))
+const CompanyDocuments = React.lazy(() => import('./views/company/CompanyDocuments'))
 
 
 const routes = [
@@ -36,6 +37,7 @@ const routes = [
   { path: '/projects/:id/related_documents', name: 'Related Documents', component: ProjectUploadDocs, exact: true },
   { path: '/projects/:id', name: 'Project Details', component: ProjectDetail, exact: false },
   { path: '/approvals', name: 'Approvals', component: ApprovalList, exact: true },
+  { path: '/documents', name: 'Documents', component: CompanyDocuments, exact: true },
   { path: '/current-works', name: 'Current Works', component: CurrentWorksList, exact: true },
   { path: '/contractors', name: 'Contractors', component: ContractorList, exact: true },
   { path: '/contractors/new', name: 'New', component: ContractorCreate, exact: true },

@@ -219,6 +219,19 @@ const getDashboardLayout = (userRole = "Dum", projectId = null) => {
                 }
               ],
             },
+            {
+              _tag: "CHeaderNavItem",
+              id: "head_nav_approvals",
+              className: "px-3",
+              _children: [
+                {
+                  _tag: "FoxHeaderNavLink",
+                  id: "head_nav_link_documents",
+                  to: "/documents",
+                  linktext: "Documents",
+                }
+              ],
+            },
           ],
         };
         break;

@@ -8,7 +8,7 @@ import {
     CEmbed
 } from "@coreui/react";
 
-class SefetyVideo extends Component {
+class SafetyVideo extends Component {
 
     componentDidMount = () => {
         this.props.getProfileFetch()
@@ -46,4 +46,4 @@ const mapDispatchToProps = dispatch => ({
     getProfileFetch: () => dispatch(getProfileFetch()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SefetyVideo)
+export default connect(mapStateToProps, mapDispatchToProps)(SafetyVideo)
