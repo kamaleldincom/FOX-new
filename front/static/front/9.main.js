@@ -194,7 +194,6 @@ var ClientManagerList = /*#__PURE__*/function (_Component) {
     })));
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
-      console.log('view props', _this.props);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tables_FoxEntityListTable__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({}, _this.props, {
         tableName: "Managers",
         fields: _this.props.clientManagerTable.fields,

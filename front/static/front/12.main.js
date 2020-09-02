@@ -68,6 +68,7 @@ var ContractorCreate = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "state", {
       username: "",
       email: "",
+      related_company: "",
       company: _this.props.company,
       role: "Contr",
       error: false
@@ -75,8 +76,6 @@ var ContractorCreate = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
       _this.setState(_defineProperty({}, event.target.name, event.target.value));
-
-      console.log(_this.props);
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSubmit", /*#__PURE__*/function () {
@@ -136,6 +135,15 @@ var ContractorCreate = /*#__PURE__*/function (_Component) {
         name: "email",
         placeholder: "Email",
         value: _this.state.email,
+        onChange: _this.handleChange,
+        required: true
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "username"
+      }, "Enter contractor company"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        id: "related_company",
+        name: "related_company",
+        placeholder: "Company name",
+        value: _this.state.related_company,
         onChange: _this.handleChange,
         required: true
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {

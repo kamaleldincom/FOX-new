@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 const ProjectList = React.lazy(() => import('./views/projects/ProjectList'))
 const ApprovalList = React.lazy(() => import('./views/approvals/ApprovalList'))
 const ContractorList = React.lazy(() => import('./views/contractors/ContractorList'))
@@ -15,6 +14,7 @@ const ProjectDetail = React.lazy(() => import('./views/projects/ProjectDetail'))
 const ProjectPTW = React.lazy(() => import('./views/projects/ProjectPTW'))
 const ProjectUploadDocs = React.lazy(() => import('./views/projects/ProjectUploadDocs'))
 const ContractorCreate = React.lazy(() => import('./views/contractors/ContractorCreate'))
+const ContractorDetail = React.lazy(() => import('./views/contractors/ContractorDetail'))
 const DocumentList = React.lazy(() => import('./views/documents/DocumentList'))
 const DocumentCreate = React.lazy(() => import('./views/documents/DocumentCreate'))
 const DocumentDetail = React.lazy(() => import('./views/documents/DocumentDetail'))
@@ -42,13 +42,13 @@ const routes = [
   { path: '/current-works', name: 'Current Works', component: CurrentWorksList, exact: true },
   { path: '/contractors', name: 'Contractors', component: ContractorList, exact: true },
   { path: '/contractors/new', name: 'New', component: ContractorCreate, exact: true },
+  { path: '/contractors/:id', name: 'Detail', component: ContractorDetail, exact: true },
   { path: '/managers', name: 'Managers', component: ClientManagerList, exact: true },
   { path: '/managers/new', name: 'New', component: ClientManagerCreate, exact: true },
   { path: '/managers/:id', name: 'Details', component: ClientManagerDetail, exact: true },
   { path: '/workers', name: 'Workers', component: WorkerList, exact: true },
   { path: '/workers/new', name: 'New', component: WorkerCreate, exact: true },
   { path: '/workers/:id', name: 'Project Details', component: WorkerDetail, exact: true },
-
 ];
 
 export default routes;

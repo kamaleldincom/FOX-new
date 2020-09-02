@@ -874,8 +874,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
 
 var ProjectList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectList */ "./src/components/views/projects/ProjectList.js"));
@@ -893,55 +891,58 @@ var ClientManagerList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.
   return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./views/managers/ClientManagerList */ "./src/components/views/managers/ClientManagerList.js"));
 });
 var ClientManagerCreate = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ./views/managers/ClientManagerCreate */ "./src/components/views/managers/ClientManagerCreate.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ./views/managers/ClientManagerCreate */ "./src/components/views/managers/ClientManagerCreate.js"));
 });
 var ClientManagerDetail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ./views/managers/ClientManagerDetail */ "./src/components/views/managers/ClientManagerDetail.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(17)]).then(__webpack_require__.bind(null, /*! ./views/managers/ClientManagerDetail */ "./src/components/views/managers/ClientManagerDetail.js"));
 });
 var WorkerList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerList */ "./src/components/views/workers/WorkerList.js"));
 });
 var WorkerCreate = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(25)]).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerCreate */ "./src/components/views/workers/WorkerCreate.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(26)]).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerCreate */ "./src/components/views/workers/WorkerCreate.js"));
 });
 var WorkerDetail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(26)]).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerDetail */ "./src/components/views/workers/WorkerDetail.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(27)]).then(__webpack_require__.bind(null, /*! ./views/workers/WorkerDetail */ "./src/components/views/workers/WorkerDetail.js"));
 });
 var ProjectCreate = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(17)]).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectCreate */ "./src/components/views/projects/ProjectCreate.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(18)]).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectCreate */ "./src/components/views/projects/ProjectCreate.js"));
 });
 var ProjectDetail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(18)]).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectDetail */ "./src/components/views/projects/ProjectDetail.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(19)]).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectDetail */ "./src/components/views/projects/ProjectDetail.js"));
 });
 var ProjectPTW = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectPTW */ "./src/components/views/projects/ProjectPTW.js"));
+  return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectPTW */ "./src/components/views/projects/ProjectPTW.js"));
 });
 var ProjectUploadDocs = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(20)]).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectUploadDocs */ "./src/components/views/projects/ProjectUploadDocs.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(21)]).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectUploadDocs */ "./src/components/views/projects/ProjectUploadDocs.js"));
 });
 var ContractorCreate = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ./views/contractors/ContractorCreate */ "./src/components/views/contractors/ContractorCreate.js"));
+});
+var ContractorDetail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ./views/contractors/ContractorDetail */ "./src/components/views/contractors/ContractorDetail.js"));
 });
 var DocumentList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/documents/DocumentList */ "./src/components/views/documents/DocumentList.js"));
 });
 var DocumentCreate = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ./views/documents/DocumentCreate */ "./src/components/views/documents/DocumentCreate.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, /*! ./views/documents/DocumentCreate */ "./src/components/views/documents/DocumentCreate.js"));
 });
 var DocumentDetail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, /*! ./views/documents/DocumentDetail */ "./src/components/views/documents/DocumentDetail.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ./views/documents/DocumentDetail */ "./src/components/views/documents/DocumentDetail.js"));
 });
 var SafetyVideo = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! ./views/safety/Video */ "./src/components/views/safety/Video.js"));
+  return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! ./views/safety/Video */ "./src/components/views/safety/Video.js"));
 });
 var ResponsiblePerson = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(24)]).then(__webpack_require__.bind(null, /*! ./views/workers/ResponsiblePerson */ "./src/components/views/workers/ResponsiblePerson.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(25)]).then(__webpack_require__.bind(null, /*! ./views/workers/ResponsiblePerson */ "./src/components/views/workers/ResponsiblePerson.js"));
 });
 var WorkersAssign = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(23)]).then(__webpack_require__.bind(null, /*! ./views/workers/Assign */ "./src/components/views/workers/Assign.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(24)]).then(__webpack_require__.bind(null, /*! ./views/workers/Assign */ "./src/components/views/workers/Assign.js"));
 });
 var ProposalSubmit = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! ./views/projects/ProposalSubmit */ "./src/components/views/projects/ProposalSubmit.js"));
+  return __webpack_require__.e(/*! import() */ 22).then(__webpack_require__.bind(null, /*! ./views/projects/ProposalSubmit */ "./src/components/views/projects/ProposalSubmit.js"));
 });
 var routes = [{
   path: '/',
@@ -1026,6 +1027,11 @@ var routes = [{
   path: '/contractors/new',
   name: 'New',
   component: ContractorCreate,
+  exact: true
+}, {
+  path: '/contractors/:id',
+  name: 'Detail',
+  component: ContractorDetail,
   exact: true
 }, {
   path: '/managers',

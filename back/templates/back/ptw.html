@@ -1895,7 +1895,7 @@
                     <p class="c3"><span class="c10">Name</span><span class="c10 c39">&nbsp;</span></p>
                 </td>
                 <td class="c93" colspan="3" rowspan="1">
-                    <p class="c1">{{contractor}}</span></p>
+                    <p class="c1">{{responsible_person}}</p>
                 </td>
                 <td class="c66 c46" colspan="2" rowspan="1">
                     <p class="c65"><span class="c47">Work Location</span></p>
@@ -1906,7 +1906,7 @@
                     <p class="c3"><span class="c9">Tel. no.:</span></p>
                 </td>
                 <td class="c93" colspan="3" rowspan="1">
-                    <p class="c1"><span class="c9"></span></p>
+                    <p class="c1"><span class="c9">{{ contractor_company}}</span></p>
                 </td>
                 <td class="c66" colspan="2" rowspan="3">
                     <p class="c1">{{ company }}</span></p>
@@ -1949,37 +1949,82 @@
                     <p class="c3"><span class="c6">Type of work</span></p>
                 </td>
                 <td class="c102" colspan="2" rowspan="1">
-                    <p class="c3"><span class="c11">&#9744;</span><span class="c37">&nbsp;</span><span class="c9">Work
+                    <p class="c3"><span class="c11">
+                            {% if work_at_height %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c37">&nbsp;</span><span class="c9">Work
                             at height </span></p>
                 </td>
                 <td class="c80" colspan="1" rowspan="1">
-                    <p class="c3"><span class="c11">&#9744;</span><span class="c37">&nbsp;</span><span
-                            class="c9">Lifting work </span></p>
+                    <p class="c3"><span class="c11">
+                            {% if lifting_work %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c37">&nbsp;</span><span class="c9">Lifting work </span></p>
                 </td>
                 <td class="c14" colspan="2" rowspan="1">
-                    <p class="c3"><span class="c11">&#9744;</span><span class="c37">&nbsp;</span><span
-                            class="c9">Confined space</span></p>
+                    <p class="c3"><span class="c11">
+                            {% if confined_space %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c37">&nbsp;</span><span class="c9">Confined space</span></p>
                 </td>
                 <td class="c23" colspan="1" rowspan="1">
-                    <p class="c3"><span class="c11">&#9744;</span><span class="c37">&nbsp;</span><span class="c9">Hot
+                    <p class="c3"><span class="c11">
+                            {% if hot_work %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c37">&nbsp;</span><span class="c9">Hot
                             work </span></p>
                 </td>
             </tr>
             <tr class="c16">
                 <td class="c102" colspan="2" rowspan="1">
-                    <p class="c3"><span class="c11">&#9744;</span><span class="c37">&nbsp;</span><span
-                            class="c9">Chemical Handling </span></p>
+                    <p class="c3"><span class="c11">
+                            {% if chemical_handling %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c37">&nbsp;</span><span class="c9">Chemical Handling </span></p>
                 </td>
                 <td class="c80" colspan="1" rowspan="1">
-                    <p class="c3"><span class="c11">&#9744;</span><span class="c37">&nbsp;</span><span class="c9">Work
+                    <p class="c3"><span class="c11">
+                            {% if work_alone %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c37">&nbsp;</span><span class="c9">Work
                             alone </span></p>
                 </td>
                 <td class="c14" colspan="2" rowspan="1">
-                    <p class="c3"><span class="c11">&#9744;</span><span class="c37">&nbsp;</span><span class="c9">Work
+                    <p class="c3"><span class="c11">
+                            {% if work_at_sensitive_area %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c37">&nbsp;</span><span class="c9">Work
                             at sensitive area </span></p>
                 </td>
                 <td class="c23" colspan="1" rowspan="1">
-                    <p class="c3"><span class="c11">&#9744;</span><span class="c37">&nbsp;</span><span class="c9">Cold
+                    <p class="c3"><span class="c11">
+                            {% if cold_work %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c37">&nbsp;</span><span class="c9">Cold
                             Work</span></p>
                 </td>
             </tr>
@@ -1989,7 +2034,7 @@
                 </td>
                 <td class="c84" colspan="6" rowspan="1">
                     <p class="c1"><span class="c9"></span></p>
-                    <p class="c1"><span class="c9"></span></p>
+                    <p class="c1">{{ description }}</span></p>
                     <p class="c1"><span class="c9"></span></p>
                 </td>
             </tr>

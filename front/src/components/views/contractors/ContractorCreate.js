@@ -19,6 +19,7 @@ class ContractorCreate extends Component {
   state = {
     username: "",
     email: "",
+    related_company: "",
     company: this.props.company,
     role: "Contr",
     error: false
@@ -28,7 +29,6 @@ class ContractorCreate extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
-    console.log(this.props);
   }
 
   handleSubmit = async event => {
@@ -81,6 +81,16 @@ class ContractorCreate extends Component {
                 onChange={this.handleChange}
                 required
               />
+            </CFormGroup>
+            <CFormGroup>
+              <CLabel htmlFor="username">Enter contractor company</CLabel>
+              <CInput
+                id="related_company"
+                name='related_company'
+                placeholder="Company name"
+                value={this.state.related_company}
+                onChange={this.handleChange}
+                required />
             </CFormGroup>
             <CFormGroup>
               <CButton type="submit" color="dark" variant="outline" block>Create contractor</CButton>

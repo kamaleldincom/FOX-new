@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[16],{
 
-/***/ "./src/components/views/managers/ClientManagerDetail.js":
+/***/ "./src/components/views/managers/ClientManagerCreate.js":
 /*!**************************************************************!*\
-  !*** ./src/components/views/managers/ClientManagerDetail.js ***!
+  !*** ./src/components/views/managers/ClientManagerCreate.js ***!
   \**************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -18,10 +18,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../services */ "./src/services/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -51,7 +47,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var foxApi = new _services__WEBPACK_IMPORTED_MODULE_5__["FoxApiService"]();
 var positions = [{
   id: -1,
   position: "Choose manager position"
@@ -74,16 +69,17 @@ var positions = [{
   id: "SecGrd",
   position: "Security Guards"
 }];
+var foxApi = new _services__WEBPACK_IMPORTED_MODULE_5__["FoxApiService"]();
 
-var ClientManagerDetail = /*#__PURE__*/function (_Component) {
-  _inherits(ClientManagerDetail, _Component);
+var ClientManagerCreate = /*#__PURE__*/function (_Component) {
+  _inherits(ClientManagerCreate, _Component);
 
-  var _super = _createSuper(ClientManagerDetail);
+  var _super = _createSuper(ClientManagerCreate);
 
-  function ClientManagerDetail() {
+  function ClientManagerCreate() {
     var _this;
 
-    _classCallCheck(this, ClientManagerDetail);
+    _classCallCheck(this, ClientManagerCreate);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -93,8 +89,10 @@ var ClientManagerDetail = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "state", {
       username: "",
+      name: "",
       email: "",
       position: -1,
+      department: "",
       company: _this.props.company,
       role: "CliMan",
       error: false
@@ -112,13 +110,13 @@ var ClientManagerDetail = /*#__PURE__*/function (_Component) {
               case 0:
                 event.preventDefault();
 
-                if (!(parseInt(_this.state.position) < 0)) {
+                if (!(parseInt(_this.state.position) === -1)) {
                   _context.next = 5;
                   break;
                 }
 
                 _this.setState({
-                  error: 'Manager Position was not selected! Please, choose position form the list'
+                  error: 'Client manager position was not selected! Please, choose position form the list'
                 });
 
                 _context.next = 9;
@@ -128,13 +126,13 @@ var ClientManagerDetail = /*#__PURE__*/function (_Component) {
                 _this.formData = _this.state;
                 delete _this.formData.error;
                 _context.next = 9;
-                return foxApi.updateEntityOf('client_managers', _this.props.match.params.id, _this.formData).then(function () {
+                return foxApi.createEntityOf('client_managers', _this.formData).then(function () {
                   _this.props.history.goBack();
                 }, function (error) {
                   console.error(error);
 
                   _this.setState({
-                    error: 'Manager update failed!' + ' Please check your input and try again!' + ' In case this problem repeats, please contact your administrator!'
+                    error: 'Client manager creation failed!' + ' Please check your input and try again!' + ' In case this problem repeats, please contact your administrator!'
                   });
                 });
 
@@ -151,36 +149,29 @@ var ClientManagerDetail = /*#__PURE__*/function (_Component) {
       };
     }());
 
-    _defineProperty(_assertThisInitialized(_this), "componentDidMount", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
-              return _this.props.getProfileFetch().then(function () {
-                return foxApi.getDetailsOf('client_managers', _this.props.match.params.id);
-              }).then(function (data) {
-                return _this.setState(_objectSpread({}, data));
-              });
-
-            case 2:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    })));
+    _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
+      _this.props.getProfileFetch();
+    });
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCol"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CForm"], {
         onSubmit: _this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4___default.a, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
         htmlFor: "username"
-      }, "Enter client manager username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+      }, "Enter client manager username. This will be used for login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
         id: "username",
         name: "username",
         placeholder: "Username",
         value: _this.state.username,
+        onChange: _this.handleChange,
+        required: true
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "name"
+      }, "Enter client manager verbose name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        id: "name",
+        name: "name",
+        placeholder: "Verbose name",
+        value: _this.state.name,
         onChange: _this.handleChange,
         required: true
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
@@ -207,7 +198,16 @@ var ClientManagerDetail = /*#__PURE__*/function (_Component) {
           key: option.id,
           value: option.id
         }, option.position);
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "department"
+      }, "Enter client manager department"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        id: "department",
+        name: "department",
+        placeholder: "Department",
+        value: _this.state.department,
+        onChange: _this.handleChange,
+        required: true
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
         type: "submit",
         color: "dark",
         variant: "outline",
@@ -218,7 +218,7 @@ var ClientManagerDetail = /*#__PURE__*/function (_Component) {
     return _this;
   }
 
-  return ClientManagerDetail;
+  return ClientManagerCreate;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -235,7 +235,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ClientManagerDetail));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ClientManagerCreate));
 
 /***/ })
 

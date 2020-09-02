@@ -7,6 +7,7 @@ import {
     CInput,
     CLabel, CRow,
     CCol,
+    CButton
 } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
 import { FoxApiService } from '../../../services'
@@ -18,6 +19,7 @@ class ContractorDetail extends Component {
     state = {
         username: "",
         email: "",
+        related_company: "",
         company: this.props.company,
         role: "Contr",
         error: false
@@ -27,7 +29,6 @@ class ContractorDetail extends Component {
         this.setState({
             [event.target.name]: event.target.value
         });
-        console.log(this.props);
     }
 
     handleSubmit = async event => {
@@ -53,7 +54,12 @@ class ContractorDetail extends Component {
             .then((data) => this.setState({ ...data }))
     }
 
+    componentWillUnmount = () => {
+        console.log("will unmount");
+    }
+
     render = () => {
+        console.log(this.state);
         return (
             <CRow>
                 <CCol>
@@ -62,7 +68,7 @@ class ContractorDetail extends Component {
                     >
                         <DjangoCSRFToken />
                         <CFormGroup>
-                            <CLabel htmlFor="username">Enter contractor username</CLabel>
+                            <CLabel htmlFor="username">Contractor username</CLabel>
                             <CInput
                                 id="username"
                                 name='username'
@@ -72,7 +78,7 @@ class ContractorDetail extends Component {
                                 required />
                         </CFormGroup>
                         <CFormGroup>
-                            <CLabel htmlFor="email">Enter contractor email</CLabel>
+                            <CLabel htmlFor="email">Contractor email</CLabel>
                             <CInput
                                 id="email"
                                 type="email"
@@ -84,13 +90,18 @@ class ContractorDetail extends Component {
                             />
                         </CFormGroup>
                         <CFormGroup>
-                            <CButton type="submit" color="dark" variant="outline" block>Create contractor</CButton>
-                            <CInput type="submit" value="Create contractor" color="info" />
+                            <CLabel htmlFor="username">Contractor company</CLabel>
+                            <CInput
+                                id="related_company"
+                                name='related_company'
+                                placeholder="Company name"
+                                value={this.state.related_company}
+                                onChange={this.handleChange}
+                                required />
                         </CFormGroup>
-                        {this.props.registerErrorFlag
-                            ? <p>{this.props.errorMessage ? this.props.errorMessage : 'INVALID CREDENTIALS! PLEASE, CHECK YOUR PASSWORD AND PASSWORD CONFIRMATION FIELDS!'}</p>
-                            : null
-                        }
+                        <CFormGroup>
+                            <CButton type="submit" color="dark" variant="outline" block>Create contractor</CButton>
+                        </CFormGroup>
                         {this.state.error
                             ? <p>{this.state.error}</p>
                             : null

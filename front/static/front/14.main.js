@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[14],{
 
-/***/ "./src/components/views/documents/DocumentDetail.js":
+/***/ "./src/components/views/documents/DocumentCreate.js":
 /*!**********************************************************!*\
-  !*** ./src/components/views/documents/DocumentDetail.js ***!
+  !*** ./src/components/views/documents/DocumentCreate.js ***!
   \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -11,17 +11,14 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../actions */ "./src/actions/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
 /* harmony import */ var django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! django-react-csrftoken */ "./node_modules/django-react-csrftoken/index.js");
 /* harmony import */ var django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../services */ "./src/services/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../actions */ "./src/actions/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -63,8 +60,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var foxApi = new _services__WEBPACK_IMPORTED_MODULE_5__["FoxApiService"]();
+var uploadOptions = [{
+  id: 1,
+  name: "URL"
+}, {
+  id: 2,
+  name: "File upload"
+}];
 var targetTypes = [{
+  id: -1,
+  target_type: "Choose target type"
+}, {
   id: "Contractor",
   target_type: "Contractor"
 }, {
@@ -72,15 +80,15 @@ var targetTypes = [{
   target_type: "Worker"
 }];
 
-var DocumentDetail = /*#__PURE__*/function (_Component) {
-  _inherits(DocumentDetail, _Component);
+var DocumentCreate = /*#__PURE__*/function (_Component) {
+  _inherits(DocumentCreate, _Component);
 
-  var _super = _createSuper(DocumentDetail);
+  var _super = _createSuper(DocumentCreate);
 
-  function DocumentDetail() {
+  function DocumentCreate() {
     var _this;
 
-    _classCallCheck(this, DocumentDetail);
+    _classCallCheck(this, DocumentCreate);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -94,6 +102,7 @@ var DocumentDetail = /*#__PURE__*/function (_Component) {
       project: _this.props.match.params.id,
       target_type: -1,
       url_to_doc: "",
+      upload_option: 1,
       error: false
     });
 
@@ -101,98 +110,80 @@ var DocumentDetail = /*#__PURE__*/function (_Component) {
       _this.setState(_defineProperty({}, event.target.name, event.target.value));
     });
 
-    _defineProperty(_assertThisInitialized(_this), "downloadFile", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return foxApi.downloadDocument(_this.props.match.params.doc_id).then(function (blob) {
-                var url = window.URL.createObjectURL(new Blob([blob]));
-                var link = document.createElement('a');
-                link.href = url;
-
-                var filename = _this.state.file.split('/').pop();
-
-                link.setAttribute('download', filename);
-                document.body.appendChild(link);
-                link.click();
-                link.parentNode.removeChild(link);
-              }).then(function () {
-                console.log('file downloaded');
-              }).catch(function (error) {
-                console.error('File download failed!');
-                console.error(error);
-              });
-
-            case 2:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    })));
+    _defineProperty(_assertThisInitialized(_this), "handleFileUpload", function (event) {
+      _this.setState(_defineProperty({}, event.target.name, event.target.files[0]));
+    });
 
     _defineProperty(_assertThisInitialized(_this), "handleSubmit", /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context.prev = _context.next) {
               case 0:
                 event.preventDefault();
+
+                if (!(parseInt(_this.state.target_type) === -1)) {
+                  _context.next = 5;
+                  break;
+                }
+
+                _this.setState({
+                  error: 'Target type was not selected! Please, choose target type form the list'
+                });
+
+                _context.next = 12;
+                break;
+
+              case 5:
                 _this.requestData = _this.state;
                 delete _this.requestData.error;
                 delete _this.requestData.upload_option;
                 _this.formData = new FormData();
-                Object.entries(_this.requestData).forEach(function (_ref3) {
-                  var _ref4 = _slicedToArray(_ref3, 2),
-                      key = _ref4[0],
-                      value = _ref4[1];
+                Object.entries(_this.requestData).forEach(function (_ref2) {
+                  var _ref3 = _slicedToArray(_ref2, 2),
+                      key = _ref3[0],
+                      value = _ref3[1];
 
                   _this.formData.append(key, value);
                 });
-                _context2.next = 8;
-                return foxApi.updateEntityOf('documents', _this.props.match.params.doc_id, _this.formData).then(function () {
+                _context.next = 12;
+                return foxApi.createEntityWithFile('documents', _this.formData).then(function () {
                   _this.props.history.goBack();
                 }, function (error) {
                   console.error(error);
 
                   _this.setState({
-                    error: 'Document update failed!' + ' Please check your input and try again!' + ' In case this problem repeats, please contact your administrator!'
+                    error: 'Document creation failed!' + ' Please check your input and try again!' + ' In case this problem repeats, please contact your administrator!'
                   });
                 });
 
-              case 8:
+              case 12:
               case "end":
-                return _context2.stop();
+                return _context.stop();
             }
           }
-        }, _callee2);
+        }, _callee);
       }));
 
       return function (_x) {
-        return _ref2.apply(this, arguments);
+        return _ref.apply(this, arguments);
       };
     }());
 
-    _defineProperty(_assertThisInitialized(_this), "componentDidMount", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+    _defineProperty(_assertThisInitialized(_this), "componentDidMount", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
-              _context3.next = 2;
-              return _this.props.getProfileFetch().then(function () {
-                return foxApi.getDetailsOf('documents', _this.props.match.params.doc_id);
-              }).then(function (data) {
-                return _this.setState(_objectSpread({}, data));
-              });
+              _context2.next = 2;
+              return _this.props.getProfileFetch();
 
             case 2:
             case "end":
-              return _context3.stop();
+              return _context2.stop();
           }
         }
-      }, _callee3);
+      }, _callee2);
     })));
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
@@ -207,7 +198,21 @@ var DocumentDetail = /*#__PURE__*/function (_Component) {
         value: _this.state.name,
         onChange: _this.handleChange,
         required: true
-      })), _this.state.url_to_doc ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "upload_option"
+      }, "File upload option"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CSelect"], {
+        id: "upload_option",
+        name: "upload_option",
+        placeholder: "Choose contractor",
+        value: _this.state.upload_option,
+        onChange: _this.handleChange,
+        required: true
+      }, uploadOptions.map(function (option) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: option.id,
+          value: option.id
+        }, option.name);
+      }))), _this.state.upload_option == 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
         htmlFor: "url_to_doc"
       }, "Url to document"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
         type: "url",
@@ -218,18 +223,14 @@ var DocumentDetail = /*#__PURE__*/function (_Component) {
         value: _this.state.url_to_doc,
         onChange: _this.handleChange,
         required: true
-      })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
-        variant: "outline",
-        color: "success",
-        onClick: _this.downloadFile
-      }, "Link to download current file")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+      })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
         htmlFor: "file"
-      }, "Upload new File"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputFile"], {
+      }, "File"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputFile"], {
         id: "file",
         name: "file",
         onChange: _this.handleFileUpload,
         required: true
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
         htmlFor: "target_type"
       }, "Target Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CSelect"], {
         id: "target_type",
@@ -248,28 +249,30 @@ var DocumentDetail = /*#__PURE__*/function (_Component) {
         color: "dark",
         variant: "outline",
         block: true
-      }, "Update Document")), _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
+      }, "Create Document")), _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
     });
 
     return _this;
   }
 
-  return DocumentDetail;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); // const mapStateToProps = state => {
-//   return {
-//   }
-// }
+  return DocumentCreate;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    company: state.currentUser.company
+  };
+};
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     getProfileFetch: function getProfileFetch() {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getProfileFetch"])());
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_6__["getProfileFetch"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mapDispatchToProps)(DocumentDetail));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(DocumentCreate)));
 
 /***/ })
 

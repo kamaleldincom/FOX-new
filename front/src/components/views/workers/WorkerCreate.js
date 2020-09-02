@@ -31,11 +31,13 @@ class WorkerCreate extends Component {
     position_in_company: "",
     safety_quiz_answer: "",
     personal_declaration: "",
+    special_competency: "",
+    special_competency_scan: "",
+    registration_number: "",
     error: false
   }
 
   handleChange = event => {
-    console.log(this.state);
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -111,7 +113,6 @@ class WorkerCreate extends Component {
                 value={this.state.card_number_id}
                 onChange={this.handleChange}
                 required />
-
             </CFormGroup>
             <CFormGroup>
               <CLabel htmlFor="license_number">License Number</CLabel>
@@ -150,6 +151,29 @@ class WorkerCreate extends Component {
                 required />
               <CLabel htmlFor="safety_green_card_scan">Safety green card scan</CLabel>
               <CInputFile id="safety_green_card_scan" name="safety_green_card_scan" onChange={this.handleFileUpload}
+                required />
+            </CFormGroup>
+            <CFormGroup>
+              <CLabel htmlFor="special_competency">Special competency</CLabel>
+              <CInput
+                id="special_competency"
+                name='special_competency'
+                placeholder="Enter competency"
+                value={this.state.special_competency}
+                onChange={this.handleChange}
+                required />
+              <CLabel htmlFor="special_competency_scan">Special competency scan</CLabel>
+              <CInputFile id="special_competency_scan" name="special_competency_scan" onChange={this.handleFileUpload}
+                required />
+            </CFormGroup>
+            <CFormGroup>
+              <CLabel htmlFor="competency_issued_by">Competency issued by</CLabel>
+              <CInput
+                id="competency_issued_by"
+                name='competency_issued_by'
+                placeholder="Enter legal entity"
+                value={this.state.competency_issued_by}
+                onChange={this.handleChange}
                 required />
             </CFormGroup>
             <CFormGroup>
