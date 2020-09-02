@@ -12,7 +12,6 @@ urlpatterns = [
     path("token-auth/", views.ObtainFoxJWTToken.as_view()),
     path("current_user/", views.current_user),
     path("users/", views.UserList.as_view()),
-    # path("dashboard/", views.Dashboard.as_view()),
     path(
         r"validate_register_token/",
         reset_password_validate_token,
@@ -54,6 +53,8 @@ urlpatterns = [
     path(
         "worker_documents/downloads/<int:pk>/", views.WorkerDocumentDownload.as_view()
     ),
+    path("approvals/", views.ApprovalList.as_view()),
+    path("approvals/<int:pk>/", views.ApprovalDetail.as_view()),
     # get  change_project_status
     # projects/id/workflow/confirm_proposal get change_project_status
     # projects/id/workflow/works_finished get change_project_status

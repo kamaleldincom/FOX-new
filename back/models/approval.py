@@ -7,6 +7,7 @@ class Approval(models.Model):
         pending = "Pending", _("Pending")
         approved = "Approved", _("Approved")
         rejected = "Rejected", _("Rejected")
+        auto_rejected = "Deprecated", _("Deprecated")
 
     description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)

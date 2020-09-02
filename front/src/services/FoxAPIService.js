@@ -227,6 +227,10 @@ class FoxApiService {
         return res.blob();
     }
 
+    getFileDownloadLink = (id) => {
+        return `${this.apiBase}documents/downloads/${id}/`;
+    }
+
 }
 
 export default FoxApiService

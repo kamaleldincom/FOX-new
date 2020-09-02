@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from rest_framework import generics
 from rest_framework.views import APIView
-from back.models import Worker
+from back.models import Worker, Contractor
 from back.serializers import WorkerListSerializer, WorkerSerializer
 
 
@@ -11,7 +11,13 @@ class WorkerList(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Worker.objects.filter(contractor=user)
+
+        if user.role == "Contr":
+            return Worker.objects.filter(contractor=user)
+        contractor_id = self.request.query_params.get("contractor_id", None)
+        if contractor_id:
+            contractor = Contractor.objects.get(pk=contractor_id)
+            return Worker.objects.filter(contractor=contractor)
 
 
 class WorkerCreate(generics.CreateAPIView):

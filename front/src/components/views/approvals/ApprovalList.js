@@ -1,42 +1,50 @@
 import React, { Component } from 'react'
 import FoxEntityListTable from '../../tables/FoxEntityListTable'
-
-const usersData = [
-    { id: 0, name: 'John Doe', registered: '2018/01/01', role: 'Guest', status: 'Pending' },
-    { id: 1, name: 'Samppa Nori', registered: '2018/01/01', role: 'Member', status: 'Active' },
-    { id: 2, name: 'Estavan Lykos', registered: '2018/02/01', role: 'Staff', status: 'Banned' },
-]
+import { getProfileFetch, getApprovalList } from '../../../actions'
+import { connect } from 'react-redux'
 
 
 const getBadge = status => {
     switch (status) {
-        case 'Active': return 'success'
-        case 'Inactive': return 'secondary'
-        case 'Pending': return 'warning'
-        case 'Banned': return 'danger'
+        case 'Pending': return 'primary'
+        case 'Approved': return 'success'
+        case 'Rejected': return 'danger'
         default: return 'primary'
     }
 }
 
-const fields = ['name', 'registered', 'role', 'status']
-
-const alertOnClick = () => {
-    alert('Clicked!');
-}
 
 class ApprovalList extends Component {
+
+    componentDidMount = async () => {
+        await this.props.getProfileFetch()
+            .then(() => this.props.getApprovalList())
+    }
+
     render = () => {
         return (
             <FoxEntityListTable
                 {...this.props}
                 tableName='Approvals'
-                fields={fields}
+                fields={this.props.projectTable.fields}
                 getBadge={getBadge}
-                usersData={usersData}
-                onRowClick={alertOnClick} />
+                tableData={this.props.projectTable.tableData}
+            />
         )
     }
 
 }
 
-export default ApprovalList
+const mapStateToProps = state => {
+    return {
+        projectTable: state.entityListTable
+    }
+}
+
+const mapDispatchToProps = dispatch => ({
+    getProfileFetch: () => dispatch(getProfileFetch()),
+    getApprovalList: () => dispatch(getApprovalList()),
+    setApprovalId: () => dispatch(setApprovalId())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ApprovalList)

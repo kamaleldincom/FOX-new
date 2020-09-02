@@ -27,3 +27,4 @@ from .worker_documents import (  # noqa F401
     WorkerDocumentDownload,
 )  # noqa F401
 from .workflow import ProposalSubmit  # noqa F401
+from .approvals import ApprovalList, ApprovalDetail  # noqa F401

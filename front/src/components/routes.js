@@ -1,6 +1,7 @@
 import React from 'react';
 const ProjectList = React.lazy(() => import('./views/projects/ProjectList'))
 const ApprovalList = React.lazy(() => import('./views/approvals/ApprovalList'))
+const ApprovalDetail = React.lazy(() => import('./views/approvals/ApprovalDetail'))
 const ContractorList = React.lazy(() => import('./views/contractors/ContractorList'))
 const CurrentWorksList = React.lazy(() => import('./views/current_works/CurrentWorksList'))
 const ClientManagerList = React.lazy(() => import('./views/managers/ClientManagerList'))
@@ -39,6 +40,7 @@ const routes = [
   { path: '/projects/:id/related_documents', name: 'Related Documents', component: ProjectUploadDocs, exact: true },
   { path: '/projects/:id', name: 'Project Details', component: ProjectDetail, exact: false },
   { path: '/approvals', name: 'Approvals', component: ApprovalList, exact: true },
+  { path: '/approvals/:id', name: 'Details', component: ApprovalDetail, exact: true },
   { path: '/current-works', name: 'Current Works', component: CurrentWorksList, exact: true },
   { path: '/contractors', name: 'Contractors', component: ContractorList, exact: true },
   { path: '/contractors/new', name: 'New', component: ContractorCreate, exact: true },
@@ -49,6 +51,7 @@ const routes = [
   { path: '/workers', name: 'Workers', component: WorkerList, exact: true },
   { path: '/workers/new', name: 'New', component: WorkerCreate, exact: true },
   { path: '/workers/:id', name: 'Project Details', component: WorkerDetail, exact: true },
+
 ];
 
 export default routes;

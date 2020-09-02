@@ -881,6 +881,9 @@ var ProjectList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy
 var ApprovalList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./views/approvals/ApprovalList */ "./src/components/views/approvals/ApprovalList.js"));
 });
+var ApprovalDetail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(28)]).then(__webpack_require__.bind(null, /*! ./views/approvals/ApprovalDetail */ "./src/components/views/approvals/ApprovalDetail.js"));
+});
 var ContractorList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./views/contractors/ContractorList */ "./src/components/views/contractors/ContractorList.js"));
 });
@@ -1012,6 +1015,11 @@ var routes = [{
   path: '/approvals',
   name: 'Approvals',
   component: ApprovalList,
+  exact: true
+}, {
+  path: '/approvals/:id',
+  name: 'Details',
+  component: ApprovalDetail,
   exact: true
 }, {
   path: '/current-works',

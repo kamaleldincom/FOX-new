@@ -14,6 +14,7 @@ import { getClientManagerList } from './client_managers'
 import { getDocumentList } from './documents'
 import { getContractorList } from './contractors'
 import { getWorkerList } from './workers'
+import { getApprovalList } from './approvals'
 
 const userLoggedIn = () => {
     return {
@@ -36,5 +37,6 @@ export {
     getDocumentList,
     getContractorList,
     getWorkerList,
-    setProjectId
+    setProjectId,
+    getApprovalList
 };
