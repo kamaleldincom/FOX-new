@@ -8,7 +8,6 @@ import {
   CLabel, CRow,
   CCol,
   CSelect,
-  CLink,
   CButton,
   CInputFile
 } from "@coreui/react";
@@ -36,6 +35,12 @@ class DocumentDetail extends Component {
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
+    });
+  }
+
+  handleFileUpload = event => {
+    this.setState({
+      [event.target.name]: event.target.files[0]
     });
   }
 
@@ -121,14 +126,6 @@ class DocumentDetail extends Component {
               :
               <React.Fragment>
                 <CFormGroup>
-                  {/* <CLink
-                    className="btn btn-outline-success"
-                    href={this.state.file}
-                    target="_blank"
-                    download
-                  >
-                    Link to download current file
-                  </CLink> */}
                   <CButton
                     variant="outline"
                     color="success"

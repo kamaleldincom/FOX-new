@@ -8,24 +8,54 @@ import {
   CRow,
   CCol,
   CLabel,
-  CInput
+  CInput,
+  CInputFile,
+  CButton
 } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
+import { FoxApiService } from '../../../services'
+
+const foxApi = new FoxApiService();
 
 class CompanyDocuments extends Component {
 
   state = {
     safetyVideoURL: "",
     personalDeclarationURL: "",
+    personalDeclarationFile: "",
     company: this.props.company
   }
 
   handleChange = event => {
     this.setState({
-        [event.target.name]: event.target.value
+      [event.target.name]: event.target.value
     });
-    console.log(this.props);
-}
+  }
+
+  handleFileUpload = event => {
+    this.setState({
+      [event.target.name]: event.target.files[0]
+    });
+  }
+
+  downloadFile = async () => {
+    await foxApi.downloadDocument(this.props.match.params.doc_id)
+      .then((blob) => {
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement('a');
+        link.href = url;
+        const filename = this.state.file.split('/').pop();
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+      })
+      .then(() => { console.log('file downloaded') })
+      .catch((error) => {
+        console.error('File download failed!');
+        console.error(error)
+      })
+  }
 
   componentDidMount = () => {
     this.props.getProfileFetch()
@@ -49,13 +79,14 @@ class CompanyDocuments extends Component {
             </CFormGroup>
             <CFormGroup>
               <CLabel htmlFor="personalDeclarationURL">Personal Declaration:</CLabel>
-              <CInput
-                id="personalDeclarationURL"
-                name="personalDeclarationURL"
-                placeholder="URL"
-                value={this.state.safetyVideoURL}
-                readOnly
-              />
+              <CButton
+                variant="outline"
+                color="success"
+                onClick={this.downloadFile}
+              >
+                Download
+                  </CButton>
+              <CInputFile id="personalDeclarationFile" name="personalDeclarationFile" onChange={this.handleFileUpload} />
             </CFormGroup>
 
           </CForm>
