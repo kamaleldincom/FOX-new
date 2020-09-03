@@ -10,3 +10,4 @@ django-rest-passwordreset
 django-extensions
 pytest-django
 django-filter
+django-environ

@@ -12,28 +12,37 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import datetime
+import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+env = environ.Env(
+    DEBUG=(bool, True),
+    MEDIA_ROOT=(str, os.path.join(BASE_DIR, "local_files")),
+    HOST_NAME=(str, "localhost"),
+    HOST_NAME_ALT=(str, "127.0.0.1"),
+)
+environ.Env.read_env()
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = env('DEBUG')
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "*myepc&&@())qx_t^^k18t65ehm4_9iaelhr6hx0g8d31$pjjr"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "46.101.221.249",
-    "ec2-3-23-115-178.us-east-2.compute.amazonaws.com",
+    env('HOST_NAME'),
+    env('HOST_NAME_ALT'),
 ]  # localhost, s2b host, aws
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "local_files")
+MEDIA_ROOT = env('MEDIA_ROOT')
 
 # Application definition
 
@@ -68,7 +77,7 @@ ROOT_URLCONF = "FOX.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["/back/templates/back/",],
+        "DIRS": ["/back/templates/back/", ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -94,7 +103,7 @@ DATABASES = {
         "USER": "postgres",
         "HOST": "db",  # set in docker-compose.yml
         "PORT": 5432,  # default postgres port
-        "PASSWORD": "mypassword",
+        "PASSWORD": env('POSTGRESQL_PASS'),
     }
 }
 
@@ -106,9 +115,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 AUTH_USER_MODEL = "back.FoxUser"
@@ -131,8 +140,8 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "s2b.fox.test@gmail.com"
-EMAIL_HOST_PASSWORD = "simple2bfox"
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
