@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { getProfileFetch, getDocumentList } from '../../../actions'
 import { connect } from 'react-redux'
+import DjangoCSRFToken from 'django-react-csrftoken'
+import { getProfileFetch, getDocumentList, getWorkerList } from '../../../actions'
 import {
   CForm,
   CFormGroup,
@@ -10,14 +11,13 @@ import {
   CTextarea,
   CLink,
   CButton,
-  CEmbed,
   CCard,
   CCardBody,
-  CCardHeader
-
+  CCardHeader,
+  CCollapse
 } from "@coreui/react";
-import DjangoCSRFToken from 'django-react-csrftoken'
 import { FoxApiService } from '../../../services'
+import { DisplayFile, WorkerReview } from '../../../utils'
 
 const foxApi = new FoxApiService();
 
@@ -32,13 +32,26 @@ class ProjectDetail extends Component {
     manager: "",
     error: "",
     filename: "",
-    file_id: ""
+    file_id: "",
+    current_worker_id: "",
+    current_worker_info: ""
   }
 
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     });
+  }
+
+  handleWorkerSelect = event => {
+    this.state.current_worker_id === event.target.name ?
+      this.setState({
+        current_worker_id: ""
+      })
+      :
+      this.setState({
+        current_worker_id: event.target.name
+      })
   }
 
   handleSubmit = async event => {
@@ -52,6 +65,8 @@ class ProjectDetail extends Component {
       delete this.formData.error;
       delete this.formData.created;
       delete this.formData.last_resolved;
+      delete this.formData.current_worker_id
+      delete this.formData.current_worker_info
       await foxApi.patchEntityOf('approvals', this.props.match.params.id, this.formData)
         .then(() => {
           this.props.history.goBack()
@@ -96,10 +111,10 @@ class ProjectDetail extends Component {
       .then(() => foxApi.getDetailsOf('approvals', this.props.match.params.id))
       .then((data) => this.setState(
         { ...data }, () => {
-          this.props.getDocumentList({ project_id: this.state.project }, true)
+          this.props.getDocumentList({ project_id: this.state.project }, true);
+          this.props.getWorkerList({ project_id: this.state.project }, false)
         }
       ))
-    // .then(() => this.props.setProjectId(this.props.match.params.id))
   }
 
   render = () => {
@@ -141,6 +156,7 @@ class ProjectDetail extends Component {
                           >
                             Download document
               						</CButton>
+                          <DisplayFile document={document} />
                         </React.Fragment>
                       }
                     </React.Fragment>
@@ -150,6 +166,41 @@ class ProjectDetail extends Component {
                 null}
             </CCardBody>
           </CCard>
+          <CCard>
+            <CCardHeader>Workers</CCardHeader>
+            <CCardBody>
+              {this.props.workers ?
+                this.props.workers.map((worker, idx) => {
+                  return (
+                    <CCard key={`card-${idx}`} className="mb-0">
+                      <CCardHeader key={`ch-${idx}`} id={worker.id}>
+                        <h5 key={`h5-${idx}`} className="m-0 p-0">{worker.name}</h5>
+                        <h6 key={`h6-${idx}`} className="m-0 p-0">{worker.position_in_company}</h6>
+                        <CButton
+                          key={`btn-${idx}`}
+                          block
+                          color="link"
+                          className="text-left m-0 p-0"
+                          id={worker.id}
+                          value={worker.id}
+                          name={worker.id}
+                          onClick={this.handleWorkerSelect}
+                        >Display Details</CButton>
+                      </CCardHeader>
+                      <CCollapse key={`clps-${idx}`} show={this.state.current_worker_id === worker.id.toString()}>
+                        <CCardBody key={`cbody-${idx}`}>
+                          <WorkerReview workerId={worker.id} />
+                        </CCardBody>
+                      </CCollapse>
+                    </CCard>
+                  )
+                })
+                :
+                null
+              }
+            </CCardBody>
+          </CCard>
+
           <CCard>
             <CCardBody>
               <CForm onSubmit={this.handleSubmit}>
@@ -202,13 +253,15 @@ class ProjectDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    documents: state.additionalEntityListTable.tableData
+    documents: state.additionalEntityListTable.tableData,
+    workers: state.entityListTable.tableData
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
   getDocumentList: (params, additional) => dispatch(getDocumentList(params, additional)),
+  getWorkerList: (params, additional) => dispatch(getWorkerList(params, additional)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetail)

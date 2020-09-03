@@ -177,6 +177,16 @@ class WorkerCreate extends Component {
                 required />
             </CFormGroup>
             <CFormGroup>
+              <CLabel htmlFor="registration_number">Registration number</CLabel>
+              <CInput
+                id="registration_number"
+                name='registration_number'
+                placeholder="Enter registration number"
+                value={this.state.registration_number}
+                onChange={this.handleChange}
+                required />
+            </CFormGroup>
+            <CFormGroup>
               <CLabel htmlFor="position_in_company">Position in Company</CLabel>
               <CInput
                 id="position_in_company"

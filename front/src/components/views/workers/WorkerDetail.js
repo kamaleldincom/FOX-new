@@ -19,7 +19,7 @@ class WorkerDetail extends Component {
 
   state = {
     name: "",
-    contractor: this.props.contractor,
+    contractor: "",
     birthday: "",
     card_number_id: "",
     license_number: "",
@@ -47,8 +47,10 @@ class WorkerDetail extends Component {
   }
 
   handleFileUpload = event => {
+    const { upload_files } = this.state;
+    upload_files[event.target.name] = event.target.files[0];
     this.setState({
-      upload_files: { [event.target.name]: event.target.files[0] },
+      upload_files: upload_files,
       [event.target.name]: ""
     }, () => console.log(this.state));
   }
@@ -256,7 +258,7 @@ class WorkerDetail extends Component {
       				</CButton>
               <CLabel htmlFor="license_scan">Upload new file</CLabel>
               <CInputFile id="special_competency_scan" name="special_competency_scan" onChange={this.handleFileUpload}
-                required />
+              />
             </CFormGroup>
             <CFormGroup>
               <CLabel htmlFor="competency_issued_by">Competency issued by</CLabel>
@@ -265,6 +267,16 @@ class WorkerDetail extends Component {
                 name='competency_issued_by'
                 placeholder="Enter legal entity"
                 value={this.state.competency_issued_by}
+                onChange={this.handleChange}
+                required />
+            </CFormGroup>
+            <CFormGroup>
+              <CLabel htmlFor="registration_number">Registration number</CLabel>
+              <CInput
+                id="registration_number"
+                name='registration_number'
+                placeholder="Enter registration number"
+                value={this.state.registration_number}
                 onChange={this.handleChange}
                 required />
             </CFormGroup>
@@ -310,8 +322,6 @@ class WorkerDetail extends Component {
               <CInputFile id="personal_declaration" name="personal_declaration" onChange={this.handleFileUpload}
               />
             </CFormGroup>
-
-
             <CFormGroup>
               <CButton type="submit" color="dark" variant="outline" block>Save changes</CButton>
             </CFormGroup>

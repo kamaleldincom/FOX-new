@@ -1,8 +1,8 @@
 import { RepresentationService } from '../services'
 
 const repr = new RepresentationService
-const getWorkerList = () => {
-    return repr.displaySimpleList('workers', null, false)
+const getWorkerList = (params = null, additional = false) => {
+    return repr.displaySimpleList('workers', params, additional)
 }
 
 const getWorker = () => {
