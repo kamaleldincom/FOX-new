@@ -75,16 +75,6 @@ const getDashboardLayout = (userRole = "Dum", projectId = null) => {
               to: "/contractor-application-status",
               icon: "",
             },
-            {
-              _tag: "CSidebarNavTitle",
-              _children: ["WORKS"]
-            },
-            {
-              _tag: "CSidebarNavItem",
-              name: "Workflow",
-              to: "/contactor/work/status",
-              icon: "cil-av-timer",
-            },
           ],
           header_nav: [
             {
