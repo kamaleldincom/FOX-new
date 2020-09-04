@@ -53,7 +53,8 @@ class ProposalSubmit extends Component {
 
   render = () => {
     return (
-      this.state.status === "Created"
+      // this.state.status === "Created" || this.state.status === "Rejected"
+      ['Created', 'Rejected'].includes(this.state.status)
         ?
         <CRow>
           <CCol>
