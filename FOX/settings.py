@@ -26,23 +26,23 @@ env = environ.Env(
 environ.Env.read_env()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = env("DEBUG")
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env("SECRET_KEY")
 
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    env('HOST_NAME'),
-    env('HOST_NAME_ALT'),
+    env("HOST_NAME"),
+    env("HOST_NAME_ALT"),
 ]  # localhost, s2b host, aws
 
-MEDIA_ROOT = env('MEDIA_ROOT')
+MEDIA_ROOT = env("MEDIA_ROOT")
 
 # Application definition
 
@@ -77,7 +77,7 @@ ROOT_URLCONF = "FOX.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["/back/templates/back/", ],
+        "DIRS": ["/back/templates/back/",],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -103,7 +103,7 @@ DATABASES = {
         "USER": "postgres",
         "HOST": "db",  # set in docker-compose.yml
         "PORT": 5432,  # default postgres port
-        "PASSWORD": env('POSTGRESQL_PASS'),
+        "PASSWORD": env("POSTGRESQL_PASS"),
     }
 }
 
@@ -140,8 +140,8 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 

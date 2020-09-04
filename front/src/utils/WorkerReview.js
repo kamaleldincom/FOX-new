@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { FoxApiService } from '../services'
 import { getProfileFetch } from '../actions'
 import {
-  CLabel,
   CButton,
   CListGroup,
   CListGroupItem,
@@ -76,7 +75,6 @@ class WorkerReview extends Component {
   }
 
   render = () => {
-    console.log(this.state);
     return (
       <Suspense fallback={loading}>
         <CListGroup flush>

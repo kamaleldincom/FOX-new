@@ -16,6 +16,7 @@ const ProjectPTW = React.lazy(() => import('./views/projects/ProjectPTW'))
 const ProjectUploadDocs = React.lazy(() => import('./views/projects/ProjectUploadDocs'))
 const ContractorCreate = React.lazy(() => import('./views/contractors/ContractorCreate'))
 const ContractorDetail = React.lazy(() => import('./views/contractors/ContractorDetail'))
+const ContractorWorkersReview = React.lazy(() => import('./views/workers/ContractorWorkersReview'))
 const DocumentList = React.lazy(() => import('./views/documents/DocumentList'))
 const DocumentCreate = React.lazy(() => import('./views/documents/DocumentCreate'))
 const DocumentDetail = React.lazy(() => import('./views/documents/DocumentDetail'))
@@ -45,6 +46,7 @@ const routes = [
   { path: '/contractors', name: 'Contractors', component: ContractorList, exact: true },
   { path: '/contractors/new', name: 'New', component: ContractorCreate, exact: true },
   { path: '/contractors/:id', name: 'Detail', component: ContractorDetail, exact: true },
+  { path: '/contractors/:id/workers_review', name: 'Workers Review', component: ContractorWorkersReview, exact: true },
   { path: '/managers', name: 'Managers', component: ClientManagerList, exact: true },
   { path: '/managers/new', name: 'New', component: ClientManagerCreate, exact: true },
   { path: '/managers/:id', name: 'Details', component: ClientManagerDetail, exact: true },
