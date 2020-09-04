@@ -8,25 +8,13 @@ class DocumentListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Document
-        fields = ["id", "name", "project_name", "target_type", "url_to_doc", "filename"]
+        fields = ["id", "name", "project_name", "url_to_doc", "filename"]
 
     def get_filename(self, obj):
         return obj.file.name
 
 
 class DocumentSerializer(serializers.ModelSerializer):
-    target_type_choices = serializers.SerializerMethodField()
-
     class Meta:
         model = Document
-        fields = [
-            "name",
-            "file",
-            "project",
-            "target_type",
-            "url_to_doc",
-            "target_type_choices",
-        ]
-
-    def get_target_type_choices(self, obj):
-        return obj.TargetType.choices
+        fields = "__all__"

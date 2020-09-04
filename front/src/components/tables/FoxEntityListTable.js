@@ -22,7 +22,6 @@ class FoxEntityListTable extends Component {
   }
 
   render = () => {
-    console.log(this.props);
     return (
       <CRow>
         <CCol>

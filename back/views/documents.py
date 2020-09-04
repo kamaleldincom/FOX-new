@@ -11,7 +11,7 @@ class DocumentList(generics.ListAPIView):
     serializer_class = DocumentListSerializer
 
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["project_id", "target_type"]
+    filterset_fields = ["project_id"]
 
 
 class DocumentCreate(generics.CreateAPIView):

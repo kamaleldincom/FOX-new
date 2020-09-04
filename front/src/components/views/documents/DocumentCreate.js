@@ -24,19 +24,12 @@ const uploadOptions = [
   { id: 2, name: "File upload" }
 ]
 
-const targetTypes = [
-  { id: -1, target_type: "Choose target type" },
-  { id: "Contractor", target_type: "Contractor" },
-  { id: "Worker", target_type: "Worker" }
-]
-
 class DocumentCreate extends Component {
 
   state = {
     name: "",
     file: "",
     project: this.props.match.params.id,
-    target_type: -1,
     url_to_doc: "",
     upload_option: 1,
     error: false
@@ -56,31 +49,25 @@ class DocumentCreate extends Component {
   handleSubmit = async event => {
     event.preventDefault();
 
-    if (parseInt(this.state.target_type) === -1) {
-      this.setState({
-        error: 'Target type was not selected! Please, choose target type form the list'
-      })
-    } else {
-      this.requestData = this.state;
-      delete this.requestData.error;
-      delete this.requestData.upload_option;
-      this.formData = new FormData
-      Object.entries(this.requestData).forEach(([key, value]) => {
-        this.formData.append(key, value);
-      })
-      await foxApi.createEntityWithFile('documents', this.formData)
-        .then(() => {
-          this.props.history.goBack()
-        },
-          (error) => {
-            console.error(error);
-            this.setState({
-              error: 'Document creation failed!' +
-                ' Please check your input and try again!' +
-                ' In case this problem repeats, please contact your administrator!'
-            })
+    this.requestData = this.state;
+    delete this.requestData.error;
+    delete this.requestData.upload_option;
+    this.formData = new FormData
+    Object.entries(this.requestData).forEach(([key, value]) => {
+      this.formData.append(key, value);
+    })
+    await foxApi.createEntityWithFile('documents', this.formData)
+      .then(() => {
+        this.props.history.goBack()
+      },
+        (error) => {
+          console.error(error);
+          this.setState({
+            error: 'Document creation failed!' +
+              ' Please check your input and try again!' +
+              ' In case this problem repeats, please contact your administrator!'
           })
-    }
+        })
   }
 
   componentDidMount = async () => {
@@ -143,25 +130,6 @@ class DocumentCreate extends Component {
                   required />
               </CFormGroup>
             }
-
-            <CFormGroup>
-              <CLabel htmlFor="target_type">Target Type</CLabel>
-              <CSelect
-                id="target_type"
-                name="target_type"
-                placeholder="Choose target type"
-                value={this.state.target_type}
-                onChange={this.handleChange}
-                required
-              >
-                {targetTypes.map((option) => {
-                  return (
-                    <option key={option.id} value={option.id}>{option.target_type}</option>
-                  )
-                }
-                )}
-              </CSelect>
-            </CFormGroup>
             <CFormGroup>
               <CButton type="submit" color="dark" variant="outline" block>Create Document</CButton>
             </CFormGroup>
