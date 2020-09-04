@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
 import {
   CBadge,
   CCard,
@@ -20,6 +22,7 @@ class FoxEntityListTable extends Component {
   }
 
   render = () => {
+    console.log(this.props);
     return (
       <CRow>
         <CCol>
@@ -29,12 +32,17 @@ class FoxEntityListTable extends Component {
               <CCardTitle>
                 {this.props.tableName}
               </CCardTitle>
-              <CLink
-                className="btn btn-outline-success"
-                to={`${this.props.match.url}/new`}
-              >
-                Add new
-              </CLink>
+              {this.props.tableName === "Projects" && this.props.role === "Contr"
+                ?
+                null
+                :
+                <CLink
+                  className="btn btn-outline-success"
+                  to={`${this.props.match.url}/new`}
+                >
+                  Add new
+                </CLink>
+              }
             </CCardHeader>
             <CCardBody>
               <CDataTable
@@ -64,7 +72,10 @@ class FoxEntityListTable extends Component {
       </CRow >
     )
   }
-
 }
 
-export default FoxEntityListTable
+const mapStateToProps = state => ({
+  role: state.currentUser.role
+})
+
+export default connect(mapStateToProps, null)(FoxEntityListTable)

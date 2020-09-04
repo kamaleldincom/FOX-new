@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react'
+import { connect } from 'react-redux'
 import {
   Redirect,
   Route,
@@ -15,7 +16,7 @@ const loading = (
 
 const Page404 = React.lazy(() => import('../pages/Page404'));
 
-const FoxContent = () => {
+const FoxContent = (props) => {
   return (
     <main className="c-main">
       <CContainer fluid>
@@ -35,6 +36,12 @@ const FoxContent = () => {
                   )} />
               )
             })}
+            {props.role === "CliMan"
+              ?
+              <Redirect from="/" to="/approvals" />
+              :
+              <Redirect from="/" to="/projects" />
+            }
             <>
               <Page404 />
             </>
@@ -45,4 +52,8 @@ const FoxContent = () => {
   )
 }
 
-export default React.memo(FoxContent)
+const mapStateToProps = state => ({
+  role: state.currentUser.role
+})
+
+export default connect(mapStateToProps, null)(React.memo(FoxContent))
