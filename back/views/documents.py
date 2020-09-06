@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from rest_framework import generics
 from rest_framework.views import APIView
-from back.models import Document, Project
+from back.models import Document
 from back.serializers import DocumentSerializer, DocumentListSerializer
 from back.logger import log
 from django_filters.rest_framework import DjangoFilterBackend
@@ -36,6 +36,7 @@ class DocumentDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class DocumentDownload(APIView):
     def get(self, request, pk, format=None):
+        log(log.DEBUG, "DocumentDownload.get id:[%d]", pk)
         document = Document.objects.get(pk=pk)
         document.file.open("rb")
         response = HttpResponse(

@@ -1,6 +1,6 @@
 from django.db.models import F
 from rest_framework import generics
-from back.models import Approval, Project, FoxUser, ClientManager
+from back.models import Approval, Project, ClientManager
 from back.serializers import ApprovalSerializer, ApprovalListSerializer
 
 
