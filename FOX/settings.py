@@ -77,7 +77,7 @@ ROOT_URLCONF = "FOX.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["/back/templates/back/",],
+        "DIRS": ["/back/templates/back/",],  # noqa E231
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
