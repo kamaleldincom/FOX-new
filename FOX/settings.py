@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "back",
+    "back.apps.BackConfig",
     "rest_framework",
     "corsheaders",
     "django_rest_passwordreset",
@@ -163,6 +163,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
+
+DISPLAY_FILE_KEY = env("DISPLAY_FILE_KEY")
 
 JWT_AUTH = {
     "JWT_ENCODE_HANDLER": "rest_framework_jwt.utils.jwt_encode_handler",

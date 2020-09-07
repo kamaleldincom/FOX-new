@@ -19,6 +19,8 @@ from .documents import (  # noqa F401
     DocumentDetail,
     DocumentCreate,
     DocumentDownload,
+    DocumentDisplayPermission,
+    download_file_to_display,
 )  # noqa F401
 from .worker_documents import (  # noqa F401
     WorkerDocumentList,
