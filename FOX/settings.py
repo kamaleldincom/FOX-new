@@ -22,28 +22,31 @@ env = environ.Env(
     MEDIA_ROOT=(str, os.path.join(BASE_DIR, "local_files")),
     HOST_NAME=(str, "localhost"),
     HOST_NAME_ALT=(str, "127.0.0.1"),
-    EMAIL_REGISTER_LINK_FORMAT=(str, "http://127.0.0.1:8000/#/register?token={}&username={}")
+    EMAIL_REGISTER_LINK_FORMAT=(
+        str,
+        "http://127.0.0.1:8000/#/register?token={}&username={}",
+    ),
 )
 environ.Env.read_env()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = env("DEBUG")
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env("SECRET_KEY")
 
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    env('HOST_NAME'),
-    env('HOST_NAME_ALT'),
+    env("HOST_NAME"),
+    env("HOST_NAME_ALT"),
 ]  # localhost, s2b host, aws
 
-MEDIA_ROOT = env('MEDIA_ROOT')
+MEDIA_ROOT = env("MEDIA_ROOT")
 
 # Application definition
 
@@ -55,7 +58,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "back",
+    "back.apps.BackConfig",
     "rest_framework",
     "corsheaders",
     "django_rest_passwordreset",
@@ -78,7 +81,7 @@ ROOT_URLCONF = "FOX.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["/back/templates/back/", ],
+        "DIRS": ["/back/templates/back/",],  # noqa E231
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -98,11 +101,11 @@ WSGI_APPLICATION = "FOX.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": env('DB_MAIN_NAME'),
-        "USER": env('DB_MAIN_USER'),
-        "HOST": env('DB_MAIN_HOST'),
-        "PORT": env('DB_MAIN_PORT'),
-        "PASSWORD": env('DB_MAIN_PASSWORD'),
+        "NAME": env("DB_MAIN_NAME"),
+        "USER": env("DB_MAIN_USER"),
+        "HOST": env("DB_MAIN_HOST"),
+        "PORT": env("DB_MAIN_PORT"),
+        "PASSWORD": env("DB_MAIN_PASSWORD"),
     }
 }
 
@@ -136,15 +139,15 @@ CORS_ORIGIN_WHITELIST = ("http://localhost:8000",)
 CORS_ALLOW_CREDENTIALS = True
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_USE_TLS = True
-EMAIL_PORT = env('EMAIL_PORT')
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_EMAIL_FROM = env('EMAIL_EMAIL_FROM')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = env("EMAIL_PORT")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_EMAIL_FROM = env("EMAIL_EMAIL_FROM")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_REGISTER_LINK_FORMAT = env('EMAIL_REGISTER_LINK_FORMAT')
+EMAIL_REGISTER_LINK_FORMAT = env("EMAIL_REGISTER_LINK_FORMAT")
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -164,6 +167,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
+
+DISPLAY_FILE_KEY = env("DISPLAY_FILE_KEY")
 
 JWT_AUTH = {
     "JWT_ENCODE_HANDLER": "rest_framework_jwt.utils.jwt_encode_handler",

@@ -15,6 +15,9 @@ class WorkerList(generics.ListAPIView):
         if user.role == "Contr":
             return Worker.objects.filter(contractor=user)
         contractor_id = self.request.query_params.get("contractor_id", None)
+        project_id = self.request.query_params.get("project_id", None)
+        if project_id:
+            return Worker.objects.filter(projects__id=project_id)
         if contractor_id:
             contractor = Contractor.objects.get(pk=contractor_id)
             return Worker.objects.filter(contractor=contractor)
@@ -31,7 +34,10 @@ class WorkerDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Worker.objects.filter(contractor=user)
+
+        if user.role == "Contr":
+            return Worker.objects.filter(contractor=user)
+        return Worker.objects.filter(contractor__company=user.company)
 
 
 class WorkerDocDownload(APIView):

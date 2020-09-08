@@ -1,5 +1,3 @@
-import { $CombinedState } from "redux";
-
 const SERVER_ADDRESS = `${window.location.origin}/`
 
 class FoxApiService {
@@ -219,6 +217,12 @@ class FoxApiService {
         let url = `${this.apiBase}documents/downloads/${id}/`;
         const res = await this.getDoc(url = url);
         return res.blob();
+    }
+
+    getDisplayPermission = async (id) => {
+        let url = `${this.apiBase}documents/display/permission/${id}`;
+        const res = await this.get(url = url);
+        return res;
     }
 
     downloadWorkerDocument = async (worker_id, doc_type) => {

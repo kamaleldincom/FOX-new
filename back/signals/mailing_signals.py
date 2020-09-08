@@ -1,6 +1,5 @@
 # from django.contrib.auth.models import User
 from django.conf import settings
-
 from django.core.mail import EmailMultiAlternatives
 from django.dispatch import receiver
 from django.template.loader import render_to_string
@@ -27,7 +26,11 @@ def password_reset_token_created(
     """
     # send an e-mail to the user
 
-    log(log.WARNING, "send an e-mail to the user [%s]", reset_password_token.user.username)
+    log(
+        log.WARNING,
+        "send an e-mail to the user [%s]",
+        reset_password_token.user.username,
+    )
 
     # URL_FORMAT = "http://46.101.221.249:8000/#/register?token={}&username={}"
     # URL_FORMAT = "http://127.0.0.1:8000/#/register?token={}&username={}"

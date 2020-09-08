@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import post_save
-from back.services import send_mail_on_creation
+from back.signals.mailing_signals import send_mail_on_creation
 from django.contrib.auth import get_user_model
 
 FoxUser = get_user_model()

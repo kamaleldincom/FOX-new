@@ -54,12 +54,10 @@ class ProjectUploadDocs extends Component {
   handleFileUpload = event => {
     console.log("initila state", this.state);
     const { upload_files } = this.state;
-    console.log("before", upload_files);
     upload_files[event.target.name] = event.target.files[0];
-    console.log("before", upload_files);
     this.setState({
       upload_files: upload_files
-    }, console.log(this.state));
+    });
   }
 
   handleSubmit = async event => {

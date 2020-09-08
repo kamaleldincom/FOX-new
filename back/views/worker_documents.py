@@ -3,7 +3,6 @@ from rest_framework import generics
 from rest_framework.views import APIView
 from back.models import WorkerDocument
 from back.serializers import WorkerDocumentSerializer, WorkerDocumentListSerializer
-from back.logger import log
 from django_filters.rest_framework import DjangoFilterBackend
 
 

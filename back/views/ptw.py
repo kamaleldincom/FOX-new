@@ -10,6 +10,7 @@ def ptw(request, pk):
         {"name": worker.name, "identification_number": worker.card_number_id}
         for worker in project.workers.all()
     ]
+    submitted = not project.status == Project.Status.created
     context = {
         "company": project.company.name,
         "start_date": project.start_date,
@@ -28,6 +29,9 @@ def ptw(request, pk):
         "contractor": project.contractor.username,
         "contractor_company": project.contractor.related_company,
         "workers": workers,
-        "responsible_person": project.responsible_person.name,
+        "responsible_person": project.responsible_person.name
+        if project.responsible_person
+        else "",
+        "submitted": submitted,
     }
     return render(request, "back/ptw.html", context=context)
