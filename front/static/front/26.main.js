@@ -1,2 +1,159 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[26],{750:function(e,t,r){"use strict";r.r(t);var n=r(1),o=r.n(n),c=r(166),a=r(95),u=r(165),i=r(632),s=r.n(i);function l(e){return(l="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function f(e,t,r,n,o,c,a){try{var u=e[c](a),i=u.value}catch(e){return void r(e)}u.done?t(i):Promise.resolve(i).then(n,o)}function p(e){return function(){var t=this,r=arguments;return new Promise((function(n,o){var c=e.apply(t,r);function a(e){f(c,n,o,a,u,"next",e)}function u(e){f(c,n,o,a,u,"throw",e)}a(void 0)}))}}function h(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function m(e,t){return(m=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}function y(e){var t=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(e){return!1}}();return function(){var r,n=w(e);if(t){var o=w(this).constructor;r=Reflect.construct(n,arguments,o)}else r=n.apply(this,arguments);return b(this,r)}}function b(e,t){return!t||"object"!==l(t)&&"function"!=typeof t?d(e):t}function d(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function w(e){return(w=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function k(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}var v=new(r(29).a),g=function(e){!function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&m(e,t)}(r,e);var t=y(r);function r(){var e;h(this,r);for(var n=arguments.length,c=new Array(n),a=0;a<n;a++)c[a]=arguments[a];return k(d(e=t.call.apply(t,[this].concat(c))),"state",{workers:[],error:!1}),k(d(e),"handleCheck",(function(t){var r=e.state.workers;t.target.checked?r.push(parseInt(t.target.value)):r.splice(r.indexOf(parseInt(t.target.value)),1),e.setState({workers:r})})),k(d(e),"handleSubmit",function(){var t=p(regeneratorRuntime.mark((function t(r){var n,o;return regeneratorRuntime.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:return r.preventDefault(),n=e.state.workers,o={workers:n},t.next=5,v.patchEntityOf("projects",e.props.match.params.id,o).then((function(){e.props.history.goBack()}),(function(t){console.error(t),e.setState({error:"Workers assignment failed! Please check your input and try again! In case this problem repeats, please contact your administrator!"})}));case 5:case"end":return t.stop()}}),t)})));return function(e){return t.apply(this,arguments)}}()),k(d(e),"componentDidMount",p(regeneratorRuntime.mark((function t(){return regeneratorRuntime.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:return t.next=2,e.props.getProfileFetch().then((function(){return e.props.getWorkerList()})).then((function(){return v.getDetailsOf("projects",e.props.match.params.id)})).then((function(t){return e.setState({workers:t.workers})}));case 2:case"end":return t.stop()}}),t)})))),k(d(e),"render",(function(){return o.a.createElement(u.P,null,o.a.createElement(u.k,null,o.a.createElement(u.v,{onSubmit:e.handleSubmit},o.a.createElement(s.a,null),o.a.createElement(u.w,null,o.a.createElement("h4",null,"Please, choose workers you want to assign for this project"),e.props.workers?e.props.workers.map((function(t){var r=e.state.workers;return o.a.createElement(u.w,{key:"fg-".concat(t.id),variant:"checkbox",className:"checkbox d-flex"},o.a.createElement(u.E,{key:"cb-".concat(t.id),id:t.id,name:t.id,value:t.id,onChange:e.handleCheck,checked:r.includes(t.id)}),o.a.createElement(u.K,{key:"lb-".concat(t.id),variant:"checkbox",className:"form-check-label mr-4",htmlFor:t.id},t.name))})):null),o.a.createElement(u.w,null,o.a.createElement(u.e,{type:"submit",color:"dark",variant:"outline",block:!0},"Save changes")),e.state.error?o.a.createElement("p",null,e.state.error):null)))})),e}return r}(n.Component);t.default=Object(a.b)((function(e){return{workers:e.entityListTable.tableData,company:e.currentUser.company,contractor:e.currentUser.id}}),(function(e){return{getProfileFetch:function(){return e(Object(c.g)())},getWorkerList:function(){return e(Object(c.i)())}}}))(g)}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[26],{
+
+/***/ "./src/components/views/workers/ContractorWorkersReview.js":
+/*!*****************************************************************!*\
+  !*** ./src/components/views/workers/ContractorWorkersReview.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions */ "./src/actions/index.js");
+/* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../utils */ "./src/utils/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+var ContractorWorkersReview = /*#__PURE__*/function (_Component) {
+  _inherits(ContractorWorkersReview, _Component);
+
+  var _super = _createSuper(ContractorWorkersReview);
+
+  function ContractorWorkersReview() {
+    var _this;
+
+    _classCallCheck(this, ContractorWorkersReview);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      current_worker_id: "",
+      current_worker_info: ""
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleWorkerSelect", function (event) {
+      _this.state.current_worker_id === event.target.name ? _this.setState({
+        current_worker_id: ""
+      }) : _this.setState({
+        current_worker_id: event.target.name
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "componentDidMount", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this.props.getProfileFetch().then(function () {
+                return _this.props.getWorkerList({
+                  contractor_id: _this.props.match.params.id
+                }, false);
+              });
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    })));
+
+    _defineProperty(_assertThisInitialized(_this), "render", function () {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCol"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCard"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCardHeader"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Workers")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCardBody"], null, _this.props.workers ? _this.props.workers.map(function (worker, idx) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCard"], {
+          key: "card-".concat(idx),
+          className: "mb-0"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCardHeader"], {
+          key: "ch-".concat(idx),
+          id: worker.id
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+          key: "h5-".concat(idx),
+          className: "m-0 p-0"
+        }, worker.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+          key: "h6-".concat(idx),
+          className: "m-0 p-0"
+        }, worker.position_in_company), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
+          key: "btn-".concat(idx),
+          block: true,
+          color: "link",
+          className: "text-left m-0 p-0",
+          id: worker.id,
+          value: worker.id,
+          name: worker.id,
+          onClick: _this.handleWorkerSelect
+        }, "Display Details")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCollapse"], {
+          key: "clps-".concat(idx),
+          show: _this.state.current_worker_id === worker.id.toString()
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCardBody"], {
+          key: "cbody-".concat(idx)
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils__WEBPACK_IMPORTED_MODULE_4__["WorkerReview"], {
+          workerId: worker.id
+        }))));
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "The contractor hasn't attached any workers yet.")))));
+    });
+
+    return _this;
+  }
+
+  return ContractorWorkersReview;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    workers: state.entityListTable.tableData
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    getProfileFetch: function getProfileFetch() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getProfileFetch"])());
+    },
+    getWorkerList: function getWorkerList(params, additional) {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getWorkerList"])(params, additional));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(ContractorWorkersReview));
+
+/***/ })
+
+}]);
 //# sourceMappingURL=26.main.js.map

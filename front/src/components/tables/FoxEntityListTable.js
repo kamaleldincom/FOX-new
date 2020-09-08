@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import {
   CBadge,
   CCard,
@@ -12,13 +11,13 @@ import {
   CRow,
   CLink
 } from '@coreui/react'
-
+import WorkStatusDropdown from './WorkStatusDropdown'
 
 
 class FoxEntityListTable extends Component {
 
   alertOnClick = (e) => {
-    this.props.history.push(`${this.props.match.url}/${e.id}`)
+    // this.props.history.push(`${this.props.match.url}/${e.id}`)
   }
 
   render = () => {
@@ -47,20 +46,35 @@ class FoxEntityListTable extends Component {
               <CDataTable
                 items={this.props.tableData ? this.props.tableData : []}
                 fields={this.props.fields ? this.props.fields : []}
+                clickableRows
                 hover
                 striped
                 bordered
+                sorter
+                footer
+                tableFilter
+                columnFilter
                 size="sm"
                 itemsPerPage={10}
+                itemsPerPageSelect
                 pagination
                 onRowClick={this.alertOnClick}
                 scopedSlots={{
-                  'status':
+                  'application_status':
                     (item) => (
                       <td>
-                        <CBadge color={this.props.getBadge(item.status)}>
-                          {item.status}
+                        <CBadge color={this.props.getBadge(item.application_status)}>
+                          {item.application_status}
                         </CBadge>
+                      </td>
+                    ),
+                  'work_status':
+                    (item) => (
+                      <td>
+                        <CBadge color={this.props.getBadge(item.work_status)}>
+                          {item.work_status}
+                        </CBadge>
+                        <WorkStatusDropdown key={item.id} item={item} {...this.props} />
                       </td>
                     )
                 }}
@@ -76,5 +90,7 @@ class FoxEntityListTable extends Component {
 const mapStateToProps = state => ({
   role: state.currentUser.role
 })
+
+
 
 export default connect(mapStateToProps, null)(FoxEntityListTable)
