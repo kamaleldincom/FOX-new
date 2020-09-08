@@ -58,7 +58,7 @@ class DocumentCreate extends Component {
     })
     await foxApi.createEntityWithFile('documents', this.formData)
       .then(() => {
-        this.props.history.goBack()
+        this.props.history.push(`/projects/${this.props.match.params.id}/documents`)
       },
         (error) => {
           console.error(error);

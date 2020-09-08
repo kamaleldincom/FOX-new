@@ -53,8 +53,41 @@ class ProjectCreate extends Component {
     })
   }
 
-  handleSubmit = async event => {
+  silenceSubmit = event => {
     event.preventDefault();
+  }
+
+  handleCreateProject = async () => {
+    await this.handleSubmit()
+      .then(() => {
+        this.props.history.goBack()
+      })
+      .catch((error) => {
+        console.error(error);
+        this.setState({
+          error: 'Project creation failed!' +
+            ' Please check your input and try again!' +
+            ' In case this problem repeats, please contact your administrator!'
+        })
+      })
+  }
+
+  handleDocumentCreationRedirect = async () => {
+    await this.handleSubmit()
+      .then(data => {
+        this.props.history.push(`/projects/${data.id}/documents/new`)
+      })
+      .catch((error) => {
+        console.error(error);
+        this.setState({
+          error: 'Project creation failed!' +
+            ' Please check your input and try again!' +
+            ' In case this problem repeats, please contact your administrator!'
+        })
+      })
+  }
+
+  handleSubmit = async () => {
     console.log(this.state);
     if (parseInt(this.state.contractor) < 0) {
       this.setState({
@@ -63,17 +96,7 @@ class ProjectCreate extends Component {
     } else {
       this.formData = this.state;
       delete this.formData.error;
-      await foxApi.createEntityOf('projects', this.formData).then(() => {
-        this.props.history.goBack()
-      },
-        (error) => {
-          console.error(error);
-          this.setState({
-            error: 'Project creation failed!' +
-              ' Please check your input and try again!' +
-              ' In case this problem repeats, please contact your administrator!'
-          })
-        })
+      return await foxApi.createEntityOf('projects', this.formData)
     }
   }
 
@@ -87,7 +110,7 @@ class ProjectCreate extends Component {
       <CRow>
         <CCol>
           <CForm
-            onSubmit={this.handleSubmit}
+            onSubmit={this.silenceSubmit}
           >
             <DjangoCSRFToken />
             <CFormGroup>
@@ -259,7 +282,8 @@ class ProjectCreate extends Component {
               </CFormGroup>
             </CFormGroup>
             <CFormGroup>
-              <CButton type="submit" color="dark" variant="outline" block>Create Project</CButton>
+              <CButton onClick={this.handleDocumentCreationRedirect} color="dark" variant="outline" block>Create Project and go to document creation</CButton>
+              {/* <CButton onClick={this.handleCreateProject} color="dark" variant="outline" block>Create Project</CButton> */}
             </CFormGroup>
             {this.state.error
               ? <p>{this.state.error}</p>
