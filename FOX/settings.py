@@ -22,6 +22,10 @@ env = environ.Env(
     MEDIA_ROOT=(str, os.path.join(BASE_DIR, "local_files")),
     HOST_NAME=(str, "localhost"),
     HOST_NAME_ALT=(str, "127.0.0.1"),
+    EMAIL_REGISTER_LINK_FORMAT=(
+        str,
+        "http://127.0.0.1:8000/#/register?token={}&username={}",
+    ),
 )
 environ.Env.read_env()
 
@@ -92,18 +96,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "FOX.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "HOST": "db",  # set in docker-compose.yml
-        "PORT": 5432,  # default postgres port
-        "PASSWORD": env("POSTGRESQL_PASS"),
+        "NAME": env("DB_MAIN_NAME"),
+        "USER": env("DB_MAIN_USER"),
+        "HOST": env("DB_MAIN_HOST"),
+        "PORT": env("DB_MAIN_PORT"),
+        "PASSWORD": env("DB_MAIN_PASSWORD"),
     }
 }
 
@@ -137,13 +139,15 @@ CORS_ORIGIN_WHITELIST = ("http://localhost:8000",)
 CORS_ALLOW_CREDENTIALS = True
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_USE_TLS = True
-EMAIL_PORT = 587
+EMAIL_PORT = env("EMAIL_PORT")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_EMAIL_FROM = env("EMAIL_EMAIL_FROM")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+EMAIL_REGISTER_LINK_FORMAT = env("EMAIL_REGISTER_LINK_FORMAT")
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/

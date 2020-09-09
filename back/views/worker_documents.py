@@ -35,6 +35,7 @@ class WorkerDocumentDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class WorkerDocumentDownload(APIView):
     def get(self, request, pk, format=None):
+        log(log.DEBUG, "WorkerDocumentDownload.get id:[%d]", pk)
         document = WorkerDocument.objects.get(pk=pk)
         document.file.open("rb")
         response = HttpResponse(

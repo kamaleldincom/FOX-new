@@ -1,18 +1,19 @@
 version: "3.8"
 services:
   db:
-    image: postgres
+    build: ./db
     container_name: db
     volumes:
       - db_data:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: mypassword
+      POSTGRES_PASSWORD: BBqfxDg1hQ+AaRbT12knLBFoLuvGwbZ+sGmCCk0FDGvO
     ports:
       - 5432:5432
+
   web:
     build: .
     container_name: web
-    command: python manage.py runserver 0.0.0.0:8000
+    command: ./start_server.sh
     volumes:
       - .:/usr/src/app
     ports:
