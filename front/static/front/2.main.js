@@ -890,22 +890,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 var ProjectList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectList */ "./src/components/views/projects/ProjectList.js"));
+  return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./views/projects/ProjectList */ "./src/components/views/projects/ProjectList.js"));
 });
 var ApprovalList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./views/approvals/ApprovalList */ "./src/components/views/approvals/ApprovalList.js"));
+  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./views/approvals/ApprovalList */ "./src/components/views/approvals/ApprovalList.js"));
 });
 var ApprovalDetail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ./views/approvals/ApprovalDetail */ "./src/components/views/approvals/ApprovalDetail.js"));
 });
 var ContractorList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./views/contractors/ContractorList */ "./src/components/views/contractors/ContractorList.js"));
+  return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./views/contractors/ContractorList */ "./src/components/views/contractors/ContractorList.js"));
 });
 var CurrentWorksList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./views/current_works/CurrentWorksList */ "./src/components/views/current_works/CurrentWorksList.js"));
+  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./views/current_works/CurrentWorksList */ "./src/components/views/current_works/CurrentWorksList.js"));
 });
 var ClientManagerList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/managers/ClientManagerList */ "./src/components/views/managers/ClientManagerList.js"));
+  return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./views/managers/ClientManagerList */ "./src/components/views/managers/ClientManagerList.js"));
 });
 var ClientManagerCreate = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(17)]).then(__webpack_require__.bind(null, /*! ./views/managers/ClientManagerCreate */ "./src/components/views/managers/ClientManagerCreate.js"));
@@ -944,7 +944,7 @@ var ContractorWorkersReview = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___de
   return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ./views/workers/ContractorWorkersReview */ "./src/components/views/workers/ContractorWorkersReview.js"));
 });
 var DocumentList = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./views/documents/DocumentList */ "./src/components/views/documents/DocumentList.js"));
+  return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/documents/DocumentList */ "./src/components/views/documents/DocumentList.js"));
 });
 var DocumentCreate = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ./views/documents/DocumentCreate */ "./src/components/views/documents/DocumentCreate.js"));
@@ -1035,7 +1035,7 @@ var routes = [{
   exact: true
 }, {
   path: '/approvals/:id',
-  name: 'Details',
+  name: 'Approval Details',
   component: ApprovalDetail,
   exact: true
 }, {
@@ -1055,7 +1055,7 @@ var routes = [{
   exact: true
 }, {
   path: '/contractors/:id',
-  name: 'Detail',
+  name: 'Contractor Details',
   component: ContractorDetail,
   exact: true
 }, {
@@ -1075,7 +1075,7 @@ var routes = [{
   exact: true
 }, {
   path: '/managers/:id',
-  name: 'Details',
+  name: 'Manager Details',
   component: ClientManagerDetail,
   exact: true
 }, {
@@ -1090,7 +1090,7 @@ var routes = [{
   exact: true
 }, {
   path: '/workers/:id',
-  name: 'Project Details',
+  name: 'Worker Details',
   component: WorkerDetail,
   exact: true
 }];

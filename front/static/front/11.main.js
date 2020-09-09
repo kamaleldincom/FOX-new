@@ -40,6 +40,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+var loading = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  className: "pt-3 text-center"
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CSpinner"], {
+  size: "sm",
+  variant: "grow",
+  style: {
+    width: '4rem',
+    height: '4rem'
+  }
+}));
 
 var FoxEntityListTable = /*#__PURE__*/function (_Component) {
   _inherits(FoxEntityListTable, _Component);
@@ -57,10 +67,34 @@ var FoxEntityListTable = /*#__PURE__*/function (_Component) {
 
     _this = _super.call.apply(_super, [this].concat(args));
 
-    _defineProperty(_assertThisInitialized(_this), "alertOnClick", function (e) {// this.props.history.push(`${this.props.match.url}/${e.id}`)
+    _defineProperty(_assertThisInitialized(_this), "alertOnClick", function (id, e) {
+      _this.props.history.push("".concat(_this.props.match.url, "/").concat(id));
     });
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
+      var slotArray = {
+        'name': function name(item) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CButton"], {
+            color: "link",
+            onClick: function onClick(e) {
+              _this.alertOnClick(item.id, e);
+            }
+          }, item.name));
+        },
+        'application_status': function application_status(item) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CBadge"], {
+            color: _this.props.getBadge(item.application_status)
+          }, item.application_status));
+        },
+        'work_status': function work_status(item) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CBadge"], {
+            color: _this.props.getBadge(item.work_status)
+          }, item.work_status), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_WorkStatusDropdown__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
+            key: item.id,
+            item: item
+          }, _this.props)));
+        }
+      };
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CCol"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CCard"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CCardHeader"], {
         className: "d-flex justify-content-between"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CCardTitle"], null, _this.props.tableName), _this.props.tableName === "Projects" && _this.props.role === "Contr" ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CLink"], {
@@ -81,22 +115,9 @@ var FoxEntityListTable = /*#__PURE__*/function (_Component) {
         itemsPerPage: 10,
         itemsPerPageSelect: true,
         pagination: true,
-        onRowClick: _this.alertOnClick,
-        scopedSlots: {
-          'application_status': function application_status(item) {
-            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CBadge"], {
-              color: _this.props.getBadge(item.application_status)
-            }, item.application_status));
-          },
-          'work_status': function work_status(item) {
-            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CBadge"], {
-              color: _this.props.getBadge(item.work_status)
-            }, item.work_status), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_WorkStatusDropdown__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
-              key: item.id,
-              item: item
-            }, _this.props)));
-          }
-        }
+        loadingSlot: loading // onRowClick={this.alertOnClick}
+        ,
+        scopedSlots: slotArray
       })))));
     });
 
@@ -170,8 +191,7 @@ var handleClick = function handleClick(value, event) {
 
 var WorkStatusDropdown = function WorkStatusDropdown(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CDropdown"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CDropdownToggle"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    name: 'cilSettings',
-    size: 'md'
+    name: 'cilSettings'
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CDropdownMenu"], {
     className: "p-0",
     placement: "bottom-end"

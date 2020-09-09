@@ -25,7 +25,7 @@ const WorkStatusDropdown = props => {
 	return (
 		<CDropdown >
 			<CDropdownToggle>
-				<CIcon name={'cilSettings'} size={'md'} />
+				<CIcon name={'cilSettings'} />
 			</CDropdownToggle>
 			<CDropdownMenu className="p-0" placement="bottom-end">
 				{choices.map((choice) => {

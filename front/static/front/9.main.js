@@ -40,6 +40,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+var loading = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  className: "pt-3 text-center"
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CSpinner"], {
+  size: "sm",
+  variant: "grow",
+  style: {
+    width: '4rem',
+    height: '4rem'
+  }
+}));
 
 var FoxEntityListTable = /*#__PURE__*/function (_Component) {
   _inherits(FoxEntityListTable, _Component);
@@ -57,10 +67,34 @@ var FoxEntityListTable = /*#__PURE__*/function (_Component) {
 
     _this = _super.call.apply(_super, [this].concat(args));
 
-    _defineProperty(_assertThisInitialized(_this), "alertOnClick", function (e) {// this.props.history.push(`${this.props.match.url}/${e.id}`)
+    _defineProperty(_assertThisInitialized(_this), "alertOnClick", function (id, e) {
+      _this.props.history.push("".concat(_this.props.match.url, "/").concat(id));
     });
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
+      var slotArray = {
+        'name': function name(item) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CButton"], {
+            color: "link",
+            onClick: function onClick(e) {
+              _this.alertOnClick(item.id, e);
+            }
+          }, item.name));
+        },
+        'application_status': function application_status(item) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CBadge"], {
+            color: _this.props.getBadge(item.application_status)
+          }, item.application_status));
+        },
+        'work_status': function work_status(item) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CBadge"], {
+            color: _this.props.getBadge(item.work_status)
+          }, item.work_status), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_WorkStatusDropdown__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
+            key: item.id,
+            item: item
+          }, _this.props)));
+        }
+      };
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CCol"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CCard"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CCardHeader"], {
         className: "d-flex justify-content-between"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CCardTitle"], null, _this.props.tableName), _this.props.tableName === "Projects" && _this.props.role === "Contr" ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CLink"], {
@@ -81,22 +115,9 @@ var FoxEntityListTable = /*#__PURE__*/function (_Component) {
         itemsPerPage: 10,
         itemsPerPageSelect: true,
         pagination: true,
-        onRowClick: _this.alertOnClick,
-        scopedSlots: {
-          'application_status': function application_status(item) {
-            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CBadge"], {
-              color: _this.props.getBadge(item.application_status)
-            }, item.application_status));
-          },
-          'work_status': function work_status(item) {
-            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CBadge"], {
-              color: _this.props.getBadge(item.work_status)
-            }, item.work_status), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_WorkStatusDropdown__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
-              key: item.id,
-              item: item
-            }, _this.props)));
-          }
-        }
+        loadingSlot: loading // onRowClick={this.alertOnClick}
+        ,
+        scopedSlots: slotArray
       })))));
     });
 
@@ -170,8 +191,7 @@ var handleClick = function handleClick(value, event) {
 
 var WorkStatusDropdown = function WorkStatusDropdown(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CDropdown"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CDropdownToggle"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_icons_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    name: 'cilSettings',
-    size: 'md'
+    name: 'cilSettings'
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CDropdownMenu"], {
     className: "p-0",
     placement: "bottom-end"
@@ -204,10 +224,10 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
-/***/ "./src/components/views/projects/ProjectList.js":
-/*!******************************************************!*\
-  !*** ./src/components/views/projects/ProjectList.js ***!
-  \******************************************************/
+/***/ "./src/components/views/managers/ClientManagerList.js":
+/*!************************************************************!*\
+  !*** ./src/components/views/managers/ClientManagerList.js ***!
+  \************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -251,50 +271,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var getBadge = function getBadge(status) {
   switch (status) {
-    case 'Created':
-      return 'secondary';
-
-    case 'Submitted':
-      return 'warning';
-
-    case 'Approved':
+    case 'Active':
       return 'success';
 
-    case 'Rejected':
+    case 'Inactive':
+      return 'secondary';
+
+    case 'Pending':
+      return 'warning';
+
+    case 'Banned':
       return 'danger';
-
-    case 'Application processing':
-      return 'secondary';
-
-    case 'Ready to start':
-      return 'success';
-
-    case 'Works started':
-      return 'info';
-
-    case 'Works finished':
-      return 'warning';
-
-    case 'Extended':
-      return 'primary';
-
-    case 'Closed':
-      return 'dark';
 
     default:
       return 'primary';
   }
 };
 
-var ProjectList = /*#__PURE__*/function (_Component) {
-  _inherits(ProjectList, _Component);
+var alertOnClick = function alertOnClick() {
+  alert('Clicked!');
+};
 
-  var _super = _createSuper(ProjectList);
+var ClientManagerList = /*#__PURE__*/function (_Component) {
+  _inherits(ClientManagerList, _Component);
 
-  function ProjectList() {
+  var _super = _createSuper(ClientManagerList);
+
+  function ClientManagerList() {
     var _this;
 
-    _classCallCheck(this, ProjectList);
+    _classCallCheck(this, ClientManagerList);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -307,14 +313,12 @@ var ProjectList = /*#__PURE__*/function (_Component) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _this.props.setProjectId(_this.props.match.params.id);
-
-              _context.next = 3;
+              _context.next = 2;
               return _this.props.getProfileFetch().then(function () {
-                return _this.props.getProjectList();
+                return _this.props.getClientManagerList();
               });
 
-            case 3:
+            case 2:
             case "end":
               return _context.stop();
           }
@@ -324,22 +328,23 @@ var ProjectList = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tables_FoxEntityListTable__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({}, _this.props, {
-        tableName: "Projects",
-        fields: _this.props.projectTable.fields,
+        tableName: "Managers",
+        fields: _this.props.clientManagerTable.fields,
         getBadge: getBadge,
-        tableData: _this.props.projectTable.tableData
+        tableData: _this.props.clientManagerTable.tableData,
+        onRowClick: alertOnClick
       }));
     });
 
     return _this;
   }
 
-  return ProjectList;
+  return ClientManagerList;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    projectTable: state.entityListTable
+    clientManagerTable: state.entityListTable
   };
 };
 
@@ -348,16 +353,13 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     getProfileFetch: function getProfileFetch() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getProfileFetch"])());
     },
-    getProjectList: function getProjectList() {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getProjectList"])());
-    },
-    setProjectId: function setProjectId() {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["setProjectId"])());
+    getClientManagerList: function getClientManagerList() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getClientManagerList"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(ProjectList));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(ClientManagerList));
 
 /***/ })
 

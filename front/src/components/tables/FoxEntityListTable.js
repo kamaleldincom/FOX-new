@@ -9,18 +9,58 @@ import {
   CCol,
   CDataTable,
   CRow,
-  CLink
+  CLink,
+  CSpinner,
+  CButton
 } from '@coreui/react'
 import WorkStatusDropdown from './WorkStatusDropdown'
 
 
+const loading = (
+  <div className="pt-3 text-center">
+    <CSpinner size="sm" variant="grow" style={{ width: '4rem', height: '4rem' }} />
+  </div>
+)
+
 class FoxEntityListTable extends Component {
 
-  alertOnClick = (e) => {
-    // this.props.history.push(`${this.props.match.url}/${e.id}`)
+  alertOnClick = (id, e) => {
+    this.props.history.push(`${this.props.match.url}/${id}`)
   }
 
+
+
   render = () => {
+    const slotArray = {
+      'name':
+        (item) => (
+          <td>
+            <CButton
+              color="link"
+              onClick={e => { this.alertOnClick(item.id, e) }}
+            >
+              {item.name}
+            </CButton>
+          </td>
+        ),
+      'application_status':
+        (item) => (
+          <td>
+            <CBadge color={this.props.getBadge(item.application_status)}>
+              {item.application_status}
+            </CBadge>
+          </td>
+        ),
+      'work_status':
+        (item) => (
+          <td>
+            <CBadge color={this.props.getBadge(item.work_status)}>
+              {item.work_status}
+            </CBadge>
+            <WorkStatusDropdown key={item.id} item={item} {...this.props} />
+          </td>
+        )
+    }
     return (
       <CRow>
         <CCol>
@@ -58,26 +98,9 @@ class FoxEntityListTable extends Component {
                 itemsPerPage={10}
                 itemsPerPageSelect
                 pagination
-                onRowClick={this.alertOnClick}
-                scopedSlots={{
-                  'application_status':
-                    (item) => (
-                      <td>
-                        <CBadge color={this.props.getBadge(item.application_status)}>
-                          {item.application_status}
-                        </CBadge>
-                      </td>
-                    ),
-                  'work_status':
-                    (item) => (
-                      <td>
-                        <CBadge color={this.props.getBadge(item.work_status)}>
-                          {item.work_status}
-                        </CBadge>
-                        <WorkStatusDropdown key={item.id} item={item} {...this.props} />
-                      </td>
-                    )
-                }}
+                loadingSlot={loading}
+                // onRowClick={this.alertOnClick}
+                scopedSlots={slotArray}
               />
             </CCardBody>
           </CCard>
