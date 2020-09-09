@@ -13,7 +13,7 @@ services:
   web:
     build: .
     container_name: web
-    command: ./start_server.sh
+    command: bash ./start_server.sh
     volumes:
       - .:/usr/src/app
     ports:
