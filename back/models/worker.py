@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 def project_docs_path(instance, filename):
@@ -6,6 +7,33 @@ def project_docs_path(instance, filename):
 
 
 class Worker(models.Model):
+    class Position(models.TextChoices):
+        welder = "Weld", _("Welder")
+        fitter = "Fit", _("Fitter")
+        helper = "Help", _("Helper")
+        rigger = "Rig", _("Rigger")
+        safety_officer = "SafeOff", _("Safety Officer")
+        plumber = "Plumb", _("Plumber")
+        technician = "Tech", _("Technician")
+        electrician = "Electr", _("Electrician")
+        flooring_installer = "FlrInst", _("Flooring Installer")
+        hvac_snstaller = "HVACInst", _("HVAC Installer")
+        insulation_installer = "InsInst", _("Insulation Installer")
+        surveyor = "Surv", _("Surveyor")
+        Brick_manson = "BrcMans", _("Brick Manson")
+        roofer = "Roof", _("Roofer")
+        site_supervisor = "SiteSuper", _("Site Supervisor")
+        other = "Other", _("Other")
+
+    class TradeCompetency(models.TextChoices):
+        civil = "Civ", _("Civil")
+        electrical = "Electr", _("Electrical")
+        mechanical = "Mech", _("Mechanical")
+        infra = "Infra", _("Infra")
+        general = "Gen", _("General")
+        safety = "Safe", _("Safety")
+        security = "Secur", _("Security")
+
     name = models.CharField(max_length=64)
     contractor = models.ForeignKey(
         "Contractor", on_delete=models.CASCADE, related_name="workers"
@@ -26,7 +54,12 @@ class Worker(models.Model):
     )
     competency_issued_by = models.CharField(max_length=64, null=True, blank=True)
     registration_number = models.CharField(max_length=64, null=True, blank=True)
-    position_in_company = models.CharField(max_length=64)
+    position_in_company = models.CharField(
+        max_length=16, choices=Position.choices, default=Position.other
+    )
+    trade_competency = models.CharField(
+        max_length=16, choices=TradeCompetency.choices, default=TradeCompetency.general
+    )
     safety_quiz_answer = models.FileField(
         upload_to=project_docs_path, null=True, blank=True
     )

@@ -22,7 +22,6 @@ class ExtendedListTable extends Component {
   }
 
   render = () => {
-    console.log(this.props);
     return (
       <CRow>
         <CCol>
