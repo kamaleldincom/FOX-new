@@ -3,7 +3,9 @@ from django.utils.translation import gettext_lazy as _
 
 
 def project_docs_path(instance, filename):
-    return "project_{0}/workers/{1}".format(instance.contractor.id, filename)
+    return "contractors/contractor_{0}/workers/{1}".format(
+        instance.contractor.id, filename
+    )
 
 
 class Worker(models.Model):
@@ -66,6 +68,7 @@ class Worker(models.Model):
     personal_declaration = models.FileField(
         upload_to=project_docs_path, null=True, blank=True
     )
+    deleted = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Worker"

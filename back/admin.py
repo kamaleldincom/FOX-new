@@ -176,10 +176,7 @@ class CompanyAdmin(admin.ModelAdmin):
 
 
 class WorkerAdmin(admin.ModelAdmin):
-    list_display = (
-        "name",
-        "contractor",
-    )
+    list_display = ("name", "contractor", "deleted")
 
 
 class ProjectAdmin(admin.ModelAdmin):
