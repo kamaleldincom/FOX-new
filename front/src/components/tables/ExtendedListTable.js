@@ -12,15 +12,17 @@ import {
   CLink,
   CButton
 } from '@coreui/react'
+import WorkStatusDropdown from './WorkStatusDropdown'
 
 
-class FoxEntityListTable extends Component {
+class ExtendedListTable extends Component {
 
   alertOnClick = (id, e) => {
     this.props.history.push(`${this.props.match.url}/${id}`)
   }
 
   render = () => {
+    console.log(this.props);
     return (
       <CRow>
         <CCol>
@@ -59,28 +61,39 @@ class FoxEntityListTable extends Component {
                 itemsPerPageSelect
                 pagination
                 scopedSlots={{
-                  'username':
+                  'name':
                     (item) => (
                       <td>
-                        <CButton
+                        {/* <CButton
                           color="link"
                           onClick={e => { this.alertOnClick(item.id, e) }}
                         >
-                          {item.username}
-                        </CButton>
+                          {item.name}
+                        </CButton> */}
+                        <CLink
+                          to={`${this.props.match.url}/${item.id}`}
+                        >
+                          {item.name}
+                        </CLink>
                       </td>
                     ),
-                  'project_name':
+                  'application_status':
                     (item) => (
                       <td>
-                        <CButton
-                          color="link"
-                          onClick={e => { this.alertOnClick(item.id, e) }}
-                        >
-                          {item.project_name}
-                        </CButton>
+                        <CBadge color={this.props.getBadge(item.application_status)}>
+                          {item.application_status}
+                        </CBadge>
                       </td>
                     ),
+                  'work_status':
+                    (item) => (
+                      <td className="d-flex align-items-center">
+                        <CBadge color={this.props.getBadge(item.work_status)}>
+                          {item.work_status}
+                        </CBadge>
+                        <WorkStatusDropdown key={item.id} item={item} {...this.props} />
+                      </td>
+                    )
                 }}
               />
             </CCardBody>
@@ -97,4 +110,4 @@ const mapStateToProps = state => ({
 
 
 
-export default connect(mapStateToProps, null)(FoxEntityListTable)
+export default connect(mapStateToProps, null)(ExtendedListTable)

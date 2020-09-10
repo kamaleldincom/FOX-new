@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import FoxEntityListTable from '../../tables/FoxEntityListTable'
-import { getProfileFetch, getProjectList, setProjectId } from '../../../actions'
 import { connect } from 'react-redux'
+import { ExtendedListTable } from '../../tables'
+
+import { getProfileFetch, getProjectList, setProjectId } from '../../../actions'
 
 
 const getBadge = status => {
@@ -31,7 +32,7 @@ class ProjectList extends Component {
 
   render = () => {
     return (
-      <FoxEntityListTable
+      <ExtendedListTable
         {...this.props}
         tableName='Projects'
         fields={this.props.projectTable.fields}
