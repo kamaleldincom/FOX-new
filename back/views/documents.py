@@ -1,4 +1,4 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, Http404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework.views import APIView
@@ -31,12 +31,15 @@ class DocumentDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class DocumentDownload(APIView):
     def get(self, request, pk, format=None):
-        document = DocumentFileService(pk, Document)
-        response = HttpResponse(
-            document.read(), content_type="application/octet-stream"
-        )
-        response["Content-Disposition"] = f"attachment; filename={document.name}"
-        return response
+        try:
+            document = DocumentFileService(pk, Document)
+            response = HttpResponse(
+                document.read(), content_type="application/octet-stream"
+            )
+            response["Content-Disposition"] = f"attachment; filename={document.name}"
+            return response
+        except FileNotFoundError:
+            raise Http404("File not found.")
 
 
 class DocumentDisplayPermission(APIView):
@@ -50,7 +53,12 @@ class DocumentDisplayPermission(APIView):
 
 
 def download_file_to_display(request, part1, part2, part3):
-    file_reader = DocumentFileJWTReader(part1=part1, part2=part2, part3=part3)
-    response = HttpResponse(file_reader.read(), content_type="application/octet-stream")
-    response["Content-Disposition"] = f"attachment; filename={file_reader.name}"
-    return response
+    try:
+        file_reader = DocumentFileJWTReader(part1=part1, part2=part2, part3=part3)
+        response = HttpResponse(
+            file_reader.read(), content_type="application/octet-stream"
+        )
+        response["Content-Disposition"] = f"attachment; filename={file_reader.name}"
+        return response
+    except FileNotFoundError:
+        raise Http404("File not found.")
