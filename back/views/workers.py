@@ -46,7 +46,6 @@ class WorkerDetail(generics.RetrieveUpdateDestroyAPIView):
         worker = get_object_or_404(queryset, pk=pk)
         worker.deleted = True
         worker.save()
-        print("WORKER DELETED!!!!!!!!!!!!!!!!!!!")
         return JsonResponse(
             data={"response": f"worker {worker.name} deleted."},
             status=status.HTTP_204_NO_CONTENT,

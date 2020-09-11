@@ -137,9 +137,9 @@ const getDashboardLayout = (userRole = "Dum", projectId = null) => {
               _children: [
                 {
                   _tag: "FoxHeaderNavLink",
-                  id: "head_nav_link_works",
-                  to: "/works",
-                  linktext: "Current Works",
+                  id: "head_nav_link_projects",
+                  to: "/projects",
+                  linktext: "Projects",
                 },
               ],
             },
