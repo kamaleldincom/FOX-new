@@ -21,6 +21,7 @@ const DocumentList = React.lazy(() => import('./views/documents/DocumentList'))
 const DocumentCreate = React.lazy(() => import('./views/documents/DocumentCreate'))
 const DocumentDetail = React.lazy(() => import('./views/documents/DocumentDetail'))
 const SafetyVideo = React.lazy(() => import('./views/safety/Video'))
+const SafetyPresets = React.lazy(() => import('./views/safety/SafetyPresets'))
 const WorkersAssign = React.lazy(() => import('./views/workers/Assign'))
 const CompanyDocuments = React.lazy(() => import('./views/company/CompanyDocuments'))
 const ProposalSubmit = React.lazy(() => import('./views/projects/ProposalSubmit'))
@@ -34,7 +35,8 @@ const routes = [
   { path: '/projects/:id/documents', name: 'Documents', component: DocumentList, exact: true },
   { path: '/projects/:id/documents/new', name: 'New', component: DocumentCreate, exact: false },
   { path: '/projects/:id/documents/:doc_id', name: 'Document Details', component: DocumentDetail, exact: false },
-  { path: '/projects/:id/safety_video', name: 'Safety Video', component: SafetyVideo, exact: true },
+  { path: '/safety/presets', name: 'Safety Presets', component: SafetyPresets, exact: true },
+  { path: '/safety/video', name: 'Safety Video', component: SafetyVideo, exact: true },
   { path: '/projects/:id/assign_workers', name: 'Assign Workers', component: WorkersAssign, exact: true },
   { path: '/projects/:id/submit_proposal', name: 'Submit Proposal', component: ProposalSubmit, exact: true },
   { path: '/projects/:id/related_documents', name: 'Related Documents', component: ProjectUploadDocs, exact: true },

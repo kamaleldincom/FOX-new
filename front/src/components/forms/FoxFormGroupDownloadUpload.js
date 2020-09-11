@@ -29,8 +29,8 @@ const FoxFormGroupDownloadUpload = props => {
             value={props.downloadValue}
             onClick={props.downloadFile}
           >
-            Download scan
-      				</CButton>
+            {props.buttonText ? props.buttonText : 'Download scan'}
+          </CButton>
         </CCol>
         <CCol md="5">
           <CLabel htmlFor={props.uploadInfo}>{`New ${makeLabel(props.uploadInfo)}`}</CLabel>

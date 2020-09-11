@@ -63,6 +63,8 @@ urlpatterns = [
     ),
     path("approvals/", views.ApprovalList.as_view()),
     path("approvals/<int:pk>/", views.ApprovalDetail.as_view()),
+    path("safety_templates/<int:pk>/", views.CompanyDocUpload.as_view()),
+    path("download_template/<str:doctype>/", views.CompanyDocDownload.as_view()),
     # get  change_project_status
     # projects/id/workflow/confirm_proposal get change_project_status
     # projects/id/workflow/works_finished get change_project_status

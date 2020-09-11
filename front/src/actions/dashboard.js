@@ -72,6 +72,19 @@ const getDashboardLayout = (userRole = "Dum", projectId = null) => {
                 }
               ],
             },
+            {
+              _tag: "CHeaderNavItem",
+              id: "head_nav_safety_video",
+              className: "px-3",
+              _children: [
+                {
+                  _tag: "FoxHeaderNavLink",
+                  id: "head_nav_link_safety_video",
+                  to: "/safety/video",
+                  linktext: "Safety",
+                }
+              ],
+            },
           ],
         };
         break;
@@ -110,6 +123,19 @@ const getDashboardLayout = (userRole = "Dum", projectId = null) => {
                   to: "/projects",
                   linktext: "Projects",
                 },
+              ],
+            },
+            {
+              _tag: "CHeaderNavItem",
+              id: "head_nav_safety_video",
+              className: "px-3",
+              _children: [
+                {
+                  _tag: "FoxHeaderNavLink",
+                  id: "head_nav_link_safety_video",
+                  to: "/safety/video",
+                  linktext: "Safety",
+                }
               ],
             },
           ],
@@ -165,29 +191,42 @@ const getDashboardLayout = (userRole = "Dum", projectId = null) => {
                 }
               ],
             },
+            // {
+            //   _tag: "CHeaderNavItem",
+            //   id: "head_nav_approvals",
+            //   className: "px-3",
+            //   _children: [
+            //     {
+            //       _tag: "FoxHeaderNavLink",
+            //       id: "head_nav_link_approvals",
+            //       to: "/approvals",
+            //       linktext: "Approvals",
+            //     }
+            //   ],
+            // },
+            // {
+            //   _tag: "CHeaderNavItem",
+            //   id: "head_nav_approvals",
+            //   className: "px-3",
+            //   _children: [
+            //     {
+            //       _tag: "FoxHeaderNavLink",
+            //       id: "head_nav_link_documents",
+            //       to: "/documents",
+            //       linktext: "Documents",
+            //     }
+            //   ],
+            // },
             {
               _tag: "CHeaderNavItem",
-              id: "head_nav_approvals",
+              id: "head_nav_safety_presets",
               className: "px-3",
               _children: [
                 {
                   _tag: "FoxHeaderNavLink",
-                  id: "head_nav_link_approvals",
-                  to: "/approvals",
-                  linktext: "Approvals",
-                }
-              ],
-            },
-            {
-              _tag: "CHeaderNavItem",
-              id: "head_nav_approvals",
-              className: "px-3",
-              _children: [
-                {
-                  _tag: "FoxHeaderNavLink",
-                  id: "head_nav_link_documents",
-                  to: "/documents",
-                  linktext: "Documents",
+                  id: "head_nav_link_safety_presets",
+                  to: "/safety/presets",
+                  linktext: "Safety",
                 }
               ],
             },

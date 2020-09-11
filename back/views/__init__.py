@@ -30,3 +30,4 @@ from .worker_documents import (  # noqa F401
 )  # noqa F401
 from .workflow import ProposalSubmit  # noqa F401
 from .approvals import ApprovalList, ApprovalDetail  # noqa F401
+from .company_doc_templates import CompanyDocUpload, CompanyDocDownload  # noqa F401

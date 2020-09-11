@@ -186,11 +186,6 @@ class DocumentDetail extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//   }
-// }
-
 const mapDispatchToProps = dispatch => ({
   getProfileFetch: () => dispatch(getProfileFetch())
 })

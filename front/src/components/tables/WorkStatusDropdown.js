@@ -33,7 +33,7 @@ const WorkStatusDropdown = props => {
             className="table-dropdown-icon"
             name={'cilSettings'} />
         </CDropdownToggle>
-        <CDropdownMenu className="p-0" placement="bottom-end">
+        <CDropdownMenu className="p-0 foxtable-dropdown-menu" placement="bottom-end">
           {choices.map((choice, idx) => {
             const [value, name] = Object.entries(choice)[0]
             return <CDropdownItem

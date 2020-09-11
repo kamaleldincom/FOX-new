@@ -13,3 +13,4 @@ from .worker_document import (  # noqa F401
     WorkerDocumentListSerializer,
 )
 from .approval import ApprovalListSerializer, ApprovalSerializer  # noqa F401
+from .company import CompanyDocsSerializer

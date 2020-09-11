@@ -236,8 +236,26 @@ class FoxApiService {
         return res
     }
 
+    getCompanySafetyInfo = (company) => {
+        let url = `${this.apiBase}safety_templates/${company}/`;
+        const res = this.get(url = url);
+        return res
+    }
+
+    patchCompanySafetyInfo = (company, data) => {
+        let url = `${this.apiBase}safety_templates/${company}/`;
+        const res = this.patchWithFiles(url = url, data = data);
+        return res
+    }
+
     downloadDocument = async (id) => {
         let url = `${this.apiBase}documents/downloads/${id}/`;
+        const res = await this.getDoc(url = url);
+        return res.blob();
+    }
+
+    downloadSafetyTemplate = async (doctype) => {
+        let url = `${this.apiBase}download_template/${doctype}/`;
         const res = await this.getDoc(url = url);
         return res.blob();
     }

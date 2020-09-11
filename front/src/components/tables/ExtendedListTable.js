@@ -63,12 +63,6 @@ class ExtendedListTable extends Component {
                   'name':
                     (item) => (
                       <td>
-                        {/* <CButton
-                          color="link"
-                          onClick={e => { this.alertOnClick(item.id, e) }}
-                        >
-                          {item.name}
-                        </CButton> */}
                         <CLink
                           to={`${this.props.match.url}/${item.id}`}
                         >
