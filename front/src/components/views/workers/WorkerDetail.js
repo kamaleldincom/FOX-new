@@ -8,16 +8,19 @@ import {
   CLabel, CRow,
   CCol,
   CButton,
-  CInputFile
 } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
 import { FoxApiService } from '../../../services'
+import { FoxFormGroupInputDownloadUpload, FoxSelectFormGroup, FoxReactSelectFormGroup, FoxFormGroupDownloadUpload } from '../../forms'
+import { positions, tradeCompetencies } from './optionLists'
+import { DeleteModal } from '../../modals'
 
 const foxApi = new FoxApiService();
 
 class WorkerDetail extends Component {
 
   state = {
+    modal: false,
     name: "",
     contractor: "",
     birthday: "",
@@ -33,6 +36,7 @@ class WorkerDetail extends Component {
     personal_declaration: "",
     special_competency: "",
     special_competency_scan: "",
+    competency_issued_by: "",
     registration_number: "",
     error: false,
     filename: "",
@@ -59,6 +63,7 @@ class WorkerDetail extends Component {
     event.preventDefault();
     this.requestData = this.state;
     const { upload_files } = this.requestData
+    delete this.requestData.modal
     delete this.requestData.upload_files
     delete this.requestData.error;
     delete this.requestData.filename;
@@ -72,12 +77,10 @@ class WorkerDetail extends Component {
     this.formData = new FormData
     Object.entries(this.requestData).forEach(([key, value]) => {
       this.formData.append(key, value);
-    })
-
+    });
     upload_files ? Object.entries(upload_files).forEach(([key, value]) => {
       this.formData.append(key, value)
-    }) : null
-    this.formData.entries().forEach(([key, value]) => console.log(key, value))
+    }) : null;
     await foxApi.patchEntityWithFiles('workers', this.props.match.params.id, this.formData)
       .then(() => {
         this.props.history.goBack()
@@ -90,6 +93,22 @@ class WorkerDetail extends Component {
               ' In case this problem repeats, please contact your administrator!'
           })
         })
+  }
+
+  confirmDelete = async () => {
+    await foxApi.deleteEntityOf('workers', this.props.match.params.id)
+      .then(() => {
+        this.props.history.goBack()
+      },
+        (error) => {
+          console.error(error);
+          this.setState({
+            error: 'Could not delete worker!' +
+              ' Please check your input and try again!' +
+              ' In case this problem repeats, please contact your administrator!'
+          })
+        })
+    console.log(`delete worker ${this.props.match.params.id}`);
   }
 
   downloadFile = async (e) => {
@@ -116,6 +135,12 @@ class WorkerDetail extends Component {
           })
       }
     )
+  }
+
+  setModalVisibility = () => {
+    this.setState({
+      modal: !this.state.modal
+    })
   }
 
   componentDidMount = async () => {
@@ -153,6 +178,18 @@ class WorkerDetail extends Component {
                 required
               />
             </CFormGroup>
+            <FoxReactSelectFormGroup
+              options={positions}
+              inputInfo="position_in_company"
+              inputValue={this.state.position_in_company}
+              handleChange={this.handleReactSelect}
+            />
+            <FoxSelectFormGroup
+              options={tradeCompetencies}
+              inputInfo="trade_competency"
+              inputValue={this.state.trade_competency}
+              handleChange={this.handleChange}
+            />
             <CFormGroup>
               <CLabel htmlFor="card_number_id">Card number ID</CLabel>
               <CInput
@@ -162,104 +199,43 @@ class WorkerDetail extends Component {
                 value={this.state.card_number_id}
                 onChange={this.handleChange}
                 required />
-
             </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="license_number">License Number</CLabel>
-              <CInput
-                id="license_number"
-                name='license_number'
-                placeholder="Enter worker name"
-                value={this.state.license_number}
-                onChange={this.handleChange}
-                required />
-              <CLabel htmlFor="license_scan">License scan</CLabel>
-              <CButton
-                variant="outline"
-                color="success"
-                id="license_scan"
-                name="license_scan"
-                value={this.state.license_scan}
-                onClick={this.downloadFile}
-              >
-                Download
-      				</CButton>
-              <CLabel htmlFor="license_scan">Upload new file</CLabel>
-              <CInputFile id="license_scan" name="license_scan" onChange={this.handleFileUpload}
-              />
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="passport">Passport</CLabel>
-              <CInput
-                id="passport"
-                name='passport'
-                placeholder="Enter passport info"
-                value={this.state.passport}
-                onChange={this.handleChange}
-                required />
-              <CLabel htmlFor="passport_scan">Passport scan</CLabel>
-              <CButton
-                variant="outline"
-                color="success"
-                id="passport_scan"
-                name="passport_scan"
-                value={this.state.passport_scan}
-                onClick={this.downloadFile}
-              >
-                Download
-      				</CButton>
-              <CLabel htmlFor="license_scan">Upload new file</CLabel>
-              <CInputFile id="passport_scan" name="passport_scan" onChange={this.handleFileUpload}
-              />
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="safety_green_card">Safety Green Card</CLabel>
-              <CInput
-                id="safety_green_card"
-                name='safety_green_card'
-                placeholder="Enter card info"
-                value={this.state.safety_green_card}
-                onChange={this.handleChange}
-              />
-              <CLabel htmlFor="safety_green_card_scan">Safety green card scan</CLabel>
-              <CButton
-                variant="outline"
-                color="success"
-                id="safety_green_card_scan"
-                name="safety_green_card_scan"
-                value={this.state.safety_green_card_scan}
-                onClick={this.downloadFile}
-              >
-                Download
-      				</CButton>
-              <CLabel htmlFor="license_scan">Upload new file</CLabel>
-              <CInputFile id="safety_green_card_scan" name="safety_green_card_scan" onChange={this.handleFileUpload}
-              />
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="special_competency">Special competency</CLabel>
-              <CInput
-                id="special_competency"
-                name='special_competency'
-                placeholder="Enter competency"
-                value={this.state.special_competency}
-                onChange={this.handleChange}
-                required />
-              <CLabel htmlFor="special_competency_scan">Special competency scan</CLabel>
-              <CButton
-                variant="outline"
-                color="success"
-                id="special_competency_scan"
-                name="special_competency_scan"
-                value={this.state.special_competency_scan}
-                onClick={this.downloadFile}
-              >
-                Download
-      				</CButton>
-              <CLabel htmlFor="license_scan">Upload new file</CLabel>
-              <CInputFile id="special_competency_scan" name="special_competency_scan" onChange={this.handleFileUpload}
-              />
-            </CFormGroup>
+            <FoxFormGroupInputDownloadUpload
+              inputValue={this.state.license_number}
+              downloadValue={this.state.license_scan}
+              handleChange={this.handleChange}
+              handleFileUpload={this.handleFileUpload}
+              inputInfo="license_number"
+              uploadInfo="license_scan"
+              downloadFile={this.downloadFile}
+            />
+            <FoxFormGroupInputDownloadUpload
+              inputValue={this.state.passport}
+              downloadValue={this.state.passport_scan}
+              handleChange={this.handleChange}
+              handleFileUpload={this.handleFileUpload}
+              inputInfo="passport"
+              uploadInfo="passport_scan"
+              downloadFile={this.downloadFile}
+            />
+            <FoxFormGroupInputDownloadUpload
+              inputValue={this.state.safety_green_card}
+              downloadValue={this.state.safety_green_card_scan}
+              handleChange={this.handleChange}
+              handleFileUpload={this.handleFileUpload}
+              inputInfo="safety_green_card"
+              uploadInfo="safety_green_card_scan"
+              downloadFile={this.downloadFile}
+            />
+            <FoxFormGroupInputDownloadUpload
+              inputValue={this.state.special_competency}
+              downloadValue={this.state.special_competency_scan}
+              handleChange={this.handleChange}
+              handleFileUpload={this.handleFileUpload}
+              inputInfo="special_competency"
+              uploadInfo="special_competency_scan"
+              downloadFile={this.downloadFile}
+            />
             <CFormGroup>
               <CLabel htmlFor="competency_issued_by">Competency issued by</CLabel>
               <CInput
@@ -268,7 +244,7 @@ class WorkerDetail extends Component {
                 placeholder="Enter legal entity"
                 value={this.state.competency_issued_by}
                 onChange={this.handleChange}
-                required />
+              />
             </CFormGroup>
             <CFormGroup>
               <CLabel htmlFor="registration_number">Registration number</CLabel>
@@ -278,58 +254,41 @@ class WorkerDetail extends Component {
                 placeholder="Enter registration number"
                 value={this.state.registration_number}
                 onChange={this.handleChange}
-                required />
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="position_in_company">Position in Company</CLabel>
-              <CInput
-                id="position_in_company"
-                name='position_in_company'
-                placeholder="Enter worker position"
-                value={this.state.position_in_company}
-                onChange={this.handleChange}
               />
             </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="safety_quiz_answer">Safety quiz answer</CLabel>
-              <CButton
-                variant="outline"
-                color="success"
-                id="safety_quiz_answer"
-                name="safety_quiz_answer"
-                value={this.state.safety_quiz_answer}
-                onClick={this.downloadFile}
-              >
-                Download
-      				</CButton>
-              <CLabel htmlFor="license_scan">Upload new file</CLabel>
-              <CInputFile id="safety_quiz_answer" name="safety_quiz_answer" onChange={this.handleFileUpload}
-              />
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="personal_declaration">Personal declaration</CLabel>
-              <CButton
-                variant="outline"
-                color="success"
-                id="personal_declaration"
-                name="personal_declaration"
-                value={this.state.personal_declaration}
-                onClick={this.downloadFile}
-              >
-                Download
-      				</CButton>
-              <CLabel htmlFor="license_scan">Upload new file</CLabel>
-              <CInputFile id="personal_declaration" name="personal_declaration" onChange={this.handleFileUpload}
-              />
-            </CFormGroup>
+            <FoxFormGroupDownloadUpload
+              inputValue={this.state.safety_quiz_answer}
+              downloadValue={this.state.safety_quiz_answer_scan}
+              handleChange={this.handleChange}
+              handleFileUpload={this.handleFileUpload}
+              inputInfo="safety_quiz_answer"
+              uploadInfo="safety_quiz_answer_scan"
+              downloadFile={this.downloadFile}
+            />
+            <FoxFormGroupDownloadUpload
+              inputValue={this.state.personal_declaration}
+              downloadValue={this.state.personal_declaration_scan}
+              handleChange={this.handleChange}
+              handleFileUpload={this.handleFileUpload}
+              inputInfo="personal_declaration"
+              uploadInfo="personal_declaration_scan"
+              downloadFile={this.downloadFile}
+            />
             <CFormGroup>
               <CButton type="submit" color="dark" variant="outline" block>Save changes</CButton>
             </CFormGroup>
+            <CButton color="danger" variant="outline" onClick={this.setModalVisibility} block>Delete Worker</CButton>
             {this.state.error
               ? <p>{this.state.error}</p>
               : null
             }
           </CForm>
+          <DeleteModal
+            setModalVisibility={this.setModalVisibility}
+            danger={this.state.modal}
+            entity="worker"
+            confirmDelete={this.confirmDelete}
+          />
         </CCol>
       </CRow >
     )

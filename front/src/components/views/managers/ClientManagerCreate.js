@@ -113,7 +113,7 @@ class ClientManagerCreate extends Component {
               />
             </CFormGroup>
             <CFormGroup>
-              <CLabel htmlFor="target_type">Client Manager Position</CLabel>
+              <CLabel htmlFor="position">Client Manager Position</CLabel>
               <CSelect
                 id="position"
                 name="position"

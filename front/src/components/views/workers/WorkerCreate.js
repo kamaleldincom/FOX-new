@@ -1,17 +1,20 @@
 import React, { Component } from 'react'
-import { getProfileFetch } from '../../../actions'
+import DjangoCSRFToken from 'django-react-csrftoken'
 import { connect } from 'react-redux'
 import {
   CForm,
   CFormGroup,
   CInput,
-  CLabel, CRow,
+  CLabel,
+  CRow,
   CCol,
   CButton,
   CInputFile
 } from "@coreui/react";
-import DjangoCSRFToken from 'django-react-csrftoken'
+import { getProfileFetch } from '../../../actions'
 import { FoxApiService } from '../../../services'
+import { FoxFormGroupWithUpload, FoxSelectFormGroup, FoxReactSelectFormGroup } from '../../forms'
+import { positions, tradeCompetencies } from './optionLists'
 
 const foxApi = new FoxApiService();
 
@@ -28,19 +31,27 @@ class WorkerCreate extends Component {
     passport_scan: "",
     safety_green_card: "",
     safety_green_card_scan: "",
-    position_in_company: "",
+    position_in_company: -1,
     safety_quiz_answer: "",
     personal_declaration: "",
     special_competency: "",
     special_competency_scan: "",
+    competency_issued_by: "",
     registration_number: "",
+    trade_competency: -1,
     error: false
   }
 
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
-    });
+    }, () => console.log(this.state));
+  }
+
+  handleReactSelect = (option, event) => {
+    this.setState({
+      [event.name]: option.value
+    }, () => console.log(this.state))
   }
 
   handleFileUpload = event => {
@@ -51,24 +62,37 @@ class WorkerCreate extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    this.requestData = this.state;
-    delete this.requestData.error;
-    this.formData = new FormData
-    Object.entries(this.requestData).forEach(([key, value]) => {
-      this.formData.append(key, value);
-    })
-    await foxApi.createEntityWithFile('workers', this.formData)
-      .then(() => {
-        this.props.history.goBack()
-      },
-        (error) => {
-          console.error(error);
-          this.setState({
-            error: 'Worker creation failed!' +
-              ' Please check your input and try again!' +
-              ' In case this problem repeats, please contact your administrator!'
+    if (this.state.position_in_company === -1) {
+      this.setState({
+        error: 'Worker position in company was not selected! Please, choose position form the list'
+      })
+    }
+    else if (this.state.trade_competency === -1) {
+      this.setState({
+        error: 'Trade competency was not selected! Please, choose competency form the list'
+      })
+    }
+    else {
+      this.requestData = this.state;
+      delete this.requestData.error;
+      this.formData = new FormData
+      Object.entries(this.requestData).forEach(([key, value]) => {
+        this.formData.append(key, value);
+      })
+      await foxApi.createEntityWithFile('workers', this.formData)
+        .then(() => {
+          this.props.history.goBack()
+        },
+          (error) => {
+            console.error(error);
+            this.setState({
+              error: 'Worker creation failed!' +
+                ' Please check your input and try again!' +
+                ' In case this problem repeats, please contact your administrator!'
+            })
           })
-        })
+    }
+
   }
 
   componentDidMount = async () => {
@@ -104,6 +128,18 @@ class WorkerCreate extends Component {
                 required
               />
             </CFormGroup>
+            <FoxReactSelectFormGroup
+              options={positions}
+              inputInfo="position_in_company"
+              inputValue={this.state.position_in_company}
+              handleChange={this.handleReactSelect}
+            />
+            <FoxSelectFormGroup
+              options={tradeCompetencies}
+              inputInfo="trade_competency"
+              inputValue={this.state.trade_competency}
+              handleChange={this.handleChange}
+            />
             <CFormGroup>
               <CLabel htmlFor="card_number_id">Card number ID</CLabel>
               <CInput
@@ -114,58 +150,34 @@ class WorkerCreate extends Component {
                 onChange={this.handleChange}
                 required />
             </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="license_number">License Number</CLabel>
-              <CInput
-                id="license_number"
-                name='license_number'
-                placeholder="Enter worker name"
-                value={this.state.license_number}
-                onChange={this.handleChange}
-                required />
-              <CLabel htmlFor="license_scan">License scan</CLabel>
-              <CInputFile id="license_scan" name="license_scan" onChange={this.handleFileUpload}
-                required />
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="passport">Passport</CLabel>
-              <CInput
-                id="passport"
-                name='passport'
-                placeholder="Enter passport info"
-                value={this.state.passport}
-                onChange={this.handleChange}
-                required />
-              <CLabel htmlFor="passport_scan">Passport scan</CLabel>
-              <CInputFile id="passport_scan" name="passport_scan" onChange={this.handleFileUpload}
-                required />
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="safety_green_card">Safety Green Card</CLabel>
-              <CInput
-                id="safety_green_card"
-                name='safety_green_card'
-                placeholder="Enter card info"
-                value={this.state.safety_green_card}
-                onChange={this.handleChange}
-                required />
-              <CLabel htmlFor="safety_green_card_scan">Safety green card scan</CLabel>
-              <CInputFile id="safety_green_card_scan" name="safety_green_card_scan" onChange={this.handleFileUpload}
-                required />
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="special_competency">Special competency</CLabel>
-              <CInput
-                id="special_competency"
-                name='special_competency'
-                placeholder="Enter competency"
-                value={this.state.special_competency}
-                onChange={this.handleChange}
-                required />
-              <CLabel htmlFor="special_competency_scan">Special competency scan</CLabel>
-              <CInputFile id="special_competency_scan" name="special_competency_scan" onChange={this.handleFileUpload}
-                required />
-            </CFormGroup>
+            <FoxFormGroupWithUpload
+              inputValue={this.state.license_number}
+              handleChange={this.handleChange}
+              handleFileUpload={this.handleFileUpload}
+              inputInfo="license_number"
+              uploadInfo="license_scan"
+            />
+            <FoxFormGroupWithUpload
+              inputValue={this.state.passport}
+              handleChange={this.handleChange}
+              handleFileUpload={this.handleFileUpload}
+              inputInfo="passport"
+              uploadInfo="passport_scan"
+            />
+            <FoxFormGroupWithUpload
+              inputValue={this.state.safety_green_card}
+              handleChange={this.handleChange}
+              handleFileUpload={this.handleFileUpload}
+              inputInfo="safety_green_card"
+              uploadInfo="safety_green_card_scan"
+            />
+            <FoxFormGroupWithUpload
+              inputValue={this.state.special_competency}
+              handleChange={this.handleChange}
+              handleFileUpload={this.handleFileUpload}
+              inputInfo="special_competency"
+              uploadInfo="special_competency_scan"
+            />
             <CFormGroup>
               <CLabel htmlFor="competency_issued_by">Competency issued by</CLabel>
               <CInput
@@ -187,16 +199,6 @@ class WorkerCreate extends Component {
                 required />
             </CFormGroup>
             <CFormGroup>
-              <CLabel htmlFor="position_in_company">Position in Company</CLabel>
-              <CInput
-                id="position_in_company"
-                name='position_in_company'
-                placeholder="Enter worker position"
-                value={this.state.position_in_company}
-                onChange={this.handleChange}
-                required />
-            </CFormGroup>
-            <CFormGroup>
               <CLabel htmlFor="safety_quiz_answer">Safety quiz answer</CLabel>
               <CInputFile id="safety_quiz_answer" name="safety_quiz_answer" onChange={this.handleFileUpload}
                 required />
@@ -206,8 +208,6 @@ class WorkerCreate extends Component {
               <CInputFile id="personal_declaration" name="personal_declaration" onChange={this.handleFileUpload}
                 required />
             </CFormGroup>
-
-
             <CFormGroup>
               <CButton type="submit" color="dark" variant="outline" block>Create Worker</CButton>
             </CFormGroup>

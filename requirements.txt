@@ -11,3 +11,4 @@ django-extensions
 pytest-django
 django-filter
 django-environ
+Pillow
