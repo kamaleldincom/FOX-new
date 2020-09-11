@@ -1,18 +1,5 @@
-import { FoxApiService } from '../services'
-
-const foxApi = new FoxApiService();
-const SERVER_ADDRESS = `${window.location.origin}`;
-
 const getDashboardLayout = (userRole = "Dum", projectId = null) => {
   return dispatch => {
-    // const url = `${SERVER_ADDRESS}/api/dashboard/`;
-    // foxApi.get(url)
-    //     .then(data => {
-    //         if (data.dashboard) {
-    //             dispatch(initiateDashboard(data.dashboard))
-    //         }
-    //     })
-
     let dashboard = null;
     switch (userRole) {
       case 'Contr':
@@ -29,48 +16,30 @@ const getDashboardLayout = (userRole = "Dum", projectId = null) => {
               _children: ["APPLICATION"]
             },
             {
-              _tag: "CSidebarNavDropdown",
-              name: "Personnel Management",
-              route: "/contractor/personal",
+              _tag: "CSidebarNavItem",
               icon: "cil-user",
-              _children: [
-                {
-                  _tag: "CSidebarNavItem",
-                  name: "1. Responsible Person",
-                  to: `/projects/${projectId}/responsible_person`,
-                },
-                {
-                  _tag: "CSidebarNavItem",
-                  name: "2. Safety",
-                  to: "safety_video",
-                },
-                {
-                  _tag: "CSidebarNavItem",
-                  name: "3. Assign Workers",
-                  to: `/projects/${projectId}/assign_workers`,
-                },
-              ],
+              name: "1. Personnel Management",
+              to: `/projects/${projectId}/assign_workers`,
             },
+            // {
+            //   _tag: "CSidebarNavItem",
+            //   name: "2. Safety",
+            //   to: "safety_video",
+            // },
             {
-              _tag: "CSidebarNavDropdown",
-              name: "Documentation",
-              route: "/contractor/general",
+              _tag: "CSidebarNavItem",
               icon: "cil-file",
-              _children: [
-                {
-                  _tag: "CSidebarNavItem",
-                  name: "1. Related docs",
-                  to: `/projects/${projectId}/related_documents`,
-                },
-                {
-                  _tag: "CSidebarNavItem",
-                  name: "2. Submit Proposal",
-                  to: `/projects/${projectId}/submit_proposal`,
-                },
-              ],
+              name: "2. Related docs",
+              to: `/projects/${projectId}/related_documents`,
             },
             {
               _tag: "CSidebarNavItem",
+              name: "3. Submit Proposal",
+              to: `/projects/${projectId}/submit_proposal`,
+            },
+            {
+              _tag: "CSidebarNavItem",
+              icon: "cil-send",
               name: "Application status",
               to: "/contractor-application-status",
               icon: "",
@@ -241,6 +210,7 @@ const getDashboardLayout = (userRole = "Dum", projectId = null) => {
         break;
     }
     dispatch(initiateDashboard(dashboard));
+
   }
 }
 

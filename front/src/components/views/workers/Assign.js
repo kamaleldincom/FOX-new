@@ -9,6 +9,7 @@ import {
   CCol,
   CButton,
   CInputCheckbox,
+  CSelect
 } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
 import { FoxApiService } from '../../../services'
@@ -19,7 +20,14 @@ class WorkerAssign extends Component {
 
   state = {
     workers: [],
+    responsible_person: -1,
     error: false,
+  }
+
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    }, () => console.log(this.state));
   }
 
   handleCheck = event => {
@@ -35,9 +43,11 @@ class WorkerAssign extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    const { workers } = this.state;
-    const workersData = { workers: workers };
-    await foxApi.patchEntityOf("projects", this.props.match.params.id, workersData)
+    const { workers, responsible_person } = this.state;
+    let requestData = { workers: workers };
+    requestData = { responsible_person, ...requestData }
+    console.log(requestData);
+    await foxApi.patchEntityOf("projects", this.props.match.params.id, requestData)
       .then(() => {
         this.props.history.goBack()
       },
@@ -55,7 +65,10 @@ class WorkerAssign extends Component {
     await this.props.getProfileFetch()
       .then(() => this.props.getWorkerList())
       .then(() => foxApi.getDetailsOf("projects", this.props.match.params.id))
-      .then(data => this.setState({ workers: data.workers }))
+      .then(data => this.setState({
+        workers: data.workers,
+        responsible_person: data.responsible_person
+      }))
   }
 
   render = () => {
@@ -64,6 +77,25 @@ class WorkerAssign extends Component {
         <CCol>
           <CForm onSubmit={this.handleSubmit}>
             <DjangoCSRFToken />
+            <CFormGroup>
+              <h4>Please, choose the responsible person among your workers.</h4>
+              <CSelect
+                id="responsible_person"
+                name="responsible_person"
+                placeholder="Choose responsible person"
+                value={this.state.responsible_person}
+                onChange={this.handleChange}
+                required
+              >
+                <option key="-1" value="-1" disabled>Choose responsible person</option>
+                {this.props.workers ? this.props.workers.map((worker) => {
+                  return (
+                    <option key={worker.id} value={worker.id}>{worker.name}</option>
+                  )
+                }) : null
+                }
+              </CSelect>
+            </CFormGroup>
             <CFormGroup>
               <h4>Please, choose workers you want to assign for this project</h4>
               {this.props.workers ?
