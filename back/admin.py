@@ -41,7 +41,10 @@ class FoxUserAdmin(UserAdmin):
                     " The user will be emailed a link allowing them to login to"
                     " the site and set their password."
                 ),
-                "fields": ("email", "username",),
+                "fields": (
+                    "email",
+                    "username",
+                ),
             },
         ),
         (
@@ -62,7 +65,10 @@ class FoxUserAdmin(UserAdmin):
                     " The user will be emailed a link allowing them to login to"
                     " the site and set their password."
                 ),
-                "fields": ("email", "username",),
+                "fields": (
+                    "email",
+                    "username",
+                ),
             },
         ),
     )
@@ -127,7 +133,10 @@ class ClientAdminInline(admin.StackedInline):
                     " The user will be emailed a link allowing them to login to"
                     " the site and set their password."
                 ),
-                "fields": ("email", "username",),
+                "fields": (
+                    "email",
+                    "username",
+                ),
             },
         ),
         (
@@ -167,10 +176,7 @@ class CompanyAdmin(admin.ModelAdmin):
 
 
 class WorkerAdmin(admin.ModelAdmin):
-    list_display = (
-        "name",
-        "contractor",
-    )
+    list_display = ("name", "contractor", "deleted")
 
 
 class ProjectAdmin(admin.ModelAdmin):
@@ -188,7 +194,7 @@ class ProjectAdmin(admin.ModelAdmin):
 
 class PermitAdmin(admin.ModelAdmin):
     model = Permit
-    list_display = ("Project", "Worker", "issue_date")
+    list_display = ("Project", "Worker", "issue_date", "active")
 
 
 class DocumentAdmin(admin.ModelAdmin):

@@ -16,9 +16,9 @@ import { FoxApiService } from '../../../services'
 
 const foxApi = new FoxApiService();
 
-const targetTypes = [
-  { id: "Contractor", target_type: "Contractor" },
-  { id: "Worker", target_type: "Worker" }
+const uploadOptions = [
+  { id: 1, name: "URL" },
+  { id: 2, name: "File upload" }
 ]
 
 class DocumentDetail extends Component {
@@ -27,9 +27,9 @@ class DocumentDetail extends Component {
     name: "",
     file: "",
     project: this.props.match.params.id,
-    target_type: -1,
     url_to_doc: "",
-    error: false
+    error: false,
+    upload_option: 2
   }
 
   handleChange = event => {
@@ -66,13 +66,19 @@ class DocumentDetail extends Component {
   handleSubmit = async event => {
     event.preventDefault();
     this.requestData = this.state;
+    if (this.requestData.upload_option === "1") {
+      this.requestData.file = ""
+    } else {
+      this.requestData.url_to_doc = ""
+    }
     delete this.requestData.error;
     delete this.requestData.upload_option;
     this.formData = new FormData
     Object.entries(this.requestData).forEach(([key, value]) => {
       this.formData.append(key, value);
     })
-    await foxApi.updateEntityOf('documents', this.props.match.params.doc_id, this.formData).then(() => {
+    this.formData.entries().forEach(entry => console.log(entry))
+    await foxApi.patchEntityWithFiles('documents', this.props.match.params.doc_id, this.formData).then(() => {
       this.props.history.goBack()
     },
       (error) => {
@@ -88,7 +94,15 @@ class DocumentDetail extends Component {
   componentDidMount = async () => {
     await this.props.getProfileFetch()
       .then(() => foxApi.getDetailsOf('documents', this.props.match.params.doc_id))
-      .then((data) => this.setState({ ...data }))
+      .then((data) => {
+        data.url_to_doc ?
+          this.setState({
+            upload_option: 1,
+            ...data
+          })
+          :
+          this.setState({ ...data })
+      })
   }
 
   render = () => {
@@ -109,8 +123,25 @@ class DocumentDetail extends Component {
                 onChange={this.handleChange}
                 required />
             </CFormGroup>
-
-            {this.state.url_to_doc ?
+            <CFormGroup>
+              <CLabel htmlFor="upload_option">File upload option</CLabel>
+              <CSelect
+                id="upload_option"
+                name="upload_option"
+                placeholder="Choose contractor"
+                value={this.state.upload_option}
+                onChange={this.handleChange}
+                required
+              >
+                {uploadOptions.map((option) => {
+                  return (
+                    <option key={option.id} value={option.id}>{option.name}</option>
+                  )
+                })
+                }
+              </CSelect>
+            </CFormGroup>
+            {this.state.upload_option == 1 ?
               <CFormGroup>
                 <CLabel htmlFor="url_to_doc">Url to document</CLabel>
                 <CInput
@@ -141,25 +172,6 @@ class DocumentDetail extends Component {
                 </CFormGroup>
               </React.Fragment>
             }
-
-            <CFormGroup>
-              <CLabel htmlFor="target_type">Target Type</CLabel>
-              <CSelect
-                id="target_type"
-                name="target_type"
-                placeholder="Choose target type"
-                value={this.state.target_type}
-                onChange={this.handleChange}
-                required
-              >
-                {targetTypes.map((option) => {
-                  return (
-                    <option key={option.id} value={option.id}>{option.target_type}</option>
-                  )
-                }
-                )}
-              </CSelect>
-            </CFormGroup>
             <CFormGroup>
               <CButton type="submit" color="dark" variant="outline" block>Update Document</CButton>
             </CFormGroup>

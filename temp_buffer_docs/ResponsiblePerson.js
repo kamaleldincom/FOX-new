@@ -48,6 +48,8 @@ class ResponsiblePerson extends Component {
   componentDidMount = async () => {
     await this.props.getProfileFetch()
       .then(() => this.props.getWorkerList())
+      .then(() => foxApi.getDetailsOf("projects", this.props.match.params.id))
+      .then(data => this.setState({ responsible_person: data.responsible_person }))
   }
 
   render = () => {
@@ -59,7 +61,7 @@ class ResponsiblePerson extends Component {
           >
             <DjangoCSRFToken />
             <CFormGroup>
-              <CLabel htmlFor="responsible_person">Please, choose the responsible person among your workers.</CLabel>
+              <h4>Please, choose the responsible person among your workers.</h4>
               <CSelect
                 id="responsible_person"
                 name="responsible_person"

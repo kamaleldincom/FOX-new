@@ -1,9 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
-# from .fox_user import FoxUser
 from django.db.models.signals import post_save
-from back.services import send_mail_on_creation
+from back.signals.mailing_signals import send_mail_on_creation
 
 from django.contrib.auth import get_user_model
 
@@ -19,6 +17,8 @@ class ClientManager(FoxUser):
         work_owner = "WorkOwn", _("Owner of Work")
         security_guards = "SecGrd", _("Security Guards")
 
+    name = models.CharField(max_length=128, null=True)
+    department = models.CharField(max_length=128, null=True)
     position = models.CharField(
         max_length=10, choices=Position.choices, default=Position.site_owner,
     )

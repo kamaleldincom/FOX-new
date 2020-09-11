@@ -1,2 +1,4 @@
-from .mailing_service import send_mail_on_creation  # noqa F401
+
 from .dashboard import get_dashboard_definition  # noqa F401
+from .document_file_service import DocumentFileService  # noqa F401
+from .file_jwt_service import DocumentFileJWTCreator, DocumentFileJWTReader  # noqa F401

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {
   CBadge,
   CCard,
@@ -8,15 +9,15 @@ import {
   CCol,
   CDataTable,
   CRow,
-  CLink
+  CLink,
+  CButton
 } from '@coreui/react'
-
 
 
 class FoxEntityListTable extends Component {
 
-  alertOnClick = (e) => {
-    this.props.history.push(`${this.props.match.url}/${e.id}`)
+  alertOnClick = (id, e) => {
+    this.props.history.push(`${this.props.match.url}/${id}`)
   }
 
   render = () => {
@@ -29,33 +30,57 @@ class FoxEntityListTable extends Component {
               <CCardTitle>
                 {this.props.tableName}
               </CCardTitle>
-              <CLink
-                className="btn btn-outline-success"
-                to={`${this.props.match.url}/new`}
-              >
-                Add new
-              </CLink>
+              {this.props.tableName === "Projects" && this.props.role === "Contr"
+                ?
+                null
+                :
+                <CLink
+                  className="btn btn-outline-success"
+                  to={`${this.props.match.url}/new`}
+                >
+                  Add new
+                </CLink>
+              }
             </CCardHeader>
             <CCardBody>
               <CDataTable
-                items={this.props.tableData}
-                fields={this.props.fields}
+                items={this.props.tableData ? this.props.tableData : []}
+                fields={this.props.fields ? this.props.fields : []}
+                clickableRows
                 hover
                 striped
                 bordered
+                sorter
+                footer
+                tableFilter
+                columnFilter
                 size="sm"
                 itemsPerPage={10}
+                itemsPerPageSelect
                 pagination
-                onRowClick={this.alertOnClick}
                 scopedSlots={{
-                  'status':
+                  'username':
                     (item) => (
                       <td>
-                        <CBadge color={this.props.getBadge(item.status)}>
-                          {item.status}
-                        </CBadge>
+                        <CButton
+                          color="link"
+                          onClick={e => { this.alertOnClick(item.id, e) }}
+                        >
+                          {item.username}
+                        </CButton>
                       </td>
-                    )
+                    ),
+                  'project_name':
+                    (item) => (
+                      <td>
+                        <CButton
+                          color="link"
+                          onClick={e => { this.alertOnClick(item.id, e) }}
+                        >
+                          {item.project_name}
+                        </CButton>
+                      </td>
+                    ),
                 }}
               />
             </CCardBody>
@@ -64,7 +89,12 @@ class FoxEntityListTable extends Component {
       </CRow >
     )
   }
-
 }
 
-export default FoxEntityListTable
+const mapStateToProps = state => ({
+  role: state.currentUser.role
+})
+
+
+
+export default connect(mapStateToProps, null)(FoxEntityListTable)

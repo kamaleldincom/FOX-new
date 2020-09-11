@@ -7,13 +7,20 @@ from .client_managers import (  # noqa F401
     ClientManagerCreate,
 )  # noqa F401
 from .contractors import ContractorList, ContractorDetail, ContractorCreate  # noqa F401
-from .workers import WorkerList, WorkerDetail, WorkerCreate  # noqa F401
+from .workers import (  # noqa F401
+    WorkerList,
+    WorkerDetail,
+    WorkerCreate,
+    WorkerDocDownload,
+)  # noqa F401
 from .ptw import ptw  # noqa F401
 from .documents import (  # noqa F401
     DocumentList,
     DocumentDetail,
     DocumentCreate,
     DocumentDownload,
+    DocumentDisplayPermission,
+    download_file_to_display,
 )  # noqa F401
 from .worker_documents import (  # noqa F401
     WorkerDocumentList,
@@ -21,3 +28,5 @@ from .worker_documents import (  # noqa F401
     WorkerDocumentCreate,
     WorkerDocumentDownload,
 )  # noqa F401
+from .workflow import ProposalSubmit  # noqa F401
+from .approvals import ApprovalList, ApprovalDetail  # noqa F401

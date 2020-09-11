@@ -3,7 +3,7 @@ import { FoxApiService, RepresentationService } from '../services'
 
 const repr = new RepresentationService
 const getProjectList = () => {
-    return repr.displaySimpleList('projects')
+    return repr.displaySimpleListWithoutStatus('projects', null, false)
 }
 
 const getProject = () => {

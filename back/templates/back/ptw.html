@@ -1895,7 +1895,7 @@
                     <p class="c3"><span class="c10">Name</span><span class="c10 c39">&nbsp;</span></p>
                 </td>
                 <td class="c93" colspan="3" rowspan="1">
-                    <p class="c1">{{contractor}}</span></p>
+                    <p class="c1">{{responsible_person}}</p>
                 </td>
                 <td class="c66 c46" colspan="2" rowspan="1">
                     <p class="c65"><span class="c47">Work Location</span></p>
@@ -1906,7 +1906,7 @@
                     <p class="c3"><span class="c9">Tel. no.:</span></p>
                 </td>
                 <td class="c93" colspan="3" rowspan="1">
-                    <p class="c1"><span class="c9"></span></p>
+                    <p class="c1"></p>
                 </td>
                 <td class="c66" colspan="2" rowspan="3">
                     <p class="c1">{{ company }}</span></p>
@@ -1920,7 +1920,7 @@
                     <p class="c3"><span class="c9">Name</span></p>
                 </td>
                 <td class="c93" colspan="3" rowspan="1">
-                    <p class="c1"><span class="c9"></span></p>
+                    <p class="c1">{{ contractor_company }}</p>
                 </td>
             </tr>
             <tr class="c118">
@@ -1949,37 +1949,82 @@
                     <p class="c3"><span class="c6">Type of work</span></p>
                 </td>
                 <td class="c102" colspan="2" rowspan="1">
-                    <p class="c3"><span class="c11">&#9744;</span><span class="c37">&nbsp;</span><span class="c9">Work
+                    <p class="c3"><span class="c11">
+                            {% if work_at_height %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c37">&nbsp;</span><span class="c9">Work
                             at height </span></p>
                 </td>
                 <td class="c80" colspan="1" rowspan="1">
-                    <p class="c3"><span class="c11">&#9744;</span><span class="c37">&nbsp;</span><span
-                            class="c9">Lifting work </span></p>
+                    <p class="c3"><span class="c11">
+                            {% if lifting_work %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c37">&nbsp;</span><span class="c9">Lifting work </span></p>
                 </td>
                 <td class="c14" colspan="2" rowspan="1">
-                    <p class="c3"><span class="c11">&#9744;</span><span class="c37">&nbsp;</span><span
-                            class="c9">Confined space</span></p>
+                    <p class="c3"><span class="c11">
+                            {% if confined_space %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c37">&nbsp;</span><span class="c9">Confined space</span></p>
                 </td>
                 <td class="c23" colspan="1" rowspan="1">
-                    <p class="c3"><span class="c11">&#9744;</span><span class="c37">&nbsp;</span><span class="c9">Hot
+                    <p class="c3"><span class="c11">
+                            {% if hot_work %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c37">&nbsp;</span><span class="c9">Hot
                             work </span></p>
                 </td>
             </tr>
             <tr class="c16">
                 <td class="c102" colspan="2" rowspan="1">
-                    <p class="c3"><span class="c11">&#9744;</span><span class="c37">&nbsp;</span><span
-                            class="c9">Chemical Handling </span></p>
+                    <p class="c3"><span class="c11">
+                            {% if chemical_handling %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c37">&nbsp;</span><span class="c9">Chemical Handling </span></p>
                 </td>
                 <td class="c80" colspan="1" rowspan="1">
-                    <p class="c3"><span class="c11">&#9744;</span><span class="c37">&nbsp;</span><span class="c9">Work
+                    <p class="c3"><span class="c11">
+                            {% if work_alone %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c37">&nbsp;</span><span class="c9">Work
                             alone </span></p>
                 </td>
                 <td class="c14" colspan="2" rowspan="1">
-                    <p class="c3"><span class="c11">&#9744;</span><span class="c37">&nbsp;</span><span class="c9">Work
+                    <p class="c3"><span class="c11">
+                            {% if work_at_sensitive_area %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c37">&nbsp;</span><span class="c9">Work
                             at sensitive area </span></p>
                 </td>
                 <td class="c23" colspan="1" rowspan="1">
-                    <p class="c3"><span class="c11">&#9744;</span><span class="c37">&nbsp;</span><span class="c9">Cold
+                    <p class="c3"><span class="c11">
+                            {% if cold_work %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c37">&nbsp;</span><span class="c9">Cold
                             Work</span></p>
                 </td>
             </tr>
@@ -1989,7 +2034,7 @@
                 </td>
                 <td class="c84" colspan="6" rowspan="1">
                     <p class="c1"><span class="c9"></span></p>
-                    <p class="c1"><span class="c9"></span></p>
+                    <p class="c1">{{ description }}</span></p>
                     <p class="c1"><span class="c9"></span></p>
                 </td>
             </tr>
@@ -2014,6 +2059,19 @@
                     <p class="c22"><span class="c17">Identification No.</span></p>
                 </td>
             </tr>
+            {% for worker in workers %}
+            <tr class="c2">
+                <td class="c33" colspan="1" rowspan="1">
+                    <p class="c12">{{ forloop.counter }}</span></p>
+                </td>
+                <td class="c13" colspan="1" rowspan="1">
+                    <p class="c12">{{ worker.name }}</p>
+                </td>
+                <td class="c73" colspan="1" rowspan="1">
+                    <p class="c12">{{ worker.identification_number }}</p>
+                </td>
+            </tr>
+            {% empty %}
             <tr class="c2">
                 <td class="c33" colspan="1" rowspan="1">
                     <p class="c12"><span class="c17"></span></p>
@@ -2069,6 +2127,8 @@
                     <p class="c12"><span class="c17"></span></p>
                 </td>
             </tr>
+            {% endfor %}
+
         </tbody>
     </table>
     <p class="c0"><span class="c17"></span></p><a id="t.1bd1c346fdffd3fd9240886fe22d679d23a024fe"></a><a id="t.2"></a>
@@ -2192,7 +2252,7 @@
                             safety measures. </span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2206,7 +2266,7 @@
                     </p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2220,7 +2280,7 @@
                             university. </span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2232,7 +2292,7 @@
                             university&rsquo;s network or power point unless permitted.</span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2244,7 +2304,7 @@
                             present at site at all time to supervise the work.</span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2256,7 +2316,7 @@
                             suitable PPE at all time</span><span class="c4">&nbsp;whenever they are at site.</span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2268,7 +2328,7 @@
                             authorizing person from the Client&rsquo;s department.</span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2280,7 +2340,7 @@
                             pedestrian.</span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2292,7 +2352,7 @@
                             permit.</span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2304,7 +2364,7 @@
                             university immediately.</span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2317,7 +2377,7 @@
                             imposed to the contractor on top of the rectification cost. </span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2330,7 +2390,7 @@
                             liaise with Head of Engineering Services for temporary storage.</span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2342,7 +2402,7 @@
                             designated area.</span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2354,7 +2414,7 @@
                             stopped and needs to resume the next day</span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2366,7 +2426,7 @@
                             at height, excavation and lock-out, LOTO and confined spaces shall apply.</span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2379,7 +2439,7 @@
                             turned off.</span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2390,7 +2450,7 @@
                     <p class="c5"><span class="c4">All vehicle should park at the designated parking area.</span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2402,7 +2462,7 @@
                             days</span><span class="c4">&nbsp;from the date of issuance.</span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2414,7 +2474,7 @@
                             after issuing this permit.</span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
             <tr class="c2">
@@ -2426,7 +2486,7 @@
                             working days</span><span class="c4">&nbsp;prior commencement of work.</span></p>
                 </td>
                 <td class="c8" colspan="1" rowspan="1">
-                    <p class="c1"><span class="c4"></span></p>
+                    <p class="c1">{% if submitted %}&#10004{% endif %}</p>
                 </td>
             </tr>
         </tbody>

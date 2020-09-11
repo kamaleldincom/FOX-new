@@ -9,7 +9,7 @@ import {
   CCol,
   CButton,
   CInputCheckbox,
-  CInputFile
+  CSelect
 } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
 import { FoxApiService } from '../../../services'
@@ -20,75 +20,34 @@ class WorkerAssign extends Component {
 
   state = {
     workers: [],
+    responsible_person: -1,
     error: false,
-    filename: "",
-    file_id: "",
-    upload_files: {}
   }
 
-  downloadFile = async (e) => {
+  handleChange = event => {
     this.setState({
-      filename: e.target.value,
-      file_id: e.target.name
-    }, () => {
-      foxApi.downloadDocument(this.state.file_id)
-        .then((blob) => {
-          const url = window.URL.createObjectURL(new Blob([blob]));
-          const link = document.createElement('a');
-          link.href = url;
-          const filename = this.state.filename.split('/').pop();
-          link.setAttribute('download', filename);
-          document.body.appendChild(link);
-          link.click();
-          link.parentNode.removeChild(link);
-        })
-        .then(() => { console.log('file downloaded') })
-        .catch((error) => {
-          console.error('File download failed!');
-          console.error(error)
-        })
-    })
+      [event.target.name]: event.target.value
+    }, () => console.log(this.state));
   }
-
 
   handleCheck = event => {
     const { workers } = this.state
     event.target.checked ?
-      workers.push(event.target.value)
+      workers.push(parseInt(event.target.value))
       :
-      workers.splice(workers.indexOf(event.target.value), 1);
+      workers.splice(workers.indexOf(parseInt(event.target.value)), 1);
     this.setState({
       workers: workers
-    }, () => console.log(this.state));
-  }
-
-  handleFileUpload = event => {
-    // const [worker, template] = event.target.name.split('-')
-    const { upload_files } = this.state;
-    upload_files[event.target.name] = event.target.files[0];
-    this.setState({
-      upload_files: upload_files
-    }, console.log(this.state));
+    });
   }
 
   handleSubmit = async event => {
     event.preventDefault();
-    const { workers, upload_files } = this.state;
-    const workersData = { workers: workers };
-    const uploadFileList = [];
-
-    Object.entries(upload_files).forEach(([key, value]) => {
-      const uploadFilesData = new FormData();
-      const [worker, template] = key.split('-');
-      uploadFilesData.append('worker', worker);
-      uploadFilesData.append('template', template);
-      uploadFilesData.append('file', value);
-      uploadFileList.push(uploadFilesData);
-    })
-    await Promise.all([
-      foxApi.patchEntityOf("projects", this.props.match.params.id, workersData),
-      uploadFileList.forEach(file => foxApi.createEntityWithFile("worker_documents", file)),
-    ])
+    const { workers, responsible_person } = this.state;
+    let requestData = { workers: workers };
+    requestData = { responsible_person, ...requestData }
+    console.log(requestData);
+    await foxApi.patchEntityOf("projects", this.props.match.params.id, requestData)
       .then(() => {
         this.props.history.goBack()
       },
@@ -105,87 +64,60 @@ class WorkerAssign extends Component {
   componentDidMount = async () => {
     await this.props.getProfileFetch()
       .then(() => this.props.getWorkerList())
-      .then(() => this.props.getDocumentList(
-        {
-          target_type: "Worker",
-          project_id: this.props.match.params.id
-        },
-        true))
-      .then(() => this.props.setProjectId(this.props.match.params.id))
+      .then(() => foxApi.getDetailsOf("projects", this.props.match.params.id))
+      .then(data => this.setState({
+        workers: data.workers,
+        responsible_person: data.responsible_person
+      }))
   }
 
   render = () => {
-    let downloadButtonArray = {};
-    let workerList = {}
-    if (this.props.documents) {
-      downloadButtonArray = this.props.documents.map((document) => {
-        return (
-          <CFormGroup key={`fg-${document.id}`} className="d-flex">
-            <CButton
-              variant="outline"
-              color="success"
-              key={`cb-${document.id}`}
-              id={document.id}
-              name={document.id}
-              value={document.filename}
-              onClick={this.downloadFile}
-            >
-              Download
-      </CButton>
-            <CLabel key={`lb-${document.id}`} htmlFor={document.id}>{document.name}</CLabel>
-          </CFormGroup>
-        )
-      })
-      workerList = this.props.workers.map((worker) => {
-        return (
-          <CFormGroup key={`fg-${worker.id}`} variant="checkbox" className="checkbox d-flex">
-            <CInputCheckbox
-              key={`cb-${worker.id}`}
-              id={worker.id}
-              name={worker.id}
-              value={worker.id}
-              onChange={this.handleCheck}
-            />
-            <CLabel key={`lb-${worker.id}`} variant="checkbox" className="form-check-label mr-4" htmlFor={worker.id}>{worker.name}</CLabel>
-            {this.props.documents.map((document) => {
-              return (
-                <React.Fragment key={`fr-${worker.id}`}>
-                  <CLabel key={`lb-${worker.id}-${document.id}`}
-                    htmlFor={`file-${document.id}`}
-                  >
-                    {document.name}
-                  </CLabel>
-                  <CInputFile key={`of-${worker.id}-${document.id}`}
-                    id={`file-${document.id}`}
-                    name={`${worker.id}-${document.id}`}
-                    onChange={this.handleFileUpload}
-                  />
-
-                </React.Fragment>
-
-              )
-            })}
-          </CFormGroup>
-        )
-      })
-    } else {
-      downloadButtonArray = null;
-      workerList = null
-    }
     return (
       <CRow>
         <CCol>
           <CForm onSubmit={this.handleSubmit}>
             <DjangoCSRFToken />
             <CFormGroup>
-              {downloadButtonArray}
+              <h4>Please, choose the responsible person among your workers.</h4>
+              <CSelect
+                id="responsible_person"
+                name="responsible_person"
+                placeholder="Choose responsible person"
+                value={this.state.responsible_person}
+                onChange={this.handleChange}
+                required
+              >
+                <option key="-1" value="-1" disabled>Choose responsible person</option>
+                {this.props.workers ? this.props.workers.map((worker) => {
+                  return (
+                    <option key={worker.id} value={worker.id}>{worker.name}</option>
+                  )
+                }) : null
+                }
+              </CSelect>
             </CFormGroup>
             <CFormGroup>
-              {workerList}
+              <h4>Please, choose workers you want to assign for this project</h4>
+              {this.props.workers ?
+                this.props.workers.map((worker) => {
+                  let workers = this.state.workers;
+                  return (
+                    <CFormGroup key={`fg-${worker.id}`} variant="checkbox" className="checkbox d-flex">
+                      <CInputCheckbox
+                        key={`cb-${worker.id}`}
+                        id={worker.id}
+                        name={worker.id}
+                        value={worker.id}
+                        onChange={this.handleCheck}
+                        checked={workers.includes(worker.id)}
+                      />
+                      <CLabel key={`lb-${worker.id}`} variant="checkbox" className="form-check-label mr-4" htmlFor={worker.id}>{worker.name}</CLabel>
+                    </CFormGroup>
+                  )
+                }) : null}
             </CFormGroup>
-
             <CFormGroup>
-              <CButton type="submit" color="success" variant="outline" block>Save changes</CButton>
+              <CButton type="submit" color="dark" variant="outline" block>Save changes</CButton>
             </CFormGroup>
             {this.state.error
               ? <p>{this.state.error}</p>
@@ -202,17 +134,13 @@ const mapStateToProps = state => {
   return {
     workers: state.entityListTable.tableData,
     company: state.currentUser.company,
-    role: state.currentUser.role,
     contractor: state.currentUser.id,
-    documents: state.additionalEntityListTable.tableData
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
   getWorkerList: () => dispatch(getWorkerList()),
-  getDocumentList: (params, additional) => dispatch(getDocumentList(params, additional)),
-  setProjectId: (id) => dispatch(setProjectId(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkerAssign)

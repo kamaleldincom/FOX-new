@@ -29,8 +29,10 @@ class ClientManagerCreate extends Component {
 
   state = {
     username: "",
+    name: "",
     email: "",
     position: -1,
+    department: "",
     company: this.props.company,
     role: "CliMan",
     error: false
@@ -79,12 +81,22 @@ class ClientManagerCreate extends Component {
           >
             <DjangoCSRFToken />
             <CFormGroup>
-              <CLabel htmlFor="username">Enter client manager username</CLabel>
+              <CLabel htmlFor="username">Enter client manager username. This will be used for login</CLabel>
               <CInput
                 id="username"
                 name='username'
                 placeholder="Username"
                 value={this.state.username}
+                onChange={this.handleChange}
+                required />
+            </CFormGroup>
+            <CFormGroup>
+              <CLabel htmlFor="name">Enter client manager verbose name</CLabel>
+              <CInput
+                id="name"
+                name='name'
+                placeholder="Verbose name"
+                value={this.state.name}
                 onChange={this.handleChange}
                 required />
             </CFormGroup>
@@ -101,7 +113,7 @@ class ClientManagerCreate extends Component {
               />
             </CFormGroup>
             <CFormGroup>
-              <CLabel htmlFor="target_type">Client Manager Position</CLabel>
+              <CLabel htmlFor="position">Client Manager Position</CLabel>
               <CSelect
                 id="position"
                 name="position"
@@ -117,6 +129,16 @@ class ClientManagerCreate extends Component {
                 }
                 )}
               </CSelect>
+            </CFormGroup>
+            <CFormGroup>
+              <CLabel htmlFor="department">Enter client manager department</CLabel>
+              <CInput
+                id="department"
+                name="department"
+                placeholder="Department"
+                value={this.state.department}
+                onChange={this.handleChange}
+                required />
             </CFormGroup>
             <CFormGroup>
               <CButton type="submit" color="dark" variant="outline" block>Create client manager</CButton>

@@ -2,7 +2,7 @@ import { RepresentationService } from '../services'
 
 const repr = new RepresentationService
 const getClientManagerList = () => {
-    return repr.displaySimpleList('client_managers')
+    return repr.displaySimpleList('client_managers', null, false)
 }
 
 const getProject = () => {

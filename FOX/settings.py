@@ -12,28 +12,41 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import datetime
+import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+env = environ.Env(
+    DEBUG=(bool, True),
+    MEDIA_ROOT=(str, os.path.join(BASE_DIR, "local_files")),
+    HOST_NAME=(str, "localhost"),
+    HOST_NAME_ALT=(str, "127.0.0.1"),
+    EMAIL_REGISTER_LINK_FORMAT=(
+        str,
+        "http://127.0.0.1:8000/#/register?token={}&username={}",
+    ),
+)
+environ.Env.read_env()
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = env("DEBUG")
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "*myepc&&@())qx_t^^k18t65ehm4_9iaelhr6hx0g8d31$pjjr"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+SECRET_KEY = env("SECRET_KEY")
 
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "46.101.221.249",
-    "ec2-3-23-115-178.us-east-2.compute.amazonaws.com",
+    env("HOST_NAME"),
+    env("HOST_NAME_ALT"),
 ]  # localhost, s2b host, aws
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "local_files")
+MEDIA_ROOT = env("MEDIA_ROOT")
 
 # Application definition
 
@@ -45,7 +58,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "back",
+    "back.apps.BackConfig",
     "rest_framework",
     "corsheaders",
     "django_rest_passwordreset",
@@ -68,7 +81,7 @@ ROOT_URLCONF = "FOX.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["/back/templates/back/",],
+        "DIRS": ["/back/templates/back/",],  # noqa E231
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -83,18 +96,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "FOX.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "HOST": "db",  # set in docker-compose.yml
-        "PORT": 5432,  # default postgres port
-        "PASSWORD": "mypassword",
+        "NAME": env("DB_MAIN_NAME"),
+        "USER": env("DB_MAIN_USER"),
+        "HOST": env("DB_MAIN_HOST"),
+        "PORT": env("DB_MAIN_PORT"),
+        "PASSWORD": env("DB_MAIN_PASSWORD"),
     }
 }
 
@@ -106,9 +117,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 AUTH_USER_MODEL = "back.FoxUser"
@@ -128,13 +139,15 @@ CORS_ORIGIN_WHITELIST = ("http://localhost:8000",)
 CORS_ALLOW_CREDENTIALS = True
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "s2b.fox.test@gmail.com"
-EMAIL_HOST_PASSWORD = "simple2bfox"
+EMAIL_PORT = env("EMAIL_PORT")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_EMAIL_FROM = env("EMAIL_EMAIL_FROM")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+EMAIL_REGISTER_LINK_FORMAT = env("EMAIL_REGISTER_LINK_FORMAT")
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -154,6 +167,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
+
+DISPLAY_FILE_KEY = env("DISPLAY_FILE_KEY")
 
 JWT_AUTH = {
     "JWT_ENCODE_HANDLER": "rest_framework_jwt.utils.jwt_encode_handler",

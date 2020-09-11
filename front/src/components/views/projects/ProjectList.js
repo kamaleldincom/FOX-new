@@ -1,15 +1,22 @@
 import React, { Component } from 'react'
-import FoxEntityListTable from '../../tables/FoxEntityListTable'
-import { getProfileFetch, getProjectList, setProjectId } from '../../../actions'
 import { connect } from 'react-redux'
+import { ExtendedListTable } from '../../tables'
+
+import { getProfileFetch, getProjectList, setProjectId } from '../../../actions'
 
 
 const getBadge = status => {
   switch (status) {
-    case 'Active': return 'success'
-    case 'Inactive': return 'secondary'
-    case 'Pending': return 'warning'
-    case 'Banned': return 'danger'
+    case 'Created': return 'secondary'
+    case 'Submitted': return 'warning'
+    case 'Approved': return 'success'
+    case 'Rejected': return 'danger'
+    case 'Application processing': return 'secondary'
+    case 'Ready to start': return 'success'
+    case 'Works started': return 'info'
+    case 'Works finished': return 'warning'
+    case 'Extended': return 'primary'
+    case 'Closed': return 'dark'
     default: return 'primary'
   }
 }
@@ -25,7 +32,7 @@ class ProjectList extends Component {
 
   render = () => {
     return (
-      <FoxEntityListTable
+      <ExtendedListTable
         {...this.props}
         tableName='Projects'
         fields={this.props.projectTable.fields}

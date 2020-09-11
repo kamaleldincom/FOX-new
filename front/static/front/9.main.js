@@ -11,7 +11,8 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -35,6 +36,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var FoxEntityListTable = /*#__PURE__*/function (_Component) {
   _inherits(FoxEntityListTable, _Component);
 
@@ -51,31 +53,47 @@ var FoxEntityListTable = /*#__PURE__*/function (_Component) {
 
     _this = _super.call.apply(_super, [this].concat(args));
 
-    _defineProperty(_assertThisInitialized(_this), "alertOnClick", function (e) {
-      _this.props.history.push("".concat(_this.props.match.url, "/").concat(e.id));
+    _defineProperty(_assertThisInitialized(_this), "alertOnClick", function (id, e) {
+      _this.props.history.push("".concat(_this.props.match.url, "/").concat(id));
     });
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CCol"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CCard"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CCardHeader"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CCol"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CCard"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CCardHeader"], {
         className: "d-flex justify-content-between"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CCardTitle"], null, _this.props.tableName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CLink"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CCardTitle"], null, _this.props.tableName), _this.props.tableName === "Projects" && _this.props.role === "Contr" ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CLink"], {
         className: "btn btn-outline-success",
         to: "".concat(_this.props.match.url, "/new")
-      }, "Add new")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CCardBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CDataTable"], {
-        items: _this.props.tableData,
-        fields: _this.props.fields,
+      }, "Add new")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CCardBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CDataTable"], {
+        items: _this.props.tableData ? _this.props.tableData : [],
+        fields: _this.props.fields ? _this.props.fields : [],
+        clickableRows: true,
         hover: true,
         striped: true,
         bordered: true,
+        sorter: true,
+        footer: true,
+        tableFilter: true,
+        columnFilter: true,
         size: "sm",
         itemsPerPage: 10,
+        itemsPerPageSelect: true,
         pagination: true,
-        onRowClick: _this.alertOnClick,
         scopedSlots: {
-          'status': function status(item) {
-            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_1__["CBadge"], {
-              color: _this.props.getBadge(item.status)
-            }, item.status));
+          'username': function username(item) {
+            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CButton"], {
+              color: "link",
+              onClick: function onClick(e) {
+                _this.alertOnClick(item.id, e);
+              }
+            }, item.username));
+          },
+          'project_name': function project_name(item) {
+            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_2__["CButton"], {
+              color: "link",
+              onClick: function onClick(e) {
+                _this.alertOnClick(item.id, e);
+              }
+            }, item.project_name));
           }
         }
       })))));
@@ -87,14 +105,20 @@ var FoxEntityListTable = /*#__PURE__*/function (_Component) {
   return FoxEntityListTable;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (FoxEntityListTable);
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    role: state.currentUser.role
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, null)(FoxEntityListTable));
 
 /***/ }),
 
-/***/ "./src/components/views/managers/ClientManagerList.js":
-/*!************************************************************!*\
-  !*** ./src/components/views/managers/ClientManagerList.js ***!
-  \************************************************************/
+/***/ "./src/components/views/approvals/ApprovalList.js":
+/*!********************************************************!*\
+  !*** ./src/components/views/approvals/ApprovalList.js ***!
+  \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -138,16 +162,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var getBadge = function getBadge(status) {
   switch (status) {
-    case 'Active':
+    case 'Pending':
+      return 'primary';
+
+    case 'Approved':
       return 'success';
 
-    case 'Inactive':
-      return 'secondary';
-
-    case 'Pending':
-      return 'warning';
-
-    case 'Banned':
+    case 'Rejected':
       return 'danger';
 
     default:
@@ -155,19 +176,15 @@ var getBadge = function getBadge(status) {
   }
 };
 
-var alertOnClick = function alertOnClick() {
-  alert('Clicked!');
-};
+var ApprovalList = /*#__PURE__*/function (_Component) {
+  _inherits(ApprovalList, _Component);
 
-var ClientManagerList = /*#__PURE__*/function (_Component) {
-  _inherits(ClientManagerList, _Component);
+  var _super = _createSuper(ApprovalList);
 
-  var _super = _createSuper(ClientManagerList);
-
-  function ClientManagerList() {
+  function ApprovalList() {
     var _this;
 
-    _classCallCheck(this, ClientManagerList);
+    _classCallCheck(this, ApprovalList);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -182,7 +199,7 @@ var ClientManagerList = /*#__PURE__*/function (_Component) {
             case 0:
               _context.next = 2;
               return _this.props.getProfileFetch().then(function () {
-                return _this.props.getClientManagerList();
+                return _this.props.getApprovalList();
               });
 
             case 2:
@@ -195,23 +212,22 @@ var ClientManagerList = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tables_FoxEntityListTable__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({}, _this.props, {
-        tableName: "Managers",
-        fields: _this.props.clientManagerTable.fields,
+        tableName: "Approvals",
+        fields: _this.props.projectTable.fields,
         getBadge: getBadge,
-        tableData: _this.props.clientManagerTable.tableData,
-        onRowClick: alertOnClick
+        tableData: _this.props.projectTable.tableData
       }));
     });
 
     return _this;
   }
 
-  return ClientManagerList;
+  return ApprovalList;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    clientManagerTable: state.entityListTable
+    projectTable: state.entityListTable
   };
 };
 
@@ -220,13 +236,26 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     getProfileFetch: function getProfileFetch() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getProfileFetch"])());
     },
-    getClientManagerList: function getClientManagerList() {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getClientManagerList"])());
-    }
+    getApprovalList: function getApprovalList() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getApprovalList"])());
+    },
+    setApprovalId: function (_setApprovalId) {
+      function setApprovalId() {
+        return _setApprovalId.apply(this, arguments);
+      }
+
+      setApprovalId.toString = function () {
+        return _setApprovalId.toString();
+      };
+
+      return setApprovalId;
+    }(function () {
+      return dispatch(setApprovalId());
+    })
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(ClientManagerList));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(ApprovalList));
 
 /***/ })
 

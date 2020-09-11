@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[15],{
 
-/***/ "./src/components/views/managers/ClientManagerCreate.js":
+/***/ "./src/components/views/contractors/ContractorCreate.js":
 /*!**************************************************************!*\
-  !*** ./src/components/views/managers/ClientManagerCreate.js ***!
+  !*** ./src/components/views/contractors/ContractorCreate.js ***!
   \**************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -47,39 +47,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var positions = [{
-  id: -1,
-  position: "Choose manager position"
-}, {
-  id: "SafeMan",
-  position: "Safety Manager"
-}, {
-  id: "SecMan",
-  position: "Security Manager"
-}, {
-  id: "SecOff",
-  position: "Security Officer"
-}, {
-  id: "SiteOwn",
-  position: "Site Owner"
-}, {
-  id: "WorkOwn",
-  position: "Owner of Work"
-}, {
-  id: "SecGrd",
-  position: "Security Guards"
-}];
 var foxApi = new _services__WEBPACK_IMPORTED_MODULE_5__["FoxApiService"]();
 
-var ClientManagerCreate = /*#__PURE__*/function (_Component) {
-  _inherits(ClientManagerCreate, _Component);
+var ContractorCreate = /*#__PURE__*/function (_Component) {
+  _inherits(ContractorCreate, _Component);
 
-  var _super = _createSuper(ClientManagerCreate);
+  var _super = _createSuper(ContractorCreate);
 
-  function ClientManagerCreate() {
+  function ContractorCreate() {
     var _this;
 
-    _classCallCheck(this, ClientManagerCreate);
+    _classCallCheck(this, ContractorCreate);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -90,9 +68,9 @@ var ClientManagerCreate = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "state", {
       username: "",
       email: "",
-      position: -1,
+      related_company: "",
       company: _this.props.company,
-      role: "CliMan",
+      role: "Contr",
       error: false
     });
 
@@ -107,34 +85,20 @@ var ClientManagerCreate = /*#__PURE__*/function (_Component) {
             switch (_context.prev = _context.next) {
               case 0:
                 event.preventDefault();
-
-                if (!(parseInt(_this.state.position) === -1)) {
-                  _context.next = 5;
-                  break;
-                }
-
-                _this.setState({
-                  error: 'Client manager position was not selected! Please, choose position form the list'
-                });
-
-                _context.next = 9;
-                break;
-
-              case 5:
                 _this.formData = _this.state;
                 delete _this.formData.error;
-                _context.next = 9;
-                return foxApi.createEntityOf('client_managers', _this.formData).then(function () {
+                _context.next = 5;
+                return foxApi.createEntityOf('contractors', _this.formData).then(function () {
                   _this.props.history.goBack();
                 }, function (error) {
                   console.error(error);
 
                   _this.setState({
-                    error: 'Client manager creation failed!' + ' Please check your input and try again!' + ' In case this problem repeats, please contact your administrator!'
+                    error: 'Contractor creation failed!' + ' Please check your input and try again!' + ' In case this problem repeats, please contact your administrator!'
                   });
                 });
 
-              case 9:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -156,7 +120,7 @@ var ClientManagerCreate = /*#__PURE__*/function (_Component) {
         onSubmit: _this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4___default.a, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
         htmlFor: "username"
-      }, "Enter client manager username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+      }, "Enter contractor username"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
         id: "username",
         name: "username",
         placeholder: "Username",
@@ -165,7 +129,7 @@ var ClientManagerCreate = /*#__PURE__*/function (_Component) {
         required: true
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
         htmlFor: "email"
-      }, "Enter client manager email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+      }, "Enter contractor email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
         id: "email",
         type: "email",
         name: "email",
@@ -174,31 +138,26 @@ var ClientManagerCreate = /*#__PURE__*/function (_Component) {
         onChange: _this.handleChange,
         required: true
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "target_type"
-      }, "Client Manager Position"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CSelect"], {
-        id: "position",
-        name: "position",
-        placeholder: "Choose position",
-        value: _this.state.position,
+        htmlFor: "username"
+      }, "Enter contractor company"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        id: "related_company",
+        name: "related_company",
+        placeholder: "Company name",
+        value: _this.state.related_company,
         onChange: _this.handleChange,
         required: true
-      }, positions.map(function (option) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-          key: option.id,
-          value: option.id
-        }, option.position);
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
         type: "submit",
         color: "dark",
         variant: "outline",
         block: true
-      }, "Create client manager")), _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
+      }, "Create contractor")), _this.props.registerErrorFlag ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.props.errorMessage ? _this.props.errorMessage : 'INVALID CREDENTIALS! PLEASE, CHECK YOUR PASSWORD AND PASSWORD CONFIRMATION FIELDS!') : null, _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
     });
 
     return _this;
   }
 
-  return ClientManagerCreate;
+  return ContractorCreate;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -215,7 +174,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ClientManagerCreate));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ContractorCreate));
 
 /***/ })
 

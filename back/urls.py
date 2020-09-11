@@ -12,7 +12,6 @@ urlpatterns = [
     path("token-auth/", views.ObtainFoxJWTToken.as_view()),
     path("current_user/", views.current_user),
     path("users/", views.UserList.as_view()),
-    path("dashboard/", views.Dashboard.as_view()),
     path(
         r"validate_register_token/",
         reset_password_validate_token,
@@ -29,6 +28,7 @@ urlpatterns = [
     path("projects/", views.ProjectList.as_view()),
     path("projects/new/", views.ProjectCreate.as_view()),
     path("projects/<int:pk>/", views.ProjectDetail.as_view()),
+    path("projects/<int:pk>/workflow/submit_proposal/", views.ProposalSubmit.as_view()),
     path("client_managers/", views.ClientManagerList.as_view()),
     path("client_managers/new/", views.ClientManagerCreate.as_view()),
     path("client_managers/<int:pk>/", views.ClientManagerDetail.as_view()),
@@ -38,15 +38,34 @@ urlpatterns = [
     path("workers/", views.WorkerList.as_view()),
     path("workers/new/", views.WorkerCreate.as_view()),
     path("workers/<int:pk>/", views.WorkerDetail.as_view()),
+    path(
+        "workers/download_doc/<int:pk>/<str:doctype>/",
+        views.WorkerDocDownload.as_view(),
+    ),
     path("ptw/<int:pk>", views.ptw),
     path("documents/", views.DocumentList.as_view()),
     path("documents/new/", views.DocumentCreate.as_view()),
     path("documents/<int:pk>/", views.DocumentDetail.as_view()),
     path("documents/downloads/<int:pk>/", views.DocumentDownload.as_view()),
+    path(
+        "documents/display/permission/<int:pk>/",
+        views.DocumentDisplayPermission.as_view(),
+    ),
+    path(
+        "documents/display/<str:part1>/<str:part2>/<str:part3>/",
+        views.download_file_to_display,
+    ),
     path("worker_documents/", views.WorkerDocumentList.as_view()),
     path("worker_documents/new/", views.WorkerDocumentCreate.as_view()),
     path("worker_documents/<int:pk>/", views.WorkerDocumentDetail.as_view()),
     path(
         "worker_documents/downloads/<int:pk>/", views.WorkerDocumentDownload.as_view()
     ),
+    path("approvals/", views.ApprovalList.as_view()),
+    path("approvals/<int:pk>/", views.ApprovalDetail.as_view()),
+    # get  change_project_status
+    # projects/id/workflow/confirm_proposal get change_project_status
+    # projects/id/workflow/works_finished get change_project_status
+    # projects/id/workflow/project_closed get change_project_status
+    # ...
 ]

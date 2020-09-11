@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[18],{
 
-/***/ "./src/components/views/projects/ProjectDetail.js":
-/*!********************************************************!*\
-  !*** ./src/components/views/projects/ProjectDetail.js ***!
-  \********************************************************/
+/***/ "./src/components/views/documents/DocumentDetail.js":
+/*!**********************************************************!*\
+  !*** ./src/components/views/documents/DocumentDetail.js ***!
+  \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22,6 +22,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -52,16 +64,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var foxApi = new _services__WEBPACK_IMPORTED_MODULE_5__["FoxApiService"]();
+var uploadOptions = [{
+  id: 1,
+  name: "URL"
+}, {
+  id: 2,
+  name: "File upload"
+}];
 
-var ProjectDetail = /*#__PURE__*/function (_Component) {
-  _inherits(ProjectDetail, _Component);
+var DocumentDetail = /*#__PURE__*/function (_Component) {
+  _inherits(DocumentDetail, _Component);
 
-  var _super = _createSuper(ProjectDetail);
+  var _super = _createSuper(DocumentDetail);
 
-  function ProjectDetail() {
+  function DocumentDetail() {
     var _this;
 
-    _classCallCheck(this, ProjectDetail);
+    _classCallCheck(this, DocumentDetail);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
@@ -71,320 +90,204 @@ var ProjectDetail = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "state", {
       name: "",
-      description: "",
-      start_date: "",
-      start_time: "",
-      end_date: "",
-      end_time: "",
-      company: _this.props.company,
-      contractor: "-1",
-      work_at_height: false,
-      lifting_work: false,
-      confined_space: false,
-      hot_work: false,
-      chemical_handling: false,
-      work_alone: false,
-      work_at_sensitive_area: false,
-      cold_work: false,
-      error: false
+      file: "",
+      project: _this.props.match.params.id,
+      url_to_doc: "",
+      error: false,
+      upload_option: 2
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
       _this.setState(_defineProperty({}, event.target.name, event.target.value));
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleCheck", function (event) {
-      _this.setState(_defineProperty({}, event.target.name, event.target.checked));
+    _defineProperty(_assertThisInitialized(_this), "handleFileUpload", function (event) {
+      _this.setState(_defineProperty({}, event.target.name, event.target.files[0]));
     });
 
+    _defineProperty(_assertThisInitialized(_this), "downloadFile", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return foxApi.downloadDocument(_this.props.match.params.doc_id).then(function (blob) {
+                var url = window.URL.createObjectURL(new Blob([blob]));
+                var link = document.createElement('a');
+                link.href = url;
+
+                var filename = _this.state.file.split('/').pop();
+
+                link.setAttribute('download', filename);
+                document.body.appendChild(link);
+                link.click();
+                link.parentNode.removeChild(link);
+              }).then(function () {
+                console.log('file downloaded');
+              }).catch(function (error) {
+                console.error('File download failed!');
+                console.error(error);
+              });
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    })));
+
     _defineProperty(_assertThisInitialized(_this), "handleSubmit", /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 event.preventDefault();
+                _this.requestData = _this.state;
 
-                if (!(parseInt(_this.state.contractor) < 0)) {
-                  _context.next = 5;
-                  break;
+                if (_this.requestData.upload_option === "1") {
+                  _this.requestData.file = "";
+                } else {
+                  _this.requestData.url_to_doc = "";
                 }
 
-                _this.setState({
-                  error: 'Contractor was not selected! Please, choose contractor form the list'
+                delete _this.requestData.error;
+                delete _this.requestData.upload_option;
+                _this.formData = new FormData();
+                Object.entries(_this.requestData).forEach(function (_ref3) {
+                  var _ref4 = _slicedToArray(_ref3, 2),
+                      key = _ref4[0],
+                      value = _ref4[1];
+
+                  _this.formData.append(key, value);
                 });
 
-                _context.next = 9;
-                break;
+                _this.formData.entries().forEach(function (entry) {
+                  return console.log(entry);
+                });
 
-              case 5:
-                _this.formData = _this.state;
-                delete _this.formData.error;
-                _context.next = 9;
-                return foxApi.updateEntityOf('projects', _this.props.match.params.id, _this.formData).then(function () {
+                _context2.next = 10;
+                return foxApi.patchEntityWithFiles('documents', _this.props.match.params.doc_id, _this.formData).then(function () {
                   _this.props.history.goBack();
                 }, function (error) {
                   console.error(error);
 
                   _this.setState({
-                    error: 'Project update failed!' + ' Please check your input and try again!' + ' In case this problem repeats, please contact your administrator!'
+                    error: 'Document update failed!' + ' Please check your input and try again!' + ' In case this problem repeats, please contact your administrator!'
                   });
                 });
 
-              case 9:
+              case 10:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }));
 
       return function (_x) {
-        return _ref.apply(this, arguments);
+        return _ref2.apply(this, arguments);
       };
     }());
 
-    _defineProperty(_assertThisInitialized(_this), "componentDidMount", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+    _defineProperty(_assertThisInitialized(_this), "componentDidMount", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
-              _context2.next = 2;
+              _context3.next = 2;
               return _this.props.getProfileFetch().then(function () {
-                return foxApi.getDetailsOf('projects', _this.props.match.params.id);
+                return foxApi.getDetailsOf('documents', _this.props.match.params.doc_id);
               }).then(function (data) {
-                return _this.setState(_objectSpread({}, data));
-              }).then(function () {
-                return _this.props.getContractorList();
-              }).then(function () {
-                return _this.props.setProjectId(_this.props.match.params.id);
+                data.url_to_doc ? _this.setState(_objectSpread({
+                  upload_option: 1
+                }, data)) : _this.setState(_objectSpread({}, data));
               });
 
             case 2:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2);
+      }, _callee3);
     })));
 
     _defineProperty(_assertThisInitialized(_this), "render", function () {
-      var _React$createElement;
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCol"], null, _this.props.role === 'CliAdm' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CForm"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCol"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CForm"], {
         onSubmit: _this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(django_react_csrftoken__WEBPACK_IMPORTED_MODULE_4___default.a, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
         htmlFor: "name"
       }, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
         id: "name",
         name: "name",
-        placeholder: "Enter project name",
+        placeholder: "Enter document name",
         value: _this.state.name,
         onChange: _this.handleChange,
         required: true
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "description"
-      }, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CTextarea"], {
-        id: "descrption",
-        name: "description",
-        placeholder: "Please, enter short description of the projet",
-        value: _this.state.description,
-        onChange: _this.handleChange,
-        required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCol"], {
-        lg: "6"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "start_date"
-      }, "Start Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
-        type: "date",
-        id: "start_date",
-        name: "start_date",
-        placeholder: "date",
-        value: _this.state.start_date,
-        onChange: _this.handleChange,
-        required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCol"], {
-        lg: "6"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "start_time"
-      }, "Start Time"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
-        type: "time",
-        id: "start_time",
-        name: "start_time" // placeholder="date"
-        ,
-        value: _this.state.start_time,
-        onChange: _this.handleChange,
-        required: true
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCol"], {
-        lg: "6"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "end_date"
-      }, "End Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
-        type: "date",
-        id: "end_date",
-        name: "end_date",
-        placeholder: "date",
-        value: _this.state.end_date,
-        onChange: _this.handleChange,
-        required: true
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CCol"], {
-        lg: "6"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "end_time"
-      }, "End Time"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
-        type: "time",
-        id: "end_time",
-        name: "end_time" // placeholder="date"
-        ,
-        value: _this.state.end_time,
-        onChange: _this.handleChange,
-        required: true
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        htmlFor: "contractor"
-      }, "Contractor"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CSelect"], {
-        id: "contractor",
-        name: "contractor",
+        htmlFor: "upload_option"
+      }, "File upload option"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CSelect"], {
+        id: "upload_option",
+        name: "upload_option",
         placeholder: "Choose contractor",
-        value: _this.state.contractor,
+        value: _this.state.upload_option,
         onChange: _this.handleChange,
         required: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        key: "-1",
-        value: "-1",
-        disabled: true
-      }, "Choose contractor"), _this.props.options.map(function (option) {
+      }, uploadOptions.map(function (option) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: option.id,
           value: option.id
-        }, option.username);
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLink"], {
-        className: "btn btn-outline-dark mr-3",
-        to: "".concat(_this.props.match.url, "/ptw")
-      }, "See Permission To Work"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLink"], {
-        className: "btn btn-outline-dark",
-        to: "".concat(_this.props.match.url, "/documents")
-      }, "Attached Documents")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], {
-        variant: "checkbox",
-        className: "checkbox"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputCheckbox"], {
-        id: "work_at_height",
-        name: "work_at_height",
-        value: "work_at_height",
-        checked: _this.state.work_at_height,
-        onChange: _this.handleCheck
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        variant: "checkbox",
-        className: "form-check-label",
-        htmlFor: "work_at_height"
-      }, "Work at height")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputCheckbox"], {
-        id: "lifting_work",
-        name: "lifting_work",
-        value: "lifting_work",
-        checked: _this.state.lifting_work,
-        onChange: _this.handleCheck
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        variant: "checkbox",
-        className: "form-check-label",
-        htmlFor: "lifting_work"
-      }, "Lifting work")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputCheckbox"], (_React$createElement = {
-        id: "confined_space",
-        name: "confined_space",
-        value: "confined_space"
-      }, _defineProperty(_React$createElement, "value", "confined_space"), _defineProperty(_React$createElement, "checked", _this.state.confined_space), _defineProperty(_React$createElement, "onChange", _this.handleCheck), _React$createElement)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        variant: "checkbox",
-        className: "form-check-label",
-        htmlFor: "confined_space"
-      }, "Confined space")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputCheckbox"], {
-        id: "hot_work",
-        name: "hot_work",
-        value: "hot_work",
-        checked: _this.state.hot_work,
-        onChange: _this.handleCheck
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        variant: "checkbox",
-        className: "form-check-label",
-        htmlFor: "hot_work"
-      }, "Hot work")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputCheckbox"], {
-        id: "chemical_handling",
-        name: "chemical_handling",
-        value: "chemical_handling",
-        checked: _this.state.chemical_handling,
-        onChange: _this.handleCheck
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        variant: "checkbox",
-        className: "form-check-label",
-        htmlFor: "chemical_handling"
-      }, "Chemical handling")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputCheckbox"], {
-        id: "work_alone",
-        name: "work_alone",
-        value: "work_alone",
-        checked: _this.state.work_alone,
-        onChange: _this.handleCheck
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        variant: "checkbox",
-        className: "form-check-label",
-        htmlFor: "work_alone"
-      }, "Work alone")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputCheckbox"], {
-        id: "work_at_sensitive_area",
-        name: "work_at_sensitive_area",
-        value: "work_at_sensitive_area",
-        checked: _this.state.work_at_sensitive_area,
-        onChange: _this.handleCheck
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        variant: "checkbox",
-        className: "form-check-label",
-        htmlFor: "work_at_sensitive_area"
-      }, "Work at sensitive area")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputCheckbox"], {
-        id: "cold_work",
-        name: "cold_work",
-        value: "cold_work",
-        checked: _this.state.cold_work,
-        onChange: _this.handleCheck
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
-        variant: "checkbox",
-        className: "form-check-label",
-        htmlFor: "cold_work"
-      }, "Cold work"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
-        type: "submit",
+        }, option.name);
+      }))), _this.state.upload_option == 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "url_to_doc"
+      }, "Url to document"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInput"], {
+        type: "url",
+        id: "url_to_doc",
+        name: "url_to_doc",
+        placeholder: "https://example.com",
+        pattern: "https://.*",
+        value: _this.state.url_to_doc,
+        onChange: _this.handleChange,
+        required: true
+      })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
+        variant: "outline",
         color: "success",
+        onClick: _this.downloadFile
+      }, "Link to download current file")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CLabel"], {
+        htmlFor: "file"
+      }, "Upload new File"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CInputFile"], {
+        id: "file",
+        name: "file",
+        onChange: _this.handleFileUpload,
+        required: true
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CButton"], {
+        type: "submit",
+        color: "dark",
         variant: "outline",
         block: true
-      }, "Save changes")), _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_3__["CEmbed"], {
-        ratio: "16by9"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("iframe", {
-        src: "".concat(window.location.origin, "/api/ptw/").concat(_this.props.match.params.id)
-      }))));
+      }, "Update Document")), _this.state.error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _this.state.error) : null)));
     });
 
     return _this;
   }
 
-  return ProjectDetail;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+  return DocumentDetail;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); // const mapStateToProps = state => {
+//   return {
+//   }
+// }
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    company: state.currentUser.company,
-    options: state.entityListTable.tableData,
-    role: state.currentUser.role
-  };
-};
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     getProfileFetch: function getProfileFetch() {
       return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getProfileFetch"])());
-    },
-    getContractorList: function getContractorList() {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["getContractorList"])());
-    },
-    setProjectId: function setProjectId(id) {
-      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["setProjectId"])(id));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ProjectDetail));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mapDispatchToProps)(DocumentDetail));
 
 /***/ })
 
