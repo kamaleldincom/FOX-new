@@ -41,18 +41,18 @@ const routes = [
   { path: '/projects/:id/related_documents', name: 'Related Documents', component: ProjectUploadDocs, exact: true },
   { path: '/projects/:id', name: 'Project Details', component: ProjectDetail, exact: false },
   { path: '/approvals', name: 'Approvals', component: ApprovalList, exact: true },
-  { path: '/approvals/:id', name: 'Details', component: ApprovalDetail, exact: true },
+  { path: '/approvals/:id', name: 'Approval Details', component: ApprovalDetail, exact: true },
   { path: '/current-works', name: 'Current Works', component: CurrentWorksList, exact: true },
   { path: '/contractors', name: 'Contractors', component: ContractorList, exact: true },
   { path: '/contractors/new', name: 'New', component: ContractorCreate, exact: true },
-  { path: '/contractors/:id', name: 'Detail', component: ContractorDetail, exact: true },
+  { path: '/contractors/:id', name: 'Contractor Details', component: ContractorDetail, exact: true },
   { path: '/contractors/:id/workers_review', name: 'Workers Review', component: ContractorWorkersReview, exact: true },
   { path: '/managers', name: 'Managers', component: ClientManagerList, exact: true },
   { path: '/managers/new', name: 'New', component: ClientManagerCreate, exact: true },
-  { path: '/managers/:id', name: 'Details', component: ClientManagerDetail, exact: true },
+  { path: '/managers/:id', name: 'Manager Details', component: ClientManagerDetail, exact: true },
   { path: '/workers', name: 'Workers', component: WorkerList, exact: true },
   { path: '/workers/new', name: 'New', component: WorkerCreate, exact: true },
-  { path: '/workers/:id', name: 'Project Details', component: WorkerDetail, exact: true },
+  { path: '/workers/:id', name: 'Worker Details', component: WorkerDetail, exact: true },
 
 ];
 
