@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import {
   CForm,
   CFormGroup,
-  CInput,
   CLabel, CRow,
   CCol,
   CLink,
@@ -13,6 +12,7 @@ import {
 } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
 import { FoxApiService } from '../../../services'
+import FoxProjectDocumentDownLoadUploadFormGroup from '../../forms/FoxProjectDocumentDownloadUploadFormGroup';
 
 const foxApi = new FoxApiService();
 
@@ -104,39 +104,11 @@ class ProjectUploadDocs extends Component {
     if (this.props.documents) {
       documentWidgetArray = this.props.documents.map((document) => {
         return (
-          <CFormGroup key={`fg-${document.id}`}>
-            <CLabel key={`lb-${document.id}`} htmlFor={document.id}>{document.name}</CLabel>
-            {document.url_to_doc ?
-              <CLink
-                key={`dl-${document.id}`}
-                href={document.url_to_doc}
-                target="_blank"
-                className="btn btn-ghost-primary"
-              >
-                Open this document in Google Docs
-            </CLink>
-              :
-              <React.Fragment>
-                <CButton
-                  variant="outline"
-                  color="primary"
-                  key={`cb-${document.id}`}
-                  id={document.id}
-                  name={document.id}
-                  value={document.filename}
-                  onClick={this.downloadFile}
-                >
-                  Download template for this document
-              </CButton>
-                <CLabel key={`lb-${document.id}`} htmlFor={document.id}>Upload filled up document</CLabel>
-                <CInputFile key={`of-${document.id}`}
-                  id={`file-${document.id}`}
-                  name={`${document.id}`}
-                  onChange={this.handleFileUpload}
-                />
-              </React.Fragment>
-            }
-          </CFormGroup>
+          <FoxProjectDocumentDownLoadUploadFormGroup
+            document={document}
+            handleFileUpload={this.handleFileUpload}
+            downloadFile={this.downloadFile}
+          />
         )
       })
     }

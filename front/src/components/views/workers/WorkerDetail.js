@@ -277,7 +277,7 @@ class WorkerDetail extends Component {
             <CFormGroup>
               <CButton type="submit" color="dark" variant="outline" block>Save changes</CButton>
             </CFormGroup>
-            <CButton color="danger" variant="outline" onClick={this.setModalVisibility} block>Delete Worker</CButton>
+            <CButton className="mb-3" color="danger" variant="outline" onClick={this.setModalVisibility} block>Delete Worker</CButton>
             {this.state.error
               ? <p>{this.state.error}</p>
               : null
