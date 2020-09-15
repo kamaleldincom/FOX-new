@@ -21,6 +21,7 @@ class FoxEntityListTable extends Component {
   }
 
   render = () => {
+    const linkName = this.props.fields ? this.props.fields[0] : "username"
     return (
       <CRow>
         <CCol>
@@ -59,14 +60,14 @@ class FoxEntityListTable extends Component {
                 itemsPerPageSelect
                 pagination
                 scopedSlots={{
-                  'username':
+                  [linkName]:
                     (item) => (
                       <td>
                         <CButton
                           color="link"
                           onClick={e => { this.alertOnClick(item.id, e) }}
                         >
-                          {item.username}
+                          {item[linkName]}
                         </CButton>
                       </td>
                     ),

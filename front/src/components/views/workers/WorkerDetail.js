@@ -8,6 +8,7 @@ import {
   CLabel, CRow,
   CCol,
   CButton,
+  CLink
 } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
 import { FoxApiService } from '../../../services'
@@ -34,9 +35,9 @@ class WorkerDetail extends Component {
     position_in_company: "",
     safety_quiz_answer: "",
     personal_declaration: "",
-    special_competency: "",
-    special_competency_scan: "",
-    competency_issued_by: "",
+    // special_competency: "",
+    // special_competency_scan: "",
+    // competency_issued_by: "",
     registration_number: "",
     error: false,
     filename: "",
@@ -56,7 +57,7 @@ class WorkerDetail extends Component {
     this.setState({
       upload_files: upload_files,
       [event.target.name]: ""
-    }, () => console.log(this.state));
+    });
   }
 
   handleSubmit = async event => {
@@ -71,7 +72,7 @@ class WorkerDetail extends Component {
     delete this.requestData.license_scan;
     delete this.requestData.passport_scan;
     delete this.requestData.safety_green_card_scan;
-    delete this.requestData.special_competency_scan;
+    // delete this.requestData.special_competency_scan;
     delete this.requestData.safety_quiz_answer;
     delete this.requestData.personal_declaration;
     this.formData = new FormData
@@ -274,6 +275,9 @@ class WorkerDetail extends Component {
               uploadInfo="personal_declaration_scan"
               downloadFile={this.downloadFile}
             />
+            <CFormGroup>
+              <CLink className="btn btn-outline-primary" to={`/workers/${this.props.match.params.id}/competencies`}>Special Competencies</CLink>
+            </CFormGroup>
             <CFormGroup>
               <CButton type="submit" color="dark" variant="outline" block>Save changes</CButton>
             </CFormGroup>

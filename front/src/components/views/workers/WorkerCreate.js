@@ -34,9 +34,10 @@ class WorkerCreate extends Component {
     position_in_company: -1,
     safety_quiz_answer: "",
     personal_declaration: "",
-    special_competency: "",
-    special_competency_scan: "",
-    competency_issued_by: "",
+    submitCallback: "",
+    // special_competency: "",
+    // special_competency_scan: "",
+    // competency_issued_by: "",
     registration_number: "",
     trade_competency: -1,
     error: false
@@ -45,13 +46,13 @@ class WorkerCreate extends Component {
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
-    }, () => console.log(this.state));
+    });
   }
 
   handleReactSelect = (option, event) => {
     this.setState({
       [event.name]: option.value
-    }, () => console.log(this.state))
+    })
   }
 
   handleFileUpload = event => {
@@ -62,6 +63,7 @@ class WorkerCreate extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
+    console.log("you are here");
     if (this.state.position_in_company === -1) {
       this.setState({
         error: 'Worker position in company was not selected! Please, choose position form the list'
@@ -80,8 +82,8 @@ class WorkerCreate extends Component {
         this.formData.append(key, value);
       })
       await foxApi.createEntityWithFile('workers', this.formData)
-        .then(() => {
-          this.props.history.goBack()
+        .then((data) => {
+          this.state.submitCallback(data.id)
         },
           (error) => {
             console.error(error);
@@ -92,7 +94,18 @@ class WorkerCreate extends Component {
             })
           })
     }
+  }
 
+  handleSimpleSubmit = (event) => {
+    this.setState({
+      submitCallback: (id) => { return this.props.history.goBack() }
+    });
+  }
+
+  handleSubmitWithCompetencies = event => {
+    this.setState({
+      submitCallback: (id) => { this.props.history.push(`/workers/${id}/competencies/new`) }
+    });
   }
 
   componentDidMount = async () => {
@@ -100,6 +113,9 @@ class WorkerCreate extends Component {
   }
 
   render = () => {
+    const preventDefaultSubmit = e => {
+      e.preventDefault();
+    }
     return (
       <CRow>
         <CCol>
@@ -171,23 +187,6 @@ class WorkerCreate extends Component {
               inputInfo="safety_green_card"
               uploadInfo="safety_green_card_scan"
             />
-            <FoxFormGroupWithUpload
-              inputValue={this.state.special_competency}
-              handleChange={this.handleChange}
-              handleFileUpload={this.handleFileUpload}
-              inputInfo="special_competency"
-              uploadInfo="special_competency_scan"
-            />
-            <CFormGroup>
-              <CLabel htmlFor="competency_issued_by">Competency issued by</CLabel>
-              <CInput
-                id="competency_issued_by"
-                name='competency_issued_by'
-                placeholder="Enter legal entity"
-                value={this.state.competency_issued_by}
-                onChange={this.handleChange}
-                required />
-            </CFormGroup>
             <CFormGroup>
               <CLabel htmlFor="registration_number">Registration number</CLabel>
               <CInput
@@ -209,7 +208,24 @@ class WorkerCreate extends Component {
                 required />
             </CFormGroup>
             <CFormGroup>
-              <CButton type="submit" color="dark" variant="outline" block>Create Worker</CButton>
+              <CRow>
+                <CCol md="6">
+                  <CButton
+                    onClick={this.handleSimpleSubmit}
+                    type="submit"
+                    color="dark"
+                    variant="outline"
+                    block>Create Worker</CButton>
+                </CCol>
+                <CCol md="6">
+                  <CButton
+                    onClick={this.handleSubmitWithCompetencies}
+                    type="submit"
+                    color="primary"
+                    variant="outline"
+                    block>Create Worker and add special competencies</CButton>
+                </CCol>
+              </CRow>
             </CFormGroup>
             {this.state.error
               ? <p>{this.state.error}</p>
@@ -233,3 +249,4 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkerCreate)
+
