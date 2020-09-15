@@ -16,7 +16,7 @@ class FoxApiService {
         });
         if (!res.ok) {
             if (res.status >= 500) {
-                throw new Error(`Could not fetch ${url}. recieved ${res.status}`);
+                throw new Error(`Could not fetch ${url}. Received ${res.status}`);
             }
         }
         return res.json();
@@ -30,7 +30,7 @@ class FoxApiService {
             } : {}
         });
         if (!res.ok) {
-            throw new Error(`Could not fetch ${url}. recieved ${res.status}`);
+            throw new Error(`Could not fetch ${url}. Received ${res.status}`);
         }
         return res;
     }
@@ -53,7 +53,7 @@ class FoxApiService {
             body: JSON.stringify(data) // body data type must match "Content-Type" header
         });
         if (!res.ok) {
-            throw new Error(`Could not fetch ${url}. recieved ${res.status}`);
+            throw new Error(`Could not fetch ${url}. Received ${res.status}`);
         }
         return res.json();
     }
@@ -76,7 +76,7 @@ class FoxApiService {
             body: data // body data type must match "Content-Type" header
         });
         if (!res.ok) {
-            throw new Error(`Could not fetch ${url}. recieved ${res.status}`);
+            throw new Error(`Could not fetch ${url}. Received ${res.status}`);
         }
         return res.json();
     }
@@ -102,7 +102,7 @@ class FoxApiService {
         });
         if (!res.ok) {
             if (res.status >= 500) {
-                throw new Error(`Could not fetch ${url}. recieved ${res.status}`);
+                throw new Error(`Could not fetch ${url}. Received ${res.status}`);
             }
         }
 
@@ -128,7 +128,7 @@ class FoxApiService {
         });
         if (!res.ok) {
             if (res.status >= 500) {
-                throw new Error(`Could not fetch ${url}. recieved ${res.status}`);
+                throw new Error(`Could not fetch ${url}. Received ${res.status}`);
             }
         }
 
@@ -154,7 +154,7 @@ class FoxApiService {
         });
         if (!res.ok) {
             if (res.status >= 500) {
-                throw new Error(`Could not fetch ${url}. recieved ${res.status}`);
+                throw new Error(`Could not fetch ${url}. Received ${res.status}`);
             }
         }
 
@@ -179,7 +179,7 @@ class FoxApiService {
             body: JSON.stringify(data) // body data type must match "Content-Type" header
         });
         if (!res.ok) {
-            throw new Error(`Could not fetch ${url}. recieved ${res.status}`);
+            throw new Error(`Could not fetch ${url}. Received ${res.status}`);
         }
         return Promise.resolve("Worker deleted successfully!");
     }
@@ -198,6 +198,16 @@ class FoxApiService {
             }
         }
         return cookieValue;
+    }
+
+
+    getEntityList = (entity, params) => {
+        let url = `${this.apiBase}${entity}/`;
+        if (params) {
+            url = new URL(url);
+            Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+        }
+        return this.get(url)
     }
 
     createEntityOf = (entity, data) => {
@@ -268,6 +278,12 @@ class FoxApiService {
 
     downloadWorkerDocument = async (worker_id, doc_type) => {
         let url = `${this.apiBase}workers/download_doc/${worker_id}/${doc_type}/`;
+        const res = await this.getDoc(url = url);
+        return res.blob();
+    }
+
+    downloadWorkerCompetency = async (id) => {
+        let url = `${this.apiBase}worker_special_competencies/downloads/${id}/`;
         const res = await this.getDoc(url = url);
         return res.blob();
     }

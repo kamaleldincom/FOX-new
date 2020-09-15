@@ -1,31 +1,33 @@
 import React from 'react';
-const ProjectList = React.lazy(() => import('./views/projects/ProjectList'))
-const ApprovalList = React.lazy(() => import('./views/approvals/ApprovalList'))
-const ApprovalDetail = React.lazy(() => import('./views/approvals/ApprovalDetail'))
+const ProjectList = React.lazy(() => import('./views/projects/ProjectList'));
+const ApprovalList = React.lazy(() => import('./views/approvals/ApprovalList'));
+const ApprovalDetail = React.lazy(() => import('./views/approvals/ApprovalDetail'));
 const ContractorList = React.lazy(() => import('./views/contractors/ContractorList'))
-const CurrentWorksList = React.lazy(() => import('./views/current_works/CurrentWorksList'))
-const ClientManagerList = React.lazy(() => import('./views/managers/ClientManagerList'))
-const ClientManagerCreate = React.lazy(() => import('./views/managers/ClientManagerCreate'))
-const ClientManagerDetail = React.lazy(() => import('./views/managers/ClientManagerDetail'))
-const WorkerList = React.lazy(() => import('./views/workers/WorkerList'))
-const WorkerCreate = React.lazy(() => import('./views/workers/WorkerCreate'))
-const WorkerDetail = React.lazy(() => import('./views/workers/WorkerDetail'))
-const ProjectCreate = React.lazy(() => import('./views/projects/ProjectCreate'))
-const ProjectDetail = React.lazy(() => import('./views/projects/ProjectDetail'))
-const ProjectPTW = React.lazy(() => import('./views/projects/ProjectPTW'))
-const ProjectUploadDocs = React.lazy(() => import('./views/projects/ProjectUploadDocs'))
-const ContractorCreate = React.lazy(() => import('./views/contractors/ContractorCreate'))
-const ContractorDetail = React.lazy(() => import('./views/contractors/ContractorDetail'))
-const ContractorWorkersReview = React.lazy(() => import('./views/workers/ContractorWorkersReview'))
-const DocumentList = React.lazy(() => import('./views/documents/DocumentList'))
-const DocumentCreate = React.lazy(() => import('./views/documents/DocumentCreate'))
-const DocumentDetail = React.lazy(() => import('./views/documents/DocumentDetail'))
-const SafetyVideo = React.lazy(() => import('./views/safety/Video'))
-const SafetyPresets = React.lazy(() => import('./views/safety/SafetyPresets'))
-const WorkersAssign = React.lazy(() => import('./views/workers/Assign'))
-const CompanyDocuments = React.lazy(() => import('./views/company/CompanyDocuments'))
-const ProposalSubmit = React.lazy(() => import('./views/projects/ProposalSubmit'))
-
+const CurrentWorksList = React.lazy(() => import('./views/current_works/CurrentWorksList'));
+const ClientManagerList = React.lazy(() => import('./views/managers/ClientManagerList'));
+const ClientManagerCreate = React.lazy(() => import('./views/managers/ClientManagerCreate'));
+const ClientManagerDetail = React.lazy(() => import('./views/managers/ClientManagerDetail'));
+const WorkerList = React.lazy(() => import('./views/workers/WorkerList'));
+const WorkerCreate = React.lazy(() => import('./views/workers/WorkerCreate'));
+const WorkerDetail = React.lazy(() => import('./views/workers/WorkerDetail'));
+const ProjectCreate = React.lazy(() => import('./views/projects/ProjectCreate'));
+const ProjectDetail = React.lazy(() => import('./views/projects/ProjectDetail'));
+const ProjectPTW = React.lazy(() => import('./views/projects/ProjectPTW'));
+const ProjectUploadDocs = React.lazy(() => import('./views/projects/ProjectUploadDocs'));
+const ContractorCreate = React.lazy(() => import('./views/contractors/ContractorCreate'));
+const ContractorDetail = React.lazy(() => import('./views/contractors/ContractorDetail'));
+const ContractorWorkersReview = React.lazy(() => import('./views/workers/ContractorWorkersReview'));
+const DocumentList = React.lazy(() => import('./views/documents/DocumentList'));
+const DocumentCreate = React.lazy(() => import('./views/documents/DocumentCreate'));
+const DocumentDetail = React.lazy(() => import('./views/documents/DocumentDetail'));
+const SafetyVideo = React.lazy(() => import('./views/safety/Video'));
+const SafetyPresets = React.lazy(() => import('./views/safety/SafetyPresets'));
+const WorkersAssign = React.lazy(() => import('./views/workers/Assign'));
+const CompanyDocuments = React.lazy(() => import('./views/company/CompanyDocuments'));
+const ProposalSubmit = React.lazy(() => import('./views/projects/ProposalSubmit'));
+const SpecialCompetencyList = React.lazy(() => import('./views/special_competencies/SpecialCompetencyList'));
+const SpecialCompetencyCreate = React.lazy(() => import('./views/special_competencies/SpecialCompetencyCreate'));
+const SpecialCompetencyDetail = React.lazy(() => import('./views/special_competencies/SpecialCompetencyDetail'));
 
 const routes = [
   { path: '/', exact: true, name: 'Fox' },
@@ -55,7 +57,9 @@ const routes = [
   { path: '/workers', name: 'Workers', component: WorkerList, exact: true },
   { path: '/workers/new', name: 'New', component: WorkerCreate, exact: true },
   { path: '/workers/:id', name: 'Worker Details', component: WorkerDetail, exact: true },
-
+  { path: '/workers/:id/competencies', name: 'Spec. Competencies', component: SpecialCompetencyList, exact: true },
+  { path: '/workers/:id/competencies/new', name: 'New Competency', component: SpecialCompetencyCreate, exact: true },
+  { path: '/workers/:id/competencies/:competency_id', name: 'Competency Details', component: SpecialCompetencyDetail, exact: true },
 ];
 
 export default routes;

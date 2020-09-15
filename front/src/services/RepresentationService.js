@@ -1,13 +1,13 @@
 import FoxApiService from './FoxAPIService'
 
 const foxApi = new FoxApiService();
-const SERVER_ADDRESS = `${window.location.origin}`;
+// const SERVER_ADDRESS = `${window.location.origin}`;
 
 class RepresentationService {
   displaySimpleList = (entity, params = null, additional = false) => {
     return dispatch => {
-      let url = this.compileUrl(dispatch, entity, params);
-      foxApi.get(url)
+      dispatch(this.clearEntityTable({}));
+      foxApi.getEntityList(entity, params)
         .then(data => {
           if (data.length > 0) {
             const entityTableInfo = this.generateTableInfo(data);
@@ -24,8 +24,8 @@ class RepresentationService {
 
   displaySimpleListWithoutStatus = (entity, params = null, additional = false) => {
     return dispatch => {
-      let url = this.compileUrl(dispatch, entity, params);
-      foxApi.get(url)
+      dispatch(this.clearEntityTable({}));
+      foxApi.getEntityList(entity, params)
         .then(data => {
           if (data.length > 0) {
             const entityTableInfo = this.generateTableInfo(data);
@@ -41,6 +41,8 @@ class RepresentationService {
     }
   }
 
+
+
   populateAdditionalEntityTable = projectTableInfo => ({
     type: 'POPULATE_ADDITIONAL_ENTITY_TABLE',
     additionalEntityListTable: projectTableInfo
@@ -55,16 +57,14 @@ class RepresentationService {
     type: 'CLEAR_ENTITY_TABLE',
   })
 
-
-  compileUrl(dispatch, entity, params) {
-    dispatch(this.clearEntityTable({}));
-    let url = `${SERVER_ADDRESS}/api/${entity}/`;
-    if (params) {
-      url = new URL(url);
-      Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
-    }
-    return url;
-  }
+  // compileUrl(entity, params) {
+  //   let url = `${SERVER_ADDRESS}/api/${entity}/`;
+  //   if (params) {
+  //     url = new URL(url);
+  //     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+  //   }
+  //   return url;
+  // }
 
   generateTableInfo(data) {
     const entityTableInfo = {};

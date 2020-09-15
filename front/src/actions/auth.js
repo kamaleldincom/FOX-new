@@ -98,7 +98,7 @@ const getProfileFetch = () => {
                         return data
                     } else {
                         dispatch(loginUser(data))
-                        return data
+                        return Promise.resolve(data)
                     }
                 })
         }

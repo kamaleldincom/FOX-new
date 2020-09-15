@@ -20,6 +20,7 @@ from back.models import (
     Permit,
     Document,
     DocumentAssign,
+    WorkerSpecialCompetency,
 )
 
 FoxUser = get_user_model()
@@ -192,6 +193,11 @@ class ProjectAdmin(admin.ModelAdmin):
     )
 
 
+class WorkerSpecialCompetencyAdmin(admin.ModelAdmin):
+    model = WorkerSpecialCompetency
+    list_display = ("name", "issued_by")
+
+
 class PermitAdmin(admin.ModelAdmin):
     model = Permit
     list_display = ("Project", "Worker", "issue_date", "active")
@@ -217,5 +223,6 @@ admin.site.register(Worker, WorkerAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Permit, PermitAdmin)
 admin.site.register(Document, DocumentAdmin)
+admin.site.register(WorkerSpecialCompetency, WorkerSpecialCompetencyAdmin)
 admin.site.register(DocumentAssign, DocumentAssignAdmin)
 admin.site.unregister(Group)

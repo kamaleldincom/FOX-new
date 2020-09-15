@@ -8,9 +8,9 @@ from .client_manager import (  # noqa F401
 from .contractor import ContractorSerializer, ContractorListSerializer  # noqa F401
 from .worker import WorkerListSerializer, WorkerSerializer  # noqa F401
 from .document import DocumentListSerializer, DocumentSerializer  # noqa F401
-from .worker_document import (  # noqa F401
-    WorkerDocumentSerializer,
-    WorkerDocumentListSerializer,
+from .worker_special_competency import (  # noqa F401
+    WorkerSpecialCompetencyListSerializer,
+    WorkerSpecialCompetencySerializer,
 )
 from .approval import ApprovalListSerializer, ApprovalSerializer  # noqa F401
-from .company import CompanyDocsSerializer
+from .company import CompanyDocsSerializer  # noqa F401

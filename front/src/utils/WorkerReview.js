@@ -1,13 +1,15 @@
 import React, { Component, Suspense } from 'react'
 import { connect } from 'react-redux'
-import { FoxApiService } from '../services'
-import { getProfileFetch } from '../actions'
 import {
   CButton,
   CListGroup,
   CListGroupItem,
   CSpinner
 } from "@coreui/react";
+
+import { FoxApiService } from '../services'
+import { getProfileFetch } from '../actions'
+import SpecialCompetencyReviewList from './SpecialCompetencyReviewList'
 
 const foxApi = new FoxApiService();
 
@@ -118,18 +120,8 @@ class WorkerReview extends Component {
             >Download</CButton>
           </CListGroupItem>
           <CListGroupItem>
-            <p><strong>Special competency: </strong>{this.state.special_competency}</p>
-            <CButton
-              variant="outline"
-              color="success"
-              id="special_competency_scan"
-              name="special_competency_scan"
-              value={this.state.special_competency_scan}
-              onClick={this.downloadFile}
-            >Download</CButton>
-          </CListGroupItem>
-          <CListGroupItem>
-            <p><strong>Competency issued by: </strong>{this.state.competency_issued_by}</p>
+            <p><strong>Special competencies:</strong></p>
+            <SpecialCompetencyReviewList workerId={this.props.workerId} />
           </CListGroupItem>
           <CListGroupItem>
             <p><strong>Registration number: </strong>{this.state.registration_number}</p>

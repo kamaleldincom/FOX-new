@@ -9,5 +9,7 @@ from .document_worker_assign import DocumentWorkerAssign  # noqa F401
 from .permit import Permit  # noqa F401
 from .project import Project  # noqa F401
 from .worker import Worker  # noqa F401
-from .worker_document import WorkerDocument  # noqa F401
+from .worker_special_competency import WorkerSpecialCompetency  # noqa F401
 from .approval import Approval  # noqa F401
+
+# from .worker_document import WorkerDocument

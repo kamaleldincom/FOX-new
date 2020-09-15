@@ -55,19 +55,21 @@ urlpatterns = [
         "documents/display/<str:part1>/<str:part2>/<str:part3>/",
         views.download_file_to_display,
     ),
-    path("worker_documents/", views.WorkerDocumentList.as_view()),
-    path("worker_documents/new/", views.WorkerDocumentCreate.as_view()),
-    path("worker_documents/<int:pk>/", views.WorkerDocumentDetail.as_view()),
+    path("worker_special_competencies/", views.WorkerSpecialCompetencyList.as_view()),
     path(
-        "worker_documents/downloads/<int:pk>/", views.WorkerDocumentDownload.as_view()
+        "worker_special_competencies/new/",
+        views.WorkerSpecialCompetencyCreate.as_view(),
+    ),
+    path(
+        "worker_special_competencies/<int:pk>/",
+        views.WorkerSpecialCompetencyDetail.as_view(),
+    ),
+    path(
+        "worker_special_competencies/downloads/<int:pk>/",
+        views.WorkerSpecialCompetencyDownload.as_view(),
     ),
     path("approvals/", views.ApprovalList.as_view()),
     path("approvals/<int:pk>/", views.ApprovalDetail.as_view()),
     path("safety_templates/<int:pk>/", views.CompanyDocUpload.as_view()),
     path("download_template/<str:doctype>/", views.CompanyDocDownload.as_view()),
-    # get  change_project_status
-    # projects/id/workflow/confirm_proposal get change_project_status
-    # projects/id/workflow/works_finished get change_project_status
-    # projects/id/workflow/project_closed get change_project_status
-    # ...
 ]

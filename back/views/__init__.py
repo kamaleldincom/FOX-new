@@ -22,11 +22,11 @@ from .documents import (  # noqa F401
     DocumentDisplayPermission,
     download_file_to_display,
 )  # noqa F401
-from .worker_documents import (  # noqa F401
-    WorkerDocumentList,
-    WorkerDocumentDetail,
-    WorkerDocumentCreate,
-    WorkerDocumentDownload,
+from .worker_special_competencies import (  # noqa F401
+    WorkerSpecialCompetencyList,
+    WorkerSpecialCompetencyCreate,
+    WorkerSpecialCompetencyDetail,
+    WorkerSpecialCompetencyDownload,
 )  # noqa F401
 from .workflow import ProposalSubmit  # noqa F401
 from .approvals import ApprovalList, ApprovalDetail  # noqa F401
