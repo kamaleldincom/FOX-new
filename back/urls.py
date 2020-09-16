@@ -9,7 +9,7 @@ from django_rest_passwordreset.views import (
 )
 
 urlpatterns = [
-    path("token-auth/", views.ObtainFoxJWTToken.as_view()),
+    path("token-auth/", views.ObtainFoxJWTToken.as_view(), name="login"),
     path("current_user/", views.current_user),
     path("users/", views.UserList.as_view()),
     path(

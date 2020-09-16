@@ -27,7 +27,7 @@ def password_reset_token_created(
     # send an e-mail to the user
 
     log(
-        log.WARNING,
+        log.INFO,
         "send an e-mail to the user [%s]",
         reset_password_token.user.username,
     )
@@ -63,7 +63,7 @@ def password_reset_token_created(
 
 def send_mail_on_creation(**kwargs):
     user = kwargs["instance"]
-    log(log.WARNING, "WE TRIED TO SEND EMAIL to [%s]", user.username)
+    log(log.INFO, "WE TRIED TO SEND EMAIL to [%s]", user.username)
     token = ResetPasswordToken.objects.create(user=user)
     # send a signal that the password token was created
     # let whoever receives this signal handle sending the email for the password reset
