@@ -74,8 +74,13 @@ class ActivityTestCase(APITestCase):
         pass
 
     def test_project_creation_activity(self):
-        res = self.login({"username": "test_admin1", "password": "ZAQ!XSW@"})
-        self.assertIsNotNone(res)
+        url = reverse("project-create")
+        data = {
+            "name": "Test project1",
+            "description": "Test description",
+        }
+        response = self.client.post(url, data)
+        self.assertIsNotNone(response)
 
     def login(self, data):
         url = reverse("login")
