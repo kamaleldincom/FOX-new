@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework.views import APIView
 from rest_framework import status
-from back.models import Project, Approval, ClientManager
+from back.models import Project, Approval, ClientManager, Activity
 from back.logger import log
 
 
@@ -10,11 +10,9 @@ class ProposalSubmit(APIView):
     def patch(self, request, pk, format=None):
         # get current project
         project = get_object_or_404(Project, pk=pk)
-        # project=Project.objects.get(pk=pk)
 
         # get companies managers
         managers = get_list_or_404(ClientManager, company=request.user.company)
-        # managers = request.user.company.fox_users.filter(role="CliMan")
 
         # create approval for each manager
         for manager in managers:
@@ -29,6 +27,12 @@ class ProposalSubmit(APIView):
         # update current project status
         project.status = Project.Status.submitted
         project.save()
+
+        # generate activity in activity log
+        activity = Activity(
+            project=project, author=request.user, company=request.user.company
+        )
+        activity.proposal_submition_message()
 
         # return response
         return JsonResponse(

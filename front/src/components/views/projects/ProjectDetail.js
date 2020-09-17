@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { getProfileFetch, getContractorList, setProjectId } from '../../../actions'
 import { connect } from 'react-redux'
+import DjangoCSRFToken from 'django-react-csrftoken'
 import {
   CForm,
   CFormGroup,
@@ -14,8 +14,10 @@ import {
   CEmbed,
   CInputCheckbox
 } from "@coreui/react";
-import DjangoCSRFToken from 'django-react-csrftoken'
+
+import { getProfileFetch, getContractorList, setProjectId } from '../../../actions'
 import { FoxApiService } from '../../../services'
+import { ActivityLog } from '../../activity_log'
 
 const foxApi = new FoxApiService();
 
@@ -294,12 +296,15 @@ class ProjectDetail extends Component {
           }
         </CForm>
           :
-          <CEmbed
-            ratio="16by9"
-          >
-            <iframe src={`${window.location.origin}/api/ptw/${this.props.match.params.id}`} />
-          </CEmbed>}
-
+          <React.Fragment>
+            <ActivityLog projectId={this.props.match.params.id} />
+            <CEmbed
+              ratio="16by9"
+            >
+              <iframe src={`${window.location.origin}/api/ptw/${this.props.match.params.id}`} />
+            </CEmbed>
+          </React.Fragment>
+        }
         </CCol>
       </CRow >
     )
