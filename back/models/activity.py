@@ -45,7 +45,9 @@ class Activity(models.Model):
         self.message = "[{0}] Submition {1} by {2} {3}.".format(
             datetime.now().strftime("%m/%d/%Y, %H:%M"),
             status.lower(),
-            self.author.clientmanager.position,
+            self.author.clientmanager.Position(
+                self.author.clientmanager.position
+            ).label,
             self.author.username,
         )
         self.save()

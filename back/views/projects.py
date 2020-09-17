@@ -35,10 +35,15 @@ class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
         return Project.objects.filter(company=user.company)
 
     def patch(self, request, *args, **kwargs):
+
+        if kwargs["pk"]:
+            prev_project = Project.objects.get(pk=kwargs["pk"])
+
         res = super(ProjectDetail, self).patch(request, args, kwargs)
         project = Project.objects.get(pk=res.data["id"])
-        activity = Activity(
-            project=project, author=request.user, company=request.user.company
-        )
-        activity.project_status_updated_message(project.status)
+        if prev_project.status != project.status:
+            activity = Activity(
+                project=project, author=request.user, company=request.user.company
+            )
+            activity.project_status_updated_message(project.status)
         return res
