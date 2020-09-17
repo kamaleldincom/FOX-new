@@ -11,6 +11,7 @@ from back.models import (
     Activity,
     ClientAdmin,
     ClientManager,
+    Approval,
 )
 
 
@@ -31,13 +32,14 @@ class ActivityTestCase(APITestCase):
             username="test_admin1",
             password="ZAQ!XSW@",
             email="lysak.ipr@gmail.com",
-            role=ClientAdmin.Role.client_admin,
+            role=FoxUser.Role.client_admin,
         )
         ClientManager.objects.create(
             username="test_man1",
             password="ZAQ!XSW@",
             email="lysak.ipr@gmail.com",
-            role=ClientManager.Role.client_admin,
+            role=ClientManager.Role.client_manager,
+            position=ClientManager.Position.safety_manager,
         )
 
         Company.objects.create(name="Test company1")
@@ -74,10 +76,34 @@ class ActivityTestCase(APITestCase):
         pass
 
     def test_activities_approval_confirmed_message(self):
-        pass
+        project = Project.objects.get(name="Test project1")
+        user = ClientManager.objects.get(username="test_man1")
+        approval = Approval.objects.create(
+            project=project, manager=user, status="Approved"
+        )
+        company = Company.objects.get(name="Test company1")
+        activity = Activity(project=project, author=user, company=company)
+        activity.approval_result_message(approval.status, approval.description)
+        self.assertEqual(
+            activity.message,
+            f'[{datetime.now().strftime("%m/%d/%Y, %H:%M")}] Submition approved by Safety Manager test_man1.',
+        )
 
     def test_activities_approval_rejected_message(self):
-        pass
+        project = Project.objects.get(name="Test project1")
+        user = ClientManager.objects.get(username="test_man1")
+        company = Company.objects.get(name="Test company1")
+        approval = Approval.objects.create(
+            project=project, manager=user, status="Rejected", description="No"
+        )
+        activity = Activity(project=project, author=user, company=company)
+        activity.approval_result_message(approval.status, approval.description)
+        self.assertEqual(
+            activity.message,
+            "[{0}] Submition rejected by Safety Manager test_man1. Comment: No".format(
+                datetime.now().strftime("%m/%d/%Y, %H:%M")
+            ),
+        )
 
     def test_project_creation_activity(self):
         url = reverse("project-create")

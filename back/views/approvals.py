@@ -25,10 +25,11 @@ class ApprovalDetail(generics.RetrieveUpdateDestroyAPIView):
         project_id = request.data.get("project", None)
         project = Project.objects.get(pk=project_id)
         approval_status = res.data["status"]
+        comment = res.data["description"]
         approval_activity = Activity(
             project=project, author=request.user, company=request.user.company
         )
-        approval_activity.approval_result_message(approval_status)
+        approval_activity.approval_result_message(approval_status, comment)
         managers = ClientManager.objects.filter(company=project.company)
         last_approvals = []
         for manager in managers:

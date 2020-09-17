@@ -40,16 +40,28 @@ class Activity(models.Model):
         )
         self.save()
 
-    def approval_result_message(self, status):
-
-        self.message = "[{0}] Submition {1} by {2} {3}.".format(
-            datetime.now().strftime("%m/%d/%Y, %H:%M"),
-            status.lower(),
-            self.author.clientmanager.Position(
-                self.author.clientmanager.position
-            ).label,
-            self.author.username,
+    def approval_result_message(self, status, comment):
+        message = (
+            "[{0}] Submition {1} by {2} {3}. Comment: {4}".format(
+                datetime.now().strftime("%m/%d/%Y, %H:%M"),
+                status.lower(),
+                self.author.clientmanager.Position(
+                    self.author.clientmanager.position
+                ).label,
+                self.author.username,
+                comment,
+            )
+            if comment
+            else "[{0}] Submition {1} by {2} {3}.".format(
+                datetime.now().strftime("%m/%d/%Y, %H:%M"),
+                status.lower(),
+                self.author.clientmanager.Position(
+                    self.author.clientmanager.position
+                ).label,
+                self.author.username,
+            )
         )
+        self.message = message
         self.save()
 
     def project_submition_accepted_message(self):
