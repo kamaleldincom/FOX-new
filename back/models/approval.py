@@ -16,13 +16,14 @@ class Approval(models.Model):
         max_length=16, choices=Status.choices, default=Status.pending
     )
     project = models.ForeignKey(
-        to="Project", on_delete=models.SET_NULL, related_name="approvals", null=True,
+        to="Project",
+        on_delete=models.CASCADE,
+        related_name="approvals",
     )
     manager = models.ForeignKey(
         "ClientManager",
         related_name="approvals",
-        on_delete=models.SET_NULL,
-        null=True,
+        on_delete=models.CASCADE,
         blank=True,
     )
 

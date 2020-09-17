@@ -1,5 +1,5 @@
 from django.urls import reverse
-from datetime import datetime, date, time
+from datetime import datetime
 from rest_framework.test import APITestCase
 
 # from django.test import TestCase
@@ -31,7 +31,13 @@ class ActivityTestCase(APITestCase):
             username="test_admin1",
             password="ZAQ!XSW@",
             email="lysak.ipr@gmail.com",
-            role=Contractor.Role.client_admin,
+            role=ClientAdmin.Role.client_admin,
+        )
+        ClientManager.objects.create(
+            username="test_man1",
+            password="ZAQ!XSW@",
+            email="lysak.ipr@gmail.com",
+            role=ClientManager.Role.client_admin,
         )
 
         Company.objects.create(name="Test company1")
@@ -44,7 +50,7 @@ class ActivityTestCase(APITestCase):
         activity.proposal_submition_message()
         self.assertEqual(
             activity.message,
-            f'[{datetime.now().strftime("%m/%d/%Y, %H:%M")}] Submitted proposal by contractor Contr 1',
+            f'[{datetime.now().strftime("%m/%d/%Y, %H:%M")}] Submitted proposal by contractor Contr 1.',
         )
 
     def test_activities_project_created_message(self):
@@ -55,7 +61,7 @@ class ActivityTestCase(APITestCase):
         activity.project_created_message()
         self.assertEqual(
             activity.message,
-            f'[{datetime.now().strftime("%m/%d/%Y, %H:%M")}] Project created by admin test_admin1',
+            f'[{datetime.now().strftime("%m/%d/%Y, %H:%M")}] Project created by admin test_admin1.',
         )
 
     def test_activities_project_approved_message(self):

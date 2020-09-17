@@ -1,6 +1,6 @@
-from back.models import Project
-from back.serializers import ProjectSerializer, ProjectListSerializer
 from rest_framework import generics
+from back.models import Project, Activity
+from back.serializers import ProjectSerializer, ProjectListSerializer
 
 
 class ProjectList(generics.ListAPIView):
@@ -19,8 +19,11 @@ class ProjectCreate(generics.CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         res = super(ProjectCreate, self).create(request, args, kwargs)
-        response_content = res.content.decode()
-        project = Project.objects.get(pk=response_content.id)
+        project = Project.objects.get(pk=res.data["id"])
+        activity = Activity(
+            project=project, author=request.user, company=request.user.company
+        )
+        activity.project_created_message()
         return res
 
 
@@ -31,6 +34,11 @@ class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
         user = self.request.user
         return Project.objects.filter(company=user.company)
 
-
-# def patch(self, request, *args, **kwargs):
-#         res = super(ApprovalDetail, self).patch(request, args, kwargs)
+    def patch(self, request, *args, **kwargs):
+        res = super(ProjectDetail, self).patch(request, args, kwargs)
+        project = Project.objects.get(pk=res.data["id"])
+        activity = Activity(
+            project=project, author=request.user, company=request.user.company
+        )
+        activity.project_status_updated_message(project.status)
+        return res

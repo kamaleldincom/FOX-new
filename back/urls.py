@@ -26,7 +26,7 @@ urlpatterns = [
         r"password_reset/", reset_password_request_token, name="reset-password-request"
     ),
     path("projects/", views.ProjectList.as_view()),
-    path("projects/new/", views.ProjectCreate.as_view()),
+    path("projects/new/", views.ProjectCreate.as_view(), name="project-create"),
     path("projects/<int:pk>/", views.ProjectDetail.as_view()),
     path("projects/<int:pk>/workflow/submit_proposal/", views.ProposalSubmit.as_view()),
     path("client_managers/", views.ClientManagerList.as_view()),
@@ -72,4 +72,5 @@ urlpatterns = [
     path("approvals/<int:pk>/", views.ApprovalDetail.as_view()),
     path("safety_templates/<int:pk>/", views.CompanyDocUpload.as_view()),
     path("download_template/<str:doctype>/", views.CompanyDocDownload.as_view()),
+    path("activities/", views.ActivityList.as_view()),
 ]
