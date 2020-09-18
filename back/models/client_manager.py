@@ -20,11 +20,17 @@ class ClientManager(FoxUser):
     name = models.CharField(max_length=128, null=True)
     department = models.CharField(max_length=128, null=True)
     position = models.CharField(
-        max_length=10, choices=Position.choices, default=Position.site_owner,
+        max_length=10,
+        choices=Position.choices,
+        default=Position.site_owner,
     )
 
     class Meta:
         verbose_name = "Client Manager"
+
+    @property
+    def info(self):
+        return {"contractor_name": self.name}
 
 
 post_save.connect(send_mail_on_creation, sender=ClientManager)

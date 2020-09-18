@@ -13,4 +13,12 @@ class FoxUser(AbstractUser):
     company = models.ForeignKey(
         "Company", on_delete=models.CASCADE, null=True, related_name="fox_users"
     )
-    role = models.CharField(max_length=16, choices=Role.choices, default=Role.dummy,)
+    role = models.CharField(
+        max_length=16,
+        choices=Role.choices,
+        default=Role.dummy,
+    )
+
+    @property
+    def info(self):
+        return {"company_name": self.company, "role": self.role}

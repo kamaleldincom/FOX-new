@@ -1,6 +1,7 @@
 from rest_framework import generics
 from back.models import Project, Activity
 from back.serializers import ProjectSerializer, ProjectListSerializer
+from back.services import ProjectEmailNotificationService as mail_service
 
 
 class ProjectList(generics.ListAPIView):
@@ -24,6 +25,8 @@ class ProjectCreate(generics.CreateAPIView):
             project=project, author=request.user, company=request.user.company
         )
         activity.project_created_message()
+        email = mail_service(project=project, receivers=[project.contractor])
+        email.send_project_created()
         return res
 
 

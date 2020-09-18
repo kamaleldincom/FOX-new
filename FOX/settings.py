@@ -81,7 +81,9 @@ ROOT_URLCONF = "FOX.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["/back/templates/back/",],  # noqa E231
+        "DIRS": [
+            "/back/templates/back/",
+        ],  # noqa E231
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -148,6 +150,7 @@ EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_REGISTER_LINK_FORMAT = env("EMAIL_REGISTER_LINK_FORMAT")
+EMAIL_BASE_LINK = env("EMAIL_BASE_LINK")
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/

@@ -12,7 +12,9 @@ class Contractor(FoxUser):
         default = "Default", _("Contractor")
 
     contractor_type = models.CharField(
-        max_length=10, choices=Type.choices, default=Type.default,
+        max_length=10,
+        choices=Type.choices,
+        default=Type.default,
     )
 
     related_company = models.CharField(max_length=128, null=True)
@@ -29,6 +31,10 @@ class Contractor(FoxUser):
     @property
     def project_list(self):
         return [project.name for project in self.projects.all()]
+
+    @property
+    def info(self):
+        return {"contractor_name": self.related_company}
 
 
 post_save.connect(send_mail_on_creation, sender=Contractor)
