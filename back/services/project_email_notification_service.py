@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from back.logger import log
 
 
 class ProjectEmailNotificationService:
@@ -15,7 +16,16 @@ class ProjectEmailNotificationService:
         self.link = f"{settings.EMAIL_BASE_LINK}projects/{self.project.pk}"
 
     def send_project_updated(self):
-        getattr(self, "send_project_{0}".format(self.project.status.lower()))()
+        try:
+            METHOD_NAME = self.project.status.lower()
+            getattr(self, f"send_project_{METHOD_NAME}")()
+        except AttributeError:
+            log(
+                log.WARNING,
+                "Project [%s] status changed to [%s] with no email",
+                self.project.name,
+                self.project.status,
+            )
 
     def send_project_created(self):
         self.subject = f"You are assigned for project {self.project.name}"

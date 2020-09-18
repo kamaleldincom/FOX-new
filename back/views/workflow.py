@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from back.models import Project, Approval, ClientManager, Activity
 from back.logger import log
+from back.services import ProjectEmailNotificationService as mail_service
 
 
 class ProposalSubmit(APIView):
@@ -33,6 +34,15 @@ class ProposalSubmit(APIView):
             project=project, author=request.user, company=request.user.company
         )
         activity.proposal_submition_message()
+
+        # send emails
+
+        mail = mail_service(
+            project=project,
+            receivers=managers,
+            issuer=project.contractor,
+        )
+        mail.send_proposal_submitted()
 
         # return response
         return JsonResponse(
