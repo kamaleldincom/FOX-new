@@ -10,8 +10,8 @@ import {
   CDataTable,
   CRow,
   CLink,
-  CButton
 } from '@coreui/react'
+import WorkStatusDropdown from './WorkStatusDropdown'
 
 
 class FoxEntityListTable extends Component {
@@ -36,7 +36,7 @@ class FoxEntityListTable extends Component {
                 null
                 :
                 <CLink
-                  className="btn btn-outline-success"
+                  className="btn btn-pill btn-outline-success"
                   to={`${this.props.match.url}/new`}
                 >
                   Add new
@@ -52,7 +52,6 @@ class FoxEntityListTable extends Component {
                 striped
                 bordered
                 sorter
-                footer
                 tableFilter
                 columnFilter
                 size="sm"
@@ -63,25 +62,30 @@ class FoxEntityListTable extends Component {
                   [linkName]:
                     (item) => (
                       <td>
-                        <CButton
-                          color="link"
-                          onClick={e => { this.alertOnClick(item.id, e) }}
+                        <CLink
+                          to={`${this.props.match.url}/${item.id}`}
                         >
                           {item[linkName]}
-                        </CButton>
+                        </CLink>
                       </td>
                     ),
-                  'project_name':
+                  'application_status':
                     (item) => (
                       <td>
-                        <CButton
-                          color="link"
-                          onClick={e => { this.alertOnClick(item.id, e) }}
-                        >
-                          {item.project_name}
-                        </CButton>
+                        <CBadge shape="pill" color={this.props.getBadge(item.application_status)}>
+                          {item.application_status}
+                        </CBadge>
                       </td>
                     ),
+                  'work_status':
+                    (item) => (
+                      <td className="d-flex align-items-center">
+                        <CBadge shape="pill" color={this.props.getBadge(item.work_status)}>
+                          {item.work_status}
+                        </CBadge>
+                        <WorkStatusDropdown key={item.id} item={item} {...this.props} />
+                      </td>
+                    )
                 }}
               />
             </CCardBody>
