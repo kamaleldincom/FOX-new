@@ -35,9 +35,6 @@ class WorkerCreate extends Component {
     safety_quiz_answer: "",
     personal_declaration: "",
     submitCallback: "",
-    // special_competency: "",
-    // special_competency_scan: "",
-    // competency_issued_by: "",
     registration_number: "",
     trade_competency: -1,
     error: false

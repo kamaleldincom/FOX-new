@@ -9,14 +9,32 @@ import {
   CRow,
   CCol,
   CTextarea,
-  CSelect,
   CButton,
-  CInputCheckbox
+  CCard,
+  CCardHeader,
+  CCardBody,
+  CCardTitle,
+  CCardText,
+  CCardSubtitle
 } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
 import { FoxApiService } from '../../../services'
+import { FoxSwitchGroup } from '../../../utils'
+import { FoxReactSelectFormGroup } from '../../forms'
+
 
 const foxApi = new FoxApiService();
+
+const permitOptions = [
+  "work_at_height",
+  "lifting_work",
+  "confined_space",
+  "hot_work",
+  "chemical_handling",
+  "work_alone",
+  "work_at_sensitive_area",
+  "cold_work",
+]
 
 class ProjectCreate extends Component {
 
@@ -24,9 +42,7 @@ class ProjectCreate extends Component {
     name: "",
     description: "",
     start_date: "",
-    start_time: "",
     end_date: "",
-    end_time: "",
     company: this.props.company,
     contractor: "-1",
     work_at_height: false,
@@ -44,12 +60,19 @@ class ProjectCreate extends Component {
 
     this.setState({
       [event.target.name]: event.target.value
-    });
+    }, () => { console.log(this.state) });
   }
 
   handleCheck = event => {
+    console.log(event);
     this.setState({
       [event.target.name]: event.target.checked
+    }, () => { console.log(this.state) })
+  }
+
+  handleReactSelect = (option, event) => {
+    this.setState({
+      [event.name]: option.value
     })
   }
 
@@ -106,190 +129,91 @@ class ProjectCreate extends Component {
   }
 
   render = () => {
+    const options = this.props.options ? this.props.options.map(option => { return { value: option.id, label: option.username } }) : null
     return (
       <CRow>
         <CCol>
-          <CForm
-            onSubmit={this.silenceSubmit}
-          >
-            <DjangoCSRFToken />
-            <CFormGroup>
-              <CLabel htmlFor="name">Name</CLabel>
-              <CInput
-                id="name"
-                name='name'
-                placeholder="Enter project name"
-                value={this.state.name}
-                onChange={this.handleChange}
-                required />
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="description">Description</CLabel>
-              <CTextarea
-                id="descrption"
-                name="description"
-                placeholder="Please, enter short description of the projet"
-                value={this.state.description}
-                onChange={this.handleChange}
-                required
-              />
-            </CFormGroup>
-            <CFormGroup>
-              <CRow>
-                <CCol lg="6">
-                  <CLabel htmlFor="start_date">Start Date</CLabel>
-                  <CInput
-                    type="date"
-                    id="start_date"
-                    name="start_date"
-                    placeholder="date"
-                    value={this.state.start_date}
-                    onChange={this.handleChange}
-                    required
-                  />
-                </CCol>
-                <CCol lg="6">
-                  <CLabel htmlFor="start_time">Start Time</CLabel>
-                  <CInput
-                    type="time"
-                    id="start_time"
-                    name="start_time"
-                    value={this.state.start_time}
-                    onChange={this.handleChange}
-                    required
-                  />
-                </CCol>
-              </CRow>
-            </CFormGroup>
-            <CFormGroup>
-              <CRow>
-                <CCol lg="6">
-                  <CLabel htmlFor="end_date">End Date</CLabel>
-                  <CInput
-                    type="date"
-                    id="end_date"
-                    name="end_date"
-                    placeholder="date"
-                    value={this.state.end_date}
-                    onChange={this.handleChange}
-                    required
-                  />
-                </CCol>
-                <CCol lg="6">
-                  <CLabel htmlFor="end_time">End Time</CLabel>
-                  <CInput
-                    type="time"
-                    id="end_time"
-                    name="end_time"
-                    value={this.state.end_time}
-                    onChange={this.handleChange}
-                    required
-                  />
-                </CCol>
-              </CRow>
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="contractor">Contractor</CLabel>
-              <CSelect
-                id="contractor"
-                name="contractor"
-                placeholder="Choose contractor"
-                value={this.state.contractor}
-                onChange={this.handleChange}
-                required
+          <CCard>
+            <CCardHeader>
+              <CCardTitle>
+                Add New Project
+              </CCardTitle>
+              <CCardSubtitle>Fill up the form below to add a new Project</CCardSubtitle>
+            </CCardHeader>
+            <CCardBody>
+              <CForm
+                onSubmit={this.silenceSubmit}
               >
-                <option key="-1" value="-1" disabled>Choose contractor</option>
-                {this.props.options ? this.props.options.map((option) => {
-                  return (
-                    <option key={option.id} value={option.id}>{option.username}</option>
-                  )
-                }) : null
+                <DjangoCSRFToken />
+                <CFormGroup>
+                  <CInput
+                    id="name"
+                    name='name'
+                    placeholder="Project Name"
+                    value={this.state.name}
+                    onChange={this.handleChange}
+                    required />
+                </CFormGroup>
+                <CFormGroup>
+                  <CTextarea
+                    id="description"
+                    name="description"
+                    placeholder="Short Project Description"
+                    value={this.state.description}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </CFormGroup>
+                <CFormGroup>
+                  <CRow>
+                    <CCol lg="6">
+                      <CLabel htmlFor="start_date">Start Date</CLabel>
+                      <CInput
+                        type="datetime-local"
+                        id="start_date"
+                        placeholder='Start date'
+                        name="start_date"
+                        value={this.state.start_date}
+                        onChange={this.handleChange}
+                        required
+                      />
+                    </CCol>
+                    <CCol lg="6">
+                      <CLabel htmlFor="end_date">End Date</CLabel>
+                      <CInput
+                        type="datetime-local"
+                        id="end_date"
+                        name="end_date"
+                        placeholder="date"
+                        value={this.state.end_date}
+                        onChange={this.handleChange}
+                        required
+                      />
+
+                    </CCol>
+                  </CRow>
+                </CFormGroup>
+                <FoxReactSelectFormGroup
+                  options={options}
+                  inputInfo="contractor"
+                  inputValue={this.state.contractor}
+                  handleChange={this.handleReactSelect}
+                />
+                <FoxSwitchGroup
+                  groupLabel='Choose the related hazardous work
+                  from the list below:'
+                  options={permitOptions}
+                  handleCheck={this.handleCheck}
+                />
+                <CButton shape="pill" onClick={this.handleDocumentCreationRedirect} color="dark" variant="outline" block>Create Project and go to document creation</CButton>
+                {/* <CButton onClick={this.handleCreateProject} color="dark" variant="outline" block>Create Project</CButton> */}
+                {this.state.error
+                  ? <p>{this.state.error}</p>
+                  : null
                 }
-              </CSelect>
-            </CFormGroup>
-            <CFormGroup variant="checkbox" className="checkbox">
-              <CFormGroup>
-                <CInputCheckbox
-                  id="work_at_height"
-                  name="work_at_height"
-                  value="work_at_height"
-                  onChange={this.handleCheck}
-                />
-                <CLabel variant="checkbox" className="form-check-label" htmlFor="work_at_height">Work at height</CLabel>
-              </CFormGroup>
-              <CFormGroup>
-                <CInputCheckbox
-                  id="lifting_work"
-                  name="lifting_work"
-                  value="lifting_work"
-                  onChange={this.handleCheck}
-                />
-                <CLabel variant="checkbox" className="form-check-label" htmlFor="lifting_work">Lifting work</CLabel>
-              </CFormGroup>
-              <CFormGroup>
-                <CInputCheckbox
-                  id="confined_space"
-                  name="confined_space"
-                  value="confined_space"
-                  onChange={this.handleCheck}
-                />
-                <CLabel variant="checkbox" className="form-check-label" htmlFor="confined_space">Confined space</CLabel>
-              </CFormGroup>
-              <CFormGroup>
-                <CInputCheckbox
-                  id="hot_work"
-                  name="hot_work"
-                  value="hot_work"
-                  onChange={this.handleCheck}
-                />
-                <CLabel variant="checkbox" className="form-check-label" htmlFor="hot_work">Hot work</CLabel>
-              </CFormGroup>
-              <CFormGroup>
-                <CInputCheckbox
-                  id="chemical_handling"
-                  name="chemical_handling"
-                  value="chemical_handling"
-                  onChange={this.handleCheck}
-                />
-                <CLabel variant="checkbox" className="form-check-label" htmlFor="chemical_handling">Chemical handling</CLabel>
-              </CFormGroup>
-              <CFormGroup>
-                <CInputCheckbox
-                  id="work_alone"
-                  name="work_alone"
-                  value="work_alone"
-                  onChange={this.handleCheck}
-                />
-                <CLabel variant="checkbox" className="form-check-label" htmlFor="work_alone">Work alone</CLabel>
-              </CFormGroup>
-              <CFormGroup>
-                <CInputCheckbox
-                  id="work_at_sensitive_area"
-                  name="work_at_sensitive_area"
-                  value="work_at_sensitive_area"
-                  onChange={this.handleCheck}
-                />
-                <CLabel variant="checkbox" className="form-check-label" htmlFor="work_at_sensitive_area">Work at sensitive area</CLabel>
-              </CFormGroup>
-              <CFormGroup>
-                <CInputCheckbox
-                  id="cold_work"
-                  name="cold_work"
-                  value="cold_work"
-                  onChange={this.handleCheck}
-                />
-                <CLabel variant="checkbox" className="form-check-label" htmlFor="cold_work">Cold work</CLabel>
-              </CFormGroup>
-            </CFormGroup>
-            <CFormGroup>
-              <CButton onClick={this.handleDocumentCreationRedirect} color="dark" variant="outline" block>Create Project and go to document creation</CButton>
-              {/* <CButton onClick={this.handleCreateProject} color="dark" variant="outline" block>Create Project</CButton> */}
-            </CFormGroup>
-            {this.state.error
-              ? <p>{this.state.error}</p>
-              : null
-            }
-          </CForm>
+              </CForm>
+            </CCardBody>
+          </CCard>
         </CCol>
       </CRow >
     )

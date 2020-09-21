@@ -30,7 +30,7 @@ class ClientManager(FoxUser):
 
     @property
     def info(self):
-        return {"contractor_name": self.name}
+        return {"client_manager_name": self.name}
 
 
 post_save.connect(send_mail_on_creation, sender=ClientManager)

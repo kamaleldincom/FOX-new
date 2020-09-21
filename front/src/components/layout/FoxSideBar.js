@@ -14,13 +14,9 @@ import {
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 
-import CIcon from '@coreui/icons-react'
-
-
 const FoxSidebar = (props) => {
     const dispatch = useDispatch()
     const show = useSelector(state => state.sidebarShow)
-    // props.projectId ? props.match.params.id = props.projectId : null
     return (
 
         <CSidebar
