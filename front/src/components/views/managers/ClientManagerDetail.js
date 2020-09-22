@@ -89,7 +89,7 @@ class ClientManagerDetail extends Component {
             <CCardHeader>
               <CCardTitle>Mananger details</CCardTitle>
             </CCardHeader>
-            <CCardBody>\
+            <CCardBody>
               <CForm
                 onSubmit={this.handleSubmit}
               >
