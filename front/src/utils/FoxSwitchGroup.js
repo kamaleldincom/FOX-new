@@ -2,7 +2,6 @@ import React from 'react'
 import {
   CFormGroup,
   CLabel,
-  CRow,
   CSwitch
 } from "@coreui/react";
 
@@ -17,7 +16,6 @@ const FoxSwitchGroup = props => {
       {props.options.map((option, idx) => {
         return (
           <CFormGroup className="d-flex align-items-center" key={idx}>
-
             <CSwitch
               className='mr-2'
               id={option}
@@ -28,6 +26,7 @@ const FoxSwitchGroup = props => {
               color={'success'}
               size={"sm"}
               onChange={props.handleCheck}
+              checked={props.parentState[option]}
             />
             <CLabel variant="checkbox" className="form-check-label" htmlFor={option}>{makeLabel(option)}</CLabel>
           </CFormGroup>
