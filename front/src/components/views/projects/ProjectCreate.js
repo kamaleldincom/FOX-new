@@ -14,32 +14,21 @@ import {
   CCardHeader,
   CCardBody,
   CCardTitle,
-  CCardText,
   CCardSubtitle
 } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
 import { FoxApiService } from '../../../services'
 import { FoxSwitchGroup } from '../../../utils'
 import { FoxReactSelectFormGroup } from '../../forms'
-
+import { permitOptions } from './optionsLists'
 
 const foxApi = new FoxApiService();
-
-const permitOptions = [
-  "work_at_height",
-  "lifting_work",
-  "confined_space",
-  "hot_work",
-  "chemical_handling",
-  "work_alone",
-  "work_at_sensitive_area",
-  "cold_work",
-]
 
 class ProjectCreate extends Component {
 
   state = {
     name: "",
+    location: "",
     description: "",
     start_date: "",
     end_date: "",
@@ -60,14 +49,14 @@ class ProjectCreate extends Component {
 
     this.setState({
       [event.target.name]: event.target.value
-    }, () => { console.log(this.state) });
+    });
   }
 
   handleCheck = event => {
     console.log(event);
     this.setState({
       [event.target.name]: event.target.checked
-    }, () => { console.log(this.state) })
+    })
   }
 
   handleReactSelect = (option, event) => {
@@ -155,6 +144,15 @@ class ProjectCreate extends Component {
                     required />
                 </CFormGroup>
                 <CFormGroup>
+                  <CInput
+                    id="location "
+                    name="location"
+                    placeholder="Project Works Location"
+                    value={this.state.location}
+                    onChange={this.handleChange}
+                    required />
+                </CFormGroup>
+                <CFormGroup>
                   <CTextarea
                     id="description"
                     name="description"
@@ -204,6 +202,7 @@ class ProjectCreate extends Component {
                   from the list below:'
                   options={permitOptions}
                   handleCheck={this.handleCheck}
+                  parentState={this.state}
                 />
                 <CButton shape="pill" onClick={this.handleDocumentCreationRedirect} color="dark" variant="outline" block>Create Project and go to document creation</CButton>
                 {/* <CButton onClick={this.handleCreateProject} color="dark" variant="outline" block>Create Project</CButton> */}
