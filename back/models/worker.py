@@ -37,6 +37,7 @@ class Worker(models.Model):
         security = "Secur", _("Security")
 
     name = models.CharField(max_length=64)
+    phone_number = models.CharField(max_length=64, null=True)
     contractor = models.ForeignKey(
         "Contractor", on_delete=models.CASCADE, related_name="workers"
     )

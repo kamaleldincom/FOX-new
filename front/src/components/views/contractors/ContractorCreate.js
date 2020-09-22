@@ -7,7 +7,12 @@ import {
   CInput,
   CLabel, CRow,
   CCol,
-  CButton
+  CButton,
+  CCard,
+  CCardHeader,
+  CCardBody,
+  CCardTitle,
+  CCardSubtitle
 } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
 import { FoxApiService } from '../../../services'
@@ -19,7 +24,9 @@ class ContractorCreate extends Component {
   state = {
     username: "",
     email: "",
+    name: "",
     related_company: "",
+    company_number: "",
     company: this.props.company,
     role: "Contr",
     error: false
@@ -56,54 +63,76 @@ class ContractorCreate extends Component {
     return (
       <CRow>
         <CCol>
-          <CForm
-            onSubmit={this.handleSubmit}
-          >
-            <DjangoCSRFToken />
-            <CFormGroup>
-              <CLabel htmlFor="username">Enter contractor username</CLabel>
-              <CInput
-                id="username"
-                name='username'
-                placeholder="Username"
-                value={this.state.username}
-                onChange={this.handleChange}
-                required />
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="email">Enter contractor email</CLabel>
-              <CInput
-                id="email"
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={this.state.email}
-                onChange={this.handleChange}
-                required
-              />
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="username">Enter contractor company</CLabel>
-              <CInput
-                id="related_company"
-                name='related_company'
-                placeholder="Company name"
-                value={this.state.related_company}
-                onChange={this.handleChange}
-                required />
-            </CFormGroup>
-            <CFormGroup>
-              <CButton type="submit" color="dark" variant="outline" block>Create contractor</CButton>
-            </CFormGroup>
-            {this.props.registerErrorFlag
-              ? <p>{this.props.errorMessage ? this.props.errorMessage : 'INVALID CREDENTIALS! PLEASE, CHECK YOUR PASSWORD AND PASSWORD CONFIRMATION FIELDS!'}</p>
-              : null
-            }
-            {this.state.error
-              ? <p>{this.state.error}</p>
-              : null
-            }
-          </CForm>
+          <CCard>
+            <CCardHeader>
+              <CCardTitle>New Contractor</CCardTitle>
+              <CCardSubtitle>Fill up the form below to add a new Project</CCardSubtitle>
+            </CCardHeader>
+            <CCardBody>
+              <CForm
+                onSubmit={this.handleSubmit}
+              >
+                <DjangoCSRFToken />
+                <CFormGroup>
+                  <CInput
+                    id="username"
+                    name='username'
+                    placeholder="Username"
+                    value={this.state.username}
+                    onChange={this.handleChange}
+                    required />
+                </CFormGroup>
+                <CFormGroup>
+                  <CInput
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={this.state.email}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </CFormGroup>
+                <CFormGroup>
+                  <CInput
+                    id="related_company"
+                    name='related_company'
+                    placeholder="Company name"
+                    value={this.state.related_company}
+                    onChange={this.handleChange}
+                    required />
+                </CFormGroup>
+                <CFormGroup>
+                  <CInput
+                    id="name"
+                    type="name"
+                    name="name"
+                    placeholder="Contact Person Name"
+                    value={this.state.name}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </CFormGroup>
+                <CFormGroup>
+                  <CInput
+                    id="company_number"
+                    name='company_number'
+                    placeholder="Contact phone number"
+                    value={this.state.company_number}
+                    onChange={this.handleChange}
+                    required />
+                </CFormGroup>
+                <CFormGroup>
+                  <CButton shape="pill" type="submit" color="dark" variant="outline" block>Create contractor</CButton>
+                </CFormGroup>
+                {this.state.error
+                  ? <p>{this.state.error}</p>
+                  : null
+                }
+              </CForm>
+            </CCardBody>
+          </CCard>
+
         </CCol>
       </CRow >
     )

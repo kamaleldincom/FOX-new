@@ -11,6 +11,10 @@ import {
   CLink,
   CButton,
   CEmbed,
+  CCard,
+  CCardBody,
+  CCardHeader,
+  CCardTitle,
 } from "@coreui/react";
 
 import { getProfileFetch, getContractorList, setProjectId } from '../../../actions'
@@ -92,102 +96,109 @@ class ProjectDetail extends Component {
     console.log(this.state);
     return (
       <CRow>
-        <CCol>{this.props.role === 'CliAdm' ? <CForm
-          onSubmit={this.handleSubmit}
-        >
-          <DjangoCSRFToken />
-          <CFormGroup>
-            <CLabel htmlFor="name">Name</CLabel>
-            <CInput
-              id="name"
-              name='name'
-              placeholder="Enter project name"
-              value={this.state.name}
-              onChange={this.handleChange}
-              required />
-          </CFormGroup>
-          <CFormGroup>
-            <CLabel htmlFor="location">Location of works</CLabel>
-            <CInput
-              id="location "
-              name="location"
-              placeholder="Project Works Location"
-              value={this.state.location}
-              onChange={this.handleChange}
-              required />
-          </CFormGroup>
-          <CFormGroup>
-            <CLabel htmlFor="description">Description</CLabel>
-            <CTextarea
-              id="descrption"
-              name="description"
-              placeholder="Please, enter short description of the projet"
-              value={this.state.description}
-              onChange={this.handleChange}
-              required
-            />
-          </CFormGroup>
-          <CFormGroup>
-            <CRow>
-              <CCol lg="6">
-                <CLabel htmlFor="start_date">Start Date</CLabel>
-                <CInput
-                  type="datetime-local"
-                  id="start_date"
-                  name="start_date"
-                  value={this.state.start_date}
-                  onChange={this.handleChange}
-                  required
+        <CCol>{this.props.role === 'CliAdm' ?
+          <CCard>
+            <CCardHeader>
+              <CCardTitle>Project Details</CCardTitle>
+            </CCardHeader>
+            <CCardBody>
+              <CForm
+                onSubmit={this.handleSubmit}
+              >
+                <DjangoCSRFToken />
+                <CFormGroup>
+                  <CLabel htmlFor="name">Name</CLabel>
+                  <CInput
+                    id="name"
+                    name='name'
+                    placeholder="Enter project name"
+                    value={this.state.name}
+                    onChange={this.handleChange}
+                    required />
+                </CFormGroup>
+                <CFormGroup>
+                  <CLabel htmlFor="location">Location of works</CLabel>
+                  <CInput
+                    id="location "
+                    name="location"
+                    placeholder="Project Works Location"
+                    value={this.state.location}
+                    onChange={this.handleChange}
+                    required />
+                </CFormGroup>
+                <CFormGroup>
+                  <CLabel htmlFor="description">Description</CLabel>
+                  <CTextarea
+                    id="descrption"
+                    name="description"
+                    placeholder="Please, enter short description of the projet"
+                    value={this.state.description}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </CFormGroup>
+                <CFormGroup>
+                  <CRow>
+                    <CCol lg="6">
+                      <CLabel htmlFor="start_date">Start Date</CLabel>
+                      <CInput
+                        type="datetime-local"
+                        id="start_date"
+                        name="start_date"
+                        value={this.state.start_date}
+                        onChange={this.handleChange}
+                        required
+                      />
+                    </CCol>
+                    <CCol lg="6">
+                      <CLabel htmlFor="end_date">End Date</CLabel>
+                      <CInput
+                        type="datetime-local"
+                        id="end_date"
+                        name="end_date"
+                        value={this.state.end_date}
+                        onChange={this.handleChange}
+                        required
+                      />
+                    </CCol>
+                  </CRow>
+                </CFormGroup>
+                <FoxReactSelectFormGroup
+                  options={options}
+                  inputInfo="contractor"
+                  inputValue={this.state.contractor}
+                  handleChange={this.handleReactSelect}
                 />
-              </CCol>
-              <CCol lg="6">
-                <CLabel htmlFor="end_date">End Date</CLabel>
-                <CInput
-                  type="datetime-local"
-                  id="end_date"
-                  name="end_date"
-                  value={this.state.end_date}
-                  onChange={this.handleChange}
-                  required
-                />
-              </CCol>
-            </CRow>
-          </CFormGroup>
-          <FoxReactSelectFormGroup
-            options={options}
-            inputInfo="contractor"
-            inputValue={this.state.contractor}
-            handleChange={this.handleReactSelect}
-          />
-          <CFormGroup>
-            <CLink
-              className="btn btn-outline-dark mr-3"
-              to={`${this.props.match.url}/ptw`}
-            >
-              See Permission To Work
+                <CFormGroup>
+                  <CLink
+                    className="btn btn-outline-dark mr-3"
+                    to={`${this.props.match.url}/ptw`}
+                  >
+                    See Permission To Work
               </CLink>
-            <CLink
-              className="btn btn-outline-dark"
-              to={`${this.props.match.url}/documents`}
-            >
-              Attached Documents
+                  <CLink
+                    className="btn btn-outline-dark"
+                    to={`${this.props.match.url}/documents`}
+                  >
+                    Attached Documents
               </CLink>
-          </CFormGroup>
-          <FoxSwitchGroup
-            groupLabel='Choose the related hazardous work
+                </CFormGroup>
+                <FoxSwitchGroup
+                  groupLabel='Choose the related hazardous work
                   from the list below:'
-            options={permitOptions}
-            handleCheck={this.handleCheck}
-            parentState={this.state}
-          />
-          <CFormGroup>
-            <CButton type="submit" color="success" variant="outline" block>Save changes</CButton>
-          </CFormGroup>
-          {this.state.error
-            ? <p>{this.state.error}</p>
-            : null
-          }
-        </CForm>
+                  options={permitOptions}
+                  handleCheck={this.handleCheck}
+                  parentState={this.state}
+                />
+                <CButton shape="pill" type="submit" color="success" variant="outline" block>Save changes</CButton>
+                {this.state.error
+                  ? <p>{this.state.error}</p>
+                  : null
+                }
+              </CForm>
+            </CCardBody>
+          </CCard>
+
           :
           <React.Fragment>
             <ActivityLog projectId={this.props.match.params.id} />

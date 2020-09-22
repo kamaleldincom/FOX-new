@@ -42,10 +42,7 @@ class FoxUserAdmin(UserAdmin):
                     " The user will be emailed a link allowing them to login to"
                     " the site and set their password."
                 ),
-                "fields": (
-                    "email",
-                    "username",
-                ),
+                "fields": ("email", "username", "name"),
             },
         ),
         (
@@ -66,10 +63,7 @@ class FoxUserAdmin(UserAdmin):
                     " The user will be emailed a link allowing them to login to"
                     " the site and set their password."
                 ),
-                "fields": (
-                    "email",
-                    "username",
-                ),
+                "fields": ("email", "username", "name"),
             },
         ),
     )
