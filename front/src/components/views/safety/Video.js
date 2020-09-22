@@ -99,9 +99,8 @@ class SafetyVideo extends Component {
       				</CButton>
               </CCol>
             </CRow>
-            <CRow>
-              <CCol>
-
+            <CRow alignHorizontal="center">
+              <CCol md="9">
                 <CEmbed
                   ratio="16by9"
                 >
