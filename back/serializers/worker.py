@@ -3,6 +3,9 @@ from back.models import Worker
 
 
 class WorkerListSerializer(serializers.ModelSerializer):
+
+    position_in_company = serializers.SerializerMethodField()
+
     class Meta:
         model = Worker
 
@@ -11,6 +14,9 @@ class WorkerListSerializer(serializers.ModelSerializer):
             "name",
             "position_in_company",
         ]
+
+    def get_position_in_company(self, obj):
+        return Worker.Position(obj.position_in_company).label
 
 
 class WorkerSerializer(serializers.ModelSerializer):
