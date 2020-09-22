@@ -35,9 +35,6 @@ class WorkerDetail extends Component {
     position_in_company: "",
     safety_quiz_answer: "",
     personal_declaration: "",
-    // special_competency: "",
-    // special_competency_scan: "",
-    // competency_issued_by: "",
     registration_number: "",
     error: false,
     filename: "",
@@ -228,25 +225,6 @@ class WorkerDetail extends Component {
               uploadInfo="safety_green_card_scan"
               downloadFile={this.downloadFile}
             />
-            <FoxFormGroupInputDownloadUpload
-              inputValue={this.state.special_competency}
-              downloadValue={this.state.special_competency_scan}
-              handleChange={this.handleChange}
-              handleFileUpload={this.handleFileUpload}
-              inputInfo="special_competency"
-              uploadInfo="special_competency_scan"
-              downloadFile={this.downloadFile}
-            />
-            <CFormGroup>
-              <CLabel htmlFor="competency_issued_by">Competency issued by</CLabel>
-              <CInput
-                id="competency_issued_by"
-                name='competency_issued_by'
-                placeholder="Enter legal entity"
-                value={this.state.competency_issued_by}
-                onChange={this.handleChange}
-              />
-            </CFormGroup>
             <CFormGroup>
               <CLabel htmlFor="registration_number">Registration number</CLabel>
               <CInput
