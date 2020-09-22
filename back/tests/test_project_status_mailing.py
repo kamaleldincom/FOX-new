@@ -83,7 +83,6 @@ class ProjectStatusMailingTestCase(APITestCase):
 
     def test_project_approved(self):
         project = Project.objects.get(name="Test project2")
-        # contractor = Contractor.objects.get(username="test1")
         manager = ClientManager.objects.get(username="test_man1")
         email_service = ProjectEmailNotificationService(
             project=project, receivers=[project.contractor], issuer=manager

@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FoxUser
-        fields = ("id", "username", "role", "company_name", "company")
+        fields = ("id", "username", "name", "role", "company_name", "company")
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):
