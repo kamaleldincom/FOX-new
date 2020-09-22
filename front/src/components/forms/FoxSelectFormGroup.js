@@ -17,7 +17,6 @@ const makePlaceholder = inputString => {
 const FoxSelectFormGroup = props => {
   return (
     <CFormGroup>
-      <CLabel htmlFor={props.inputInfo}>{makeLabel(props.inputInfo)}</CLabel>
       <CSelect
         id={props.inputInfo}
         name={props.inputInfo}
