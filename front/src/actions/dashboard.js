@@ -21,11 +21,6 @@ const getDashboardLayout = (userRole = "Dum", projectId = null) => {
               name: "1. Personnel Management",
               to: `/projects/${projectId}/assign_workers`,
             },
-            // {
-            //   _tag: "CSidebarNavItem",
-            //   name: "2. Safety",
-            //   to: "safety_video",
-            // },
             {
               _tag: "CSidebarNavItem",
               icon: "cil-file",
@@ -36,13 +31,6 @@ const getDashboardLayout = (userRole = "Dum", projectId = null) => {
               _tag: "CSidebarNavItem",
               name: "3. Submit Proposal",
               to: `/projects/${projectId}/submit_proposal`,
-            },
-            {
-              _tag: "CSidebarNavItem",
-              icon: "cil-send",
-              name: "Application status",
-              to: "/contractor-application-status",
-              icon: "",
             },
           ],
           header_nav: [

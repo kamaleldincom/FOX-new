@@ -6,6 +6,8 @@ class ProjectListSerializer(serializers.ModelSerializer):
 
     application_status = serializers.SerializerMethodField()
     work_status = serializers.SerializerMethodField()
+    start_date = serializers.SerializerMethodField()
+    end_date = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
@@ -15,6 +17,7 @@ class ProjectListSerializer(serializers.ModelSerializer):
             "start_date",
             "end_date",
             "contractor_name",
+            "location",
             "status",
             "application_status",
             "work_status",
@@ -50,8 +53,24 @@ class ProjectListSerializer(serializers.ModelSerializer):
         )
         return work_status
 
+    def get_start_date(self, obj):
+        return obj.start_date.strftime("%d %b %Y")
+
+    def get_end_date(self, obj):
+        return obj.end_date.strftime("%d %b %Y")
+
 
 class ProjectSerializer(serializers.ModelSerializer):
+
+    start_date = serializers.SerializerMethodField()
+    end_date = serializers.SerializerMethodField()
+
     class Meta:
         model = Project
         fields = "__all__"
+
+    def get_start_date(self, obj):
+        return obj.start_date.strftime("%Y-%m-%dT%H:%M:%S")
+
+    def get_end_date(self, obj):
+        return obj.end_date.strftime("%Y-%m-%dT%H:%M:%S")

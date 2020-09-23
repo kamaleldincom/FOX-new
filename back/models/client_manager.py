@@ -17,7 +17,7 @@ class ClientManager(FoxUser):
         work_owner = "WorkOwn", _("Owner of Work")
         security_guards = "SecGrd", _("Security Guards")
 
-    name = models.CharField(max_length=128, null=True)
+    # name = models.CharField(max_length=128, null=True)
     department = models.CharField(max_length=128, null=True)
     position = models.CharField(
         max_length=10,
@@ -30,7 +30,7 @@ class ClientManager(FoxUser):
 
     @property
     def info(self):
-        return {"contractor_name": self.name}
+        return {"client_manager_name": self.name}
 
 
 post_save.connect(send_mail_on_creation, sender=ClientManager)

@@ -22,7 +22,7 @@ class Worker(models.Model):
         hvac_snstaller = "HVACInst", _("HVAC Installer")
         insulation_installer = "InsInst", _("Insulation Installer")
         surveyor = "Surv", _("Surveyor")
-        Brick_manson = "BrcMans", _("Brick Manson")
+        brick_manson = "BrcMans", _("Brick Manson")
         roofer = "Roof", _("Roofer")
         site_supervisor = "SiteSuper", _("Site Supervisor")
         other = "Other", _("Other")
@@ -37,6 +37,7 @@ class Worker(models.Model):
         security = "Secur", _("Security")
 
     name = models.CharField(max_length=64)
+    phone_number = models.CharField(max_length=64, null=True)
     contractor = models.ForeignKey(
         "Contractor", on_delete=models.CASCADE, related_name="workers"
     )

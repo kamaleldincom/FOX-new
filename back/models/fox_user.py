@@ -18,6 +18,7 @@ class FoxUser(AbstractUser):
         choices=Role.choices,
         default=Role.dummy,
     )
+    name = models.CharField(max_length=128, default="BarFoo")
 
     @property
     def info(self):

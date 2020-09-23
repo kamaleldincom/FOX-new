@@ -36,10 +36,7 @@ const FoxContent = (props) => {
                   )} />
               )
             })}
-            {props.role === "CliMan"
-              ?
-              <Redirect from="/" to="/approvals" />
-              :
+            {
               <Redirect from="/" to="/projects" />
             }
             <>

@@ -1,9 +1,81 @@
 @import "~@coreui/coreui/scss/coreui";
 
+
+$theme-colors: (
+  "fox-base": #8A0707,
+  "fox-dark": #610505,
+  "fox-light": #ae0909,
+  "fox-pale": #feecec
+);
+
 .project-table-toggle{
         padding: 0 0 0 5px;
 }
 
 .c-icon.table-dropdown-icon{
     margin: 0;
+}
+
+.foxtable-dropdown-menu{
+  z-index: 1100;
+}
+
+.dropdown-item{
+  z-index: 11100;
+}
+
+.form-control{
+    border-radius: 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    text-align: center;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    text-align: center;
+
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    text-align: center;
+
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    text-align: center;
+
+  }
+.pagination>li:first-child{
+    border-radius: 1.5rem 0 0 1.5rem;
+}
+
+.card{
+    border-radius: 1.5rem;
+}
+
+.card-header{
+    border-radius: 1.5rem 1.5rem 0 0;
+}
+
+.card-header:first-child{
+    border-radius: 1.5rem 1.5rem 0 0;
+}
+
+.c-sidebar{
+    background: theme-color("fox-base");
+}
+
+.c-header{
+    background: theme-color("fox-base");
+
+}
+
+.c-subheader{
+  background: theme-color("fox-light");
+  border-top: 1px solid rgba(0, 0, 21, 0.5);;
+}
+
+.c-header .c-header-nav .c-header-nav-link, .c-header .c-header-nav .c-header-nav-btn{
+  color: theme-color("fox-pale");
 }

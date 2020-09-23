@@ -9,6 +9,10 @@ import {
   CCol,
   CSelect,
   CButton,
+  CCard,
+  CCardHeader,
+  CCardBody,
+  CCardTitle
 } from "@coreui/react";
 import DjangoCSRFToken from 'django-react-csrftoken'
 import { FoxApiService } from '../../../services'
@@ -81,78 +85,86 @@ class ClientManagerDetail extends Component {
     return (
       <CRow>
         <CCol>
-          <CForm
-            onSubmit={this.handleSubmit}
-          >
-            <DjangoCSRFToken />
-            <CFormGroup>
-              <CLabel htmlFor="username">Enter client manager username</CLabel>
-              <CInput
-                id="username"
-                name='username'
-                placeholder="Username"
-                value={this.state.username}
-                onChange={this.handleChange}
-                required />
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="name">Enter client manager verbose name</CLabel>
-              <CInput
-                id="name"
-                name='name'
-                placeholder="Verbose name"
-                value={this.state.name}
-                onChange={this.handleChange}
-                required />
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="email">Enter client manager email</CLabel>
-              <CInput
-                id="email"
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={this.state.email}
-                onChange={this.handleChange}
-                required
-              />
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="target_type">Client Manager Position</CLabel>
-              <CSelect
-                id="position"
-                name="position"
-                placeholder="Choose position"
-                value={this.state.position}
-                onChange={this.handleChange}
-                required
+          <CCard>
+            <CCardHeader>
+              <CCardTitle>Mananger details</CCardTitle>
+            </CCardHeader>
+            <CCardBody>
+              <CForm
+                onSubmit={this.handleSubmit}
               >
-                {positions.map((option) => {
-                  return (
-                    <option key={option.id} value={option.id}>{option.position}</option>
-                  )
+                <DjangoCSRFToken />
+                <CFormGroup>
+                  <CLabel htmlFor="username">Manager username</CLabel>
+                  <CInput
+                    id="username"
+                    name='username'
+                    placeholder="Username"
+                    value={this.state.username}
+                    onChange={this.handleChange}
+                    required />
+                </CFormGroup>
+                <CFormGroup>
+                  <CLabel htmlFor="name">Manager verbose name</CLabel>
+                  <CInput
+                    id="name"
+                    name='name'
+                    placeholder="Verbose name"
+                    value={this.state.name}
+                    onChange={this.handleChange}
+                    required />
+                </CFormGroup>
+                <CFormGroup>
+                  <CLabel htmlFor="email">Manager email</CLabel>
+                  <CInput
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={this.state.email}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </CFormGroup>
+                <CFormGroup>
+                  <CLabel htmlFor="target_type">Manager Position</CLabel>
+                  <CSelect
+                    id="position"
+                    name="position"
+                    placeholder="Choose position"
+                    value={this.state.position}
+                    onChange={this.handleChange}
+                    required
+                  >
+                    {positions.map((option) => {
+                      return (
+                        <option key={option.id} value={option.id}>{option.position}</option>
+                      )
+                    }
+                    )}
+                  </CSelect>
+                </CFormGroup>
+                <CFormGroup>
+                  <CLabel htmlFor="department">Manager department</CLabel>
+                  <CInput
+                    id="department"
+                    name="department"
+                    placeholder="Department"
+                    value={this.state.department}
+                    onChange={this.handleChange}
+                    required />
+                </CFormGroup>
+                <CFormGroup>
+                  <CButton shape="pill" type="submit" color="dark" variant="outline" block>Save changes</CButton>
+                </CFormGroup>
+                {this.state.error
+                  ? <p>{this.state.error}</p>
+                  : null
                 }
-                )}
-              </CSelect>
-            </CFormGroup>
-            <CFormGroup>
-              <CLabel htmlFor="department">Enter client manager department</CLabel>
-              <CInput
-                id="department"
-                name="department"
-                placeholder="Department"
-                value={this.state.department}
-                onChange={this.handleChange}
-                required />
-            </CFormGroup>
-            <CFormGroup>
-              <CButton type="submit" color="dark" variant="outline" block>Save changes</CButton>
-            </CFormGroup>
-            {this.state.error
-              ? <p>{this.state.error}</p>
-              : null
-            }
-          </CForm>
+              </CForm>
+            </CCardBody>
+          </CCard>
+
         </CCol>
       </CRow >
     )

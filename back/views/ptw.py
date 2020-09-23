@@ -13,10 +13,10 @@ def ptw(request, pk):
     submitted = not project.status == Project.Status.created
     context = {
         "company": project.company.name,
-        "start_date": project.start_date,
-        "start_time": project.start_time,
-        "end_date": project.end_date,
-        "end_time": project.end_time,
+        "start_date": project.start_date.date(),
+        "start_time": project.start_date.time(),
+        "end_date": project.end_date.date(),
+        "end_time": project.end_date.time(),
         "description": project.description,
         "work_at_height": project.work_at_height,
         "lifting_work": project.lifting_work,

@@ -11,6 +11,7 @@ class FoxUserCreationForm(UserCreationForm):
     """
 
     role = forms.CharField(max_length=16)
+    name = forms.CharField(max_length=64)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -20,7 +21,8 @@ class FoxUserCreationForm(UserCreationForm):
         # password or both password' validation will be triggered.
         self.fields["password1"].widget.attrs["autocomplete"] = "off"
         self.fields["password2"].widget.attrs["autocomplete"] = "off"
-        self.fields['email'].required = True
+        self.fields["email"].required = True
+        self.fields["name"].required = True
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -30,7 +32,11 @@ class FoxUserCreationForm(UserCreationForm):
         return password2
 
     class Meta(UserCreationForm.Meta):
-        fields = ('username', 'email',)
+        fields = (
+            "username",
+            "email",
+            "name",
+        )
 
 
 class ClientAdminCreationForm(FoxUserCreationForm):
