@@ -12,6 +12,9 @@ def ptw(request, pk):
     ]
     submitted = not project.status == Project.Status.created
     context = {
+        "reference_number": f"PTW/{project.company.pk}/{project.contractor.pk}/{project.start_date.year}/{pk}",
+        "reference_date": project.start_date.date(),
+        "work_location": project.location,
         "company": project.company.name,
         "start_date": project.start_date.date(),
         "start_time": project.start_date.time(),
@@ -29,9 +32,7 @@ def ptw(request, pk):
         "contractor": project.contractor.username,
         "contractor_company": project.contractor.related_company,
         "workers": workers,
-        "responsible_person": project.responsible_person.name
-        if project.responsible_person
-        else "",
+        "responsible_person": project.responsible_person.name if project.responsible_person else "",
         "submitted": submitted,
     }
     return render(request, "back/ptw.html", context=context)
