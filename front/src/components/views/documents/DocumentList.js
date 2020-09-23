@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import FoxEntityListTable from '../../tables/FoxEntityListTable'
+import { FoxEntityListTable, FoxTableWithDeleteOption } from '../../tables'
 import { getProfileFetch, getDocumentList, } from '../../../actions'
 import { connect } from 'react-redux'
 
@@ -13,27 +13,38 @@ const getBadge = status => {
   }
 }
 
-
 class DocumentList extends Component {
-
 
   componentDidMount = async () => {
     await this.props.getProfileFetch()
-      .then(() =>
+      .then(() => {
+        console.log(this.props.role);
         this.props.getDocumentList({
-          project_id: this.props.match.params.id
-        }))
+          project_id: this.props.match.params.id,
+        }, false, this.props.role);
+      })
+
   }
 
   render = () => {
     return (
-      <FoxEntityListTable
-        {...this.props}
-        tableName='Documents'
-        fields={this.props.documentListTable.fields}
-        getBadge={getBadge}
-        tableData={this.props.documentListTable.tableData}
-      />
+      this.props.role == 'CliAdm' ?
+        <FoxTableWithDeleteOption
+          {...this.props}
+          tableName='Documents'
+          fields={this.props.documentListTable.fields}
+          getBadge={getBadge}
+          tableData={this.props.documentListTable.tableData}
+          updateList={this.props.getDocumentList}
+        />
+        :
+        <FoxEntityListTable
+          {...this.props}
+          tableName='Documents'
+          fields={this.props.documentListTable.fields}
+          getBadge={getBadge}
+          tableData={this.props.documentListTable.tableData}
+        />
     )
   }
 
@@ -41,13 +52,14 @@ class DocumentList extends Component {
 
 const mapStateToProps = state => {
   return {
-    documentListTable: state.entityListTable
+    documentListTable: state.entityListTable,
+    role: state.currentUser.role
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
-  getDocumentList: (params) => dispatch(getDocumentList(params))
+  getDocumentList: (params, additional, role) => dispatch(getDocumentList(params, additional, role))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DocumentList)

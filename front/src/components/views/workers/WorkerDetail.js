@@ -74,7 +74,6 @@ class WorkerDetail extends Component {
     delete this.requestData.license_scan;
     delete this.requestData.passport_scan;
     delete this.requestData.safety_green_card_scan;
-    // delete this.requestData.special_competency_scan;
     delete this.requestData.safety_quiz_answer;
     delete this.requestData.personal_declaration;
     this.formData = new FormData

@@ -51,11 +51,6 @@ class Worker(models.Model):
     safety_green_card_scan = models.FileField(
         upload_to=project_docs_path, null=True, blank=True
     )
-    # special_competency = models.CharField(max_length=64, null=True, blank=True)
-    # special_competency_scan = models.FileField(
-    #     upload_to=project_docs_path, null=True, blank=True
-    # )
-    # competency_issued_by = models.CharField(max_length=64, null=True, blank=True)
     registration_number = models.CharField(max_length=64, null=True, blank=True)
     position_in_company = models.CharField(
         max_length=16, choices=Position.choices, default=Position.other

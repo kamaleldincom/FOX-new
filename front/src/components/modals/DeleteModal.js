@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   CButton,
-
   CModal,
   CModalBody,
   CModalFooter,
   CModalHeader,
   CModalTitle,
 } from '@coreui/react'
+
 
 const DeleteModal = props => {
   return (

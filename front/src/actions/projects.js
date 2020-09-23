@@ -1,9 +1,14 @@
-import { FoxApiService, RepresentationService } from '../services'
+import { RepresentationService } from '../services'
 
 
 const repr = new RepresentationService
-const getProjectList = () => {
-    return repr.displaySimpleListWithoutStatus('projects', null, false)
+const getProjectList = (role) => {
+    if (role === "CliAdm") {
+        return repr.displayDeleteListWithoutStatus('projects', null, false);
+    } else {
+        return repr.displaySimpleListWithoutStatus('projects', null, false);
+    }
+
 }
 
 const getProject = () => {

@@ -12,7 +12,7 @@ class Document(models.Model):
     project = models.ForeignKey(
         "back.Project", on_delete=models.CASCADE, related_name="documents", null=True
     )
-
+    deleted = models.BooleanField(default=False)
     url_to_doc = models.URLField(null=True, blank=True)
 
     def __str__(self):

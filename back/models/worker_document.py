@@ -15,3 +15,4 @@ class WorkerDocument(models.Model):
         "Document", on_delete=models.CASCADE, related_name="related_documents"
     )
     file = models.FileField(upload_to=project_docs_path, null=True, blank=True)
+    deleted = models.BooleanField(default=False)

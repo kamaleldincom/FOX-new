@@ -45,6 +45,7 @@ class Project(models.Model):
         null=True,
         blank=True,
     )
+    deleted = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Project"

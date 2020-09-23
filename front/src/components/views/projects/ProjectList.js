@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { FoxEntityListTable } from '../../tables'
+import { FoxEntityListTable, FoxTableWithDeleteOption } from '../../tables'
 
 import { getProfileFetch, getProjectList, setProjectId } from '../../../actions'
 
@@ -27,18 +27,28 @@ class ProjectList extends Component {
   componentDidMount = async () => {
     this.props.setProjectId(this.props.match.params.id)
     await this.props.getProfileFetch()
-      .then(() => this.props.getProjectList())
+      .then(() => this.props.getProjectList(this.props.role))
   }
 
   render = () => {
     return (
-      <FoxEntityListTable
-        {...this.props}
-        tableName='Projects'
-        fields={this.props.projectTable.fields}
-        getBadge={getBadge}
-        tableData={this.props.projectTable.tableData}
-      />
+      this.props.role == 'CliAdm' ?
+        <FoxTableWithDeleteOption
+          {...this.props}
+          tableName='Projects'
+          fields={this.props.projectTable.fields}
+          getBadge={getBadge}
+          tableData={this.props.projectTable.tableData}
+          updateList={this.props.getProjectList}
+        /> :
+        <FoxEntityListTable
+          {...this.props}
+          tableName='Projects'
+          fields={this.props.projectTable.fields}
+          getBadge={getBadge}
+          tableData={this.props.projectTable.tableData}
+        />
+
     )
   }
 
@@ -46,13 +56,14 @@ class ProjectList extends Component {
 
 const mapStateToProps = state => {
   return {
-    projectTable: state.entityListTable
+    projectTable: state.entityListTable,
+    role: state.currentUser.role
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
-  getProjectList: () => dispatch(getProjectList()),
+  getProjectList: (role) => dispatch(getProjectList(role)),
   setProjectId: () => dispatch(setProjectId())
 })
 

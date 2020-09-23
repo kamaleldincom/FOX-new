@@ -1,5 +1,7 @@
 from django.db.models import F
-from rest_framework import generics
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from rest_framework import generics, status
 from back.models import Approval, Project, ClientManager, Activity
 from back.serializers import ApprovalSerializer, ApprovalListSerializer
 from back.services import ProjectEmailNotificationService as mail_service
@@ -11,7 +13,9 @@ class ApprovalList(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
 
-        return Approval.objects.filter(manager=user, status=Approval.Status.pending)
+        return Approval.objects.filter(
+            manager=user, status=Approval.Status.pending, deleted=False
+        )
 
 
 class ApprovalDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -19,7 +23,23 @@ class ApprovalDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Approval.objects.filter(manager=user, status=Approval.Status.pending)
+        return Approval.objects.filter(
+            manager=user, status=Approval.Status.pending, deleted=False
+        )
+
+    def destroy(self, request, pk):
+        queryset = self.get_queryset()
+        approval = get_object_or_404(queryset, pk=pk)
+        approval.deleted = True
+        approval.save()
+        return JsonResponse(
+            data={
+                "response": "approval for project {0} from manager {1} deleted.".format(
+                    approval.project.name, approval.manager.username
+                )
+            },
+            status=status.HTTP_204_NO_CONTENT,
+        )
 
     def patch(self, request, *args, **kwargs):
         res = super(ApprovalDetail, self).patch(request, args, kwargs)
@@ -53,11 +73,6 @@ class ApprovalDetail(generics.RetrieveUpdateDestroyAPIView):
                 project=project, author=request.user, company=request.user.company
             )
             resolution_activity.project_submition_rejected_message()
-            # mail = mail_service(
-            #     project=project,
-            #     receivers=[project.contractor],
-            #     issuer=request.user.clientmanager,
-            # )
             mail.send_project_updated()
             for approval in last_approvals:
                 if approval.status == Approval.Status.pending:

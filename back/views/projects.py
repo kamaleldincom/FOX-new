@@ -1,4 +1,6 @@
-from rest_framework import generics
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from rest_framework import generics, status
 from back.models import Project, Activity
 from back.serializers import ProjectSerializer, ProjectListSerializer
 from back.services import ProjectEmailNotificationService as mail_service
@@ -10,8 +12,10 @@ class ProjectList(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         if user.role == "Contr":
-            return Project.objects.filter(company=user.company, contractor=user)
-        return Project.objects.filter(company=user.company)
+            return Project.objects.filter(
+                company=user.company, contractor=user, deleted=False
+            )
+        return Project.objects.filter(company=user.company, deleted=False)
 
 
 class ProjectCreate(generics.CreateAPIView):
@@ -35,7 +39,7 @@ class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Project.objects.filter(company=user.company)
+        return Project.objects.filter(company=user.company, deleted=False)
 
     def patch(self, request, *args, **kwargs):
 
@@ -52,3 +56,13 @@ class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
             mail = mail_service(project=project, receivers=[project.contractor])
             mail.send_project_updated()
         return res
+
+    def destroy(self, request, pk):
+        queryset = self.get_queryset()
+        project = get_object_or_404(queryset, pk=pk)
+        project.deleted = True
+        project.save()
+        return JsonResponse(
+            data={"response": f"project {project.name} deleted."},
+            status=status.HTTP_204_NO_CONTENT,
+        )

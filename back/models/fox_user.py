@@ -19,6 +19,7 @@ class FoxUser(AbstractUser):
         default=Role.dummy,
     )
     name = models.CharField(max_length=128, default="BarFoo")
+    deleted = models.BooleanField(default=False)
 
     @property
     def info(self):

@@ -1,6 +1,7 @@
 from django.http import HttpResponse, JsonResponse, Http404
+from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics
+from rest_framework import generics, status
 from rest_framework.views import APIView
 from back.models import Document
 from back.serializers import DocumentSerializer, DocumentListSerializer
@@ -18,6 +19,9 @@ class DocumentList(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ["project_id"]
 
+    def get_queryset(self):
+        return Document.objects.filter(deleted=False)
+
 
 class DocumentCreate(generics.CreateAPIView):
     queryset = Document.objects.all()
@@ -27,6 +31,16 @@ class DocumentCreate(generics.CreateAPIView):
 class DocumentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Document.objects.all()
     serializer_class = DocumentSerializer
+
+    def destroy(self, request, pk):
+        queryset = self.get_queryset()
+        document = get_object_or_404(queryset, pk=pk)
+        document.deleted = True
+        document.save()
+        return JsonResponse(
+            data={"response": f"document {document.name} deleted."},
+            status=status.HTTP_204_NO_CONTENT,
+        )
 
 
 class DocumentDownload(APIView):

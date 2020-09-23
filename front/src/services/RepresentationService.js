@@ -11,6 +11,31 @@ class RepresentationService {
         .then(data => {
           if (data.length > 0) {
             const entityTableInfo = this.generateTableInfo(data);
+
+            additional === true ?
+              dispatch(this.populateAdditionalEntityTable(entityTableInfo))
+              :
+              dispatch(this.populateEntityTable(entityTableInfo));
+          }
+        }).catch(function (error) {
+          console.error(error);
+        })
+    }
+  }
+
+  displayDeleteList = (entity, params = null, additional = false) => {
+    return dispatch => {
+      dispatch(this.clearEntityTable({}));
+      foxApi.getEntityList(entity, params)
+        .then(data => {
+          if (data.length > 0) {
+            const entityTableInfo = this.generateTableInfo(data);
+            entityTableInfo.fields.push({
+              key: 'delete_item',
+              label: '',
+              sorter: false,
+              filter: false
+            });
             additional === true ?
               dispatch(this.populateAdditionalEntityTable(entityTableInfo))
               :
@@ -41,6 +66,31 @@ class RepresentationService {
     }
   }
 
+  displayDeleteListWithoutStatus = (entity, params = null, additional = false) => {
+    return dispatch => {
+      dispatch(this.clearEntityTable({}));
+      foxApi.getEntityList(entity, params)
+        .then(data => {
+          if (data.length > 0) {
+            const entityTableInfo = this.generateTableInfo(data);
+            entityTableInfo.fields.splice(entityTableInfo.fields.indexOf('status'), 1);
+            entityTableInfo.fields.push({
+              key: 'delete_item',
+              label: '',
+              sorter: false,
+              filter: false
+            });
+            additional === true ?
+              dispatch(this.populateAdditionalEntityTable(entityTableInfo))
+              :
+              dispatch(this.populateEntityTable(entityTableInfo));
+          }
+        }).catch(function (error) {
+          console.error(error);
+        })
+    }
+  }
+
 
 
   populateAdditionalEntityTable = projectTableInfo => ({
@@ -56,15 +106,6 @@ class RepresentationService {
   clearEntityTable = () => ({
     type: 'CLEAR_ENTITY_TABLE',
   })
-
-  // compileUrl(entity, params) {
-  //   let url = `${SERVER_ADDRESS}/api/${entity}/`;
-  //   if (params) {
-  //     url = new URL(url);
-  //     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
-  //   }
-  //   return url;
-  // }
 
   generateTableInfo(data) {
     const entityTableInfo = {};

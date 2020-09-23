@@ -1,6 +1,8 @@
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from rest_framework import generics, status
 from back.models import ClientManager
 from back.serializers import ClientManagerSerializer, ClientManagerListSerializer
-from rest_framework import generics
 
 
 class ClientManagerList(generics.ListAPIView):
@@ -8,7 +10,7 @@ class ClientManagerList(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return ClientManager.objects.filter(company=user.company)
+        return ClientManager.objects.filter(company=user.company, deleted=False)
 
 
 class ClientManagerCreate(generics.CreateAPIView):
@@ -22,4 +24,14 @@ class ClientManagerDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return ClientManager.objects.filter(company=user.company)
+        return ClientManager.objects.filter(company=user.company, deleted=False)
+
+    def destroy(self, request, pk):
+        queryset = self.get_queryset()
+        manager = get_object_or_404(queryset, pk=pk)
+        manager.deleted = True
+        manager.save()
+        return JsonResponse(
+            data={"response": f"manager {manager.username} deleted."},
+            status=status.HTTP_204_NO_CONTENT,
+        )

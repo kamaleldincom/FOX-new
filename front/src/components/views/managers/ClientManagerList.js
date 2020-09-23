@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import FoxEntityListTable from '../../tables/FoxEntityListTable'
+import { FoxEntityListTable, FoxTableWithDeleteOption } from '../../tables'
 import { getProfileFetch, getClientManagerList, } from '../../../actions'
 import { connect } from 'react-redux'
 
@@ -15,26 +15,35 @@ const getBadge = status => {
   }
 }
 
-const alertOnClick = () => {
-  alert('Clicked!');
-}
 
 class ClientManagerList extends Component {
 
   componentDidMount = async () => {
     await this.props.getProfileFetch()
-      .then(() => this.props.getClientManagerList())
+      .then(() => this.props.getClientManagerList(this.props.role))
   }
 
   render = () => {
     return (
-      <FoxEntityListTable
-        {...this.props}
-        tableName='Managers'
-        fields={this.props.clientManagerTable.fields}
-        getBadge={getBadge}
-        tableData={this.props.clientManagerTable.tableData}
-        onRowClick={alertOnClick} />
+      this.props.role == 'CliAdm' ?
+        <FoxTableWithDeleteOption
+          {...this.props}
+          tableName='Managers'
+          fields={this.props.clientManagerTable.fields}
+          getBadge={getBadge}
+          tableData={this.props.clientManagerTable.tableData}
+          updateList={this.props.getClientManagerList}
+        />
+        :
+        <FoxEntityListTable
+          {...this.props}
+          updateList={this.props.getClientManagerList}
+          tableName='Managers'
+          fields={this.props.clientManagerTable.fields}
+          getBadge={getBadge}
+          tableData={this.props.clientManagerTable.tableData}
+        />
+
     )
   }
 
@@ -42,13 +51,14 @@ class ClientManagerList extends Component {
 
 const mapStateToProps = state => {
   return {
-    clientManagerTable: state.entityListTable
+    clientManagerTable: state.entityListTable,
+    role: state.currentUser.role
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
-  getClientManagerList: () => dispatch(getClientManagerList())
+  getClientManagerList: (role) => dispatch(getClientManagerList(role))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClientManagerList)

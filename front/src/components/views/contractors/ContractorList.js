@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import FoxEntityListTable from '../../tables/FoxEntityListTable'
-import { getProfileFetch, getContractorList, } from '../../../actions'
 import { connect } from 'react-redux'
+import { FoxEntityListTable, FoxTableWithDeleteOption } from '../../tables'
+import { getProfileFetch, getContractorList, } from '../../../actions'
 
 const getBadge = status => {
   switch (status) {
@@ -13,41 +13,46 @@ const getBadge = status => {
   }
 }
 
-
-const alertOnClick = () => {
-  alert('Clicked!');
-}
-
 class ContractorList extends Component {
 
   componentDidMount = async () => {
     await this.props.getProfileFetch()
-      .then(() => this.props.getContractorList())
+      .then(() => this.props.getContractorList(this.props.role))
   }
 
   render = () => {
     return (
-      <FoxEntityListTable
-        {...this.props}
-        tableName='Contractors'
-        fields={this.props.contractorTable.fields}
-        getBadge={getBadge}
-        tableData={this.props.contractorTable.tableData}
-        onRowClick={alertOnClick} />
+      this.props.role == 'CliAdm' ?
+        <FoxTableWithDeleteOption
+          {...this.props}
+          tableName='Contractors'
+          fields={this.props.contractorTable.fields}
+          getBadge={getBadge}
+          tableData={this.props.contractorTable.tableData}
+          updateList={this.props.getContractorList}
+        />
+        :
+        <FoxEntityListTable
+          {...this.props}
+          tableName='Contractors'
+          fields={this.props.contractorTable.fields}
+          getBadge={getBadge}
+          tableData={this.props.contractorTable.tableData}
+        />
     )
   }
-
 }
 
 const mapStateToProps = state => {
   return {
-    contractorTable: state.entityListTable
+    contractorTable: state.entityListTable,
+    role: state.currentUser.role
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
-  getContractorList: () => dispatch(getContractorList())
+  getContractorList: (role) => dispatch(getContractorList(role))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContractorList)
