@@ -100,7 +100,6 @@ class ProjectCreate extends Component {
   }
 
   handleSubmit = async () => {
-    console.log(this.state);
     if (parseInt(this.state.contractor) < 0) {
       this.setState({
         error: 'Contractor was not selected! Please, choose contractor form the list'
