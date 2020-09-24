@@ -13,9 +13,7 @@ class ApprovalList(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
 
-        return Approval.objects.filter(
-            manager=user, status=Approval.Status.pending, deleted=False
-        )
+        return Approval.objects.filter(manager=user, status=Approval.Status.pending)
 
 
 class ApprovalDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -23,9 +21,7 @@ class ApprovalDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Approval.objects.filter(
-            manager=user, status=Approval.Status.pending, deleted=False
-        )
+        return Approval.objects.filter(manager=user, status=Approval.Status.pending)
 
     def destroy(self, request, pk):
         queryset = self.get_queryset()
@@ -87,6 +83,5 @@ class ApprovalDetail(generics.RetrieveUpdateDestroyAPIView):
                 project=project, author=request.user, company=request.user.company
             )
             resolution_activity.project_submition_accepted_message()
-            # mail = mail_service(project=project, receivers=[project.contractor])
             mail.send_project_updated()
         return res

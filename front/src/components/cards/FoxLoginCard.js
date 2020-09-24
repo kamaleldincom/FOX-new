@@ -3,16 +3,16 @@ import { CContainer, CRow, CCol, CCard, CCardHeader, CCardBody, CCardFooter } fr
 import FoxLoginForm from "../forms/FoxLoginForm"
 
 class FoxLoginCard extends Component {
-    render() {
-        return (
-            <CCard>
-                <CCardHeader color='dark' textColor='light'>
-                    Login
-                </CCardHeader>
-                <FoxLoginForm />
-            </CCard>
-        )
-    }
+  render() {
+    return (
+      <CRow alignHorizontal="center">
+        <CCol md="6">
+          <FoxLoginForm />
+        </CCol>
+      </CRow>
+
+    )
+  }
 }
 
 export default FoxLoginCard;

@@ -79,3 +79,53 @@ $theme-colors: (
 .c-header .c-header-nav .c-header-nav-link, .c-header .c-header-nav .c-header-nav-btn{
   color: theme-color("fox-pale");
 }
+
+// .login-canvas{
+//   height: 100vh;
+// }
+
+.login-right{
+  height: 100vh;
+  background-color: theme-color("fox-base");
+}
+
+.input-group-text{
+  background-color: #fff;
+  border-radius: 2.0rem;
+}
+
+.fox-input-before{
+  border-right-style: none;
+}
+.fox-input-before-invalid{
+  border-color: #e55353;
+  border-right-style: none;
+}
+
+.fox-input-after{
+  border-left-style: none;
+}
+.fox-input-after-invalid{
+  border-color: #e55353;
+  border-left-style: none;
+}
+
+html:not([dir=rtl]) .input-group > .form-control:not(:first-child), html:not([dir=rtl]) .input-group > .custom-select:not(:first-child){
+  border-left-style: none;
+}
+
+html:not([dir=rtl]) .input-group > .form-control:not(:last-child), html:not([dir=rtl]) .input-group > .custom-select:not(:last-child){
+  border-left-style: none;
+  border-right-style: none;
+}
+
+.fox-form-invalid-feedback{
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #e55353;
+}
+
+.fox-login-welcome{
+  text-align: center;
+}
