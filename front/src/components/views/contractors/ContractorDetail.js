@@ -26,7 +26,7 @@ class ContractorDetail extends Component {
     email: "",
     name: "",
     related_company: "",
-    company_number: "",
+    company_phone: "",
     company: this.props.company,
     role: "Contr",
     error: false
@@ -130,7 +130,7 @@ class ContractorDetail extends Component {
                     id="company_number"
                     name='company_number'
                     placeholder="Contact phone number"
-                    value={this.state.company_number}
+                    value={this.state.company_phone}
                     onChange={this.handleChange}
                     required />
                 </CFormGroup>
