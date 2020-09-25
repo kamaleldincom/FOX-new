@@ -7,15 +7,17 @@ import {
 } from '@coreui/react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom';
-import FoxRegisterCard from "../cards/FoxRegisterCard";
+import { FoxRegisterForm } from "../forms";
 import { userRegisterValidationFetch } from "../../actions"
+import { AuthContainer } from '../containers'
 
 
-const loading = (
-    <div className="pt-3 text-center">
-        <CSpinner size="sm" variant="grow" style={{ width: '4rem', height: '4rem' }} />
-    </div>
-)
+
+// const loading = (
+//     <div className="pt-3 text-center">
+//         <CSpinner size="sm" variant="grow" style={{ width: '4rem', height: '4rem' }} />
+//     </div>
+// )
 
 class Register extends Component {
 
@@ -25,18 +27,11 @@ class Register extends Component {
 
     render() {
         return (!this.props.registerAllowed ? <Redirect to="/login" /> :
-            <Suspense fallback={loading}>
-                <div className="c-app c-default-layout flex-row align-items-center">
-                    <CContainer>
-                        <CRow className="justify-content-center">
-                            <CCol md="6">
-                                <FoxRegisterCard username={this.props.username} />
-                            </CCol>
-                        </CRow>
-                    </CContainer>
-                </div>
-            </Suspense>
-
+            // <Suspense fallback={loading}>
+            <AuthContainer>
+                <FoxRegisterForm username={this.props.username} />
+            </AuthContainer>
+            // </Suspense>
         )
     }
 
@@ -55,3 +50,4 @@ const mapDispatchToProps = dispatch => ({
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register)
+

@@ -26,7 +26,7 @@ class ContractorCreate extends Component {
     email: "",
     name: "",
     related_company: "",
-    company_number: "",
+    company_phone: "",
     company: this.props.company,
     role: "Contr",
     error: false
@@ -115,10 +115,10 @@ class ContractorCreate extends Component {
                 </CFormGroup>
                 <CFormGroup>
                   <CInput
-                    id="company_number"
-                    name='company_number'
+                    id="company_phone"
+                    name='company_phone'
                     placeholder="Contact phone number"
-                    value={this.state.company_number}
+                    value={this.state.company_phone}
                     onChange={this.handleChange}
                     required />
                 </CFormGroup>
