@@ -125,10 +125,10 @@ class ContractorDetail extends Component {
                   />
                 </CFormGroup>
                 <CFormGroup>
-                  <CLabel htmlFor="company_number">Contact phone number</CLabel>
+                  <CLabel htmlFor="company_phone">Contact phone number</CLabel>
                   <CInput
-                    id="company_number"
-                    name='company_number'
+                    id="company_phone"
+                    name='company_phone'
                     placeholder="Contact phone number"
                     value={this.state.company_phone}
                     onChange={this.handleChange}
