@@ -95,7 +95,7 @@ const getProfileFetch = () => {
                     if (data.detail) {
                         console.log(data.detail)
                         dispatch(logoutUser())
-                        return data
+                        return Promise.reject(data)
                     } else {
                         dispatch(loginUser(data))
                         return Promise.resolve(data)

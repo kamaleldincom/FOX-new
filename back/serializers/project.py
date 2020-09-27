@@ -4,6 +4,7 @@ from back.models import Project
 
 class ProjectListSerializer(serializers.ModelSerializer):
 
+    project_name = serializers.SerializerMethodField()
     application_status = serializers.SerializerMethodField()
     work_status = serializers.SerializerMethodField()
     start_date = serializers.SerializerMethodField()
@@ -13,7 +14,7 @@ class ProjectListSerializer(serializers.ModelSerializer):
         model = Project
         fields = [
             "id",
-            "name",
+            "project_name",
             "start_date",
             "end_date",
             "contractor_name",
@@ -58,6 +59,9 @@ class ProjectListSerializer(serializers.ModelSerializer):
 
     def get_end_date(self, obj):
         return obj.end_date.strftime("%d %b %Y")
+
+    def get_project_name(self, obj):
+        return obj.name
 
 
 class ProjectSerializer(serializers.ModelSerializer):

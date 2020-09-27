@@ -228,10 +228,32 @@ const getDashboardLayout = (userRole = "Dum", projectId = null) => {
   }
 }
 
+const updateSideBar = sidebar => {
+  return dispatch => {
+    dispatch(newSideBar(sidebar))
+  }
+}
+
+const updateHeaderNav = headerNav => {
+  return dispatch => {
+    dispatch(newHeaderNav(headerNav))
+  }
+}
+
 const initiateDashboard = dashboard => ({
   type: 'INITIATE_DASHBOARD',
   sidebar: dashboard.sidebar,
   headerNav: dashboard.header_nav
+})
+
+const newSideBar = sidebar => ({
+  type: 'UPDATE_SIDEBAR',
+  sidebar: sidebar
+})
+
+const newHeaderNav = headerNav => ({
+  type: 'UPDATE_HEADER_NAV',
+  headerNav: headerNav
 })
 
 export default getDashboardLayout

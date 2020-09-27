@@ -45,7 +45,6 @@ class FoxTableWithDeleteOption extends Component {
   }
 
   confirmDelete = async (id) => {
-    console.log(this.props.tableName);
     const entity = this.props.tableName.toLowerCase().replace(' ', '_');
     await foxApi.deleteEntityOf(entity, id)
       .then(() => {

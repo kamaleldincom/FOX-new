@@ -7,6 +7,7 @@ const CurrentWorksList = React.lazy(() => import('./views/current_works/CurrentW
 const ClientManagerList = React.lazy(() => import('./views/managers/ClientManagerList'));
 const ClientManagerCreate = React.lazy(() => import('./views/managers/ClientManagerCreate'));
 const ClientManagerDetail = React.lazy(() => import('./views/managers/ClientManagerDetail'));
+const ClientManagerEdit = React.lazy(() => import('./views/managers/ClientManagerEdit'));
 const WorkerList = React.lazy(() => import('./views/workers/WorkerList'));
 const WorkerCreate = React.lazy(() => import('./views/workers/WorkerCreate'));
 const WorkerDetail = React.lazy(() => import('./views/workers/WorkerDetail'));
@@ -16,6 +17,7 @@ const ProjectPTW = React.lazy(() => import('./views/projects/ProjectPTW'));
 const ProjectUploadDocs = React.lazy(() => import('./views/projects/ProjectUploadDocs'));
 const ContractorCreate = React.lazy(() => import('./views/contractors/ContractorCreate'));
 const ContractorDetail = React.lazy(() => import('./views/contractors/ContractorDetail'));
+const ContractorEdit = React.lazy(() => import('./views/contractors/ContractorEdit'));
 const ContractorWorkersReview = React.lazy(() => import('./views/workers/ContractorWorkersReview'));
 const DocumentList = React.lazy(() => import('./views/documents/DocumentList'));
 const DocumentCreate = React.lazy(() => import('./views/documents/DocumentCreate'));
@@ -50,10 +52,12 @@ const routes = [
   { path: '/contractors', name: 'Contractors', component: ContractorList, exact: true },
   { path: '/contractors/new', name: 'New', component: ContractorCreate, exact: true },
   { path: '/contractors/:id', name: 'Contractor Details', component: ContractorDetail, exact: true },
+  { path: '/contractors/:id/edit', name: 'Contractor Edition', component: ContractorEdit, exact: true },
   { path: '/contractors/:id/workers_review', name: 'Workers Review', component: ContractorWorkersReview, exact: true },
   { path: '/managers', name: 'Managers', component: ClientManagerList, exact: true },
   { path: '/managers/new', name: 'New', component: ClientManagerCreate, exact: true },
   { path: '/managers/:id', name: 'Manager Details', component: ClientManagerDetail, exact: true },
+  { path: '/managers/:id/edit', name: 'Manager Edition', component: ClientManagerEdit, exact: true },
   { path: '/workers', name: 'Workers', component: WorkerList, exact: true },
   { path: '/workers/new', name: 'New', component: WorkerCreate, exact: true },
   { path: '/workers/:id', name: 'Worker Details', component: WorkerDetail, exact: true },
