@@ -1,2 +1,171 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[20],{635:function(e,t,n){"use strict";n.d(t,"a",(function(){return c}));var r=n(1),o=n.n(r),a=n(165),c=function(e){return o.a.createElement(a.U,{show:e.danger,onClose:e.setModalVisibility,color:"danger"},o.a.createElement(a.X,{closeButton:!0},o.a.createElement(a.Y,null,"Confirm Deletion")),o.a.createElement(a.V,null,"Are you sure you want to delete this ".concat(e.entity,"?")),o.a.createElement(a.W,null,o.a.createElement(a.e,{color:"danger",onClick:e.confirmDelete},"Confirm")," ",o.a.createElement(a.e,{color:"secondary",onClick:e.setModalVisibility},"Cancel")))}},769:function(e,t,n){"use strict";n.r(t);var r=n(1),o=n.n(r),a=n(166),c=n(95),i=n(165),l=n(634),u=n.n(l),s=n(29),f=n(642),p=n(635);function m(e){return(m="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function d(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function y(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?d(Object(n),!0).forEach((function(t){S(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):d(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function h(e,t){return function(e){if(Array.isArray(e))return e}(e)||function(e,t){if("undefined"==typeof Symbol||!(Symbol.iterator in Object(e)))return;var n=[],r=!0,o=!1,a=void 0;try{for(var c,i=e[Symbol.iterator]();!(r=(c=i.next()).done)&&(n.push(c.value),!t||n.length!==t);r=!0);}catch(e){o=!0,a=e}finally{try{r||null==i.return||i.return()}finally{if(o)throw a}}return n}(e,t)||function(e,t){if(!e)return;if("string"==typeof e)return b(e,t);var n=Object.prototype.toString.call(e).slice(8,-1);"Object"===n&&e.constructor&&(n=e.constructor.name);if("Map"===n||"Set"===n)return Array.from(e);if("Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))return b(e,t)}(e,t)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function b(e,t){(null==t||t>e.length)&&(t=e.length);for(var n=0,r=new Array(t);n<t;n++)r[n]=e[n];return r}function g(e,t,n,r,o,a,c){try{var i=e[a](c),l=i.value}catch(e){return void n(e)}i.done?t(l):Promise.resolve(l).then(r,o)}function w(e){return function(){var t=this,n=arguments;return new Promise((function(r,o){var a=e.apply(t,n);function c(e){g(a,r,o,c,i,"next",e)}function i(e){g(a,r,o,c,i,"throw",e)}c(void 0)}))}}function v(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function O(e,t){return(O=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}function E(e){var t=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(e){return!1}}();return function(){var n,r=j(e);if(t){var o=j(this).constructor;n=Reflect.construct(r,arguments,o)}else n=r.apply(this,arguments);return _(this,n)}}function _(e,t){return!t||"object"!==m(t)&&"function"!=typeof t?D(e):t}function D(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function j(e){return(j=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function S(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var C=new s.a,k=function(e){!function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&O(e,t)}(n,e);var t=E(n);function n(){var e;v(this,n);for(var r=arguments.length,a=new Array(r),c=0;c<r;c++)a[c]=arguments[c];return S(D(e=t.call.apply(t,[this].concat(a))),"state",{worker:e.props.match.params.id,name:"",file:"",issued_by:"",modal:!1,error:!1,filename:"",doc_type:"",upload_files:{}}),S(D(e),"handleChange",(function(t){e.setState(S({},t.target.name,t.target.value))})),S(D(e),"handleFileUpload",(function(t){var n=e.state.upload_files;n[t.target.name]=t.target.files[0],e.setState(S({upload_files:n},t.target.name,""))})),S(D(e),"handleSubmit",function(){var t=w(regeneratorRuntime.mark((function t(n){var r;return regeneratorRuntime.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:return n.preventDefault(),e.requestData=e.state,r=e.requestData.upload_files,delete e.requestData.modal,delete e.requestData.upload_files,delete e.requestData.error,delete e.requestData.filename,delete e.requestData.doc_type,e.formData=new FormData,Object.entries(e.requestData).forEach((function(t){var n=h(t,2),r=n[0],o=n[1];e.formData.append(r,o)})),r&&Object.entries(r).forEach((function(t){var n=h(t,2),r=n[0],o=n[1];e.formData.append(r,o)})),t.next=13,C.patchEntityWithFiles("worker_special_competencies",e.props.match.params.competency_id,e.formData).then((function(){e.props.history.goBack()}),(function(t){console.error(t),e.setState({error:"Competency update failed! Please check your input and try again! In case this problem repeats, please contact your administrator!"})}));case 13:case"end":return t.stop()}}),t)})));return function(e){return t.apply(this,arguments)}}()),S(D(e),"confirmDelete",w(regeneratorRuntime.mark((function t(){return regeneratorRuntime.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:return t.next=2,C.deleteEntityOf("worker_special_competencies",e.props.match.params.competency_id).then((function(){e.props.history.goBack()}),(function(t){console.error(t),e.setState({error:"Could not delete competency! Please check your input and try again! In case this problem repeats, please contact your administrator!"})}));case 2:console.log("delete special competency ".concat(e.props.match.params.competency_id));case 3:case"end":return t.stop()}}),t)})))),S(D(e),"downloadFile",function(){var t=w(regeneratorRuntime.mark((function t(n){return regeneratorRuntime.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:e.setState({filename:n.target.value,doc_type:n.target.name},(function(){C.downloadWorkerCompetency(e.props.match.params.id,e.state.doc_type).then((function(t){var n=window.URL.createObjectURL(new Blob([t])),r=document.createElement("a");r.href=n;var o=e.state.filename.split("/").pop();r.setAttribute("download",o),document.body.appendChild(r),r.click(),r.parentNode.removeChild(r)})).catch((function(e){console.error("File download failed!"),console.error(e)}))}));case 1:case"end":return t.stop()}}),t)})));return function(e){return t.apply(this,arguments)}}()),S(D(e),"setModalVisibility",(function(){e.setState({modal:!e.state.modal})})),S(D(e),"componentDidMount",w(regeneratorRuntime.mark((function t(){return regeneratorRuntime.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:return t.next=2,e.props.getProfileFetch().then((function(){return C.getDetailsOf("worker_special_competencies",e.props.match.params.competency_id)})).then((function(t){return e.setState(y({},t))}));case 2:case"end":return t.stop()}}),t)})))),S(D(e),"render",(function(){return o.a.createElement(i.ab,null,o.a.createElement(i.q,null,o.a.createElement(i.B,{onSubmit:e.handleSubmit},o.a.createElement(u.a,null),o.a.createElement(f.b,{inputValue:e.state.name,downloadValue:e.state.file,handleChange:e.handleChange,handleFileUpload:e.handleFileUpload,inputInfo:"name",uploadInfo:"file",downloadFile:e.downloadFile}),o.a.createElement(i.C,null,o.a.createElement(i.Q,{htmlFor:"issued_by"},"Competency issued by"),o.a.createElement(i.J,{id:"issued_by",name:"issued_by",placeholder:"Enter legal entity",value:e.state.issued_by,onChange:e.handleChange})),o.a.createElement(i.C,null,o.a.createElement(i.e,{type:"submit",color:"dark",variant:"outline",block:!0},"Save changes")),o.a.createElement(i.e,{className:"mb-3",color:"danger",variant:"outline",onClick:e.setModalVisibility,block:!0},"Delete Competency"),e.state.error?o.a.createElement("p",null,e.state.error):null),o.a.createElement(p.a,{setModalVisibility:e.setModalVisibility,danger:e.state.modal,entity:"special competency",confirmDelete:e.confirmDelete})))})),e}return n}(r.Component);t.default=Object(c.b)((function(e){return{contractor:e.currentUser.id}}),(function(e){return{getProfileFetch:function(){return e(Object(a.g)())}}}))(k)}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[20],{
+
+/***/ "./src/components/views/company/CompanyDocuments.js":
+/*!**********************************************************!*\
+  !*** ./src/components/views/company/CompanyDocuments.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions */ "./src/actions/index.js");
+/* harmony import */ var _coreui_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @coreui/react */ "./node_modules/@coreui/react/es/index.js");
+/* harmony import */ var django_react_csrftoken__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! django-react-csrftoken */ "./node_modules/django-react-csrftoken/index.js");
+/* harmony import */ var django_react_csrftoken__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(django_react_csrftoken__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../services */ "./src/services/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+var foxApi = new _services__WEBPACK_IMPORTED_MODULE_6__["FoxApiService"]();
+
+var CompanyDocuments = /*#__PURE__*/function (_Component) {
+  _inherits(CompanyDocuments, _Component);
+
+  var _super = _createSuper(CompanyDocuments);
+
+  function CompanyDocuments() {
+    var _this;
+
+    _classCallCheck(this, CompanyDocuments);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      safetyVideoURL: "",
+      personalDeclarationURL: "",
+      personalDeclarationFile: "",
+      company: _this.props.company
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleChange", function (event) {
+      _this.setState(_defineProperty({}, event.target.name, event.target.value));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleFileUpload", function (event) {
+      _this.setState(_defineProperty({}, event.target.name, event.target.files[0]));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "downloadFile", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return foxApi.downloadDocument(_this.props.match.params.doc_id).then(function (blob) {
+                var url = window.URL.createObjectURL(new Blob([blob]));
+                var link = document.createElement('a');
+                link.href = url;
+
+                var filename = _this.state.file.split('/').pop();
+
+                link.setAttribute('download', filename);
+                document.body.appendChild(link);
+                link.click();
+                link.parentNode.removeChild(link);
+              }).then(function () {
+                console.log('file downloaded');
+              }).catch(function (error) {
+                console.error('File download failed!');
+                console.error(error);
+              });
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    })));
+
+    _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
+      _this.props.getProfileFetch();
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "render", function () {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CCol"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CForm"], {
+        onSubmit: _this.handleSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(django_react_csrftoken__WEBPACK_IMPORTED_MODULE_5___default.a, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CLabel"], {
+        htmlFor: "safetyVideoURL"
+      }, "Safety Video URL:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CInput"], {
+        id: "safetyVideoURL",
+        name: "safetyVideoURL",
+        placeholder: "URL",
+        value: _this.state.safetyVideoURL,
+        onChange: _this.handleChange,
+        required: true
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CFormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CLabel"], {
+        htmlFor: "personalDeclarationURL"
+      }, "Personal Declaration:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CButton"], {
+        variant: "outline",
+        color: "success",
+        onClick: _this.downloadFile
+      }, "Download"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_coreui_react__WEBPACK_IMPORTED_MODULE_4__["CInputFile"], {
+        id: "personalDeclarationFile",
+        name: "personalDeclarationFile",
+        onChange: _this.handleFileUpload
+      })))));
+    });
+
+    return _this;
+  }
+
+  return CompanyDocuments;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    username: state.currentUser.username
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    getProfileFetch: function getProfileFetch() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["getProfileFetch"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(CompanyDocuments));
+
+/***/ })
+
+}]);
 //# sourceMappingURL=20.main.js.map

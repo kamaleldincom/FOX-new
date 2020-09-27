@@ -1,2 +1,146 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[30],{748:function(e,t,n){"use strict";n.r(t);var r=n(1),a=n.n(r),o=n(166),i=n(95),c=n(165),u=n(634),l=n.n(u);function s(e){return(s="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function p(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function f(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?p(Object(n),!0).forEach((function(t){E(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):p(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function m(e,t,n,r,a,o,i){try{var c=e[o](i),u=c.value}catch(e){return void n(e)}c.done?t(u):Promise.resolve(u).then(r,a)}function h(e){return function(){var t=this,n=arguments;return new Promise((function(r,a){var o=e.apply(t,n);function i(e){m(o,r,a,i,c,"next",e)}function c(e){m(o,r,a,i,c,"throw",e)}i(void 0)}))}}function d(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function y(e,t){return(y=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}function b(e){var t=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(e){return!1}}();return function(){var n,r=v(e);if(t){var a=v(this).constructor;n=Reflect.construct(r,arguments,a)}else n=r.apply(this,arguments);return g(this,n)}}function g(e,t){return!t||"object"!==s(t)&&"function"!=typeof t?O(e):t}function O(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function v(e){return(v=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function E(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var w=new(n(29).a),S=[{id:-1,position:"Choose manager position"},{id:"SafeMan",position:"Safety Manager"},{id:"SecMan",position:"Security Manager"},{id:"SecOff",position:"Security Officer"},{id:"SiteOwn",position:"Site Owner"},{id:"WorkOwn",position:"Owner of Work"},{id:"SecGrd",position:"Security Guards"}],C=function(e){!function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&y(e,t)}(n,e);var t=b(n);function n(){var e;d(this,n);for(var r=arguments.length,o=new Array(r),i=0;i<r;i++)o[i]=arguments[i];return E(O(e=t.call.apply(t,[this].concat(o))),"state",{username:"",name:"",email:"",position:-1,company:e.props.company,role:"CliMan",department:"",error:!1}),E(O(e),"handleChange",(function(t){e.setState(E({},t.target.name,t.target.value))})),E(O(e),"handleSubmit",function(){var t=h(regeneratorRuntime.mark((function t(n){return regeneratorRuntime.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:if(n.preventDefault(),!(parseInt(e.state.position)<0)){t.next=5;break}e.setState({error:"Manager Position was not selected! Please, choose position form the list"}),t.next=9;break;case 5:return e.formData=e.state,delete e.formData.error,t.next=9,w.updateEntityOf("client_managers",e.props.match.params.id,e.formData).then((function(){e.props.history.goBack()}),(function(t){console.error(t),e.setState({error:"Manager update failed! Please check your input and try again! In case this problem repeats, please contact your administrator!"})}));case 9:case"end":return t.stop()}}),t)})));return function(e){return t.apply(this,arguments)}}()),E(O(e),"componentDidMount",h(regeneratorRuntime.mark((function t(){return regeneratorRuntime.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:return t.next=2,e.props.getProfileFetch().then((function(){return w.getDetailsOf("client_managers",e.props.match.params.id)})).then((function(t){return e.setState(f({},t))}));case 2:case"end":return t.stop()}}),t)})))),E(O(e),"render",(function(){return a.a.createElement(c.ab,null,a.a.createElement(c.q,null,a.a.createElement(c.f,null,a.a.createElement(c.i,null,a.a.createElement(c.k,null,"Mananger details")),a.a.createElement(c.g,null,a.a.createElement(c.B,{onSubmit:e.handleSubmit},a.a.createElement(l.a,null),a.a.createElement(c.C,null,a.a.createElement(c.Q,{htmlFor:"username"},"Manager username"),a.a.createElement(c.J,{id:"username",name:"username",placeholder:"Username",value:e.state.username,onChange:e.handleChange,required:!0})),a.a.createElement(c.C,null,a.a.createElement(c.Q,{htmlFor:"name"},"Manager verbose name"),a.a.createElement(c.J,{id:"name",name:"name",placeholder:"Verbose name",value:e.state.name,onChange:e.handleChange,required:!0})),a.a.createElement(c.C,null,a.a.createElement(c.Q,{htmlFor:"email"},"Manager email"),a.a.createElement(c.J,{id:"email",type:"email",name:"email",placeholder:"Email",value:e.state.email,onChange:e.handleChange,required:!0})),a.a.createElement(c.C,null,a.a.createElement(c.Q,{htmlFor:"target_type"},"Manager Position"),a.a.createElement(c.bb,{id:"position",name:"position",placeholder:"Choose position",value:e.state.position,onChange:e.handleChange,required:!0},S.map((function(e){return a.a.createElement("option",{key:e.id,value:e.id},e.position)})))),a.a.createElement(c.C,null,a.a.createElement(c.Q,{htmlFor:"department"},"Manager department"),a.a.createElement(c.J,{id:"department",name:"department",placeholder:"Department",value:e.state.department,onChange:e.handleChange,required:!0})),a.a.createElement(c.C,null,a.a.createElement(c.e,{shape:"pill",type:"submit",color:"dark",variant:"outline",block:!0},"Save changes")),e.state.error?a.a.createElement("p",null,e.state.error):null)))))})),e}return n}(r.Component);t.default=Object(i.b)((function(e){return{company:e.currentUser.company}}),(function(e){return{getProfileFetch:function(){return e(Object(o.g)())}}}))(C)}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[30],{
+
+/***/ "./src/components/views/managers/ClientManagerList.js":
+/*!************************************************************!*\
+  !*** ./src/components/views/managers/ClientManagerList.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _tables__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tables */ "./src/components/tables/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions */ "./src/actions/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var getBadge = function getBadge(status) {
+  switch (status) {
+    case 'Active':
+      return 'success';
+
+    case 'Inactive':
+      return 'secondary';
+
+    case 'Pending':
+      return 'warning';
+
+    case 'Banned':
+      return 'danger';
+
+    default:
+      return 'primary';
+  }
+};
+
+var ClientManagerList = /*#__PURE__*/function (_Component) {
+  _inherits(ClientManagerList, _Component);
+
+  var _super = _createSuper(ClientManagerList);
+
+  function ClientManagerList() {
+    var _this;
+
+    _classCallCheck(this, ClientManagerList);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "componentDidMount", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this.props.getProfileFetch().then(function () {
+                return _this.props.getClientManagerList(_this.props.role);
+              });
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    })));
+
+    _defineProperty(_assertThisInitialized(_this), "render", function () {
+      return _this.props.role == 'CliAdm' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tables__WEBPACK_IMPORTED_MODULE_1__["FoxTableWithDeleteOption"], _extends({}, _this.props, {
+        tableName: "Managers",
+        fields: _this.props.clientManagerTable.fields,
+        getBadge: getBadge,
+        tableData: _this.props.clientManagerTable.tableData,
+        updateList: _this.props.getClientManagerList
+      })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tables__WEBPACK_IMPORTED_MODULE_1__["FoxEntityListTable"], _extends({}, _this.props, {
+        updateList: _this.props.getClientManagerList,
+        tableName: "Managers",
+        fields: _this.props.clientManagerTable.fields,
+        getBadge: getBadge,
+        tableData: _this.props.clientManagerTable.tableData
+      }));
+    });
+
+    return _this;
+  }
+
+  return ClientManagerList;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    clientManagerTable: state.entityListTable,
+    role: state.currentUser.role
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    getProfileFetch: function getProfileFetch() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getProfileFetch"])());
+    },
+    getClientManagerList: function getClientManagerList(role) {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getClientManagerList"])(role));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(ClientManagerList));
+
+/***/ })
+
+}]);
 //# sourceMappingURL=30.main.js.map

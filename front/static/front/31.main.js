@@ -1,2 +1,168 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[31],{766:function(e,t,n){"use strict";n.r(t);var r=n(1),a=n.n(r),o=n(24),i=n(95),l=n(165),s=n(166),c=n(29);function u(e){return(u="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function p(e,t,n,r,a,o,i){try{var l=e[o](i),s=l.value}catch(e){return void n(e)}l.done?t(s):Promise.resolve(s).then(r,a)}function m(e){return function(){var t=this,n=arguments;return new Promise((function(r,a){var o=e.apply(t,n);function i(e){p(o,r,a,i,l,"next",e)}function l(e){p(o,r,a,i,l,"throw",e)}i(void 0)}))}}function f(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function h(e,t){return(h=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}function d(e){var t=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(e){return!1}}();return function(){var n,r=w(e);if(t){var a=w(this).constructor;n=Reflect.construct(r,arguments,a)}else n=r.apply(this,arguments);return y(this,n)}}function y(e,t){return!t||"object"!==u(t)&&"function"!=typeof t?b(e):t}function b(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function w(e){return(w=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function g(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var v=new c.b,E=new c.a,k=function(e){!function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&h(e,t)}(n,e);var t=d(n);function n(){var e;f(this,n);for(var r=arguments.length,i=new Array(r),s=0;s<r;s++)i[s]=arguments[s];return g(b(e=t.call.apply(t,[this].concat(i))),"state",{status:"Created",error:""}),g(b(e),"handleSubmit",m(regeneratorRuntime.mark((function t(){return regeneratorRuntime.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:return console.log(e.props),t.next=3,v.submitProposal(e.props.match.params.id).then(e.props.history.goBack()).catch((function(t){console.error(t),e.setState({error:"Proposal submit failed! Please check your input and try again! In case this problem repeats, please contact your administrator!"})}));case 3:case"end":return t.stop()}}),t)})))),g(b(e),"componentDidMount",m(regeneratorRuntime.mark((function t(){return regeneratorRuntime.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:return t.next=2,e.props.getProfileFetch().then((function(){return E.getDetailsOf("projects",e.props.match.params.id)})).then((function(t){e.setState({status:t.status})}));case 2:case"end":return t.stop()}}),t)})))),g(b(e),"render",(function(){return["Created","Rejected"].includes(e.state.status)?a.a.createElement(l.ab,null,a.a.createElement(l.q,null,a.a.createElement(l.f,null,a.a.createElement(l.i,null,a.a.createElement("strong",null,"Rules and Regulations to Comply")),a.a.createElement(l.g,null,a.a.createElement(l.S,null,a.a.createElement(l.T,null,"The person in charge/contractor’s supervisor will be wholly responsible and accountable for the behavior and safety of his worker and implement all safety measures."),a.a.createElement(l.T,null,"By acknowledging this he/she shall be responsible for any incident or accident and hereby agreed upon all of the above terms and conditions. The University shall have the authority to stop work immediately if the regulations are not met."),a.a.createElement(l.T,null,"Please attach this permit with a list of workers’ name & identification number (IC/work permit/passport) as well as risk assessment, method statement, HIRAC or any other relevant document as requested by the university."),a.a.createElement(l.T,null,"Contractor shall not plug in any gadget or laptop to the university’s network or power point unless permitted."),a.a.createElement(l.T,null,"Contractor's PIC must give instructions to workers and be present at site at all time to supervise the work."),a.a.createElement(l.T,null,"Contractor must wear employee pass and suitable PPE at all time whenever they are at site."),a.a.createElement(l.T,null,"Work on weekend or public holidays will need approval from the authorizing person from the Client’s department."),a.a.createElement(l.T,null,"30km/h speed limits for vehicle should apply and priority to pedestrian."),a.a.createElement(l.T,null,"Contractor is forbidden to enter areas in which not stated in the permit."),a.a.createElement(l.T,null,"Any usage of fire extinguishing equipment must be report to the university immediately."),a.a.createElement(l.T,null,"Any damages done to the university’s property shall be reported immediately and if in any case damages not reported, additional penalty will be imposed to the contractor on top of the rectification cost."),a.a.createElement(l.T,null,"Contractor should not store any equipment, machinery or tools within the university’s premises. If there is a need, contractor must clarify and liaise with Head of Engineering Services for temporary storage."),a.a.createElement(l.T,null,"Smoking is prohibited unless at the designated area."),a.a.createElement(l.T,null,"The workplace must be kept clean and tidy after the work completed or stopped and needs to resume the next day"),a.a.createElement(l.T,null,"Malaysia’s OSHA 1994 of safety regulation for hot work, working at height, excavation and lock-out, LOTO and confined spaces shall apply."),a.a.createElement(l.T,null,"Work must be stopped at 5.30 pm unless permitted by the university. Doors must be locked and lights turned off."),a.a.createElement(l.T,null,"All vehicle should park at the designated parking area."),a.a.createElement(l.T,null,"The validity of each permit is 7 days from the date of issuance."),a.a.createElement(l.T,null,"The university will not be liable for any accident occurred at site after issuing this permit."),a.a.createElement(l.T,null,"The permit to work should be submitted 3 working days prior commencement of work.")))),a.a.createElement(l.f,null,a.a.createElement(l.g,null,"I certify that I understand and will comply with all the requirement of this application to work and strictly comply with the company’s rules and regulation as well as Malaysia’s OSHA Act 1994. Intolerable risk subjected to ",a.a.createElement("strong",null,"any violation of this application’s requirement may cause work process being stopped"),"."),a.a.createElement(l.h,null,a.a.createElement(l.e,{type:"submit",color:"dark",variant:"outline",block:!0,onClick:e.handleSubmit},"Submit Proposal"),e.state.error?a.a.createElement("p",null,e.state.error):null)))):a.a.createElement(o.a,{to:"/projects/".concat(e.props.match.params.id,"/application_status")})})),e}return n}(r.Component);t.default=Object(i.b)(null,(function(e){return{getProfileFetch:function(){return e(Object(s.g)())}}}))(k)}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[31],{
+
+/***/ "./src/components/views/projects/ProjectList.js":
+/*!******************************************************!*\
+  !*** ./src/components/views/projects/ProjectList.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _tables__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tables */ "./src/components/tables/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions */ "./src/actions/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var getBadge = function getBadge(status) {
+  switch (status) {
+    case 'Created':
+      return 'secondary';
+
+    case 'Submitted':
+      return 'warning';
+
+    case 'Approved':
+      return 'success';
+
+    case 'Rejected':
+      return 'danger';
+
+    case 'Application processing':
+      return 'secondary';
+
+    case 'Ready to start':
+      return 'success';
+
+    case 'Works started':
+      return 'info';
+
+    case 'Works finished':
+      return 'warning';
+
+    case 'Extended':
+      return 'primary';
+
+    case 'Closed':
+      return 'dark';
+
+    default:
+      return 'primary';
+  }
+};
+
+var ProjectList = /*#__PURE__*/function (_Component) {
+  _inherits(ProjectList, _Component);
+
+  var _super = _createSuper(ProjectList);
+
+  function ProjectList() {
+    var _this;
+
+    _classCallCheck(this, ProjectList);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "componentDidMount", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _this.props.setProjectId(_this.props.match.params.id);
+
+              _context.next = 3;
+              return _this.props.getProfileFetch().then(function () {
+                return _this.props.getProjectList(_this.props.role);
+              });
+
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    })));
+
+    _defineProperty(_assertThisInitialized(_this), "render", function () {
+      return _this.props.role == 'CliAdm' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tables__WEBPACK_IMPORTED_MODULE_2__["FoxTableWithDeleteOption"], _extends({}, _this.props, {
+        tableName: "Projects",
+        fields: _this.props.projectTable.fields,
+        getBadge: getBadge,
+        tableData: _this.props.projectTable.tableData,
+        updateList: _this.props.getProjectList
+      })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tables__WEBPACK_IMPORTED_MODULE_2__["FoxEntityListTable"], _extends({}, _this.props, {
+        tableName: "Projects",
+        fields: _this.props.projectTable.fields,
+        getBadge: getBadge,
+        tableData: _this.props.projectTable.tableData
+      }));
+    });
+
+    return _this;
+  }
+
+  return ProjectList;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    projectTable: state.entityListTable,
+    role: state.currentUser.role
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    getProfileFetch: function getProfileFetch() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["getProfileFetch"])());
+    },
+    getProjectList: function getProjectList(role) {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["getProjectList"])(role));
+    },
+    setProjectId: function setProjectId() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["setProjectId"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(ProjectList));
+
+/***/ })
+
+}]);
 //# sourceMappingURL=31.main.js.map

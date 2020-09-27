@@ -1,2 +1,145 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[23],{743:function(e,t,n){"use strict";n.r(t);var r=n(1),a=n.n(r),o=n(95),c=n(634),i=n.n(c),l=n(166),u=n(165),s=n(29),f=n(650);function p(e){return(p="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function m(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function d(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?m(Object(n),!0).forEach((function(t){_(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):m(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function h(e,t,n,r,a,o,c){try{var i=e[o](c),l=i.value}catch(e){return void n(e)}i.done?t(l):Promise.resolve(l).then(r,a)}function y(e){return function(){var t=this,n=arguments;return new Promise((function(r,a){var o=e.apply(t,n);function c(e){h(o,r,a,c,i,"next",e)}function i(e){h(o,r,a,c,i,"throw",e)}c(void 0)}))}}function b(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function w(e,t){return(w=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}function g(e){var t=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(e){return!1}}();return function(){var n,r=E(e);if(t){var a=E(this).constructor;n=Reflect.construct(r,arguments,a)}else n=r.apply(this,arguments);return v(this,n)}}function v(e,t){return!t||"object"!==p(t)&&"function"!=typeof t?k(e):t}function k(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function E(e){return(E=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function _(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var j=new s.a,O=function(e){!function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&w(e,t)}(n,e);var t=g(n);function n(){var e;b(this,n);for(var r=arguments.length,o=new Array(r),c=0;c<r;c++)o[c]=arguments[c];return _(k(e=t.call.apply(t,[this].concat(o))),"state",{description:"",created:"",last_resolved:"",status:"",project:"",manager:"",error:"",filename:"",file_id:"",current_worker_id:"",current_worker_info:""}),_(k(e),"handleChange",(function(t){e.setState(_({},t.target.name,t.target.value))})),_(k(e),"handleWorkerSelect",(function(t){e.state.current_worker_id===t.target.name?e.setState({current_worker_id:""}):e.setState({current_worker_id:t.target.name})})),_(k(e),"handleSubmit",function(){var t=y(regeneratorRuntime.mark((function t(n){return regeneratorRuntime.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:if(n.preventDefault(),"Rejected"!==e.state.status||e.state.description){t.next=5;break}e.setState({error:"Rejections reason was not provided! Please, specify the rejection reason!"}),t.next=13;break;case 5:return e.formData=e.state,delete e.formData.error,delete e.formData.created,delete e.formData.last_resolved,delete e.formData.current_worker_id,delete e.formData.current_worker_info,t.next=13,j.patchEntityOf("approvals",e.props.match.params.id,e.formData).then((function(){e.props.history.goBack()})).catch((function(t){console.error(t),e.setState({error:"Project update failed! Please check your input and try again! In case this problem repeats, please contact your administrator!"})}));case 13:case"end":return t.stop()}}),t)})));return function(e){return t.apply(this,arguments)}}()),_(k(e),"downloadFile",function(){var t=y(regeneratorRuntime.mark((function t(n){return regeneratorRuntime.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:e.setState({filename:n.target.value,file_id:n.target.name},(function(){j.downloadDocument(e.state.file_id).then((function(t){var n=window.URL.createObjectURL(new Blob([t])),r=document.createElement("a");r.href=n;var a=e.state.filename.split("/").pop();r.setAttribute("download",a),document.body.appendChild(r),r.click(),r.parentNode.removeChild(r)})).then((function(){console.log("file downloaded")})).catch((function(e){console.error("File download failed!"),console.error(e)}))}));case 1:case"end":return t.stop()}}),t)})));return function(e){return t.apply(this,arguments)}}()),_(k(e),"componentDidMount",y(regeneratorRuntime.mark((function t(){return regeneratorRuntime.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:return t.next=2,e.props.getProfileFetch().then((function(){return j.getDetailsOf("approvals",e.props.match.params.id)})).then((function(t){return e.setState(d({},t),(function(){e.props.getDocumentList({project_id:e.state.project},!0),e.props.getWorkerList({project_id:e.state.project},!1)}))}));case 2:case"end":return t.stop()}}),t)})))),_(k(e),"render",(function(){return a.a.createElement(u.ab,null,a.a.createElement(u.q,null,a.a.createElement(u.f,null,a.a.createElement(u.i,null,"Attached Documents"),a.a.createElement(u.g,null,e.props.documents?e.props.documents.map((function(t,n){return a.a.createElement(a.a.Fragment,{key:n},a.a.createElement("h6",null,t.name),t.url_to_doc?a.a.createElement(u.R,{key:"dl-".concat(t.id),href:t.url_to_doc,target:"_blank",className:"btn btn-ghost-primary"},"Open this document in Google Docs"):a.a.createElement(a.a.Fragment,null,a.a.createElement(u.e,{variant:"outline",color:"primary",key:"cb-".concat(t.id),id:t.id,name:t.id,value:t.filename,onClick:e.downloadFile},"Download document"),a.a.createElement(f.a,{document:t})))})):null)),a.a.createElement(u.f,null,a.a.createElement(u.i,null,"Workers"),a.a.createElement(u.g,null,e.props.workers?e.props.workers.map((function(t,n){return a.a.createElement(u.f,{key:"card-".concat(n),className:"mb-0"},a.a.createElement(u.i,{key:"ch-".concat(n),id:t.id},a.a.createElement("h5",{key:"h5-".concat(n),className:"m-0 p-0"},t.name),a.a.createElement("h6",{key:"h6-".concat(n),className:"m-0 p-0"},t.position_in_company),a.a.createElement(u.e,{key:"btn-".concat(n),block:!0,color:"link",className:"text-left m-0 p-0",id:t.id,value:t.id,name:t.id,onClick:e.handleWorkerSelect},"Display Details")),a.a.createElement(u.r,{key:"clps-".concat(n),show:e.state.current_worker_id===t.id.toString()},a.a.createElement(u.g,{key:"cbody-".concat(n)},a.a.createElement(f.d,{workerId:t.id}))))})):null)),a.a.createElement(u.f,null,a.a.createElement(u.g,null,a.a.createElement(u.B,{onSubmit:e.handleSubmit},a.a.createElement(i.a,null),a.a.createElement(u.C,null,a.a.createElement(u.Q,{htmlFor:"description"},"Reject reason:"),a.a.createElement(u.nb,{id:"description",name:"description",value:e.state.description?e.state.description:"",onChange:e.handleChange})),a.a.createElement(u.C,null,a.a.createElement(u.e,{className:"mr-3",type:"submit",name:"status",value:"Approved",color:"success",variant:"outline",onClick:e.handleChange},"Approve"),a.a.createElement(u.e,{type:"submit",name:"status",value:"Rejected",color:"danger",variant:"outline",onClick:e.handleChange},"Reject")),e.state.error?a.a.createElement("p",null,e.state.error):null)))))})),e}return n}(r.Component);t.default=Object(o.b)((function(e){return{documents:e.additionalEntityListTable.tableData,workers:e.entityListTable.tableData}}),(function(e){return{getProfileFetch:function(){return e(Object(l.g)())},getDocumentList:function(t,n){return e(Object(l.f)(t,n))},getWorkerList:function(t,n){return e(Object(l.j)(t,n))}}}))(O)}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[23],{
+
+/***/ "./src/components/views/contractors/ContractorList.js":
+/*!************************************************************!*\
+  !*** ./src/components/views/contractors/ContractorList.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _tables__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tables */ "./src/components/tables/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../actions */ "./src/actions/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var getBadge = function getBadge(status) {
+  switch (status) {
+    case 'Active':
+      return 'success';
+
+    case 'Inactive':
+      return 'secondary';
+
+    case 'Pending':
+      return 'warning';
+
+    case 'Banned':
+      return 'danger';
+
+    default:
+      return 'primary';
+  }
+};
+
+var ContractorList = /*#__PURE__*/function (_Component) {
+  _inherits(ContractorList, _Component);
+
+  var _super = _createSuper(ContractorList);
+
+  function ContractorList() {
+    var _this;
+
+    _classCallCheck(this, ContractorList);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "componentDidMount", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this.props.getProfileFetch().then(function () {
+                return _this.props.getContractorList(_this.props.role);
+              });
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    })));
+
+    _defineProperty(_assertThisInitialized(_this), "render", function () {
+      return _this.props.role == 'CliAdm' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tables__WEBPACK_IMPORTED_MODULE_2__["FoxTableWithDeleteOption"], _extends({}, _this.props, {
+        tableName: "Contractors",
+        fields: _this.props.contractorTable.fields,
+        getBadge: getBadge,
+        tableData: _this.props.contractorTable.tableData,
+        updateList: _this.props.getContractorList
+      })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tables__WEBPACK_IMPORTED_MODULE_2__["FoxEntityListTable"], _extends({}, _this.props, {
+        tableName: "Contractors",
+        fields: _this.props.contractorTable.fields,
+        getBadge: getBadge,
+        tableData: _this.props.contractorTable.tableData
+      }));
+    });
+
+    return _this;
+  }
+
+  return ContractorList;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    contractorTable: state.entityListTable,
+    role: state.currentUser.role
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    getProfileFetch: function getProfileFetch() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["getProfileFetch"])());
+    },
+    getContractorList: function getContractorList(role) {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_3__["getContractorList"])(role));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(ContractorList));
+
+/***/ })
+
+}]);
 //# sourceMappingURL=23.main.js.map

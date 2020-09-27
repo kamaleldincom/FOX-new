@@ -1,2 +1,147 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[36],{758:function(e,t,n){"use strict";n.r(t);var r=n(1),o=n.n(r),c=n(95),a=n(166),i=n(165),u=n(650);function l(e){return(l="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function f(e,t,n,r,o,c,a){try{var i=e[c](a),u=i.value}catch(e){return void n(e)}i.done?t(u):Promise.resolve(u).then(r,o)}function s(e){return function(){var t=this,n=arguments;return new Promise((function(r,o){var c=e.apply(t,n);function a(e){f(c,r,o,a,i,"next",e)}function i(e){f(c,r,o,a,i,"throw",e)}a(void 0)}))}}function p(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function m(e,t){return(m=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}function y(e){var t=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(e){return!1}}();return function(){var n,r=b(e);if(t){var o=b(this).constructor;n=Reflect.construct(r,arguments,o)}else n=r.apply(this,arguments);return d(this,n)}}function d(e,t){return!t||"object"!==l(t)&&"function"!=typeof t?h(e):t}function h(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function b(e){return(b=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function w(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var k=function(e){!function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&m(e,t)}(n,e);var t=y(n);function n(){var e;p(this,n);for(var r=arguments.length,c=new Array(r),a=0;a<r;a++)c[a]=arguments[a];return w(h(e=t.call.apply(t,[this].concat(c))),"state",{current_worker_id:"",current_worker_info:""}),w(h(e),"handleWorkerSelect",(function(t){e.state.current_worker_id===t.target.name?e.setState({current_worker_id:""}):e.setState({current_worker_id:t.target.name})})),w(h(e),"componentDidMount",s(regeneratorRuntime.mark((function t(){return regeneratorRuntime.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:return t.next=2,e.props.getProfileFetch().then((function(){return e.props.getWorkerList({contractor_id:e.props.match.params.id},!1)}));case 2:case"end":return t.stop()}}),t)})))),w(h(e),"render",(function(){return o.a.createElement(i.ab,null,o.a.createElement(i.q,null,o.a.createElement(i.f,null,o.a.createElement(i.i,null,o.a.createElement("strong",null,"Workers")),o.a.createElement(i.g,null,e.props.workers?e.props.workers.map((function(t,n){return o.a.createElement(i.f,{key:"card-".concat(n),className:"mb-0"},o.a.createElement(i.i,{key:"ch-".concat(n),id:t.id},o.a.createElement("h5",{key:"h5-".concat(n),className:"m-0 p-0"},t.name),o.a.createElement("h6",{key:"h6-".concat(n),className:"m-0 p-0"},t.position_in_company),o.a.createElement(i.e,{key:"btn-".concat(n),block:!0,color:"link",className:"text-left m-0 p-0",id:t.id,value:t.id,name:t.id,onClick:e.handleWorkerSelect},"Display Details")),o.a.createElement(i.r,{key:"clps-".concat(n),show:e.state.current_worker_id===t.id.toString()},o.a.createElement(i.g,{key:"cbody-".concat(n)},o.a.createElement(u.d,{workerId:t.id}))))})):o.a.createElement("strong",null,"The contractor hasn't attached any workers yet.")))))})),e}return n}(r.Component);t.default=Object(c.b)((function(e){return{workers:e.entityListTable.tableData}}),(function(e){return{getProfileFetch:function(){return e(Object(a.g)())},getWorkerList:function(t,n){return e(Object(a.j)(t,n))}}}))(k)}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[36],{
+
+/***/ "./src/components/views/special_competencies/SpecialCompetencyList.js":
+/*!****************************************************************************!*\
+  !*** ./src/components/views/special_competencies/SpecialCompetencyList.js ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _tables__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tables */ "./src/components/tables/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions */ "./src/actions/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var getBadge = function getBadge(status) {
+  switch (status) {
+    case 'Active':
+      return 'success';
+
+    case 'Inactive':
+      return 'secondary';
+
+    case 'Pending':
+      return 'warning';
+
+    case 'Banned':
+      return 'danger';
+
+    default:
+      return 'primary';
+  }
+};
+
+var SpecialCompetencyList = /*#__PURE__*/function (_Component) {
+  _inherits(SpecialCompetencyList, _Component);
+
+  var _super = _createSuper(SpecialCompetencyList);
+
+  function SpecialCompetencyList() {
+    var _this;
+
+    _classCallCheck(this, SpecialCompetencyList);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "componentDidMount", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this.props.getProfileFetch().then(function () {
+                return _this.props.getSpecialCompetencyList({
+                  worker_id: _this.props.match.params.id
+                }, _this.props.role);
+              });
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    })));
+
+    _defineProperty(_assertThisInitialized(_this), "render", function () {
+      return _this.props.role == 'Contr' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tables__WEBPACK_IMPORTED_MODULE_1__["FoxTableWithDeleteOption"], _extends({}, _this.props, {
+        tableName: "Worker Special Competencies",
+        fields: _this.props.specialCompetencyListTable.fields,
+        getBadge: getBadge,
+        tableData: _this.props.specialCompetencyListTable.tableData,
+        updateList: _this.props.getSpecialCompetencyList
+      })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_tables__WEBPACK_IMPORTED_MODULE_1__["FoxEntityListTable"], _extends({}, _this.props, {
+        tableName: "Worker Special Competencies",
+        fields: _this.props.specialCompetencyListTable.fields,
+        getBadge: getBadge,
+        tableData: _this.props.specialCompetencyListTable.tableData
+      }));
+    });
+
+    return _this;
+  }
+
+  return SpecialCompetencyList;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    specialCompetencyListTable: state.entityListTable,
+    role: state.currentUser.role
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    getProfileFetch: function getProfileFetch() {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getProfileFetch"])());
+    },
+    getSpecialCompetencyList: function getSpecialCompetencyList(params, role) {
+      return dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["getSpecialCompetencyList"])(params, role));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(SpecialCompetencyList));
+
+/***/ })
+
+}]);
 //# sourceMappingURL=36.main.js.map
