@@ -15,3 +15,7 @@ from .worker_special_competency import (  # noqa F401
 from .approval import ApprovalListSerializer, ApprovalSerializer  # noqa F401
 from .company import CompanyDocsSerializer  # noqa F401
 from .activity import ActivityListSerializer, ActivitySerializer  # noqa F401
+from .notification import (  # noqa F401
+    NotificationUpdateSerializer,
+    NotificationListSerializer,
+)

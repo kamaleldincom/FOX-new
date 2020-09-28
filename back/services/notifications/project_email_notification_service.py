@@ -2,6 +2,9 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from back.logger import log
+from .internal_notification_service import (
+    InternalNotificationService as internal_service,
+)
 
 
 class ProjectEmailNotificationService:
@@ -30,31 +33,43 @@ class ProjectEmailNotificationService:
     def send_project_created(self):
         self.subject = f"You are assigned for project {self.project.name}"
         self._conduct_email_send("project_created")
+        self._conduct_internal_notification()
 
     def send_proposal_submitted(self):
         self.subject = f"Proposal submitted for project {self.project.name}"
         self._conduct_email_send("proposal_submitted")
+        self._conduct_internal_notification()
 
     def send_project_approved(self):
         self.subject = f"Project {self.project.name}. Application approved."
         self._conduct_email_send("project_approved")
+        self._conduct_internal_notification()
 
     def send_project_rejected(self):
         self.subject = f"Project {self.project.name}. Application rejected."
         self._conduct_email_send("project_rejected")
+        self._conduct_internal_notification()
 
     def send_project_extended(self):
         self.subject = f"Project {self.project.name} extended"
         self._conduct_email_send("project_extended")
+        self._conduct_internal_notification()
 
     def send_project_closed(self):
         self.subject = f"Project {self.project.name} closed"
         self._conduct_email_send("project_closed")
+        self._conduct_internal_notification()
 
     def _conduct_email_send(self, template):
         self._generate_context()
         self._render_email_text(template)
         self._send_message()
+
+    def _conduct_internal_notification(self):
+        internal_message = internal_service(
+            message_text=self.subject, receivers=self.receivers
+        )
+        internal_message.emit()
 
     def _generate_context(self):
         self.context = {
