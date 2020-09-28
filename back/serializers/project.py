@@ -9,6 +9,7 @@ class ProjectListSerializer(serializers.ModelSerializer):
     work_status = serializers.SerializerMethodField()
     start_date = serializers.SerializerMethodField()
     end_date = serializers.SerializerMethodField()
+    extend_date = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
@@ -22,6 +23,7 @@ class ProjectListSerializer(serializers.ModelSerializer):
             "status",
             "application_status",
             "work_status",
+            "extend_date",
         ]
 
     def get_application_status(self, obj):
@@ -60,6 +62,11 @@ class ProjectListSerializer(serializers.ModelSerializer):
     def get_end_date(self, obj):
         return obj.end_date.strftime("%d %b %Y")
 
+    def get_extend_date(self, obj):
+        return (
+            obj.extend_date.strftime("%d %b %Y") if obj.extend_date is not None else ""
+        )
+
     def get_project_name(self, obj):
         return obj.name
 
@@ -68,6 +75,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     start_date = serializers.DateTimeField(format="%Y-%m-%dT%H:%M:%S")
     end_date = serializers.DateTimeField(format="%Y-%m-%dT%H:%M:%S")
+    extend_date = serializers.DateTimeField(format="%Y-%m-%dT%H:%M:%S")
 
     class Meta:
         model = Project

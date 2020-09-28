@@ -181,9 +181,11 @@ class ProjectAdmin(admin.ModelAdmin):
         "company",
         "contractor",
         "start_date",
-        "start_time",
+        # "start_time",
         "end_date",
-        "end_time",
+        # "end_time",
+        "extend_date",
+        "status",
     )
 
 

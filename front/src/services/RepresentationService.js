@@ -80,13 +80,15 @@ class RepresentationService {
               sorter: false,
               filter: false
             });
-            additional === true ?
+            if (additional === true) {
               dispatch(this.populateAdditionalEntityTable(entityTableInfo))
-              :
+              return Promise.resolve("Success: List received!")
+            }
+            else {
               dispatch(this.populateEntityTable(entityTableInfo));
+              return Promise.resolve("Success: List received!")
+            }
           }
-        }).catch(function (error) {
-          console.error(error);
         })
     }
   }

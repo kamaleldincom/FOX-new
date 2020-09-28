@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { FoxApiService } from '../../services'
 import { getProjectList } from '../../actions'
 import { CDropdown, CDropdownToggle, CDropdownItem, CDropdownMenu } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+import { ExtendModal } from '../modals'
 
 
 const foxApi = new FoxApiService();
@@ -16,38 +17,65 @@ const choices = [
 ]
 
 
-const handleClick = async ({ value, props }, event) => {
-  await foxApi.patchEntityOf("projects", props.item.id, { status: value })
-    .then(() => {
-      props.getProjectList();
+class WorkStatusDropdown extends Component {
+
+  state = {
+    modal: false
+  }
+
+  handleClick = async (value, event) => {
+    if (value === "Extended") {
+      this.setModalVisibility()
+    } else {
+      await foxApi.patchEntityOf("projects", this.props.item.id, { status: value })
+        .then(() => {
+          this.props.getProjectList();
+        })
+    }
+  }
+
+  setModalVisibility = () => {
+    this.setState({
+      modal: !this.state.modal
     })
-}
+  }
 
-const WorkStatusDropdown = props => {
-  return (
-    props.role === "CliAdm" && props.item.work_status !== "Application processing" ?
-      <CDropdown >
-        <CDropdownToggle className="project-table-toggle">
-          <CIcon
-            style={{ margin: "0" }}
-            className="table-dropdown-icon"
-            name={'cilSettings'} />
-        </CDropdownToggle>
-        <CDropdownMenu className="p-0 foxtable-dropdown-menu" placement="bottom-end">
-          {choices.map((choice, idx) => {
-            const [value, name] = Object.entries(choice)[0]
-            return <CDropdownItem
-              key={idx}
-              value={value}
-              onClick={event => handleClick({ value, props }, event)}
-            >{name}</CDropdownItem>
-          })}
+  render = () => {
+    const { modal } = this.state
+    return (
+      this.props.role === "CliAdm" && this.props.item.work_status !== "Application processing" ?
+        <React.Fragment>
+          <CDropdown >
+            <CDropdownToggle className="project-table-toggle">
+              <CIcon
+                style={{ margin: "0" }}
+                className="table-dropdown-icon"
+                name={'cilSettings'} />
+            </CDropdownToggle>
+            <CDropdownMenu className="p-0 foxtable-dropdown-menu" placement="bottom-end">
+              {choices.map((choice, idx) => {
+                const [value, name] = Object.entries(choice)[0]
+                return <CDropdownItem
+                  key={idx}
+                  value={value}
+                  onClick={event => this.handleClick(value, event)}
+                >{name}</CDropdownItem>
+              })}
 
-        </CDropdownMenu>
-      </CDropdown > : null
+            </CDropdownMenu>
+          </CDropdown >
+          <ExtendModal
+            show={modal}
+            setModalVisibility={this.setModalVisibility}
+            projectId={this.props.item.id}
+            {...this.props}
+          />
+        </React.Fragment>
 
+        : null
+    )
+  }
 
-  )
 }
 
 const mapStateToProps = state => ({

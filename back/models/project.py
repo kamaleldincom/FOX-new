@@ -17,9 +17,9 @@ class Project(models.Model):
     description = models.TextField()
     location = models.CharField(max_length=255, default="Whole facility")
     start_date = models.DateTimeField(null=True)
-    start_time = models.TimeField(null=True)
     end_date = models.DateTimeField(null=True)
-    end_time = models.TimeField(null=True)
+    extend_date = models.DateTimeField(null=True)
+
     status = models.CharField(
         max_length=16, choices=Status.choices, default=Status.created
     )

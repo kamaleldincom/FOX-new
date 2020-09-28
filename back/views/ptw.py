@@ -20,6 +20,12 @@ def ptw(request, pk):
         "start_time": project.start_date.time(),
         "end_date": project.end_date.date(),
         "end_time": project.end_date.time(),
+        "extend_date": project.extend_date.date()
+        if project.extend_date is not None
+        else "",
+        "extend_time": project.extend_date.time()
+        if project.extend_date is not None
+        else "",
         "description": project.description,
         "work_at_height": project.work_at_height,
         "lifting_work": project.lifting_work,
@@ -32,7 +38,10 @@ def ptw(request, pk):
         "contractor": project.contractor.username,
         "contractor_company": project.contractor.related_company,
         "workers": workers,
-        "responsible_person": project.responsible_person.name if project.responsible_person else "",
+        "responsible_person": project.responsible_person.name
+        if project.responsible_person
+        else "",
         "submitted": submitted,
+        "status": project.status,
     }
     return render(request, "back/ptw.html", context=context)

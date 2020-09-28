@@ -2207,12 +2207,14 @@
                 </td>
                 <td class="c120" colspan="4" rowspan="1">
                     <p class="c22"><span class="c2">From</span></p>
-                    <p class="c22"><span class="c119">Date: {{start_date}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    <p class="c22"><span class="c119">Date: {{start_date}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            &nbsp; &nbsp;
                             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Time: {{start_time}}</span></p>
                 </td>
                 <td class="c135" colspan="6" rowspan="1">
                     <p class="c22"><span class="c2">To</span></p>
-                    <p class="c22"><span class="c2">Date: {{end_date}}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    <p class="c22"><span class="c2">Date: {{end_date}}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            &nbsp; &nbsp;
                             &nbsp; &nbsp; &nbsp; &nbsp; Time: {{end_time}}</span></p>
                 </td>
             </tr>
@@ -2222,82 +2224,81 @@
                 </td>
                 <td class="c68" colspan="3" rowspan="1">
                     <p class="c22"><span class="c38">
-                        {% if work_at_height %}
-                        &#9746;
-                        {% else %}
-                        &#9744;
-                        {% endif %}
-                    </span><span
-                            class="c11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Work at height</span></p>
+                            {% if work_at_height %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Work at height</span>
+                    </p>
                 </td>
                 <td class="c96" colspan="1" rowspan="1">
                     <p class="c22"><span class="c38">
-                        {% if lifting_work %}
-                        &#9746;
-                        {% else %}
-                        &#9744;
-                        {% endif %}
-                    </span><span class="c11">&nbsp;Lifting work</span></p>
+                            {% if lifting_work %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c11">&nbsp;Lifting work</span></p>
                 </td>
                 <td class="c93" colspan="5" rowspan="1">
                     <p class="c22"><span class="c38">
-                        {% if confined_space %}
-                        &#9746;
-                        {% else %}
-                        &#9744;
-                        {% endif %}
-                    </span><span
-                            class="c11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Confined space</span></p>
+                            {% if confined_space %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Confined
+                            space</span></p>
                 </td>
                 <td class="c81" colspan="1" rowspan="1">
                     <p class="c22"><span class="c38">
-                        {% if hot_work %}
-                        &#9746;
-                        {% else %}
-                        &#9744;
-                        {% endif %}
-                    </span><span class="c11">&nbsp;Hot work</span></p>
+                            {% if hot_work %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c11">&nbsp;Hot work</span></p>
                 </td>
             </tr>
             <tr class="c49">
                 <td class="c68" colspan="3" rowspan="1">
                     <p class="c22"><span class="c38">
-                        {% if chemical_handling %}
-                        &#9746;
-                        {% else %}
-                        &#9744;
-                        {% endif %}
-                    </span><span
-                            class="c11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chemical handling</span></p>
+                            {% if chemical_handling %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chemical
+                            handling</span></p>
                 </td>
                 <td class="c96" colspan="1" rowspan="1">
                     <p class="c22"><span class="c38">
-                        {% if work_alone %}
-                        &#9746;
-                        {% else %}
-                        &#9744;
-                        {% endif %}
-                    </span><span class="c11">&nbsp;Work alone</span></p>
+                            {% if work_alone %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c11">&nbsp;Work alone</span></p>
                 </td>
                 <td class="c93" colspan="5" rowspan="1">
                     <p class="c22"><span class="c38">
-                        {% if work_at_sensitive_area %}
-                        &#9746;
-                        {% else %}
-                        &#9744;
-                        {% endif %}
-                    </span><span
-                            class="c11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Work at sensitive area</span></p>
+                            {% if work_at_sensitive_area %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Work at sensitive
+                            area</span></p>
                 </td>
                 <td class="c81" colspan="1" rowspan="1">
                     <p class="c22"><span class="c38">
-                        {% if cold_work %}
-                        &#9746;
-                        {% else %}
-                        &#9744;
-                        {% endif %}
-                    </span><span
-                            class="c11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cold work</span></p>
+                            {% if cold_work %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}
+                        </span><span class="c11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cold work</span></p>
                 </td>
             </tr>
             <tr class="c52">
@@ -2419,7 +2420,12 @@
             </tr>
             <tr class="c23">
                 <td class="c50 c10" colspan="2" rowspan="4">
-                    <p class="c22"><span class="c121">&#9744;</span><span class="c2">&nbsp;Closed</span></p>
+                    <p class="c22"><span class="c121">
+                            {% if status == "Closed" %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}</span><span class="c2">&nbsp;Closed</span></p>
                 </td>
                 <td class="c54 c10" colspan="10" rowspan="1">
                     <p class="c22"><span class="c2">All work has been completed, tools and materials have been withdrawn
@@ -2428,10 +2434,10 @@
             </tr>
             <tr class="c23">
                 <td class="c55 c130" colspan="5" rowspan="1">
-                    <p class="c29"><span class="c11">Issued by</span></p>
+                    <p class="c29"><span class="c132">Issued by</span></p>
                 </td>
                 <td class="c55 c74" colspan="5" rowspan="1">
-                    <p class="c29"><span class="c11">Acknowledged by</span></p>
+                    <p class="c29"><span class="c132">Acknowledged by</span></p>
                 </td>
             </tr>
             <tr class="c23">
@@ -2459,7 +2465,11 @@
             </tr>
             <tr class="c23">
                 <td class="c50 c10" colspan="2" rowspan="5">
-                    <p class="c22"><span class="c121">&#9744;</span><span class="c2">&nbsp;Extended</span></p>
+                    <p class="c22"><span class="c121">{% if extend_date %}
+                            &#9746;
+                            {% else %}
+                            &#9744;
+                            {% endif %}</span><span class="c2">&nbsp;Extended</span></p>
                 </td>
                 <td class="c10 c54" colspan="10" rowspan="1">
                     <p class="c22"><span class="c2">I certify that this permit is extended.</span></p>
@@ -2470,15 +2480,21 @@
                     <p class="c22"><span class="c11">From</span></p>
                 </td>
                 <td class="c74 c55" colspan="5" rowspan="1">
-                    <p class="c29"><span class="c11">Authorized by</span></p>
+                    <p class="c29"><span class="c132">Authorized by</span></p>
                 </td>
             </tr>
             <tr class="c23">
                 <td class="c99" colspan="2" rowspan="1">
-                    <p class="c22"><span class="c11">Date</span></p>
+                    <p class="c22"><span class="c11">Date &nbsp; {% if extend_date %}
+                            {{end_date}}
+                            {% else %}
+                            {% endif %}</span></p>
                 </td>
                 <td class="c75" colspan="3" rowspan="1">
-                    <p class="c22"><span class="c11">Time</span></p>
+                    <p class="c22"><span class="c11">Time {% if extend_date %}
+                            {{end_time}}
+                            {% else %}
+                            {% endif %}</span></p>
                 </td>
                 <td class="c60" colspan="3" rowspan="2">
                     <p class="c22"><span class="c11">Name</span></p>
@@ -2497,10 +2513,10 @@
             </tr>
             <tr class="c23">
                 <td class="c99" colspan="2" rowspan="1">
-                    <p class="c22"><span class="c11">Date</span></p>
+                    <p class="c22"><span class="c11">Date &nbsp; {{extend_date}}</span></p>
                 </td>
                 <td class="c75" colspan="3" rowspan="1">
-                    <p class="c22"><span class="c11">Time</span></p>
+                    <p class="c22"><span class="c11">Time &nbsp; {{extend_time}}</span></p>
                 </td>
                 <td class="c60" colspan="3" rowspan="1">
                     <p class="c22"><span class="c30">Date</span></p>
@@ -2517,7 +2533,7 @@
             </tr>
             <tr class="c23">
                 <td class="c35" colspan="10" rowspan="1">
-                    <p class="c22"><span class="c30">Authorized by</span></p>
+                    <p class="c22"><span class="c132">Authorized by</span></p>
                 </td>
             </tr>
             <tr class="c23">

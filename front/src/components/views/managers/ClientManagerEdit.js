@@ -87,7 +87,7 @@ class ClientManagerEdit extends Component {
         <CCol>
           <CCard>
             <CCardHeader>
-              <CCardTitle>Mananger details</CCardTitle>
+              <CCardTitle>Manager details</CCardTitle>
             </CCardHeader>
             <CCardBody>
               <CForm

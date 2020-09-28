@@ -50,15 +50,15 @@ class FoxTableWithDeleteOption extends Component {
       .then(() => {
         this.props.updateList(this.props.role)
         this.setModalVisibility()
-      },
-        (error) => {
-          console.error(error);
-          this.setState({
-            error: 'Could not delete entity!' +
-              ' Please check your input and try again!' +
-              ' In case this problem repeats, please contact your administrator!'
-          })
+      })
+      .catch((error) => {
+        console.error(error);
+        this.setState({
+          error: 'Could not delete entity!' +
+            ' Please check your input and try again!' +
+            ' In case this problem repeats, please contact your administrator!'
         })
+      })
     console.log(`delete entity [${entity}] ${id}`);
   }
 
@@ -69,7 +69,6 @@ class FoxTableWithDeleteOption extends Component {
   render = () => {
     const linkName = this.props.fields ? this.props.fields[0] : "username"
     const { delete_id, modal } = this.state
-    console.log("rendered");
     return (
       <CRow>
         <CCol>
