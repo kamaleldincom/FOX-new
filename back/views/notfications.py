@@ -1,3 +1,0 @@
-from rest_framework import generics
-from back.models import Notification
-from back.serializers import NotificationListSerializer, NotificationUpdateSerializer

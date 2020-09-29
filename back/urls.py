@@ -73,4 +73,6 @@ urlpatterns = [
     path("safety_templates/<int:pk>/", views.CompanyDocUpload.as_view()),
     path("download_template/<str:doctype>/", views.CompanyDocDownload.as_view()),
     path("activities/", views.ActivityList.as_view()),
+    path("notifications/", views.NotificationList.as_view()),
+    path("notifications/:pk/", views.NotificationUpdate.as_view()),
 ]
