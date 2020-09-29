@@ -66,7 +66,6 @@ class WorkerCreate extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    console.log("you are here");
     if (this.state.position_in_company === -1) {
       this.setState({
         error: 'Worker position in company was not selected! Please, choose position form the list'

@@ -10,7 +10,6 @@ import {
 } from "@coreui/react";
 
 const UserDetailCard = props => {
-  console.log(props);
   return (
     <CCard>
       <CCardHeader className="d-flex justify-content-between">

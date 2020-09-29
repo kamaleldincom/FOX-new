@@ -44,7 +44,7 @@ class ExtendModal extends Component {
           error: 'Could not extend project!' +
             ' Please check your input and try again!' +
             ' In case this problem repeats, please contact your administrator!'
-        }, console.log(this.state))
+        })
       })
   }
 

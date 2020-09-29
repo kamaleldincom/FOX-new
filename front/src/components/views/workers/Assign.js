@@ -27,7 +27,7 @@ class WorkerAssign extends Component {
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
-    }, () => console.log(this.state));
+    });
   }
 
   handleCheck = event => {
@@ -46,7 +46,6 @@ class WorkerAssign extends Component {
     const { workers, responsible_person } = this.state;
     let requestData = { workers: workers };
     requestData = { responsible_person, ...requestData }
-    console.log(requestData);
     await foxApi.patchEntityOf("projects", this.props.match.params.id, requestData)
       .then(() => {
         this.props.history.goBack()

@@ -68,7 +68,7 @@ const FoxHeader = (props) => {
             </CHeaderNav>
 
             <CHeaderNav className="px-3">
-                <FoxHeaderDropdownNotif />
+                {/* <FoxHeaderDropdownNotif /> */}
                 {/* <FoxHeaderDropdownTasks /> */}
                 <FoxHeaderDropdownMssg />
                 <FoxHeaderDropdown />

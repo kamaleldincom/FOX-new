@@ -18,7 +18,6 @@ class DocumentList extends Component {
   componentDidMount = async () => {
     await this.props.getProfileFetch()
       .then(() => {
-        console.log(this.props.role);
         this.props.getDocumentList({
           project_id: this.props.match.params.id,
         }, false, this.props.role);

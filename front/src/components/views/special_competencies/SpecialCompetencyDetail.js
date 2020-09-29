@@ -89,7 +89,6 @@ class WorkerDetail extends Component {
               ' In case this problem repeats, please contact your administrator!'
           })
         })
-    console.log(`delete special competency ${this.props.match.params.competency_id}`);
   }
 
   downloadFile = async (e) => {

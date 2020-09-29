@@ -74,5 +74,5 @@ urlpatterns = [
     path("download_template/<str:doctype>/", views.CompanyDocDownload.as_view()),
     path("activities/", views.ActivityList.as_view()),
     path("notifications/", views.NotificationList.as_view()),
-    path("notifications/:pk/", views.NotificationUpdate.as_view()),
+    path("notifications/<int:pk>/", views.NotificationUpdate.as_view()),
 ]

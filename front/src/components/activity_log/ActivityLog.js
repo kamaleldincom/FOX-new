@@ -30,7 +30,6 @@ class ActivityLog extends Component {
 
   render = () => {
     const { items, show } = this.state;
-    console.log(this.state);
     return (
       <CCard>
         <CCardHeader>

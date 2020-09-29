@@ -16,6 +16,7 @@ import { getContractorList } from './contractors'
 import { getWorkerList } from './workers'
 import { getApprovalList } from './approvals'
 import { getSpecialCompetencyList } from './special_competencies'
+import { getNotifications, readNotification } from './notifications'
 
 const userLoggedIn = () => {
     return {
@@ -40,5 +41,7 @@ export {
     getWorkerList,
     setProjectId,
     getApprovalList,
-    getSpecialCompetencyList
+    getSpecialCompetencyList,
+    getNotifications,
+    readNotification
 };

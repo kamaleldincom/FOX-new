@@ -56,7 +56,6 @@ class DocumentDetail extends Component {
         link.click();
         link.parentNode.removeChild(link);
       })
-      .then(() => { console.log('file downloaded') })
       .catch((error) => {
         console.error('File download failed!');
         console.error(error)
@@ -77,7 +76,6 @@ class DocumentDetail extends Component {
     Object.entries(this.requestData).forEach(([key, value]) => {
       this.formData.append(key, value);
     })
-    this.formData.entries().forEach(entry => console.log(entry))
     await foxApi.patchEntityWithFiles('documents', this.props.match.params.doc_id, this.formData).then(() => {
       this.props.history.goBack()
     },

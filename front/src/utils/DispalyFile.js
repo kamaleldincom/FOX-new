@@ -47,7 +47,6 @@ class DisplayFile extends Component {
       });
   }
   render = () => {
-    console.log(this.state);
     return (
       this.state.loaded ?
         <Fragment>

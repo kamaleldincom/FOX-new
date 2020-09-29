@@ -30,7 +30,6 @@ class CompetencyReview extends Component {
         link.click();
         link.parentNode.removeChild(link);
       })
-      .then(() => { console.log('file downloaded') })
       .catch((error) => {
         console.error('File download failed!');
         console.error(error)

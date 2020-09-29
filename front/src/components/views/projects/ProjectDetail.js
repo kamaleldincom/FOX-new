@@ -93,7 +93,6 @@ class ProjectDetail extends Component {
 
   render = () => {
     const options = this.props.options ? this.props.options.map(option => { return { value: option.id, label: option.username } }) : null
-    console.log(this.state);
     return (
       <CRow>
         <CCol>{this.props.role === 'CliAdm' ?

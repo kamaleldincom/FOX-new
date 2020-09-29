@@ -43,7 +43,6 @@ class ProjectUploadDocs extends Component {
           link.click();
           link.parentNode.removeChild(link);
         })
-        .then(() => { console.log('file downloaded') })
         .catch((error) => {
           console.error('File download failed!');
           console.error(error)
@@ -52,7 +51,6 @@ class ProjectUploadDocs extends Component {
   }
 
   handleFileUpload = event => {
-    console.log("initila state", this.state);
     const { upload_files } = this.state;
     upload_files[event.target.name] = event.target.files[0];
     this.setState({
@@ -63,7 +61,6 @@ class ProjectUploadDocs extends Component {
   handleSubmit = async event => {
     event.preventDefault();
     const { upload_files } = this.state;
-    console.log(upload_files);
 
     Object.entries(upload_files).forEach(([key, value]) => {
 

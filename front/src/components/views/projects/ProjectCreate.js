@@ -53,7 +53,6 @@ class ProjectCreate extends Component {
   }
 
   handleCheck = event => {
-    console.log(event);
     this.setState({
       [event.target.name]: event.target.checked
     })

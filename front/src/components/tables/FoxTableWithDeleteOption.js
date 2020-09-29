@@ -59,7 +59,6 @@ class FoxTableWithDeleteOption extends Component {
             ' In case this problem repeats, please contact your administrator!'
         })
       })
-    console.log(`delete entity [${entity}] ${id}`);
   }
 
   alertOnClick = (id, e) => {

@@ -26,6 +26,7 @@ env = environ.Env(
         str,
         "http://127.0.0.1:8000/#/register?token={}&username={}",
     ),
+    MAX_NOTIFICATION_DISPLAY=(int, 5),
 )
 environ.Env.read_env()
 
@@ -195,3 +196,5 @@ JWT_AUTH = {
     "JWT_AUTH_HEADER_PREFIX": "JWT",
     "JWT_AUTH_COOKIE": None,
 }
+
+MAX_NOTIFICATION_DISPLAY = env("MAX_NOTIFICATION_DISPLAY")

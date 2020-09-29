@@ -56,14 +56,9 @@ class ContractorEdit extends Component {
   }
 
   componentDidMount = async () => {
-    console.log(this.props.match);
     await this.props.getProfileFetch()
       .then(() => foxApi.getDetailsOf('contractors', this.props.match.params.id))
       .then((data) => this.setState({ ...data }))
-  }
-
-  componentWillUnmount = () => {
-    console.log("will unmount");
   }
 
   render = () => {

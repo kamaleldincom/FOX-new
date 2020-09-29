@@ -10,40 +10,47 @@ const initialState = {
     headerNav: [],
     entityListTable: {},
     additionalEntityListTable: {},
-    projectId: ""
+    projectId: "",
+    notifications: []
 }
 
 const changeState = (state = initialState, { type, ...rest }) => {
     switch (type) {
         case 'set':
-            return { ...state, ...rest }
+            return { ...state, ...rest };
         case 'ALLOW_REGISTER':
-            return { ...state, ...rest }
+            return { ...state, ...rest };
         case 'FORBID_REGISTER':
-            return { ...state, ...rest }
+            return { ...state, ...rest };
         case 'REGISTER_USER':
-            return { ...state, ...rest }
+            return { ...state, ...rest };
         case 'LOGIN_USER':
-            return { ...state, ...rest }
+            return { ...state, ...rest };
         case 'LOGOUT_USER':
-            return { ...state, currentUser: {} }
+            return { ...state, currentUser: {} };
         case 'LOGIN_ERROR':
-            return { ...state, ...rest }
+            return { ...state, ...rest };
         case 'REGISTER_ERROR':
-            return { ...state, ...rest }
+            return { ...state, ...rest };
         case 'INITIATE_DASHBOARD':
-            return { ...state, ...rest }
+            return { ...state, ...rest };
         case 'POPULATE_ENTITY_TABLE':
-            return { ...state, ...rest }
+            return { ...state, ...rest };
         case 'CLEAR_ENTITY_TABLE':
-            return { ...state, entityListTable: {} }
+            return { ...state, entityListTable: {} };
         case 'POPULATE_ADDITIONAL_ENTITY_TABLE':
-            return { ...state, ...rest }
+            return { ...state, ...rest };
         case 'SET_PROJECT_ID':
-            return { ...state, ...rest }
+            return { ...state, ...rest };
+        case 'REFRESH_NOTIFICATION_LIST':
+            return { ...state, ...rest };
+        case 'READ_NOTIFICATION':
+            const newNotifications = [...state.notifications]
+            newNotifications[newNotifications.findIndex(element => element.id === rest.notification.id)] = rest.notification;
+            return { ...state, notifications: newNotifications };
 
         default:
-            return state
+            return state;
     }
 }
 

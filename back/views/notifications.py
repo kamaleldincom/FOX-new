@@ -1,6 +1,9 @@
 from rest_framework import generics
 from back.models import Notification
 from back.serializers import NotificationListSerializer, NotificationUpdateSerializer
+from django.conf import settings
+
+MAX_NOTIFICATION_DISPLAY = settings.MAX_NOTIFICATION_DISPLAY
 
 
 class NotificationList(generics.ListAPIView):
@@ -9,10 +12,11 @@ class NotificationList(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         notifications = Notification.objects.filter(receiver=user).order_by("-pk")
-        if notifications.count(unread=True) > 5:
+        if notifications.filter(unread=True).count() >= MAX_NOTIFICATION_DISPLAY:
             return notifications.filter(unread=True)
         else:
-            return notifications[:5]
+
+            return notifications[:MAX_NOTIFICATION_DISPLAY]
 
 
 class NotificationUpdate(generics.UpdateAPIView):
@@ -20,4 +24,4 @@ class NotificationUpdate(generics.UpdateAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Notification.objects.filter(receiver=user, unread=True)
+        return Notification.objects.filter(receiver=user)

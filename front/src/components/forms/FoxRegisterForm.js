@@ -37,7 +37,6 @@ class FoxRegisterForm extends Component {
   }
 
   render() {
-    console.log(this.props.registerError);
     const { username, password, password2 } = this.state
     return (
       <CRow alignHorizontal="center">

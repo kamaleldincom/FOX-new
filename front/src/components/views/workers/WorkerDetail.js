@@ -110,7 +110,6 @@ class WorkerDetail extends Component {
               ' In case this problem repeats, please contact your administrator!'
           })
         })
-    console.log(`delete worker ${this.props.match.params.id}`);
   }
 
   downloadFile = async (e) => {
@@ -130,7 +129,6 @@ class WorkerDetail extends Component {
             link.click();
             link.parentNode.removeChild(link);
           })
-          .then(() => { console.log('file downloaded') })
           .catch((error) => {
             console.error('File download failed!');
             console.error(error)
