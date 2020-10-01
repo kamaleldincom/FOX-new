@@ -8,6 +8,8 @@ $theme-colors: (
   "fox-pale": #feecec
 );
 
+
+
 .project-table-toggle{
         padding: 0 0 0 5px;
 }
@@ -63,17 +65,39 @@ $theme-colors: (
 }
 
 .c-sidebar{
-    background: theme-color("fox-base");
+    background: #f2f2f3;
+}
+
+.c-sidebar .c-sidebar-brand{
+  background:#de0048;
+}
+
+.c-sidebar .c-sidebar-nav-title{
+  color:#a9a9a9;
+}
+
+
+.c-sidebar .c-sidebar-nav-link, .c-sidebar .c-sidebar-nav-dropdown-toggle{
+  color:#a9a9a9;
+}
+
+.c-sidebar .c-sidebar-nav-link:hover, .c-sidebar .c-sidebar-nav-dropdown-toggle:hover{
+  background:#a9a9a9;
+}
+
+.c-sidebar .c-sidebar-nav-link.c-active, .c-sidebar .c-active.c-sidebar-nav-dropdown-toggle{
+  color: #f2f2f3;
+  background:#de0048;
 }
 
 .c-header{
-    background: theme-color("fox-base");
+  background-image: linear-gradient(to right, #de0048, #fe1c66, #fc3652, #fa5d36);
 
 }
 
 .c-subheader{
-  background: theme-color("fox-light");
-  border-top: 1px solid rgba(0, 0, 21, 0.5);;
+  // background: theme-color("fox-light");
+  border-top: 1px solid rgba(0, 0, 21, 0.5);
 }
 
 .c-header .c-header-nav .c-header-nav-link, .c-header .c-header-nav .c-header-nav-btn{
