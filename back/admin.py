@@ -128,10 +128,7 @@ class ClientAdminInline(admin.StackedInline):
                     " The user will be emailed a link allowing them to login to"
                     " the site and set their password."
                 ),
-                "fields": (
-                    "email",
-                    "username",
-                ),
+                "fields": ("email", "username", "name"),
             },
         ),
         (
@@ -181,9 +178,7 @@ class ProjectAdmin(admin.ModelAdmin):
         "company",
         "contractor",
         "start_date",
-        # "start_time",
         "end_date",
-        # "end_time",
         "extend_date",
         "status",
     )
