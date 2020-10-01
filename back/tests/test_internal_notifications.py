@@ -5,7 +5,6 @@ from back.models import (
     Company,
     ClientAdmin,
     ClientManager,
-    Message,
     Notification,
     Project,
 )
@@ -66,7 +65,9 @@ class InternalNotificationsTestCase(APITestCase):
     def test_emit(self):
         message_text = "Test text"
         receivers = ClientManager.objects.all()
-        notification_service = InternalNotificationService(message_text, receivers)
+        notification_service = InternalNotificationService(
+            message_text, receivers, forward_link="https://www.google.com/"
+        )
         notification_service.emit()
         notifications = Notification.objects.all()
         self.assertEqual(notifications.count(), 2)

@@ -42,7 +42,7 @@ class TheHeaderDropdownMssg extends Component {
         <CDropdownMenu className="pt-0" placement="bottom-end">
           {this.props.notifications.map(notification => {
             return (
-              <CDropdownItem key={notification.id}><NotificationMessage notification={notification} /></CDropdownItem>
+              <CDropdownItem key={notification.id} href={notification.forward_link}><NotificationMessage notification={notification} /></CDropdownItem>
             )
           })}
         </CDropdownMenu>

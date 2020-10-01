@@ -12,10 +12,17 @@ class NotificationList(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         notifications = Notification.objects.filter(receiver=user).order_by("-pk")
-        if notifications.filter(unread=True).count() >= MAX_NOTIFICATION_DISPLAY:
+        unread_notifications_count = notifications.filter(unread=True).count()
+        if unread_notifications_count >= MAX_NOTIFICATION_DISPLAY:
             return notifications.filter(unread=True)
         else:
-
+            unread_notifications = notifications.filter(unread="True")
+            extra_notifications = notifications.filter(unread=False)[
+                : (MAX_NOTIFICATION_DISPLAY - unread_notifications_count)
+            ]
+            return unread_notifications.union(extra_notifications).order_by(
+                "-unread", "-pk"
+            )
             return notifications[:MAX_NOTIFICATION_DISPLAY]
 
 
