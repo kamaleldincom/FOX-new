@@ -40,11 +40,19 @@ class TheHeaderDropdownMssg extends Component {
           <NotificationCountBadge items={this.props.notifications} />
         </CDropdownToggle>
         <CDropdownMenu className="pt-0" placement="bottom-end">
-          {this.props.notifications.map(notification => {
-            return (
-              <CDropdownItem key={notification.id} href={notification.forward_link}><NotificationMessage notification={notification} /></CDropdownItem>
-            )
-          })}
+          {this.props.notifications.length > 0 ?
+            this.props.notifications.map(notification => {
+              return (
+                <CDropdownItem key={notification.id} href={notification.forward_link}><NotificationMessage notification={notification} /></CDropdownItem>
+              )
+            })
+            :
+            <CDropdownItem href="#">
+              <div className="text-muted text-truncate">
+                You have no messages yet.
+              </div>
+            </CDropdownItem>
+          }
         </CDropdownMenu>
       </CDropdown>
     )
