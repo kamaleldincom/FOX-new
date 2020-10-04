@@ -37,7 +37,6 @@ class App extends Component {
                 return <Register
                   username={queryString.parse(props.location.search).username}
                   token={queryString.parse(props.location.search).token}
-                  username={queryString.parse(props.location.search).username}
                   {...props}
                 />
               }
