@@ -12,13 +12,6 @@ import { userRegisterValidationFetch } from "../../actions"
 import { AuthContainer } from '../containers'
 
 
-
-// const loading = (
-//     <div className="pt-3 text-center">
-//         <CSpinner size="sm" variant="grow" style={{ width: '4rem', height: '4rem' }} />
-//     </div>
-// )
-
 class Register extends Component {
 
     componentDidMount = () => {
@@ -27,11 +20,9 @@ class Register extends Component {
 
     render() {
         return (!this.props.registerAllowed ? <Redirect to="/login" /> :
-            // <Suspense fallback={loading}>
             <AuthContainer>
                 <FoxRegisterForm username={this.props.username} />
             </AuthContainer>
-            // </Suspense>
         )
     }
 
