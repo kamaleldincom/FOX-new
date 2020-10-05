@@ -46,21 +46,23 @@ class CompetencyReview extends Component {
   }
 
   render = () => {
+    const { name, issued_by } = this.state
     return (
-      <CListGroup flush>
-        <CListGroupItem>
-          <p><strong>Competency scan: </strong></p>
+      // <CListGroup flush>
+      <CListGroupItem>
+        <div>
+          <p><strong>Competency name: </strong>{name}</p>
           <CButton
             variant="outline"
             color="success"
             id="file"
             onClick={this.downloadFile}
-          >Download</CButton>
-        </CListGroupItem>
-        <CListGroupItem>
-          <p><strong>Issued_by: </strong>{this.state.issued_by}</p>
-        </CListGroupItem>
-      </CListGroup>
+          >Download scan</CButton>
+        </div>
+        {/* <p><strong>Competency scan: </strong></p> */}
+        <p><strong>Issued_by: </strong>{issued_by}</p>
+      </CListGroupItem>
+      // {/* </CListGroup> */ }
     )
   }
 }

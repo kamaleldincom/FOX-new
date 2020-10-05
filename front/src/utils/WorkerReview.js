@@ -13,12 +13,6 @@ import SpecialCompetencyReviewList from './SpecialCompetencyReviewList'
 
 const foxApi = new FoxApiService();
 
-const loading = (
-  <div className="pt-3 text-center">
-    <CSpinner size="sm" variant="grow" style={{ width: '4rem', height: '4rem' }} />
-  </div>
-)
-
 class WorkerReview extends Component {
 
   state = {
@@ -77,81 +71,78 @@ class WorkerReview extends Component {
 
   render = () => {
     return (
-      <Suspense fallback={loading}>
-        <CListGroup flush>
-          <CListGroupItem>
-            <p><strong>Birthday: </strong>{this.state.birthday}</p>
-          </CListGroupItem>
-          <CListGroupItem>
-            <p><strong>Card number ID: </strong>{this.state.card_number_id}</p>
-          </CListGroupItem>
-          <CListGroupItem>
-            <p><strong>License Number: </strong>{this.state.license_number}</p>
-            <CButton
-              variant="outline"
-              color="success"
-              id="license_scan"
-              name="license_scan"
-              value={this.state.license_scan}
-              onClick={this.downloadFile}
-            >Download</CButton>
-          </CListGroupItem>
-          <CListGroupItem>
-            <p><strong>Passport: </strong>{this.state.passport}</p>
-            <CButton
-              variant="outline"
-              color="success"
-              id="passport_scan"
-              name="passport_scan"
-              value={this.state.passport_scan}
-              onClick={this.downloadFile}
-            >Download</CButton>
-          </CListGroupItem>
-          <CListGroupItem>
-            <p><strong>Safety Green Card: </strong>{this.state.safety_green_card}</p>
-            <CButton
-              variant="outline"
-              color="success"
-              id="safety_green_card_scan"
-              name="safety_green_card_scan"
-              value={this.state.safety_green_card_scan}
-              onClick={this.downloadFile}
-            >Download</CButton>
-          </CListGroupItem>
-          <CListGroupItem>
-            <p><strong>Special competencies:</strong></p>
-            <SpecialCompetencyReviewList workerId={this.props.workerId} />
-          </CListGroupItem>
-          <CListGroupItem>
-            <p><strong>Registration number: </strong>{this.state.registration_number}</p>
-          </CListGroupItem>
-          <CListGroupItem>
-            <p><strong>Position in Company: </strong>{this.state.position_in_company}</p>
-          </CListGroupItem>
-          <CListGroupItem>
-            <p><strong>Safety quiz answer: </strong></p>
-            <CButton
-              variant="outline"
-              color="success"
-              id="safety_quiz_answer"
-              name="safety_quiz_answer"
-              value={this.state.safety_quiz_answer}
-              onClick={this.downloadFile}
-            >Download</CButton>
-          </CListGroupItem>
-          <CListGroupItem>
-            <p><strong>Personal declaration: </strong></p>
-            <CButton
-              variant="outline"
-              color="success"
-              id="personal_declaration"
-              name="personal_declaration"
-              value={this.state.personal_declaration}
-              onClick={this.downloadFile}
-            >Download</CButton>
-          </CListGroupItem>
-        </CListGroup>
-      </Suspense>
+      <CListGroup flush>
+        <CListGroupItem>
+          <p><strong>Birthday: </strong>{this.state.birthday}</p>
+        </CListGroupItem>
+        <CListGroupItem>
+          <p><strong>Card number ID: </strong>{this.state.card_number_id}</p>
+        </CListGroupItem>
+        <CListGroupItem>
+          <p><strong>License Number: </strong>{this.state.license_number}</p>
+          <CButton
+            variant="outline"
+            color="success"
+            id="license_scan"
+            name="license_scan"
+            value={this.state.license_scan}
+            onClick={this.downloadFile}
+          >Download</CButton>
+        </CListGroupItem>
+        <CListGroupItem>
+          <p><strong>Passport: </strong>{this.state.passport}</p>
+          <CButton
+            variant="outline"
+            color="success"
+            id="passport_scan"
+            name="passport_scan"
+            value={this.state.passport_scan}
+            onClick={this.downloadFile}
+          >Download</CButton>
+        </CListGroupItem>
+        <CListGroupItem>
+          <p><strong>Safety Green Card: </strong>{this.state.safety_green_card}</p>
+          <CButton
+            variant="outline"
+            color="success"
+            id="safety_green_card_scan"
+            name="safety_green_card_scan"
+            value={this.state.safety_green_card_scan}
+            onClick={this.downloadFile}
+          >Download</CButton>
+        </CListGroupItem>
+        <CListGroupItem>
+          <SpecialCompetencyReviewList workerId={this.props.workerId} />
+        </CListGroupItem>
+        <CListGroupItem>
+          <p><strong>Registration number: </strong>{this.state.registration_number}</p>
+        </CListGroupItem>
+        <CListGroupItem>
+          <p><strong>Position in Company: </strong>{this.state.position_in_company}</p>
+        </CListGroupItem>
+        <CListGroupItem>
+          <p><strong>Safety quiz answer: </strong></p>
+          <CButton
+            variant="outline"
+            color="success"
+            id="safety_quiz_answer"
+            name="safety_quiz_answer"
+            value={this.state.safety_quiz_answer}
+            onClick={this.downloadFile}
+          >Download</CButton>
+        </CListGroupItem>
+        <CListGroupItem>
+          <p><strong>Personal declaration: </strong></p>
+          <CButton
+            variant="outline"
+            color="success"
+            id="personal_declaration"
+            name="personal_declaration"
+            value={this.state.personal_declaration}
+            onClick={this.downloadFile}
+          >Download</CButton>
+        </CListGroupItem>
+      </CListGroup>
     )
   }
 }

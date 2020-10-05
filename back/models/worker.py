@@ -19,7 +19,7 @@ class Worker(models.Model):
         technician = "Tech", _("Technician")
         electrician = "Electr", _("Electrician")
         flooring_installer = "FlrInst", _("Flooring Installer")
-        hvac_snstaller = "HVACInst", _("HVAC Installer")
+        hvac_installer = "HVACInst", _("HVAC Installer")
         insulation_installer = "InsInst", _("Insulation Installer")
         surveyor = "Surv", _("Surveyor")
         brick_manson = "BrcMans", _("Brick Manson")

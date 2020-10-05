@@ -4,9 +4,10 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
+from rest_framework_jwt.views import ObtainJSONWebToken
 from back.serializers import UserSerializer, UserSerializerWithToken
 from back.models import Company
-from rest_framework_jwt.views import ObtainJSONWebToken
+
 
 FoxUser = get_user_model()
 

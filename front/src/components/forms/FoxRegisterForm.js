@@ -32,7 +32,8 @@ class FoxRegisterForm extends Component {
     event.preventDefault();
     this.props.userRegisterFetch({
       password: this.state.password,
-      token: this.props.registrationToken
+      token: this.props.registrationToken,
+      is_active: true
     })
   }
 
@@ -58,7 +59,7 @@ class FoxRegisterForm extends Component {
               </CCol>
             </CRow>
             <CRow className="mt-2 mb-2">
-              <CCol sm="8" className="mx-auto">
+              <CCol className="mx-auto">
                 <CForm
                   onSubmit={this.handleSubmit}
                 >

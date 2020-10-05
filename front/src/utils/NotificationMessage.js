@@ -46,7 +46,6 @@ const checkFresh = fresh => {
 
 const NotificationMessage = props => {
   const timeStamp = calculateTimeStamp(props.notification.emitted);
-  console.log(props);
   return (
     <div className="message w-100" onClick={() => handleClick([props.notification, props.readNotification])}>
       <div className="d-flex justify-content-end">

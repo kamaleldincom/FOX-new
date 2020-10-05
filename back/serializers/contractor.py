@@ -35,4 +35,5 @@ class ContractorSerializer(serializers.ModelSerializer):
             "company_phone",
             "role",
             "related_company",
+            # "is_active",
         ]

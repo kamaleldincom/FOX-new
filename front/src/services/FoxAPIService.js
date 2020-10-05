@@ -297,5 +297,11 @@ class FoxApiService {
         const res = this.delete(url = url, data = data);
         return res
     }
+
+    resetPassword = data => {
+        let url = `${this.apiBase}password_reset/`;
+        const res = this.post(url = url, data = data);
+        return res
+    }
 }
 export default FoxApiService

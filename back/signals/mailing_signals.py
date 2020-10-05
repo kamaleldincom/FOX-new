@@ -63,10 +63,13 @@ def password_reset_token_created(
 
 def send_mail_on_creation(**kwargs):
     user = kwargs["instance"]
-    log(log.INFO, "WE TRIED TO SEND EMAIL to [%s]", user.username)
-    token = ResetPasswordToken.objects.create(user=user)
-    # send a signal that the password token was created
-    # let whoever receives this signal handle sending the email for the password reset
-    reset_password_token_created.send(
-        sender=user.__class__, instance=user, reset_password_token=token
-    )
+    if not user.is_active:
+        log(log.INFO, "WE TRIED TO SEND EMAIL to [%s]", user.username)
+        token = ResetPasswordToken.objects.create(user=user)
+        # send a signal that the password token was created
+        # let whoever receives this signal handle sending the email for the password reset
+        reset_password_token_created.send(
+            sender=user.__class__, instance=user, reset_password_token=token
+        )
+        user.is_active = True
+        user.save()

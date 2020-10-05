@@ -1,4 +1,8 @@
-from .login import current_user, UserList, ObtainFoxJWTToken  # noqa F401
+from .login import (  # noqa F401
+    current_user,
+    UserList,
+    ObtainFoxJWTToken,
+)  # noqa F401
 from .dashboard import Dashboard  # noqa F401
 from .projects import ProjectList, ProjectCreate, ProjectDetail  # noqa F401
 from .client_managers import (  # noqa F401

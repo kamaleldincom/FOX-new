@@ -14,7 +14,9 @@ import {
   CCard,
   CCardBody,
   CCardHeader,
-  CCollapse
+  CCollapse,
+  CCardTitle,
+  CCardSubtitle
 } from "@coreui/react";
 import { FoxApiService } from '../../../services'
 import { DisplayFile, WorkerReview } from '../../../utils'
@@ -122,8 +124,10 @@ class ProjectDetail extends Component {
         <CCol>
           <CCard>
             <CCardHeader>
-              Attached Documents
-						</CCardHeader>
+              <CCardTitle>
+                Attached Documents
+              </CCardTitle>
+            </CCardHeader>
             <CCardBody>
               {this.props.documents
                 ?
@@ -143,20 +147,20 @@ class ProjectDetail extends Component {
                           Open this document in Google Docs
             						</CLink>
                         :
-                        <React.Fragment>
-                          <CButton
-                            variant="outline"
-                            color="primary"
-                            key={`cb-${document.id}`}
-                            id={document.id}
-                            name={document.id}
-                            value={document.filename}
-                            onClick={this.downloadFile}
-                          >
-                            Download document
-              						</CButton>
-                          <DisplayFile document={document} />
-                        </React.Fragment>
+                        // <React.Fragment>
+                        <CButton
+                          variant="outline"
+                          color="primary"
+                          key={`cb-${document.id}`}
+                          id={document.id}
+                          name={document.id}
+                          value={document.filename}
+                          onClick={this.downloadFile}
+                        >
+                          Download document
+              					</CButton>
+                        // {/* <DisplayFile document={document} /> */}
+                        // </React.Fragment>
                       }
                     </React.Fragment>
                   )
@@ -166,13 +170,20 @@ class ProjectDetail extends Component {
             </CCardBody>
           </CCard>
           <CCard>
-            <CCardHeader>Workers</CCardHeader>
+            <CCardHeader>
+              <CCardTitle>
+                Workers
+              </CCardTitle>
+            </CCardHeader>
             <CCardBody>
               {this.props.workers ?
                 this.props.workers.map((worker, idx) => {
                   return (
                     <CCard key={`card-${idx}`} className="mb-0">
-                      <CCardHeader key={`ch-${idx}`} id={worker.id}>
+                      {/* <CCardHeader key={`ch-${idx}`} id={worker.id}>
+
+                      </CCardHeader> */}
+                      <CCardBody key={`cbody-${idx}`}>
                         <h5 key={`h5-${idx}`} className="m-0 p-0">{worker.name}</h5>
                         <h6 key={`h6-${idx}`} className="m-0 p-0">{worker.position_in_company}</h6>
                         <CButton
@@ -185,12 +196,10 @@ class ProjectDetail extends Component {
                           name={worker.id}
                           onClick={this.handleWorkerSelect}
                         >Display Details</CButton>
-                      </CCardHeader>
-                      <CCollapse key={`clps-${idx}`} show={this.state.current_worker_id === worker.id.toString()}>
-                        <CCardBody key={`cbody-${idx}`}>
+                        <CCollapse key={`clps-${idx}`} show={this.state.current_worker_id === worker.id.toString()}>
                           <WorkerReview workerId={worker.id} />
-                        </CCardBody>
-                      </CCollapse>
+                        </CCollapse>
+                      </CCardBody>
                     </CCard>
                   )
                 })
@@ -217,6 +226,7 @@ class ProjectDetail extends Component {
                 <CFormGroup>
                   <CButton
                     className="mr-3"
+                    shape="pill"
                     type="submit"
                     name="status"
                     value="Approved"
@@ -227,6 +237,7 @@ class ProjectDetail extends Component {
                     Approve
 										</CButton>
                   <CButton
+                    shape="pill"
                     type="submit"
                     name="status"
                     value="Rejected"

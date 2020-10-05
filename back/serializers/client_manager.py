@@ -27,4 +27,5 @@ class ClientManagerSerializer(serializers.ModelSerializer):
             "role",
             "position",
             "department",
+            # "is_active",
         ]
