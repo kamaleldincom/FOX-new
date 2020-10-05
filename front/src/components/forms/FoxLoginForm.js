@@ -18,12 +18,14 @@ import CIcon from '@coreui/icons-react'
 import DjangoCSRFToken from 'django-react-csrftoken'
 import { userLoginFetch } from '../../actions'
 import { FoxPasswordInput } from './inputs'
+import { ForgetPasswordModal } from '../modals'
 
 class FoxLoginForm extends Component {
 
   state = {
     username: "",
-    password: ""
+    password: "",
+    showModal: false
   }
 
   handleChange = event => {
@@ -32,13 +34,21 @@ class FoxLoginForm extends Component {
     });
   }
 
+  setModalVisibility = () => {
+    const { showModal } = this.state
+    this.setState({
+      showModal: !showModal
+    })
+  }
+
   handleSubmit = event => {
+    const { username, password } = this.state
     event.preventDefault()
-    this.props.userLoginFetch(this.state)
+    this.props.userLoginFetch({ username, password })
   }
 
   render() {
-    const { username, password } = this.state
+    const { username, password, showModal } = this.state
     return (
       <CRow alignHorizontal="center">
         <CCol md="6">
@@ -102,11 +112,12 @@ class FoxLoginForm extends Component {
                     <CButton shape="pill" type="submit" value="Submit" color="dark" block >Login</CButton>
                   </CFormGroup>
                 </CForm>
-                <CButton type="link" size="sm" className="align-self-center">Forgot password?</CButton>
+                <CButton type="link" size="sm" className="align-self-center" onClick={this.setModalVisibility}>Forgot password?</CButton>
               </CCol>
             </CRow>
           </CContainer >
         </CCol>
+        <ForgetPasswordModal show={showModal} setModalVisibility={this.setModalVisibility} />
       </CRow >
     )
   }

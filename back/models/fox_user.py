@@ -20,6 +20,14 @@ class FoxUser(AbstractUser):
     )
     name = models.CharField(max_length=128, default="BarFoo")
     deleted = models.BooleanField(default=False)
+    is_active = models.BooleanField(
+        _("active"),
+        default=False,
+        help_text=_(
+            "Designates whether this user should be treated as active. "
+            "Unselect this instead of deleting accounts."
+        ),
+    )
 
     @property
     def info(self):
