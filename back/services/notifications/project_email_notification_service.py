@@ -67,7 +67,7 @@ class ProjectEmailNotificationService:
 
     def _conduct_internal_notification(self):
         internal_message = internal_service(
-            message_text=self.subject, receivers=self.receivers
+            message_text=self.subject, receivers=self.receivers, forward_link=self.link
         )
         internal_message.emit()
 

@@ -15,9 +15,9 @@ const AuthContainer = (props) => {
           <CCol className="login-left justify-content-center" md="6">
             {props.children}
           </CCol>
-          <CCol className="login-right justify-content-center align-items-center" md="6">
+          {/* <CCol className="login-right justify-content-center align-items-center" md="6">
             <LoginCarousel />
-          </CCol>
+          </CCol> */}
         </CRow>
       </CContainer>
     </div>

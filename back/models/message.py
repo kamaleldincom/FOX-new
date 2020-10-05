@@ -6,6 +6,7 @@ class Message(models.Model):
     receivers = models.ManyToManyField(
         to="FoxUser", through="Notification", related_name="messages"
     )
+    forward_link = models.URLField(default="https://www.google.com/")
 
     def __str__(self):
         return self.text
