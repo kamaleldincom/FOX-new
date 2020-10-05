@@ -6,27 +6,17 @@ import {
   CModalFooter,
   CModalHeader,
   CModalTitle,
-  CForm,
-  CFormGroup,
-  CInput,
-  CLabel,
 } from '@coreui/react'
 import { FoxApiService } from '../../services'
 
 const foxApi = new FoxApiService()
 
-class ForgetPasswordModal extends Component {
+class ResetPasswordModal extends Component {
 
   state = {
-    email: "",
+    email: this.props.email,
     error: false,
     success: false
-  }
-
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
   }
 
   handleSubmit = async () => {
@@ -51,8 +41,7 @@ class ForgetPasswordModal extends Component {
   }
 
   render = () => {
-    const { email, error, success } = this.state
-    console.log(success);
+    const { error, success } = this.state
     return (
       <CModal
         show={this.props.show}
@@ -66,12 +55,7 @@ class ForgetPasswordModal extends Component {
           {success ?
             <p className="fox-form-valid-feedback">Password reset application was successful. Please check your email for further instructions</p>
             :
-            <CForm>
-              <CFormGroup>
-                <CLabel htmlFor="extend_date">Please, enter your account`s email address. An letter will be send on this address to reset your password.</CLabel>
-                <CInput type="email" name="email" value={email} onChange={this.handleChange} placeholder="Email" required />
-              </CFormGroup>
-            </CForm>
+            <p>Are you sure you want to reset your password?</p>
           }
           {error
             ? <p className="fox-form-invalid-feedback">{error}</p>
@@ -87,4 +71,4 @@ class ForgetPasswordModal extends Component {
   }
 }
 
-export default ForgetPasswordModal
+export default ResetPasswordModal

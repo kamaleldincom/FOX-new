@@ -68,8 +68,6 @@ const FoxHeader = (props) => {
             </CHeaderNav>
 
             <CHeaderNav className="px-3">
-                {/* <FoxHeaderDropdownNotif /> */}
-                {/* <FoxHeaderDropdownTasks /> */}
                 <FoxHeaderDropdownMssg />
                 <FoxHeaderDropdown />
             </CHeaderNav>
@@ -87,7 +85,7 @@ const FoxHeader = (props) => {
 const mapStateToProps = state => {
     return {
         navigation: state.headerNav,
-        company: state.company
+        company: state.company,
     }
 }
 

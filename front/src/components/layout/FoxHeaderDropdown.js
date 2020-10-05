@@ -10,44 +10,61 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react';
 import { logoutUser } from '../../actions';
+import { ResetPasswordModal } from '../modals';
 
 class TheHeaderDropdown extends Component {
 
+  state = {
+    showModal: false
+  }
+
   handleClick = event => {
-    event.preventDefault()
-    this.props.logoutUser()
+    event.preventDefault();
+    this.props.logoutUser();
+  }
+
+  setModalVisibility = () => {
+    const { showModal } = this.state;
+    this.setState({
+      showModal: !showModal
+    })
   }
 
   render() {
+    const { showModal } = this.state;
     return (
-      <CDropdown
-        inNav
-        className="c-header-nav-items mx-2"
-        direction="down"
-      >
-        <CDropdownToggle className="c-header-nav-link" caret={false}>
-          <CIcon name="cil-user" />
-        </CDropdownToggle>
-        <CDropdownMenu className="pt-0" placement="bottom-end">
-          <CDropdownItem
-            header
-            tag="div"
-            color="light"
-            className="text-center"
-          >
-            <strong>Settings</strong>
+      <React.Fragment>
+        <CDropdown
+          inNav
+          className="c-header-nav-items mx-2"
+          direction="down"
+        >
+          <CDropdownToggle className="c-header-nav-link" caret={false}>
+            <CIcon name="cil-settings" />
+          </CDropdownToggle>
+          <CDropdownMenu className="pt-0" placement="bottom-end">
+            <CDropdownItem
+              header
+              tag="div"
+              color="light"
+              className="text-center"
+            >
+              <strong>Settings</strong>
+            </CDropdownItem>
+            <CDropdownItem onClick={this.setModalVisibility}>
+              <CIcon name="cil-lock-locked" className="mfe-2" />
+            Change password
           </CDropdownItem>
-          <CDropdownItem>
-            <CIcon name="cil-settings" className="mfe-2" />
-            Settings
-          </CDropdownItem>
-          <CDropdownItem divider />
-          <CDropdownItem onClick={this.handleClick}>
-            <CIcon name="cil-account-logout" className="mfe-2" />
+            <CDropdownItem divider />
+            <CDropdownItem onClick={this.handleClick}>
+              <CIcon name="cil-account-logout" className="mfe-2" />
             Logout
           </CDropdownItem>
-        </CDropdownMenu>
-      </CDropdown>
+          </CDropdownMenu>
+        </CDropdown>
+        <ResetPasswordModal show={showModal} email={this.props.currentUser.email} setModalVisibility={this.setModalVisibility} />
+      </React.Fragment>
+
     )
   }
 }
