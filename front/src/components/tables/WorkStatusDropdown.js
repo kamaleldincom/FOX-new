@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { FoxApiService } from '../../services'
-import { getProjectList } from '../../actions'
+import { getProjectList, updateModal } from '../../actions'
 import { CDropdown, CDropdownToggle, CDropdownItem, CDropdownMenu } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { ExtendModal } from '../modals'
 
 
 const foxApi = new FoxApiService();
 
 const choices = [
-  { Works_started: 'Works started' },
-  { Works_finished: 'Works finished' },
+  { Started: 'Started' },
+  { Completed: 'Completed' },
   { Extended: 'Extended' },
   { Closed: 'Closed' },
 ]
@@ -19,13 +18,9 @@ const choices = [
 
 class WorkStatusDropdown extends Component {
 
-  state = {
-    modal: false
-  }
-
-  handleClick = async (value, event) => {
+  handleClick = async (value) => {
     if (value === "Extended") {
-      this.setModalVisibility()
+      this.props.showExtendModal({ modalType: "extendModal", projectId: this.props.item.id, updateList: this.props.updateList })
     } else {
       await foxApi.patchEntityOf("projects", this.props.item.id, { status: value })
         .then(() => {
@@ -34,16 +29,9 @@ class WorkStatusDropdown extends Component {
     }
   }
 
-  setModalVisibility = () => {
-    this.setState({
-      modal: !this.state.modal
-    })
-  }
-
   render = () => {
-    const { modal } = this.state
     return (
-      this.props.role === "CliAdm" && this.props.item.work_status !== "Application processing" ?
+      this.props.role === "CliAdm" && this.props.item.project_status !== "Application processing" ?
         <React.Fragment>
           <CDropdown >
             <CDropdownToggle className="project-table-toggle">
@@ -52,7 +40,7 @@ class WorkStatusDropdown extends Component {
                 className="table-dropdown-icon"
                 name={'cilSettings'} />
             </CDropdownToggle>
-            <CDropdownMenu className="p-0 foxtable-dropdown-menu" placement="bottom-end">
+            <CDropdownMenu className="p-0 foxtable-dropdown-menu" placement="right">
               {choices.map((choice, idx) => {
                 const [value, name] = Object.entries(choice)[0]
                 return <CDropdownItem
@@ -64,14 +52,7 @@ class WorkStatusDropdown extends Component {
 
             </CDropdownMenu>
           </CDropdown >
-          <ExtendModal
-            show={modal}
-            setModalVisibility={this.setModalVisibility}
-            projectId={this.props.item.id}
-            {...this.props}
-          />
         </React.Fragment>
-
         : null
     )
   }
@@ -83,7 +64,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getProjectList: () => dispatch(getProjectList()),
+  getProjectList: ({ ...kwargs }) => dispatch(getProjectList({ ...kwargs })),
+  showExtendModal: ({ modalType, ...rest }) => dispatch(updateModal({ modalType, ...rest }))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkStatusDropdown)

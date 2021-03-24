@@ -1,44 +1,57 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { CForm, CFormGroup, CInput, CContainer, CRow, CCol, CImg, CButton } from "@coreui/react";
-import CIcon from '@coreui/icons-react'
-import DjangoCSRFToken from 'django-react-csrftoken'
-import { userRegisterFetch, registerError, allowRegistration } from '../../actions'
-import { FoxPasswordInput } from './inputs'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import {
+  CForm,
+  CFormGroup,
+  CContainer,
+  CRow,
+  CCol,
+  CImg,
+  CButton,
+  CPopover,
+} from "@coreui/react";
+import DjangoCSRFToken from "django-react-csrftoken";
+import {
+  userRegisterFetch,
+  registerError,
+  allowRegistration,
+} from "../../actions";
+import { FoxPasswordInput } from "./inputs";
+import logo from "../assets/images/signed-logo.png";
 
 class FoxRegisterForm extends Component {
-
   state = {
     username: this.props.username,
     password: "",
     password2: "",
-  }
+  };
 
-
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    }, () => {
-      if (this.state.password !== this.state.password2) {
-        this.props.registerError();
+  handleChange = (event) => {
+    this.setState(
+      {
+        [event.target.name]: event.target.value,
+      },
+      () => {
+        if (this.state.password !== this.state.password2) {
+          this.props.registerError();
+        } else {
+          this.props.allowRegistration(this.props.registrationToken);
+        }
       }
-      else {
-        this.props.allowRegistration(this.props.registrationToken);
-      };
-    });
-  }
+    );
+  };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     this.props.userRegisterFetch({
       password: this.state.password,
       token: this.props.registrationToken,
-      is_active: true
-    })
-  }
+      is_active: true,
+    });
+  };
 
   render() {
-    const { username, password, password2 } = this.state
+    const { username, password, password2 } = this.state;
     return (
       <CRow alignHorizontal="center">
         <CCol md="6">
@@ -47,68 +60,93 @@ class FoxRegisterForm extends Component {
               <CCol md="8" className="mx-auto">
                 <CImg
                   width="100%"
-                  src='/static/front/images/signed-logo.png'
+                  src="/static/front/images/signed-logo.png"
                   className="mb-2"
+                  src={logo}
                 />
               </CCol>
             </CRow>
             <CRow className="mt-2 mb-2" alignHorizontal="center">
               <CCol className="mx-auto">
                 <h1 className="fox-login-welcome">Welcome to FOX!</h1>
-                <p className="fox-login-welcome"> You are trying to register as <strong>{username}</strong>.  Please, fill this form to finish your registration.</p>
+                <p className="fox-login-welcome">
+                  {" "}
+                  You are trying to register as <strong>{username}</strong>.
+                  {/* Please, fill this form to finish your registration. */}
+                  Create your new password below.
+                </p>
               </CCol>
             </CRow>
             <CRow className="mt-2 mb-2">
               <CCol className="mx-auto">
-                <CForm
-                  onSubmit={this.handleSubmit}
-                >
+                <CForm onSubmit={this.handleSubmit}>
                   <DjangoCSRFToken />
-                  <CFormGroup>
-                    <FoxPasswordInput
-                      inputName="password"
-                      password={password}
-                      placeholder="Password"
-                      submitError={this.props.registerErrorFlag}
-                      handleChange={this.handleChange}
-                    />
-                    <FoxPasswordInput
-                      inputName="password2"
-                      password={password2}
-                      placeholder="Confirm password"
-                      submitError={this.props.registerErrorFlag}
-                      handleChange={this.handleChange}
-                    />
-                    {this.props.registerErrorFlag
-                      ? <p className={"fox-form-invalid-feedback"}>The suggested password is inappropriate. Please, Try to choose more sophisticated password and try again.</p>
-                      : null
+
+                  <CPopover
+                    content={
+                      <>
+                        <p>Password must contain at least 8 characters.</p>
+                        <p>
+                          Please choose a password that you haven't used before.
+                        </p>
+                      </>
                     }
-                  </CFormGroup>
+                  >
+                    <CFormGroup>
+                      <FoxPasswordInput
+                        inputName="password"
+                        password={password}
+                        placeholder="Password"
+                        submitError={this.props.registerErrorFlag}
+                        handleChange={this.handleChange}
+                      />
+                      <FoxPasswordInput
+                        inputName="password2"
+                        password={password2}
+                        placeholder="Confirm password"
+                        submitError={this.props.registerErrorFlag}
+                        handleChange={this.handleChange}
+                      />
+                      {this.props.registerErrorFlag ? (
+                        <p className={"fox-form-invalid-feedback"}>
+                          Passwords do not match. Please try again.
+                        </p>
+                      ) : null}
+                    </CFormGroup>
+                  </CPopover>
                   <CFormGroup>
-                    <CButton shape="pill" block type="submit" color="dark" disabled={this.state.password !== this.state.password2} >Register</CButton>
+                    <CButton
+                      shape="pill"
+                      block
+                      type="submit"
+                      color="dark"
+                      disabled={this.state.password !== this.state.password2}
+                    >
+                      Register
+                    </CButton>
                   </CFormGroup>
                 </CForm>
               </CCol>
             </CRow>
-          </CContainer >
+          </CContainer>
         </CCol>
-      </CRow >
-    )
+      </CRow>
+    );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     registerErrorFlag: state.registerError,
     registrationToken: state.registrationToken,
-    errorMessage: state.errorMessage
-  }
-}
+    errorMessage: state.errorMessage,
+  };
+};
 
-const mapDispatchToProps = dispatch => ({
-  userRegisterFetch: credentials => dispatch(userRegisterFetch(credentials)),
+const mapDispatchToProps = (dispatch) => ({
+  userRegisterFetch: (credentials) => dispatch(userRegisterFetch(credentials)),
   registerError: () => dispatch(registerError()),
-  allowRegistration: (token) => dispatch(allowRegistration(token))
-})
+  allowRegistration: (token) => dispatch(allowRegistration(token)),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(FoxRegisterForm)
+export default connect(mapStateToProps, mapDispatchToProps)(FoxRegisterForm);

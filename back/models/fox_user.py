@@ -19,6 +19,7 @@ class FoxUser(AbstractUser):
         default=Role.dummy,
     )
     name = models.CharField(max_length=128, default="BarFoo")
+    email = models.EmailField(_("email address"), blank=False, unique=True)
     deleted = models.BooleanField(default=False)
     is_active = models.BooleanField(
         _("active"),
@@ -27,6 +28,10 @@ class FoxUser(AbstractUser):
             "Designates whether this user should be treated as active. "
             "Unselect this instead of deleting accounts."
         ),
+    )
+    is_new = models.BooleanField(
+        _("new"),
+        default=False,
     )
 
     @property

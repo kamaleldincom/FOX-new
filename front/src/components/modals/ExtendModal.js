@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   CButton,
   CModal,
@@ -8,53 +9,65 @@ import {
   CModalTitle,
   CForm,
   CFormGroup,
-  CInput, CLabel
-} from '@coreui/react'
-import { FoxApiService } from '../../services'
+  CInput,
+  CLabel,
+  CInvalidFeedback,
+} from "@coreui/react";
 
-const foxApi = new FoxApiService()
+import { FoxApiService } from "../../services";
+import { updateModal } from "../../actions";
+import { WithLoading, SubmitSpinner } from "../loadings";
+
+const foxApi = new FoxApiService();
 
 class ExtendModal extends Component {
-
   state = {
     extend_date: "",
     status: "Extended",
-    error: false
-  }
+    error: false,
+  };
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
+      [event.target.name]: event.target.value,
+    });
+  };
 
   handleSubmit = async () => {
     const requestData = this.state;
-    delete requestData.error;
-    await foxApi.patchEntityOf("projects", this.props.projectId, requestData)
-      .then(() => {
-        this.props.updateList("CliAdm")
-          .then(() => {
-            this.props.setModalVisibility()
-          })
-      })
-      .catch((error) => {
-        console.error(error);
-        this.setState({
-          error: 'Could not extend project!' +
-            ' Please check your input and try again!' +
-            ' In case this problem repeats, please contact your administrator!'
+    if (requestData.extend_date === "") {
+      this.setState({
+        error:
+          "Extension date was not provided, please, choose extension date before confirmation",
+      });
+    } else {
+      this.props.changeSubmitState();
+      delete requestData.error;
+      await foxApi
+        .patchEntityOf("projects", this.props.projectId, requestData)
+        .then(async () => {
+          await this.props.updateList({ role: "CliAdm" });
         })
-      })
-  }
-
+        .then(() => this.props.hideModal())
+        .catch((error) => {
+          console.error(error);
+          this.setState({
+            error:
+              "Could not extend project!" +
+              " Please check your input and try again!" +
+              " In case this problem repeats, please contact your administrator!",
+          });
+        })
+        .finally(this.props.changeSubmitState);
+    }
+  };
 
   render = () => {
-    const { extend_date, error } = this.state
+    const { extend_date, error } = this.state;
     return (
       <CModal
-        show={this.props.show}
-        onClose={this.props.setModalVisibility}
+        show={this.props.modalType === "extendModal"}
+        onClose={this.props.hideModal}
         color="dark"
       >
         <CModalHeader closeButton>
@@ -63,22 +76,55 @@ class ExtendModal extends Component {
         <CModalBody>
           <CForm>
             <CFormGroup>
-              <CLabel htmlFor="extend_date">Extend this project till:</CLabel>
-              <CInput type="datetime-local" name="extend_date" value={extend_date} onChange={this.handleChange} required />
+              <CLabel htmlFor="extend_date">Extend this project until:</CLabel>
+              <CInput
+                invalid={error}
+                type="datetime-local"
+                name="extend_date"
+                value={extend_date}
+                onChange={this.handleChange}
+                required
+              />
+              <CInvalidFeedback>{error}</CInvalidFeedback>
             </CFormGroup>
           </CForm>
-          {error
-            ? <p className={"fox-form-invalid-feedback"}>{error}</p>
-            : null
-          }
         </CModalBody>
         <CModalFooter>
-          <CButton shape="pill" color="primary" onClick={this.handleSubmit}>Confirm</CButton>{' '}
-          <CButton shape="pill" color="dark" onClick={this.props.setModalVisibility}>Cancel</CButton>
+          <CButton
+            disabled={this.props.submitting}
+            shape="pill"
+            color="primary"
+            onClick={this.handleSubmit}
+          >
+            <SubmitSpinner submitting={this.props.submitting} />
+            Confirm
+          </CButton>{" "}
+          <CButton
+            disabled={this.props.submitting}
+            shape="pill"
+            color="dark"
+            onClick={this.props.hideModal}
+          >
+            <SubmitSpinner submitting={this.props.submitting} />
+            Cancel
+          </CButton>
         </CModalFooter>
       </CModal>
-    )
-  }
+    );
+  };
 }
 
-export default ExtendModal
+const mapStateToProps = (state) => ({
+  modalType: state.modal.modalType,
+  projectId: state.modal.projectId,
+  updateList: state.modal.updateList,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  hideModal: () => dispatch(updateModal("", {})),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WithLoading(ExtendModal));

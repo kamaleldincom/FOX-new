@@ -23,6 +23,7 @@ class FoxUserCreationForm(UserCreationForm):
         self.fields["password2"].widget.attrs["autocomplete"] = "off"
         self.fields["email"].required = True
         self.fields["name"].required = True
+        # self.fields["is_new"].value = True
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")

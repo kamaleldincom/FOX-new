@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
-import { getProfileFetch } from '../../../actions'
-import { connect } from 'react-redux'
-import {
-  CRow,
-  CCol,
-} from "@coreui/react";
-import { FoxApiService } from '../../../services'
-import { UserDetailCard } from '../../cards'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { CRow, CCol } from "@coreui/react";
+import { FoxApiService } from "../../../services";
+import { getProfileFetch } from "../../../actions";
+import { UserDetailCard } from "../../cards";
+import { WithLoading, WithLoadingSpinner } from "../../loadings";
 
 const foxApi = new FoxApiService();
 
@@ -16,12 +14,10 @@ const positions = {
   SecOff: "Security Officer",
   SiteOwn: "Site Owner",
   WorkOwn: "Owner of Work",
-  SecGrd: "Security Guards"
-}
-
+  SecGrd: "Security Guards",
+};
 
 class ClientManagerDetail extends Component {
-
   state = {
     username: "",
     name: "",
@@ -30,37 +26,45 @@ class ClientManagerDetail extends Component {
     company: this.props.company,
     role: "CliMan",
     department: "",
-  }
+  };
 
   componentDidMount = async () => {
-    await this.props.getProfileFetch()
-      .then(() => foxApi.getDetailsOf('client_managers', this.props.match.params.id))
+    await this.props
+      .getProfileFetch()
+      .then(() => foxApi.getDetailsOf("managers", this.props.match.params.id))
       .then((data) => {
-        data.position = positions[data.position]
-        this.setState({ ...data })
+        data.position = positions[data.position];
+        this.setState({ ...data });
       })
-  }
+      .catch((error) => console.log(error))
+      .finally(() => this.props.changeLoadingState());
+  };
   render = () => {
     const details = this.state;
-    ["id", "company", "role"].forEach(option => {
-      delete details[option]
-    })
+    ["id", "company", "role", "is_new"].forEach((option) => {
+      delete details[option];
+    });
     return (
       <CRow>
         <CCol>
-          <UserDetailCard
-            userRole="Manager"
-            details={details}
-            {...this.props}
-          />
+          <WithLoadingSpinner loading={this.props.loading}>
+            <UserDetailCard
+              userRole="Manager"
+              details={details}
+              {...this.props}
+            />
+          </WithLoadingSpinner>
         </CCol>
-      </CRow >
-    )
-  }
+      </CRow>
+    );
+  };
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
-})
+});
 
-export default connect(null, mapDispatchToProps)(ClientManagerDetail)
+export default connect(
+  null,
+  mapDispatchToProps
+)(WithLoading(ClientManagerDetail));

@@ -1,54 +1,56 @@
-import React, { Component } from 'react'
-import { getProfileFetch } from '../../../actions'
-import { connect } from 'react-redux'
-import {
-  CRow,
-  CCol,
-} from "@coreui/react";
-import { FoxApiService } from '../../../services'
-import { UserDetailCard } from '../../cards'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { CRow, CCol } from "@coreui/react";
+import { getProfileFetch } from "../../../actions";
+import { FoxApiService } from "../../../services";
+import { UserDetailCard } from "../../cards";
+import { WithLoading, WithLoadingSpinner } from "../../loadings";
 
 const foxApi = new FoxApiService();
 
 class ContractorDetail extends Component {
-
   state = {
     username: "",
     email: "",
     name: "",
     related_company: "",
     company_phone: "",
-  }
+  };
 
   componentDidMount = async () => {
-    await this.props.getProfileFetch()
-      .then(() => foxApi.getDetailsOf('contractors', this.props.match.params.id))
+    await this.props
+      .getProfileFetch()
+      .then(() =>
+        foxApi.getDetailsOf("contractors", this.props.match.params.id)
+      )
       .then((data) => {
-        this.setState({ ...data })
+        this.setState({ ...data });
       })
-  }
+      .then(() => this.props.changeLoadingState());
+  };
   render = () => {
     const details = this.state;
-    ["id", "company", "role"].forEach(option => {
-      delete details[option]
-    })
+    ["id", "company", "role", "signature", "is_new"].forEach((option) => {
+      delete details[option];
+    });
     return (
       <CRow>
         <CCol>
-          <UserDetailCard
-            userRole="Contractor"
-            details={details}
-            {...this.props}
-          />
+          <WithLoadingSpinner loading={this.props.loading}>
+            <UserDetailCard
+              userRole="Contractor"
+              details={details}
+              {...this.props}
+            />
+          </WithLoadingSpinner>
         </CCol>
-      </CRow >
-    )
-  }
+      </CRow>
+    );
+  };
 }
 
-
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
-})
+});
 
-export default connect(null, mapDispatchToProps)(ContractorDetail)
+export default connect(null, mapDispatchToProps)(WithLoading(ContractorDetail));

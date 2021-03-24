@@ -13,7 +13,9 @@ class ProposalSubmit(APIView):
         project = get_object_or_404(Project, pk=pk)
 
         # get companies managers
-        managers = get_list_or_404(ClientManager, company=request.user.company)
+        managers = get_list_or_404(
+            ClientManager, company=project.company, deleted=False
+        )
 
         # create approval for each manager
         for manager in managers:
@@ -36,13 +38,13 @@ class ProposalSubmit(APIView):
         activity.proposal_submition_message()
 
         # send emails
-
-        mail = mail_service(
-            project=project,
-            receivers=managers,
-            issuer=project.contractor,
-        )
-        mail.send_proposal_submitted()
+        for manager in managers:
+            mail = mail_service(
+                project=project,
+                receivers=[manager],
+                issuer=project.contractor,
+            )
+            mail.send_proposal_submitted()
 
         # return response
         return JsonResponse(

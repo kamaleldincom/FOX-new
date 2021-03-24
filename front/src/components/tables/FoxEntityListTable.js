@@ -15,17 +15,6 @@ import WorkStatusDropdown from './WorkStatusDropdown'
 
 class FoxEntityListTable extends Component {
 
-  state = {
-    error: "",
-    modal: false
-  }
-
-  setModalVisibility = () => {
-    this.setState({
-      modal: !this.state.modal
-    })
-  }
-
   alertOnClick = (id, e) => {
     this.props.history.push(`${this.props.match.url}/${id}`)
   }
@@ -41,28 +30,27 @@ class FoxEntityListTable extends Component {
               <CCardTitle>
                 {this.props.tableName}
               </CCardTitle>
-              {this.props.tableName === "Projects" && this.props.role === "Contr"
-                ?
-                null
-                :
+              {this.props.showNewButton ?
                 <CLink
                   className="btn btn-pill btn-outline-success"
                   to={`${this.props.match.url}/new`}
                 >
                   Add new
-                </CLink>
+          </CLink>
+                : null
               }
             </CCardHeader>
             <CCardBody>
               <CDataTable
                 items={this.props.tableData ? this.props.tableData : []}
                 fields={this.props.fields ? this.props.fields : []}
+                loading={this.props.loading}
                 clickableRows
                 hover
                 striped
                 bordered
                 sorter
-                tableFilter
+                tableFilter={{ placeholder: "Search..." }}
                 columnFilter
                 size="sm"
                 itemsPerPage={10}
@@ -87,11 +75,11 @@ class FoxEntityListTable extends Component {
                         </CBadge>
                       </td>
                     ),
-                  'work_status':
+                  'project_status':
                     (item) => (
                       <td className="d-flex align-items-center">
-                        <CBadge shape="pill" color={this.props.getBadge(item.work_status)}>
-                          {item.work_status}
+                        <CBadge shape="pill" color={this.props.getBadge(item.project_status)}>
+                          {item.project_status}
                         </CBadge>
                         <WorkStatusDropdown key={item.id} item={item} {...this.props} />
                       </td>

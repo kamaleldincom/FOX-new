@@ -2,9 +2,9 @@ import { FoxApiService } from '../services'
 
 const foxApi = new FoxApiService();
 
-const getNotifications = () => {
+const getNotifications = ({ signal = null }) => {
   return dispatch => {
-    foxApi.getEntityList('notifications')
+    foxApi.getEntityList('notifications', null, signal)
       .then(data => {
         if (data.length > 0) {
           dispatch(refreshNotificationList(data))
@@ -13,6 +13,12 @@ const getNotifications = () => {
       .catch(function (error) {
         console.error(error);
       })
+  }
+}
+
+const clearNotifications = () => {
+  return dispatch => {
+    dispatch(refreshNotificationList({}))
   }
 }
 
@@ -37,4 +43,4 @@ const setNotificationAsRead = notification => ({
   notification: notification
 })
 
-export { getNotifications, readNotification }
+export { getNotifications, clearNotifications, readNotification }

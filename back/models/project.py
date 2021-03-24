@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 
@@ -8,14 +9,18 @@ class Project(models.Model):
         submitted = "Submitted", _("Submitted")
         approved = "Approved", _("Approved")
         rejected = "Rejected", _("Rejected")
-        works_started = "Works_started", _("Works started")
-        works_finished = "Works_finished", _("Works finished")
+        works_started = "Started", _("Started")
+        works_finished = "Completed", _("Completed")
         extended = "Extended", _("Extended")
         closed = "Closed", _("Closed")
 
     name = models.CharField(max_length=64)
     description = models.TextField()
     location = models.CharField(max_length=255, default="Whole facility")
+    creation_date = models.DateTimeField(
+        default=timezone.localtime, null=True, blank=True
+    )
+    submit_date = models.DateTimeField(null=True, blank=True)
     start_date = models.DateTimeField(null=True)
     end_date = models.DateTimeField(null=True)
     extend_date = models.DateTimeField(null=True, blank=True)
@@ -45,6 +50,8 @@ class Project(models.Model):
         null=True,
         blank=True,
     )
+    applicant_name = models.CharField(max_length=64, null=True, blank=True)
+    applicant_phone = models.CharField(max_length=32, null=True, blank=True)
     deleted = models.BooleanField(default=False)
 
     class Meta:
@@ -59,4 +66,4 @@ class Project(models.Model):
 
     @property
     def contractor_name(self):
-        return self.contractor.username
+        return self.contractor.related_company
