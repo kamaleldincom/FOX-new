@@ -3,7 +3,7 @@ from rest_framework_jwt.settings import api_settings
 from django.contrib.auth import authenticate, get_user_model
 from django.utils.translation import ugettext as _
 from rest_framework_jwt.compat import get_username_field, PasswordField, Serializer
-
+from back.models.fox_user import ModulePermission
 
 User = get_user_model()
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
@@ -86,9 +86,24 @@ class FoxJSONWebTokenSerializer(Serializer):
                     msg = _("User account is disabled.")
                     raise serializers.ValidationError(msg)
 
-                payload = jwt_payload_handler(user)
+                try:
+                    company_id = user.company.id
+                except:
+                    company_id = None
 
-                return {"token": jwt_encode_handler(payload), "user": user}
+                if company_id:
+                    try:
+                        obj_mod_pr = ModulePermission.objects.get(company_id=company_id, module__id=1)
+                    except:
+                        obj_mod_pr = None
+
+                    if obj_mod_pr:
+                        payload = jwt_payload_handler(user)
+                        return {"token": jwt_encode_handler(payload), "user": user}
+                    else:
+                        msg = _("Permission denied.")
+                        raise serializers.ValidationError(msg)
+
             else:
                 msg = _("Unable to log in with provided credentials.")
                 raise serializers.ValidationError(msg)

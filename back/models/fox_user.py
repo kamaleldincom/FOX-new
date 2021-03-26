@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
+from back.models.company import Company
 
 
 class FoxUser(AbstractUser):
@@ -37,3 +38,31 @@ class FoxUser(AbstractUser):
     @property
     def info(self):
         return {"company_name": self.company, "role": self.role}
+
+
+class Module(models.Model):
+    """
+    module table fields
+    """
+    id = models.AutoField(primary_key=True)
+    modified_at = models.DateTimeField(verbose_name="Updated", auto_now=True, editable=False)
+    created_at = models.DateTimeField(verbose_name="Created", auto_now_add=True, editable=False)
+    name = models.CharField(max_length=50)
+    description = models.TextField(null=True)
+
+    class Meta:
+        verbose_name_plural = "Modules"
+
+
+class ModulePermission(models.Model):
+    """
+    module permission table fields
+    """
+    id = models.AutoField(primary_key=True)
+    modified_at = models.DateTimeField(verbose_name="Updated", auto_now=True, editable=False)
+    created_at = models.DateTimeField(verbose_name="Created", auto_now_add=True, editable=False)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    module = models.ForeignKey(Module, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = "ModulePermissions"
